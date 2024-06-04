@@ -1,0 +1,21 @@
+project:
+  type: book
+
+book:
+  title: "dlfc_notes"
+  author: "Olivier Ma"
+  date: "6/4/2024"
+  chapters:
+    - index.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+
