@@ -7,3 +7,71 @@ One particular branch of machine learning, known as **deep learning** (DL), has 
 The field of **artificial intelligence** (AI), seeks to recreate the powerful capabilities of the brain in machines, using machine learning methods. Many of the AI systems in current use represent applications of machine learning which are designed to solve very specific and focused problems, and while these are extremely useful they fall far short of the tremendous breadth of capabilities of the human brain. This has led to the introduction of the term **artificial general intelligence** (AGI), to describe the aspiration of building machines with this much greater flexibility.  After many decades of steady progress, machine learning has now entered a phase of very rapid development. Recently, massive deep learning systems called **large language models** (LLMs) have started to exhibit remarkable capabilities that have been described as the first indications of artificial general intelligence.
 
 Will LLMs help us achieve the leap from AI to AGI? This is a question hotly debated everyday everwhere; only time will tell.
+
+## the impact of DL (4)
+
+### midical diagnosis
+
+![](./img/DLFC/Chapter-1/Figure_1.png)
+
+### protein structure
+
+![](./img/DLFC/Chapter-1/Figure_2.png)
+
+### image synthesis
+
+![](./img/DLFC/Chapter-1/Figure_3.png)
+
+### LLM
+
+## a tutorial example (6)
+
+### synthetic data
+
+![](./img/DLFC/Chapter-1/Figure_4.png)
+
+### linear models
+
+### error function
+
+![](./img/DLFC/Chapter-1/Figure_5.png)
+
+### model complexity
+
+![](./img/DLFC/Chapter-1/Figure_6_a.png)
+![](./img/DLFC/Chapter-1/Figure_6_b.png)
+![](./img/DLFC/Chapter-1/Figure_6_c.png)
+![](./img/DLFC/Chapter-1/Figure_6_d.png)
+![](./img/DLFC/Chapter-1/Figure_7.png)
+![](./img/DLFC/Chapter-1/Figure_8_a.png)
+![](./img/DLFC/Chapter-1/Figure_8_b.png)
+
+### regularization
+
+![](./img/DLFC/Chapter-1/Figure_9_a.png)
+![](./img/DLFC/Chapter-1/Figure_9_b.png)
+![](./img/DLFC/Chapter-1/Figure_10.png)
+
+### model selection
+
+![](./img/DLFC/Chapter-1/Figure_11.png)
+
+## a brief history of ML
+
+![](./img/DLFC/Chapter-1/Figure_12.jpg)
+
+### single layer networks
+
+![](./img/DLFC/Chapter-1/Figure_13.png)
+
+![](./img/DLFC/Chapter-1/Figure_14_a.jpg)
+![](./img/DLFC/Chapter-1/Figure_14_b.jpg)
+![](./img/DLFC/Chapter-1/Figure_14_c.jpg)
+
+### backpropagation
+
+![](./img/DLFC/Chapter-1/Figure_15.png)
+
+### deep networks
+
+![](./img/DLFC/Chapter-1/Figure_16.png)

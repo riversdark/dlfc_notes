@@ -24,7 +24,37 @@
     "href": "01.html",
     "title": "1  the deep learning revolution (3)",
     "section": "",
-    "text": "Machine learning (ML) today is one of the most important, and fastest growing, fields of technology. Applications of machine learning are becoming ubiquitous, and solutions learned from data are increasingly displacing traditional hand-crafted algorithms. This has not only led to improved performance for existing technologies but has opened the door to a vast range of new capabilities that would be inconceivable if new algorithms had to be designed explicitly by hand.\nOne particular branch of machine learning, known as deep learning (DL), has emerged as an exceptionally powerful and general-purpose framework for learning from data. Deep learning is based on computational models called neural networks which were originally inspired by mechanisms of learning and information processing in the human brain.\nThe field of artificial intelligence (AI), seeks to recreate the powerful capabilities of the brain in machines, using machine learning methods. Many of the AI systems in current use represent applications of machine learning which are designed to solve very specific and focused problems, and while these are extremely useful they fall far short of the tremendous breadth of capabilities of the human brain. This has led to the introduction of the term artificial general intelligence (AGI), to describe the aspiration of building machines with this much greater flexibility. After many decades of steady progress, machine learning has now entered a phase of very rapid development. Recently, massive deep learning systems called large language models (LLMs) have started to exhibit remarkable capabilities that have been described as the first indications of artificial general intelligence.\nWill LLMs help us achieve the leap from AI to AGI? This is a question hotly debated everyday everwhere; only time will tell.",
+    "text": "1.1 the impact of DL (4)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>the deep learning revolution (3)</span>"
+    ]
+  },
+  {
+    "objectID": "01.html#the-impact-of-dl-4",
+    "href": "01.html#the-impact-of-dl-4",
+    "title": "1  the deep learning revolution (3)",
+    "section": "",
+    "text": "1.1.1 midical diagnosis\n\n\n\n1.1.2 protein structure\n\n\n\n1.1.3 image synthesis\n\n\n\n1.1.4 LLM",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>the deep learning revolution (3)</span>"
+    ]
+  },
+  {
+    "objectID": "01.html#a-tutorial-example-6",
+    "href": "01.html#a-tutorial-example-6",
+    "title": "1  the deep learning revolution (3)",
+    "section": "1.2 a tutorial example (6)",
+    "text": "1.2 a tutorial example (6)\n\n1.2.1 synthetic data\n\n\n\n1.2.2 linear models\n\n\n1.2.3 error function\n\n\n\n1.2.4 model complexity\n      \n\n\n1.2.5 regularization\n  \n\n\n1.2.6 model selection",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>the deep learning revolution (3)</span>"
+    ]
+  },
+  {
+    "objectID": "01.html#a-brief-history-of-ml",
+    "href": "01.html#a-brief-history-of-ml",
+    "title": "1  the deep learning revolution (3)",
+    "section": "1.3 a brief history of ML",
+    "text": "1.3 a brief history of ML\n\n\n1.3.1 single layer networks\n\n  \n\n\n1.3.2 backpropagation\n\n\n\n1.3.3 deep networks",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>the deep learning revolution (3)</span>"
     ]
