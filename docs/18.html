@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Olivier Ma">
-<meta name="dcterms.date" content="2024-06-04">
 
-<title>dlfc_notes</title>
+<title>dlfc_notes – 2&nbsp; Normalizing Flows</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -52,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01.html" rel="next">
+<link href="./references.html" rel="next">
+<link href="./01.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -90,6 +69,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -102,7 +110,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./18.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -129,19 +137,19 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">the deep learning revolution (3)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Deep Learning Revolution</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./18.html" class="sidebar-item-text sidebar-link">
+  <a href="./18.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></span></a>
   </div>
 </li>
@@ -161,7 +169,14 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#coupling-flows" id="toc-coupling-flows" class="nav-link active" data-scroll-target="#coupling-flows"><span class="header-section-number">2.1</span> coupling flows</a></li>
+  <li><a href="#autoregressive-flows" id="toc-autoregressive-flows" class="nav-link" data-scroll-target="#autoregressive-flows"><span class="header-section-number">2.2</span> autoregressive flows</a></li>
+  <li><a href="#continuous-flows" id="toc-continuous-flows" class="nav-link" data-scroll-target="#continuous-flows"><span class="header-section-number">2.3</span> continuous flows</a>
+  <ul class="collapse">
+  <li><a href="#neural-differential-equation" id="toc-neural-differential-equation" class="nav-link" data-scroll-target="#neural-differential-equation"><span class="header-section-number">2.3.1</span> neural differential equation</a></li>
+  <li><a href="#neural-ode-backpropagation" id="toc-neural-ode-backpropagation" class="nav-link" data-scroll-target="#neural-ode-backpropagation"><span class="header-section-number">2.3.2</span> neural ODE backpropagation</a></li>
+  <li><a href="#neural-ode-flows" id="toc-neural-ode-flows" class="nav-link" data-scroll-target="#neural-ode-flows"><span class="header-section-number">2.3.3</span> neural ODE flows</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -170,26 +185,14 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">dlfc_notes</h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Olivier Ma </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 4, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -199,25 +202,42 @@ div.csl-indent {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p><em>This project is a WIP.</em></p>
-<p>I’m a great fan of Bishop’s 2006 book, Pattern Recognition and Machine Learning (PRML), so as an AI practioner coming from a Bayesian background, I’m very much pleasantly surprised to learn that Bishop (and Bishop) have published a new book dedicated to deep learning and artificial intelligence. The focuse on generative models is especially enticing, firstly because it is all the rage for the moment; secondly for a Bayesian statistician, doing generative modeling has always been what we are trained for.</p>
-<p>The book has 20 chapters, I have divided them roughly into three parts.</p>
-<ul>
-<li>Foundations: chapters 1-5, covers the basics of machine learning.</li>
-<li>Deep Learning: chapters 6-13, covers the nuts and bolts of deep learning.</li>
-<li>Generative Models: chapters 14-20, covers generative modeling and some common model architectures.</li>
-</ul>
-<p>Herein collected are my notes on the book, and the code to implement the examples in the book. Since these are my understanding of the book, they might not be completely accurate, so please refer to the book for the authoritative source. And if you find any errors, do let me know!</p>
-<p>The notes and code are written in a literate programming style (See <span class="citation" data-cites="knuth84">Knuth (<a href="references.html#ref-knuth84" role="doc-biblioref">1984</a>)</span> for additional discussion). The references are not complete; I only included the ones I have read.</p>
+<p><strong>GANs</strong> are the first major generative modeling architecture we considered, but nowadays it’s no longer widely used. Although the sampling is easy, it usually has no data likelihood, and the training process is often unstable. <strong>Normalizing flows</strong>, on the contrary, have exact likelihoods we can train on, and the sampling process is also easy (albeit much slower). The exact likelihood is guaranteed by applying some specific constraints on the network architecture (invertibility), which makes the Jacobian determinant between distribution transformations easy to compute. Later, with <strong>diffusion models</strong>, we’ll relax the architecture constraints a little bit so that the network will no longer be invertible, and we will only be able to train on an approximation of the likelihood. But these relaxations allow for some much more expressive models and better sample quality.</p>
+<p>Normalizing flows are called as such because they transform a probability distribution through a sequence of mappings of the same dimensionality (thus it flows), and the inverse mappings transform a complex data distribution into a normalized one, often the normal distribution (thus it normalizes). As we can see, diffusion models also roughly share the same concepts. Recent SOTA generative models are often a mixture of the two.</p>
+<p>The <strong>general model structure</strong> goes as follows. We start with a latent variable <span class="math inline">\(\mathbf{z}\)</span>, distributed according to a simple distribution <span class="math inline">\(p_{\mathbf{z}}(\mathbf{z})\)</span>, a function <span class="math inline">\(\mathbf{x} = f(\mathbf{z}, \mathbf{w})\)</span> parameterized by a neural network that transforms the latent space into the data space, and its inverse function <span class="math inline">\(\mathbf{z} = g(\mathbf{x}, \mathbf{w})= g(f(\mathbf{z}, \mathbf{w}), \mathbf{w})\)</span> that transforms the data space back into the latent space. The data likelihood is then given by the change of variables formula:</p>
+<p><span class="math display">\[
+p_{\mathbf{x}}(\mathbf{x}|\mathbf{w}) = p_{\mathbf{z}}(g(\mathbf{x}, \mathbf{w})) \cdot |\det J(\mathbf{x})|
+\]</span></p>
+<p>where <span class="math inline">\(J(\mathbf{x})\)</span> is the Jacobian matrix of partial derivatives whose elements are given by:</p>
+<p><span class="math display">\[
+J_{ij}(\mathbf{x}) = \frac{\partial g_i(\mathbf{x}, \mathbf{w})}{\partial x_j}.
+\]</span></p>
+<p>To make sure that transformation is invertible, function <span class="math inline">\(f\)</span> has to be a one-to-one mapping, this adds some constraints on the architecture of the neural network. Also computing the determinant of the Jacobian matrix can be computationally expensive, so we might impose some further restrictions on the network structure to make it more efficient.</p>
+<p>If we consider a training set <span class="math inline">\(\mathcal{D} = \{\mathbf{x}_1, \ldots, \mathbf{x}_N\}\)</span> of independent data points, the <strong>log likelihood function</strong></p>
+<p><span class="math display">\[
+\ln p(\mathcal{D}|\mathbf{w}) = \sum_{n=1}^N \ln p_{\mathbf{x}}(\mathbf{x}_n|\mathbf{w}) = \sum_{n=1}^N \left[ \ln p_{\mathbf{z}}(g(\mathbf{x}_n, \mathbf{w})) + \ln |\det J(\mathbf{x}_n)| \right]
+\]</span></p>
+<p>will serve as the objective function to train the neural network. The first term is the log likelihood of the latent variable, the second term is the log determinant of the Jacobian matrix.</p>
+<p>To be able to model a wide range of distributions, we want the transformation function <span class="math inline">\(\mathbf{x} = f(\mathbf{z}, \mathbf{w})\)</span> to be highly flexible, so we use a deep neural network with multiple layers. We can ensure that the overall function is invertible if we make each layer of the network invertible. And the two terms in the data likelihood, the latent variable likelihood and the Jacobian determinant, can both be computed easily under such a layered structure, using the chain rule of calculus.</p>
+<section id="coupling-flows" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="coupling-flows"><span class="header-section-number">2.1</span> coupling flows</h2>
+</section>
+<section id="autoregressive-flows" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="autoregressive-flows"><span class="header-section-number">2.2</span> autoregressive flows</h2>
+</section>
+<section id="continuous-flows" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="continuous-flows"><span class="header-section-number">2.3</span> continuous flows</h2>
+<section id="neural-differential-equation" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="neural-differential-equation"><span class="header-section-number">2.3.1</span> neural differential equation</h3>
+</section>
+<section id="neural-ode-backpropagation" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="neural-ode-backpropagation"><span class="header-section-number">2.3.2</span> neural ODE backpropagation</h3>
+</section>
+<section id="neural-ode-flows" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="neural-ode-flows"><span class="header-section-number">2.3.3</span> neural ODE flows</h3>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-knuth84" class="csl-entry" role="listitem">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput. J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
-</div>
-</div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -643,10 +663,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./01.html" class="pagination-link" aria-label="The Deep Learning Revolution">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Deep Learning Revolution</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01.html" class="pagination-link" aria-label="the deep learning revolution (3)">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">the deep learning revolution (3)</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

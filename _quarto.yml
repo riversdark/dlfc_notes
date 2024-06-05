@@ -9,6 +9,7 @@ book:
   chapters:
     - index.qmd
     - 01.qmd
+    - 18.qmd
     - references.qmd
 
 bibliography: references.bib

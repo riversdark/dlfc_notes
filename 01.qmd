@@ -1,4 +1,6 @@
-# the deep learning revolution (3)
+---
+title: "The Deep Learning Revolution"
+---
 
 **Machine learning** (ML) today is one of the most important, and fastest growing, fields of technology. Applications of machine learning are becoming ubiquitous, and solutions learned from data are increasingly displacing traditional hand-crafted algorithms. This has not only led to improved performance for existing technologies but has opened the door to a vast range of new capabilities that would be inconceivable if new algorithms had to be designed explicitly by hand.
 
@@ -63,10 +65,6 @@ Will LLMs help us achieve the leap from AI to AGI? This is a question hotly deba
 ### single layer networks
 
 ![](./img/DLFC/Chapter-1/Figure_13.png)
-
-![](./img/DLFC/Chapter-1/Figure_14_a.jpg)
-![](./img/DLFC/Chapter-1/Figure_14_b.jpg)
-![](./img/DLFC/Chapter-1/Figure_14_c.jpg)
 
 ### backpropagation
 

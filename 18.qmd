@@ -1,0 +1,44 @@
+---
+title: "Normalizing Flows"
+---
+
+**GANs** are the first major generative modeling architecture we considered, but nowadays it's no longer widely used. Although the sampling is easy, it usually has no data likelihood, and the training process is often unstable.  **Normalizing flows**, on the contrary, have exact likelihoods we can train on, and the sampling process is also easy (albeit much slower). The exact likelihood is guaranteed by applying some specific constraints on the network architecture (invertibility), which makes the Jacobian determinant between distribution transformations easy to compute. Later, with **diffusion models**, we'll relax the architecture constraints a little bit so that the network will no longer be invertible, and we will only be able to train on an approximation of the likelihood. But these relaxations allow for some much more expressive models and better sample quality.
+
+Normalizing flows are called as such because they transform a probability distribution through a sequence of mappings of the same dimensionality (thus it flows), and the inverse mappings transform a complex data distribution into a normalized one, often the normal distribution (thus it normalizes). As we can see, diffusion models also roughly share the same concepts. Recent SOTA generative models are often a mixture of the two.
+
+The **general model structure** goes as follows.  We start with a latent variable $\mathbf{z}$, distributed according to a simple distribution $p_{\mathbf{z}}(\mathbf{z})$, a function $\mathbf{x} = f(\mathbf{z}, \mathbf{w})$ parameterized by a neural network that transforms the latent space into the data space, and its inverse function $\mathbf{z} = g(\mathbf{x}, \mathbf{w})= g(f(\mathbf{z}, \mathbf{w}), \mathbf{w})$ that transforms the data space back into the latent space. The data likelihood is then given by the change of variables formula:
+
+$$ 
+p_{\mathbf{x}}(\mathbf{x}|\mathbf{w}) = p_{\mathbf{z}}(g(\mathbf{x}, \mathbf{w})) \cdot |\det J(\mathbf{x})| 
+$$
+
+where $J(\mathbf{x})$ is the Jacobian matrix of partial derivatives whose elements are given by:
+
+$$
+J_{ij}(\mathbf{x}) = \frac{\partial g_i(\mathbf{x}, \mathbf{w})}{\partial x_j}.
+$$
+
+To make sure that transformation is invertible, function $f$ has to be a one-to-one mapping, this adds some constraints on the architecture of the neural network. Also computing the determinant of the Jacobian matrix can be computationally expensive, so we might impose some further restrictions on the network structure to make it more efficient.
+
+If we consider a training set $\mathcal{D} = \{\mathbf{x}_1, \ldots, \mathbf{x}_N\}$ of independent data points, the **log likelihood function** 
+
+$$
+\ln p(\mathcal{D}|\mathbf{w}) = \sum_{n=1}^N \ln p_{\mathbf{x}}(\mathbf{x}_n|\mathbf{w}) = \sum_{n=1}^N \left[ \ln p_{\mathbf{z}}(g(\mathbf{x}_n, \mathbf{w})) + \ln |\det J(\mathbf{x}_n)| \right]
+$$
+
+will serve as the objective function to train the neural network. The first term is the log likelihood of the latent variable, the second term is the log determinant of the Jacobian matrix.
+
+To be able to model a wide range of distributions, we want the transformation function $\mathbf{x} = f(\mathbf{z}, \mathbf{w})$ to be highly flexible, so we use a deep neural network with multiple layers. We can ensure that the overall function is invertible if we make each layer of the network invertible. And the two terms in the data likelihood, the latent variable likelihood and the Jacobian determinant, can both be computed easily under such a layered structure, using the chain rule of calculus.
+
+##  coupling flows
+
+
+##  autoregressive flows
+
+##  continuous flows
+
+###  neural differential equation
+
+###  neural ODE backpropagation
+
+###  neural ODE flows
