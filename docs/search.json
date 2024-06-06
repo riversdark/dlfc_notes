@@ -1,25 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "dlfc_notes",
-    "section": "",
-    "text": "Preface\nThis project is a WIP.\nI’m a great fan of Bishop’s 2006 book, Pattern Recognition and Machine Learning (PRML), so as an AI practioner coming from a Bayesian background, I’m very much pleasantly surprised to learn that Bishop (and Bishop) have published a new book dedicated to deep learning and artificial intelligence. The focuse on generative models is especially enticing, firstly because it is all the rage for the moment; secondly for a Bayesian statistician, doing generative modeling has always been what we are trained for.\nThe book has 20 chapters, I have divided them roughly into three parts.\n\nFoundations: chapters 1-5, covers the basics of machine learning.\nDeep Learning: chapters 6-13, covers the nuts and bolts of deep learning.\nGenerative Models: chapters 14-20, covers generative modeling and some common model architectures.\n\nHerein collected are my notes on the book, and the code to implement the examples in the book. Since these are my understanding of the book, they might not be completely accurate, so please refer to the book for the authoritative source. And if you find any errors, do let me know!\nThe notes and code are written in a literate programming style (See Knuth (1984) for additional discussion). The references are not complete; I only included the ones I have read.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
-    "crumbs": [
-      "Preface"
-    ]
-  },
-  {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
-    "crumbs": [
-      "References"
-    ]
-  },
-  {
     "objectID": "01.html",
     "href": "01.html",
     "title": "1  The Deep Learning Revolution",
@@ -60,173 +40,33 @@
     ]
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "dlfc_notes",
+    "section": "",
+    "text": "Preface\nThis project is a WIP.\nI’m a great fan of Bishop’s 2006 book, Pattern Recognition and Machine Learning (PRML), so as an AI practioner coming from a Bayesian background, I’m very much pleasantly surprised to learn that Bishop (and Bishop) have published a new book dedicated to deep learning and artificial intelligence. The focuse on generative models is especially enticing, firstly because it is all the rage for the moment; secondly for a Bayesian statistician, doing generative modeling has always been what we are trained for.\nThe book has 20 chapters, I have divided them roughly into three parts.\n\nFoundations: chapters 1-5, covers the basics of machine learning.\nDeep Learning: chapters 6-13, covers the nuts and bolts of deep learning.\nGenerative Models: chapters 14-20, covers generative modeling and some common model architectures.\n\nHerein collected are my notes on the book, and the code to implement the examples in the book. Since these are my understanding of the book, they might not be completely accurate, so please refer to the book for the authoritative source. And if you find any errors, do let me know!\nThe notes and code are written in a literate programming style (See Knuth (1984) for additional discussion). The references are not complete; I only included the ones I have read.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
     "objectID": "18.html",
     "href": "18.html",
     "title": "2  Normalizing Flows",
     "section": "",
-    "text": "2.1 coupling flows",
+    "text": "2.1 coupling flows\nRecall that in flow models we aim for the following goals:\nEach flow model will attempt to meet these goals in different ways. In coupling flows, for each layer of the network, we first split the latent variable \\(\\mathbf{z}\\) into two parts \\(\\mathbf{z} = (\\mathbf{z}_A, \\mathbf{z}_B)\\), then apply the following transformation:\n\\[\n\\begin{align}\n\\mathbf{X}_A &= \\mathbf{Z}_A, \\\\\n\\mathbf{X}_B &= \\exp(s(\\mathbf{Z}_A, w)) \\odot \\mathbf{Z}_B + b(\\mathbf{Z}_A, w).\n\\end{align}\n\\]\nThe frist part \\(\\mathbf{X}_A\\) is simply left unchanged, and all the efforts are put into transforming the second part \\(\\mathbf{X}_B\\). The transformation is done by a neural network with parameters \\(w\\), which takes \\(\\mathbf{Z}_A\\) as input and outputs two vectors \\(s(\\mathbf{Z}_A, w)\\) and \\(b(\\mathbf{Z}_A, w)\\) of the same dimensionality as \\(\\mathbf{Z}_B\\). Besides, an \\(\\exp\\) function is used to ensure that the Jacobian determinant is easy to compute.\nNow let’s check how this formula meets the three aformentioned goals. First is invertability. Simply rearrange the terms and we can get the inverse transformation:\n\\[\n\\begin{align}\n\\mathbf{Z}_A &= \\mathbf{X}_A, \\\\\n\\mathbf{Z}_B &= (\\mathbf{X}_B - b(\\mathbf{X}_A, w)) \\odot \\exp(-s(\\mathbf{X}_A, w)).\n\\end{align}\n\\]\nNotice how the inverse transformation does not involve inverting the neural networks at all, just changing the sign of the \\(\\exp\\) function. This is the key to making the transformation invertible easy and efficient.\nSecond is computing the Jacobian determinant. It turns out the Jacobian is a lower trianglular matrix\n\\[\n\\begin{bmatrix}\n\\mathbf{I} & 0 \\\\\n\\frac{\\partial \\mathbf{Z}_B}{\\partial \\mathbf{X}_A} & \\text{diag}(-\\exp(s(\\mathbf{Z}_A, w)))\n\\end{bmatrix}\n\\]\nand the determinant is simply the product of the diagonal elements.\nTo make the network more expressive, normalizing flows often have multiple coupling layers stacked together, switching the roles of \\(\\mathbf{Z}_A\\) and \\(\\mathbf{Z}_B\\) at each layer, and possibly also changing the split points at each layer. The final data likelihood is the product of the likelihoods at each layer. And the Jacobian determinant is the product of the determinants at each layer.\nThird is sampling. Once the model is trained, we can start with \\(\\mathbf{Z}_A\\), and follow the flow till we get to \\(\\mathbf{X}\\). The sampling process is deterministic and easy to compute.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Normalizing Flows</span>"
     ]
   },
   {
-    "objectID": "18.html#neural-differential-equation",
-    "href": "18.html#neural-differential-equation",
+    "objectID": "18.html#coupling-flows",
+    "href": "18.html#coupling-flows",
     "title": "2  Normalizing Flows",
-    "section": "5.1 neural differential equation",
-    "text": "5.1 neural differential equation",
+    "section": "",
+    "text": "The transformation function \\(f\\) should be (easily enough) invertible, so that we can compute the latent variable likelihood.\nThe Jacobian determinant of the transformation should be easy to compute, so that we can correct the latent likelihood to get the data likelihood.\nWe should be able to sample from it. Once the above two are met, this is usually straightforward, although the computation cost might vary.\n\n\n\n\n\n\n\n\n\n\n\n\n\\(\\mathbf{Z}_A\\) is an identity transformation of \\(\\mathbf{X}_A\\), so \\(\\frac{\\partial \\mathbf{Z}_A}{\\partial \\mathbf{X}_A}\\) is an identity matrix.\n\\(\\frac{\\partial \\mathbf{Z}_A}{\\partial \\mathbf{X}_B}\\) is zero.\n\\(\\mathbf{Z}_B\\) is \\(\\mathbf{X}_B\\) minus a linear transformation of \\(\\mathbf{X}_A\\) (doesn’t involve \\(\\mathbf{Z}_B\\)), then element-wise multiplied by the exponential term (meaning no interaction among \\(\\mathbf{Z}_B\\)), so \\(\\frac{\\partial \\mathbf{Z}_A}{\\partial \\mathbf{X}_B}\\) is a diagonal matrix, and the diagonal values are the corresponding negatives of the exponential term. Up to this point we know the Jacobian matrix itselve is a lower triangular matrix.\n\\(\\frac{\\partial \\mathbf{Z}_B}{\\partial \\mathbf{X}_A}\\) is more complicated, but it doesn’t factor into the Jacobian determinant so can be safely ignored.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Normalizing Flows</span>"
-    ]
-  },
-  {
-    "objectID": "18.html#neural-ode-backpropagation",
-    "href": "18.html#neural-ode-backpropagation",
-    "title": "2  Normalizing Flows",
-    "section": "5.2 neural ODE backpropagation",
-    "text": "5.2 neural ODE backpropagation",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Normalizing Flows</span>"
-    ]
-  },
-  {
-    "objectID": "18.html#neural-ode-flows",
-    "href": "18.html#neural-ode-flows",
-    "title": "2  Normalizing Flows",
-    "section": "5.3 neural ODE flows",
-    "text": "5.3 neural ODE flows",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Normalizing Flows</span>"
-    ]
-  },
-  {
-    "objectID": "01.html#midical-diagnosis",
-    "href": "01.html#midical-diagnosis",
-    "title": "1  The Deep Learning Revolution",
-    "section": "2.1 midical diagnosis",
-    "text": "2.1 midical diagnosis",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Deep Learning Revolution</span>"
-    ]
-  },
-  {
-    "objectID": "01.html#protein-structure",
-    "href": "01.html#protein-structure",
-    "title": "1  The Deep Learning Revolution",
-    "section": "2.2 protein structure",
-    "text": "2.2 protein structure",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Deep Learning Revolution</span>"
-    ]
-  },
-  {
-    "objectID": "01.html#image-synthesis",
-    "href": "01.html#image-synthesis",
-    "title": "1  The Deep Learning Revolution",
-    "section": "2.3 image synthesis",
-    "text": "2.3 image synthesis",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Deep Learning Revolution</span>"
-    ]
-  },
-  {
-    "objectID": "01.html#llm",
-    "href": "01.html#llm",
-    "title": "1  The Deep Learning Revolution",
-    "section": "2.4 LLM",
-    "text": "2.4 LLM",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Deep Learning Revolution</span>"
-    ]
-  },
-  {
-    "objectID": "01.html#synthetic-data",
-    "href": "01.html#synthetic-data",
-    "title": "1  The Deep Learning Revolution",
-    "section": "3.1 synthetic data",
-    "text": "3.1 synthetic data",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Deep Learning Revolution</span>"
-    ]
-  },
-  {
-    "objectID": "01.html#linear-models",
-    "href": "01.html#linear-models",
-    "title": "1  The Deep Learning Revolution",
-    "section": "3.2 linear models",
-    "text": "3.2 linear models",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Deep Learning Revolution</span>"
-    ]
-  },
-  {
-    "objectID": "01.html#error-function",
-    "href": "01.html#error-function",
-    "title": "1  The Deep Learning Revolution",
-    "section": "3.3 error function",
-    "text": "3.3 error function",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Deep Learning Revolution</span>"
-    ]
-  },
-  {
-    "objectID": "01.html#model-complexity",
-    "href": "01.html#model-complexity",
-    "title": "1  The Deep Learning Revolution",
-    "section": "3.4 model complexity",
-    "text": "3.4 model complexity",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Deep Learning Revolution</span>"
-    ]
-  },
-  {
-    "objectID": "01.html#regularization",
-    "href": "01.html#regularization",
-    "title": "1  The Deep Learning Revolution",
-    "section": "3.5 regularization",
-    "text": "3.5 regularization",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Deep Learning Revolution</span>"
-    ]
-  },
-  {
-    "objectID": "01.html#model-selection",
-    "href": "01.html#model-selection",
-    "title": "1  The Deep Learning Revolution",
-    "section": "3.6 model selection",
-    "text": "3.6 model selection",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Deep Learning Revolution</span>"
-    ]
-  },
-  {
-    "objectID": "01.html#single-layer-networks",
-    "href": "01.html#single-layer-networks",
-    "title": "1  The Deep Learning Revolution",
-    "section": "4.1 single layer networks",
-    "text": "4.1 single layer networks",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Deep Learning Revolution</span>"
-    ]
-  },
-  {
-    "objectID": "01.html#backpropagation",
-    "href": "01.html#backpropagation",
-    "title": "1  The Deep Learning Revolution",
-    "section": "4.2 backpropagation",
-    "text": "4.2 backpropagation",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Deep Learning Revolution</span>"
-    ]
-  },
-  {
-    "objectID": "01.html#deep-networks",
-    "href": "01.html#deep-networks",
-    "title": "1  The Deep Learning Revolution",
-    "section": "4.3 deep networks",
-    "text": "4.3 deep networks",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>The Deep Learning Revolution</span>"
     ]
   },
   {
@@ -240,16 +80,6 @@
     ]
   },
   {
-    "objectID": "18.html#continuous-flows-3",
-    "href": "18.html#continuous-flows-3",
-    "title": "2  Normalizing Flows",
-    "section": "2.3 continuous flows (3)",
-    "text": "2.3 continuous flows (3)\nContinuous flows, particularly those based on Neural Ordinary Differential Equations (Neural ODEs), offer a sophisticated framework for modeling transformations of continuous state spaces. Unlike discrete flows that apply transformations in layers or steps, continuous flows define the transformation through the solution of a differential equation over a continuous depth or time variable.\nNeural ODEs conceptualize the layers of a deep network as a continuous dynamic process governed by an ordinary differential equation. For an input $ $, the output $ $ is obtained by solving the following ODE:\n\\[\n\\frac{d\\mathbf{z}(t)}{dt} = f(\\mathbf{z}(t), t, \\mathbf{\\theta})\n\\]\nWhere:\n\n$ (t) $ represents the state of the system at time $ t $.\n$ f $ is a neural network parametrized by weights $ $.\n$ (0) = $ and $ (1) = $ (assuming integration from $ t=0 $ to $ t=1 $).\n\nThe transformation $ = (1) $ is defined implicitly by the trajectory that $ (t) $ follows, dictated by $ f \\(.\nThis setup allows an infinitely deep network by parameterizing the\ncontinuous transformation depth with a fixed set of parameters\\) $.\nTraining Neural ODEs involves backpropagation through the solution of the ODE. The adjoint sensitivity method is the standard approach, which computes gradients without retaining the entire trajectory of $ (t) $. This is formulated as:\n\\[\n\\frac{d\\mathbf{a}(t)}{dt} = -\\mathbf{a}(t)^T \\frac{\\partial f}{\\partial \\mathbf{z}(t)}\n\\]\nWhere $ (t) $ is the adjoint state, representing the gradient of the loss $ $ with respect to $ (t) \\(. This\nmethod efficiently computes gradients by solving a coupled ODE backwards\nin time, starting from\\) (1) = $.\nNeural ODE Flows extend the concept of Neural ODEs to model complex distributions by transforming a simple base distribution (like a standard Gaussian) into a more complex one through the flow defined by the ODE. The key benefit here is the computation of the log-likelihood adjustment due to the change of variables formula, which involves the trace of the Jacobian rather than its determinant:\n\\[\n\\text{Trace} \\left(\\frac{\\partial f}{\\partial \\mathbf{z}(t)}\\right)\n\\]\nThis trace can be estimated stochastically (e.g., Hutchinson's trace estimator), making the model both memory efficient and scalable for high-dimensional data.\nThese continuous and neural ODE-based flows provide a powerful framework for deep generative models, especially in scenarios where the data or the model's behavior is inherently continuous.\n\n2.3.1 neural differential equation\n\n\n2.3.2 neural ODE backpropagation\n\n\n2.3.3 neural ODE flows",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Normalizing Flows</span>"
-    ]
-  },
-  {
     "objectID": "18.html#continuous-flows",
     "href": "18.html#continuous-flows",
     "title": "2  Normalizing Flows",
@@ -257,6 +87,16 @@
     "text": "2.3 continuous flows\n\n2.3.1 neural differential equation\n\n\n2.3.2 neural ODE backpropagation\n\n\n2.3.3 neural ODE flows",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Normalizing Flows</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "crumbs": [
+      "References"
     ]
   }
 ]

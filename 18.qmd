@@ -32,8 +32,65 @@ To be able to model a wide range of distributions, we want the transformation fu
 
 ##  coupling flows
 
+Recall that in flow models we aim for **the following goals**:
+
+1. The transformation function $f$ should be (easily enough) invertible, so that we can compute the latent variable likelihood.
+2. The Jacobian determinant of the transformation should be easy to compute, so that we can correct the latent likelihood to get the data likelihood.
+3. We should be able to sample from  it. Once the above two are met, this is usually straightforward, although the computation cost might vary.
+
+Each flow model will attempt to meet these goals in different ways. In **coupling flows**, for each layer of the network, we first split the latent variable $\mathbf{z}$ into two parts $\mathbf{z} = (\mathbf{z}_A, \mathbf{z}_B)$, then apply the following transformation:
+
+$$
+\begin{align}
+\mathbf{X}_A &= \mathbf{Z}_A, \\
+\mathbf{X}_B &= \exp(s(\mathbf{Z}_A, w)) \odot \mathbf{Z}_B + b(\mathbf{Z}_A, w). 
+\end{align}
+$$
+
+The frist part $\mathbf{X}_A$ is simply left unchanged, and all the efforts are put into transforming the second part $\mathbf{X}_B$. The transformation is done by a neural network with parameters $w$, which takes $\mathbf{Z}_A$ as input and outputs two vectors $s(\mathbf{Z}_A, w)$ and $b(\mathbf{Z}_A, w)$ of the same dimensionality as $\mathbf{Z}_B$. Besides, an $\exp$ function is used to ensure that the Jacobian determinant is easy to compute.
+
+![](./img/DLFC/Chapter-18/Figure_1.png)
+
+Now let's check how this formula meets the three aformentioned goals. **First** is invertability. Simply rearrange the terms and we can get the inverse transformation:
+
+$$
+\begin{align}
+\mathbf{Z}_A &= \mathbf{X}_A, \\
+\mathbf{Z}_B &= (\mathbf{X}_B - b(\mathbf{X}_A, w)) \odot \exp(-s(\mathbf{X}_A, w)).
+\end{align}
+$$
+
+Notice how the inverse transformation does not involve inverting the neural networks at all, just changing the sign of the $\exp$ function. This is the key to making the transformation invertible easy and efficient.
+
+**Second** is computing the Jacobian determinant. It turns out the Jacobian is a lower trianglular matrix 
+
+$$
+\begin{bmatrix}
+\mathbf{I} & 0 \\
+\frac{\partial \mathbf{Z}_B}{\partial \mathbf{X}_A} & \text{diag}(-\exp(s(\mathbf{Z}_A, w)))
+\end{bmatrix}
+$$
+
+and the determinant is simply the product of the diagonal elements.
+
+1. $\mathbf{Z}_A$ is an identity transformation of $\mathbf{X}_A$, so $\frac{\partial \mathbf{Z}_A}{\partial \mathbf{X}_A}$ is an identity matrix. 
+2. $\frac{\partial \mathbf{Z}_A}{\partial \mathbf{X}_B}$ is zero. 
+3. $\mathbf{Z}_B$ is $\mathbf{X}_B$ minus a linear transformation of $\mathbf{X}_A$ (doesn't involve $\mathbf{Z}_B$), then element-wise multiplied by the exponential term (meaning no interaction among $\mathbf{Z}_B$), so $\frac{\partial \mathbf{Z}_A}{\partial \mathbf{X}_B}$ is a diagonal matrix, and the diagonal values are the corresponding negatives of the exponential term.  Up to this point we know the Jacobian matrix itselve is a lower triangular matrix.
+4. $\frac{\partial \mathbf{Z}_B}{\partial \mathbf{X}_A}$ is more complicated, but it doesn't factor into the Jacobian determinant so can be safely ignored.
+
+To make the network more expressive, normalizing flows often have multiple coupling layers stacked together, switching the roles of $\mathbf{Z}_A$ and $\mathbf{Z}_B$ at each layer, and possibly also changing the split points at each layer.  The final data likelihood is the product of the likelihoods at each layer. And the Jacobian determinant is the product of the determinants at each layer.
+
+![](./img/DLFC/Chapter-18/Figure_2.png)
+
+**Third** is sampling. Once the model is trained, we can start with $\mathbf{Z}_A$, and follow the flow till we get to $\mathbf{X}$. The sampling process is deterministic and easy to compute.
+
+![](./img/DLFC/Chapter-18/Figure_3_a.png) ![](./img/DLFC/Chapter-18/Figure_3_b.png) ![](./img/DLFC/Chapter-18/Figure_3_c.png) ![](./img/DLFC/Chapter-18/Figure_3_d.png) ![](./img/DLFC/Chapter-18/Figure_3_e.png) ![](./img/DLFC/Chapter-18/Figure_3_f.png)
 
 ##  autoregressive flows
+
+![](./img/DLFC/Chapter-18/Figure_4_a.png)
+
+![](./img/DLFC/Chapter-18/Figure_4_b.png)
 
 ##  continuous flows
 

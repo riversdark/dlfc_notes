@@ -221,9 +221,52 @@ J_{ij}(\mathbf{x}) = \frac{\partial g_i(\mathbf{x}, \mathbf{w})}{\partial x_j}.
 <p>To be able to model a wide range of distributions, we want the transformation function <span class="math inline">\(\mathbf{x} = f(\mathbf{z}, \mathbf{w})\)</span> to be highly flexible, so we use a deep neural network with multiple layers. We can ensure that the overall function is invertible if we make each layer of the network invertible. And the two terms in the data likelihood, the latent variable likelihood and the Jacobian determinant, can both be computed easily under such a layered structure, using the chain rule of calculus.</p>
 <section id="coupling-flows" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="coupling-flows"><span class="header-section-number">2.1</span> coupling flows</h2>
+<p>Recall that in flow models we aim for <strong>the following goals</strong>:</p>
+<ol type="1">
+<li>The transformation function <span class="math inline">\(f\)</span> should be (easily enough) invertible, so that we can compute the latent variable likelihood.</li>
+<li>The Jacobian determinant of the transformation should be easy to compute, so that we can correct the latent likelihood to get the data likelihood.</li>
+<li>We should be able to sample from it. Once the above two are met, this is usually straightforward, although the computation cost might vary.</li>
+</ol>
+<p>Each flow model will attempt to meet these goals in different ways. In <strong>coupling flows</strong>, for each layer of the network, we first split the latent variable <span class="math inline">\(\mathbf{z}\)</span> into two parts <span class="math inline">\(\mathbf{z} = (\mathbf{z}_A, \mathbf{z}_B)\)</span>, then apply the following transformation:</p>
+<p><span class="math display">\[
+\begin{align}
+\mathbf{X}_A &amp;= \mathbf{Z}_A, \\
+\mathbf{X}_B &amp;= \exp(s(\mathbf{Z}_A, w)) \odot \mathbf{Z}_B + b(\mathbf{Z}_A, w).
+\end{align}
+\]</span></p>
+<p>The frist part <span class="math inline">\(\mathbf{X}_A\)</span> is simply left unchanged, and all the efforts are put into transforming the second part <span class="math inline">\(\mathbf{X}_B\)</span>. The transformation is done by a neural network with parameters <span class="math inline">\(w\)</span>, which takes <span class="math inline">\(\mathbf{Z}_A\)</span> as input and outputs two vectors <span class="math inline">\(s(\mathbf{Z}_A, w)\)</span> and <span class="math inline">\(b(\mathbf{Z}_A, w)\)</span> of the same dimensionality as <span class="math inline">\(\mathbf{Z}_B\)</span>. Besides, an <span class="math inline">\(\exp\)</span> function is used to ensure that the Jacobian determinant is easy to compute.</p>
+<p><img src="./img/DLFC/Chapter-18/Figure_1.png" class="img-fluid"></p>
+<p>Now let’s check how this formula meets the three aformentioned goals. <strong>First</strong> is invertability. Simply rearrange the terms and we can get the inverse transformation:</p>
+<p><span class="math display">\[
+\begin{align}
+\mathbf{Z}_A &amp;= \mathbf{X}_A, \\
+\mathbf{Z}_B &amp;= (\mathbf{X}_B - b(\mathbf{X}_A, w)) \odot \exp(-s(\mathbf{X}_A, w)).
+\end{align}
+\]</span></p>
+<p>Notice how the inverse transformation does not involve inverting the neural networks at all, just changing the sign of the <span class="math inline">\(\exp\)</span> function. This is the key to making the transformation invertible easy and efficient.</p>
+<p><strong>Second</strong> is computing the Jacobian determinant. It turns out the Jacobian is a lower trianglular matrix</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+\mathbf{I} &amp; 0 \\
+\frac{\partial \mathbf{Z}_B}{\partial \mathbf{X}_A} &amp; \text{diag}(-\exp(s(\mathbf{Z}_A, w)))
+\end{bmatrix}
+\]</span></p>
+<p>and the determinant is simply the product of the diagonal elements.</p>
+<ol type="1">
+<li><span class="math inline">\(\mathbf{Z}_A\)</span> is an identity transformation of <span class="math inline">\(\mathbf{X}_A\)</span>, so <span class="math inline">\(\frac{\partial \mathbf{Z}_A}{\partial \mathbf{X}_A}\)</span> is an identity matrix.</li>
+<li><span class="math inline">\(\frac{\partial \mathbf{Z}_A}{\partial \mathbf{X}_B}\)</span> is zero.</li>
+<li><span class="math inline">\(\mathbf{Z}_B\)</span> is <span class="math inline">\(\mathbf{X}_B\)</span> minus a linear transformation of <span class="math inline">\(\mathbf{X}_A\)</span> (doesn’t involve <span class="math inline">\(\mathbf{Z}_B\)</span>), then element-wise multiplied by the exponential term (meaning no interaction among <span class="math inline">\(\mathbf{Z}_B\)</span>), so <span class="math inline">\(\frac{\partial \mathbf{Z}_A}{\partial \mathbf{X}_B}\)</span> is a diagonal matrix, and the diagonal values are the corresponding negatives of the exponential term. Up to this point we know the Jacobian matrix itselve is a lower triangular matrix.</li>
+<li><span class="math inline">\(\frac{\partial \mathbf{Z}_B}{\partial \mathbf{X}_A}\)</span> is more complicated, but it doesn’t factor into the Jacobian determinant so can be safely ignored.</li>
+</ol>
+<p>To make the network more expressive, normalizing flows often have multiple coupling layers stacked together, switching the roles of <span class="math inline">\(\mathbf{Z}_A\)</span> and <span class="math inline">\(\mathbf{Z}_B\)</span> at each layer, and possibly also changing the split points at each layer. The final data likelihood is the product of the likelihoods at each layer. And the Jacobian determinant is the product of the determinants at each layer.</p>
+<p><img src="./img/DLFC/Chapter-18/Figure_2.png" class="img-fluid"></p>
+<p><strong>Third</strong> is sampling. Once the model is trained, we can start with <span class="math inline">\(\mathbf{Z}_A\)</span>, and follow the flow till we get to <span class="math inline">\(\mathbf{X}\)</span>. The sampling process is deterministic and easy to compute.</p>
+<p><img src="./img/DLFC/Chapter-18/Figure_3_a.png" class="img-fluid"> <img src="./img/DLFC/Chapter-18/Figure_3_b.png" class="img-fluid"> <img src="./img/DLFC/Chapter-18/Figure_3_c.png" class="img-fluid"> <img src="./img/DLFC/Chapter-18/Figure_3_d.png" class="img-fluid"> <img src="./img/DLFC/Chapter-18/Figure_3_e.png" class="img-fluid"> <img src="./img/DLFC/Chapter-18/Figure_3_f.png" class="img-fluid"></p>
 </section>
 <section id="autoregressive-flows" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="autoregressive-flows"><span class="header-section-number">2.2</span> autoregressive flows</h2>
+<p><img src="./img/DLFC/Chapter-18/Figure_4_a.png" class="img-fluid"></p>
+<p><img src="./img/DLFC/Chapter-18/Figure_4_b.png" class="img-fluid"></p>
 </section>
 <section id="continuous-flows" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="continuous-flows"><span class="header-section-number">2.3</span> continuous flows</h2>
