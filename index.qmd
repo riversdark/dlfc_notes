@@ -2,7 +2,7 @@
 
 *This project is a WIP.*
 
-I'm a great fan of Bishop's 2006 book, Pattern Recognition and Machine Learning (PRML), so as an AI practioner coming from a Bayesian background, I'm very much pleasantly surprised to learn that Bishop (and Bishop) have published a new book dedicated to deep learning and artificial intelligence. The focuse on generative models is especially enticing, firstly because it is all the rage for the moment; secondly for a Bayesian statistician, doing generative modeling has always been what we are trained for.
+I'm a great fan of Bishop's 2006 book, Pattern Recognition and Machine Learning (PRML), so as an AI practioner coming from a Bayesian background, I'm very much pleasantly surprised to learn that Bishop (and Bishop) have published a new book dedicated to deep learning and artificial intelligence. The focus on generative models is especially enticing, firstly because it is all the rage for the moment; secondly for a Bayesian statistician, doing generative modeling has always been what we are trained for.
 
 The book has 20 chapters, I have divided them roughly into three parts.
 

@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./20.html" rel="next">
 <link href="./01.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -155,6 +155,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./20.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -255,7 +261,7 @@ J_{ij}(\mathbf{x}) = \frac{\partial g_i(\mathbf{x}, \mathbf{w})}{\partial x_j}.
 <ol type="1">
 <li><span class="math inline">\(\mathbf{Z}_A\)</span> is an identity transformation of <span class="math inline">\(\mathbf{X}_A\)</span>, so <span class="math inline">\(\frac{\partial \mathbf{Z}_A}{\partial \mathbf{X}_A}\)</span> is an identity matrix.</li>
 <li><span class="math inline">\(\frac{\partial \mathbf{Z}_A}{\partial \mathbf{X}_B}\)</span> is zero.</li>
-<li><span class="math inline">\(\mathbf{Z}_B\)</span> is <span class="math inline">\(\mathbf{X}_B\)</span> minus a linear transformation of <span class="math inline">\(\mathbf{X}_A\)</span> (doesn’t involve <span class="math inline">\(\mathbf{Z}_B\)</span>), then element-wise multiplied by the exponential term (meaning no interaction among <span class="math inline">\(\mathbf{Z}_B\)</span>), so <span class="math inline">\(\frac{\partial \mathbf{Z}_A}{\partial \mathbf{X}_B}\)</span> is a diagonal matrix, and the diagonal values are the corresponding negatives of the exponential term. Up to this point we know the Jacobian matrix itselve is a lower triangular matrix.</li>
+<li><span class="math inline">\(\mathbf{Z}_B\)</span> is <span class="math inline">\(\mathbf{X}_B\)</span> minus a linear transformation of <span class="math inline">\(\mathbf{X}_A\)</span> (doesn’t involve <span class="math inline">\(\mathbf{Z}_B\)</span>), then element-wise multiplied by the exponential term (meaning no interaction among <span class="math inline">\(\mathbf{Z}_B\)</span>), so <span class="math inline">\(\frac{\partial \mathbf{Z}_B}{\partial \mathbf{X}_B}\)</span> is a diagonal matrix, and the diagonal values are the corresponding negatives of the exponential term. Up to this point we know the Jacobian matrix itselve is a lower triangular matrix.</li>
 <li><span class="math inline">\(\frac{\partial \mathbf{Z}_B}{\partial \mathbf{X}_A}\)</span> is more complicated, but it doesn’t factor into the Jacobian determinant so can be safely ignored.</li>
 </ol>
 <p>To make the network more expressive, normalizing flows often have multiple coupling layers stacked together, switching the roles of <span class="math inline">\(\mathbf{Z}_A\)</span> and <span class="math inline">\(\mathbf{Z}_B\)</span> at each layer, and possibly also changing the split points at each layer. The final data likelihood is the product of the likelihoods at each layer. And the Jacobian determinant is the product of the determinants at each layer.</p>
@@ -711,8 +717,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./20.html" class="pagination-link" aria-label="Diffusion Models">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

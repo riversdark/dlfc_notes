@@ -75,7 +75,7 @@ and the determinant is simply the product of the diagonal elements.
 
 1. $\mathbf{Z}_A$ is an identity transformation of $\mathbf{X}_A$, so $\frac{\partial \mathbf{Z}_A}{\partial \mathbf{X}_A}$ is an identity matrix. 
 2. $\frac{\partial \mathbf{Z}_A}{\partial \mathbf{X}_B}$ is zero. 
-3. $\mathbf{Z}_B$ is $\mathbf{X}_B$ minus a linear transformation of $\mathbf{X}_A$ (doesn't involve $\mathbf{Z}_B$), then element-wise multiplied by the exponential term (meaning no interaction among $\mathbf{Z}_B$), so $\frac{\partial \mathbf{Z}_A}{\partial \mathbf{X}_B}$ is a diagonal matrix, and the diagonal values are the corresponding negatives of the exponential term.  Up to this point we know the Jacobian matrix itselve is a lower triangular matrix.
+3. $\mathbf{Z}_B$ is $\mathbf{X}_B$ minus a linear transformation of $\mathbf{X}_A$ (doesn't involve $\mathbf{Z}_B$), then element-wise multiplied by the exponential term (meaning no interaction among $\mathbf{Z}_B$), so $\frac{\partial \mathbf{Z}_B}{\partial \mathbf{X}_B}$ is a diagonal matrix, and the diagonal values are the corresponding negatives of the exponential term.  Up to this point we know the Jacobian matrix itselve is a lower triangular matrix.
 4. $\frac{\partial \mathbf{Z}_B}{\partial \mathbf{X}_A}$ is more complicated, but it doesn't factor into the Jacobian determinant so can be safely ignored.
 
 To make the network more expressive, normalizing flows often have multiple coupling layers stacked together, switching the roles of $\mathbf{Z}_A$ and $\mathbf{Z}_B$ at each layer, and possibly also changing the split points at each layer.  The final data likelihood is the product of the likelihoods at each layer. And the Jacobian determinant is the product of the determinants at each layer.
