@@ -1,5 +1,6 @@
 ---
 title: "Normalizing Flows"
+jupyter: "torch"
 ---
 
 **GANs** are the first major generative modeling architecture we considered, but nowadays it's no longer widely used. Although the sampling is easy, it usually has no data likelihood, and the training process is often unstable.  **Normalizing flows**, on the contrary, have exact likelihoods we can train on, and the sampling process is also easy (albeit much slower). The exact likelihood is guaranteed by applying some specific constraints on the network architecture (invertibility), which makes the Jacobian determinant between distribution transformations easy to compute. Later, with **diffusion models**, we'll relax the architecture constraints a little bit so that the network will no longer be invertible, and we will only be able to train on an approximation of the likelihood. But these relaxations allow for some much more expressive models and better sample quality.
@@ -84,7 +85,109 @@ To make the network more expressive, normalizing flows often have multiple coupl
 
 **Third** is sampling. Once the model is trained, we can start with $\mathbf{Z}_A$, and follow the flow till we get to $\mathbf{X}$. The sampling process is deterministic and easy to compute.
 
-![](./img/DLFC/Chapter-18/Figure_3_a.png) ![](./img/DLFC/Chapter-18/Figure_3_b.png) ![](./img/DLFC/Chapter-18/Figure_3_c.png) ![](./img/DLFC/Chapter-18/Figure_3_d.png) ![](./img/DLFC/Chapter-18/Figure_3_e.png) ![](./img/DLFC/Chapter-18/Figure_3_f.png)
+As an example we can train a normalizing flow model on a two-moons dataset, using the `normflows` package. The following code is adapted from the package's example code.
+
+``` {python}
+# Import required packages
+import torch
+import numpy as np
+import normflows as nf
+from matplotlib import pyplot as plt
+from tqdm import tqdm
+device = 'cuda'
+```
+
+This is the target distribution 
+
+``` {python}
+# Define target distribution
+target = nf.distributions.TwoMoons()
+# Plot target distribution
+grid_size = 200
+xx, yy = torch.meshgrid(torch.linspace(-3, 3, grid_size), torch.linspace(-3, 3, grid_size), indexing='xy')
+zz = torch.cat([xx.unsqueeze(2), yy.unsqueeze(2)], 2).view(-1, 2)
+zz = zz.to(device)
+
+log_prob = target.log_prob(zz).to('cpu').view(*xx.shape)
+prob = torch.exp(log_prob)
+prob[torch.isnan(prob)] = 0
+
+plt.pcolormesh(xx, yy, prob.data.numpy(), cmap='hot')
+plt.gca().set_aspect('equal', 'box')
+```
+
+Construct the model. To define a normalizing flow model, we first specify the base distribution and the transformation layers, and then combine them in the `NormalizingFlow` class.
+
+``` {python}
+# Define 2D Gaussian base distribution
+base = nf.distributions.base.DiagGaussian(2)
+
+# Define list of flows
+num_layers = 2
+flows = []
+for i in range(num_layers):
+    # Neural network with two hidden layers having 64 units each
+    # Last layer is initialized by zeros making training more stable
+    param_map = nf.nets.MLP([1, 64, 64, 2], init_zeros=True)
+    # Add flow layer
+    flows.append(nf.flows.AffineCouplingBlock(param_map))
+    # Swap dimensions
+    flows.append(nf.flows.Permute(2, mode='swap'))
+
+model = nf.NormalizingFlow(base, flows)
+model = model.to(device)
+```
+
+Train the model. 
+``` {python}
+max_iter = 3201
+num_samples = 2 ** 9
+show_iter = 800
+
+loss_hist = np.array([])
+prob_list = []
+optimizer = torch.optim.Adam(model.parameters(), lr=5e-4, weight_decay=1e-5)
+
+for it in tqdm(range(max_iter)):
+    optimizer.zero_grad()
+
+    # Get training samples
+    x = target.sample(num_samples).to(device)
+
+    # Compute loss
+    loss = model.forward_kld(x)
+
+    # Do backprop and optimizer step
+    if ~(torch.isnan(loss) | torch.isinf(loss)):
+        loss.backward()
+        optimizer.step()
+
+    # Log loss
+    loss_hist = np.append(loss_hist, loss.to('cpu').data.numpy())
+
+    # Save prob for later plotting
+    if it % show_iter == 0:
+        model.eval()
+        log_prob = model.log_prob(zz)
+        model.train()
+        prob = torch.exp(log_prob.to('cpu').view(*xx.shape))
+        prob[torch.isnan(prob)] = 0
+        prob_list.append(prob.data.numpy())
+plt.plot(loss_hist)
+```
+
+Plot the results. We can see that the model has (roughly) learned the distribution of the two moons dataset.
+
+``` {python}
+fig, axes = plt.subplots(1, len(prob_list), figsize=(10, 2), sharey=True)
+for i, prob in enumerate(prob_list):
+    ax = axes[i]
+    c = ax.pcolormesh(xx, yy, prob, cmap='hot')
+    ax.set_aspect('equal', 'box')
+
+# Adjust the colorbar to have more padding
+cbar = fig.colorbar(c, ax=axes, orientation='vertical', fraction=0.02, pad=0.02)
+```
 
 ##  autoregressive flows
 
@@ -94,8 +197,32 @@ To make the network more expressive, normalizing flows often have multiple coupl
 
 ##  continuous flows
 
+In normalizing flow models, for each transformation layer, the input and output always have the same dimensionality, we are thus looking for a more meaningful representation of the same data space. There is another neural network sharing this property, namely residual networks, but there is no guarantee that such a network will be invertible. Here we introduce a well known mathematical concept, the differential equation, into the neural network, and thus satisfying both the invertibility and the constant dimensionality requirements.
+
 ###  neural differential equation
+
+Neural differential equation, as the name implies, is a neural network that is defined by a differential equation. We can consider the residual network as a discrete version of the differential equation, since the "residual" is already a difference between consecutive layers, and the differential is the limit of this difference as it approaches zero. Thus starting from a residual network
+
+$$
+\mathbf{z}_{t+1} = \mathbf{z}_t + f(\mathbf{z}_t, \mathbf{w})
+$$
+
+we can readily convert it into a differential equation
+
+$$
+\frac{d\mathbf{z(t)}}{dt} = f(\mathbf{z(t)}, \mathbf{w}).
+$$
+
+Now defining something is easy, what really matters is what we can do with it. On the modeling side, starting from an initial state $\mathbf{z}_0$, we no longer need to define the number of layers in the network. we can integrate the differential equation to get the state at any time $t$,
+
+![](./img/DLFC/Chapter-18/Figure_5.png)
 
 ###  neural ODE backpropagation
 
 ###  neural ODE flows
+
+![](./img/DLFC/Chapter-18/Figure_6_a.png)
+
+![](./img/DLFC/Chapter-18/Figure_6_b.png)
+
+![](./img/DLFC/Chapter-18/Figure_6_c.png)
