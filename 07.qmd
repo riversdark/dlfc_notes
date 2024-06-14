@@ -1,0 +1,159 @@
+# DLFC07 gradient descent (4) {#fbf5a044-6960-4224-9c8d-d1f62df9e39d}
+
+``` example
+8 plots, 4 algorithms
+```
+
+In the previous chapter we saw that neural networks are a very broad and
+flexible class of functions and are able in principle to approximate any
+desired function to arbitrarily high accuracy given a sufficiently large
+number of hidden units
+([6.2.2](id:0de943c6-048c-40b5-b1f1-63c83f2ee2c8)). Moreover, we saw
+that deep neural networks can encode inductive biases corresponding to
+hierarchical representations
+([6.3.1](id:88e23b3e-9c9c-4a1b-b521-5ce98c011545)), which prove valuable
+in a wide range of practical applications. We now turn to the task of
+finding a suitable setting for the network parameters (weights and
+biases), based on a set of training data.
+
+As with the regression and classification models discussed in earlier
+chapters, we choose the model parameters by optimizing an error
+function. We have seen how to define **a suitable error function** for a
+particular application by using maximum likelihood. Although in
+principle the error function could be minimized numerically through a
+series of direct error function evaluations, this turns out to be very
+inefficient. Instead, we turn to another core concept that is used in
+deep learning, which is that optimizing the error function can be done
+much more efficiently by making use of **gradient information**, in
+other words by evaluating the derivatives of the error function with
+respect to the network parameters. This is why we took care to ensure
+that the function represented by the neural network is differentiable by
+design. Likewise, the error function itself also needs to be
+differentiable.
+
+The required derivatives of the error function with respect to each of
+the parameters in the network can be evaluated efficiently using a
+technique called backpropagation
+([8](id:bbc86a9c-b425-4d10-b16e-9e123f866928)), which involves
+successive computations that flow backwards through the network in a way
+that is analogous to the forward flow of function computations during
+the evaluation of the network outputs.
+
+Although the likelihood is used to define an error function, the goal
+when optimizing the error function in a neural network is to achieve
+good generalization on test data. In classical statistics, maximum
+likelihood is used to fit a parametric model to a finite data set, in
+which the number of data points typically far exceeds the number of
+parameters in the model. The optimal solution has the maximum value of
+the likelihood function, and the values found for the fitted parameters
+are of direct interest. By contrast, modern deep learning works with
+very rich models containing huge numbers of learnable parameters, and
+the goal is never simply exact optimization. Instead, the properties and
+behaviour of the learning algorithm itself, along with various methods
+for regularization, are important in determining how well the solution
+generalizes to new data.
+
+## 7.1 error surfaces (1) {#528ddffa-464f-4470-aa11-8dc86fc3cde9}
+
+![](./img/DLFC/Chapter-7/Figure_1.png)
+
+``` example
+error function, local minimum A, global minimum B, and gradient at C
+```
+
+### 7.1.1 local quadratic approximation
+
+![](./img/DLFC/Chapter-7/Figure_2.png)
+
+## 7.2 gradient descent optimisation (5) {#d7b6e568-6d23-4870-9dd2-6f941fbe9e10}
+
+simply put, gradient descent initialize the weights somewhere, calculate
+an increment using gradient information, and modify the weights using
+this information.
+
+$$
+\mathbf{w}^{(\tau)} = \mathbf{w}^{(\tau-1)} + \Delta \mathbf{w}^{(\tau-1)} \quad (7.15)
+$$
+
+the bulk of our attention will be devoted to how to get the gradient,
+but the starting point is also quite important.
+
+### 7.2.1 use of gradient information
+
+### 7.2.2 batch gradient descent
+
+### 7.2.3 stochastic gradient descent
+
+### 7.2.4 mini-batches
+
+### 7.2.5 parameter initialisation
+
+## 7.3 convergence (3) {#24ca3aac-10c9-493b-946d-5b851955eb24}
+
+```{=org}
+#+ATTR_ORG: :width 300
+```
+![](./img/DLFC/Chapter-7/Figure_3.png)
+
+### 7.3.1 momentum
+
+![](./img/DLFC/Chapter-7/Figure_4.png)
+![](./img/DLFC/Chapter-7/Figure_5.png)
+![](./img/DLFC/Chapter-7/Figure_6.png)
+
+### 7.3.2 learning rate schedule
+
+### 7.3.3 RMSProp and Adam
+
+## 7.4 normalisation (3) {#06e1cf3b-d78d-42f9-80e9-654fbadac7a9}
+
+The gopher(2022) paper also introduced a RMSNorm normalisation method.
+
+### 7.4.1 data normalisation
+
+![](./img/DLFC/Chapter-7/Figure_7.png)
+
+### 7.4.2 batch normalisation
+
+![](./img/DLFC/Chapter-7/Figure_8_a.png)
+
+### 7.4.3 layer normalisation
+
+![](./img/DLFC/Chapter-7/Figure_8_b.png)
+
+``` python
+import torch
+import torch.nn as nn
+from einops import reduce
+
+# NLP Example
+batch, sentence_length, embedding_dim = 2, 5, 3
+embedding = torch.randn(batch, sentence_length, embedding_dim)
+layer_norm = nn.LayerNorm(embedding_dim)
+
+# Calculate mean before LayerNorm across all dimensions except batch
+mean_before = reduce(embedding, 'b s e -> b', 'mean')
+
+# Calculate variance before LayerNorm across all dimensions except batch
+var_before = reduce((embedding - mean_before.reshape(batch, 1, 1)) ** 2, 'b s e -> b', 'mean')
+
+# Activate module
+normalized_embedding = layer_norm(embedding)
+
+# Calculate mean after LayerNorm across all dimensions except batch
+mean_after = reduce(normalized_embedding, 'b s e -> b', 'mean')
+
+# Calculate variance after LayerNorm across all dimensions except batch
+var_after = reduce((normalized_embedding - mean_after.reshape(batch, 1, 1)) ** 2, 'b s e -> b', 'mean')
+
+# Display mean and variance
+print("Before LayerNorm - Mean: ", end="")
+print(*mean_before.tolist(), sep=", ")
+print("Before LayerNorm - Variance: ", end="")
+print(*var_before.tolist(), sep=", ")
+
+print("After LayerNorm - Mean: ", end="")
+print(*mean_after.tolist(), sep=", ")
+print("After LayerNorm - Variance: ", end="")
+print(*var_after.tolist(), sep=", ")
+```
