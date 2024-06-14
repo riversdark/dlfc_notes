@@ -52,41 +52,41 @@
   {
     "objectID": "18.html",
     "href": "18.html",
-    "title": "2  Normalizing Flows",
+    "title": "3  Normalizing Flows",
     "section": "",
-    "text": "2.1 coupling flows\nRecall that in flow models we aim for the following goals:\nEach flow model will attempt to meet these goals in different ways. In coupling flows, for each layer of the network, we first split the latent variable \\(\\mathbf{z}\\) into two parts \\(\\mathbf{z} = (\\mathbf{z}_A, \\mathbf{z}_B)\\), then apply the following transformation:\n\\[\n\\begin{align}\n\\mathbf{X}_A &= \\mathbf{Z}_A, \\\\\n\\mathbf{X}_B &= \\exp(s(\\mathbf{Z}_A, w)) \\odot \\mathbf{Z}_B + b(\\mathbf{Z}_A, w).\n\\end{align}\n\\]\nThe frist part \\(\\mathbf{X}_A\\) is simply left unchanged, and all the efforts are put into transforming the second part \\(\\mathbf{X}_B\\). The transformation is done by a neural network with parameters \\(w\\), which takes \\(\\mathbf{Z}_A\\) as input and outputs two vectors \\(s(\\mathbf{Z}_A, w)\\) and \\(b(\\mathbf{Z}_A, w)\\) of the same dimensionality as \\(\\mathbf{Z}_B\\). Besides, an \\(\\exp\\) function is used to ensure that the Jacobian determinant is easy to compute.\nNow let’s check how this formula meets the three aformentioned goals. First is invertability. Simply rearrange the terms and we can get the inverse transformation:\n\\[\n\\begin{align}\n\\mathbf{Z}_A &= \\mathbf{X}_A, \\\\\n\\mathbf{Z}_B &= (\\mathbf{X}_B - b(\\mathbf{X}_A, w)) \\odot \\exp(-s(\\mathbf{X}_A, w)).\n\\end{align}\n\\]\nNotice how the inverse transformation does not involve inverting the neural networks at all, just changing the sign of the \\(\\exp\\) function. This is the key to making the transformation invertible easy and efficient.\nSecond is computing the Jacobian determinant. It turns out the Jacobian is a lower trianglular matrix\n\\[\n\\begin{bmatrix}\n\\mathbf{I} & 0 \\\\\n\\frac{\\partial \\mathbf{Z}_B}{\\partial \\mathbf{X}_A} & \\text{diag}(-\\exp(s(\\mathbf{Z}_A, w)))\n\\end{bmatrix}\n\\]\nand the determinant is simply the product of the diagonal elements.\nTo make the network more expressive, normalizing flows often have multiple coupling layers stacked together, switching the roles of \\(\\mathbf{Z}_A\\) and \\(\\mathbf{Z}_B\\) at each layer, and possibly also changing the split points at each layer. The final data likelihood is the product of the likelihoods at each layer. And the Jacobian determinant is the product of the determinants at each layer.\nThird is sampling. Once the model is trained, we can start with \\(\\mathbf{Z}_A\\), and follow the flow till we get to \\(\\mathbf{X}\\). The sampling process is deterministic and easy to compute.",
+    "text": "3.1 coupling flows\nRecall that in flow models we aim for the following goals:\nEach flow model will attempt to meet these goals in different ways. In coupling flows, for each layer of the network, we first split the latent variable \\(\\mathbf{z}\\) into two parts \\(\\mathbf{z} = (\\mathbf{z}_A, \\mathbf{z}_B)\\), then apply the following transformation:\n\\[\n\\begin{align}\n\\mathbf{X}_A &= \\mathbf{Z}_A, \\\\\n\\mathbf{X}_B &= \\exp(s(\\mathbf{Z}_A, w)) \\odot \\mathbf{Z}_B + b(\\mathbf{Z}_A, w).\n\\end{align}\n\\]\nThe frist part \\(\\mathbf{X}_A\\) is simply left unchanged, and all the efforts are put into transforming the second part \\(\\mathbf{X}_B\\). The transformation is done by a neural network with parameters \\(w\\), which takes \\(\\mathbf{Z}_A\\) as input and outputs two vectors \\(s(\\mathbf{Z}_A, w)\\) and \\(b(\\mathbf{Z}_A, w)\\) of the same dimensionality as \\(\\mathbf{Z}_B\\). Besides, an \\(\\exp\\) function is used to ensure that the Jacobian determinant is easy to compute.\nNow let’s check how this formula meets the three aformentioned goals. First is invertability. Simply rearrange the terms and we can get the inverse transformation:\n\\[\n\\begin{align}\n\\mathbf{Z}_A &= \\mathbf{X}_A, \\\\\n\\mathbf{Z}_B &= (\\mathbf{X}_B - b(\\mathbf{X}_A, w)) \\odot \\exp(-s(\\mathbf{X}_A, w)).\n\\end{align}\n\\]\nNotice how the inverse transformation does not involve inverting the neural networks at all, just changing the sign of the \\(\\exp\\) function. This is the key to making the transformation invertible easy and efficient.\nSecond is computing the Jacobian determinant. It turns out the Jacobian is a lower trianglular matrix\n\\[\n\\begin{bmatrix}\n\\mathbf{I} & 0 \\\\\n\\frac{\\partial \\mathbf{Z}_B}{\\partial \\mathbf{X}_A} & \\text{diag}(-\\exp(s(\\mathbf{Z}_A, w)))\n\\end{bmatrix}\n\\]\nand the determinant is simply the product of the diagonal elements.\nTo make the network more expressive, normalizing flows often have multiple coupling layers stacked together, switching the roles of \\(\\mathbf{Z}_A\\) and \\(\\mathbf{Z}_B\\) at each layer, and possibly also changing the split points at each layer. The final data likelihood is the product of the likelihoods at each layer. And the Jacobian determinant is the product of the determinants at each layer.\nThird is sampling. Once the model is trained, we can start with \\(\\mathbf{Z}_A\\), and follow the flow till we get to \\(\\mathbf{X}\\). The sampling process is deterministic and easy to compute.\nAs an example we can train a normalizing flow model on a two-moons dataset, using the normflows package. The following code is adapted from the package’s example code.\n# Import required packages\nimport torch\nimport numpy as np\nimport normflows as nf\nfrom matplotlib import pyplot as plt\nfrom tqdm import tqdm\ndevice = 'cuda'\nThis is the target distribution\n# Define target distribution\ntarget = nf.distributions.TwoMoons()\n# Plot target distribution\ngrid_size = 200\nxx, yy = torch.meshgrid(torch.linspace(-3, 3, grid_size), torch.linspace(-3, 3, grid_size), indexing='xy')\nzz = torch.cat([xx.unsqueeze(2), yy.unsqueeze(2)], 2).view(-1, 2)\nzz = zz.to(device)\n\nlog_prob = target.log_prob(zz).to('cpu').view(*xx.shape)\nprob = torch.exp(log_prob)\nprob[torch.isnan(prob)] = 0\n\nplt.pcolormesh(xx, yy, prob.data.numpy(), cmap='hot')\nplt.gca().set_aspect('equal', 'box')\nConstruct the model. To define a normalizing flow model, we first specify the base distribution and the transformation layers, and then combine them in the NormalizingFlow class.\n# Define 2D Gaussian base distribution\nbase = nf.distributions.base.DiagGaussian(2)\n\n# Define list of flows\nnum_layers = 2\nflows = []\nfor i in range(num_layers):\n    # Neural network with two hidden layers having 64 units each\n    # Last layer is initialized by zeros making training more stable\n    param_map = nf.nets.MLP([1, 64, 64, 2], init_zeros=True)\n    # Add flow layer\n    flows.append(nf.flows.AffineCouplingBlock(param_map))\n    # Swap dimensions\n    flows.append(nf.flows.Permute(2, mode='swap'))\n\nmodel = nf.NormalizingFlow(base, flows)\nmodel = model.to(device)\nTrain the model.\nmax_iter = 3201\nnum_samples = 2 ** 9\nshow_iter = 800\n\nloss_hist = np.array([])\nprob_list = []\noptimizer = torch.optim.Adam(model.parameters(), lr=5e-4, weight_decay=1e-5)\n\nfor it in tqdm(range(max_iter)):\n    optimizer.zero_grad()\n\n    # Get training samples\n    x = target.sample(num_samples).to(device)\n\n    # Compute loss\n    loss = model.forward_kld(x)\n\n    # Do backprop and optimizer step\n    if ~(torch.isnan(loss) | torch.isinf(loss)):\n        loss.backward()\n        optimizer.step()\n\n    # Log loss\n    loss_hist = np.append(loss_hist, loss.to('cpu').data.numpy())\n\n    # Save prob for later plotting\n    if it % show_iter == 0:\n        model.eval()\n        log_prob = model.log_prob(zz)\n        model.train()\n        prob = torch.exp(log_prob.to('cpu').view(*xx.shape))\n        prob[torch.isnan(prob)] = 0\n        prob_list.append(prob.data.numpy())\nplt.plot(loss_hist)\n\n  0%|          | 0/3201 [00:00&lt;?, ?it/s]  0%|          | 15/3201 [00:00&lt;00:21, 149.57it/s]  2%|▏         | 64/3201 [00:00&lt;00:09, 348.03it/s]  3%|▎         | 111/3201 [00:00&lt;00:07, 400.08it/s]  5%|▍         | 157/3201 [00:00&lt;00:07, 420.78it/s]  6%|▋         | 202/3201 [00:00&lt;00:06, 430.97it/s]  8%|▊         | 248/3201 [00:00&lt;00:06, 438.31it/s]  9%|▉         | 294/3201 [00:00&lt;00:06, 442.53it/s] 11%|█         | 339/3201 [00:00&lt;00:06, 444.55it/s] 12%|█▏        | 384/3201 [00:00&lt;00:06, 446.14it/s] 13%|█▎        | 430/3201 [00:01&lt;00:06, 448.35it/s] 15%|█▍        | 475/3201 [00:01&lt;00:06, 448.17it/s] 16%|█▌        | 520/3201 [00:01&lt;00:05, 447.81it/s] 18%|█▊        | 566/3201 [00:01&lt;00:05, 448.81it/s] 19%|█▉        | 611/3201 [00:01&lt;00:05, 445.47it/s] 20%|██        | 656/3201 [00:01&lt;00:05, 446.51it/s] 22%|██▏       | 701/3201 [00:01&lt;00:05, 446.64it/s] 23%|██▎       | 746/3201 [00:01&lt;00:05, 446.91it/s] 25%|██▍       | 791/3201 [00:01&lt;00:05, 447.78it/s] 26%|██▌       | 836/3201 [00:01&lt;00:05, 438.08it/s] 28%|██▊       | 881/3201 [00:02&lt;00:05, 441.20it/s] 29%|██▉       | 926/3201 [00:02&lt;00:05, 441.27it/s] 30%|███       | 971/3201 [00:02&lt;00:05, 442.14it/s] 32%|███▏      | 1017/3201 [00:02&lt;00:04, 444.51it/s] 33%|███▎      | 1062/3201 [00:02&lt;00:04, 444.95it/s] 35%|███▍      | 1107/3201 [00:02&lt;00:04, 446.39it/s] 36%|███▌      | 1152/3201 [00:02&lt;00:04, 446.95it/s] 37%|███▋      | 1197/3201 [00:02&lt;00:04, 443.93it/s] 39%|███▉      | 1242/3201 [00:02&lt;00:04, 445.48it/s] 40%|████      | 1287/3201 [00:02&lt;00:04, 445.54it/s] 42%|████▏     | 1332/3201 [00:03&lt;00:04, 446.29it/s] 43%|████▎     | 1377/3201 [00:03&lt;00:04, 445.23it/s] 44%|████▍     | 1422/3201 [00:03&lt;00:04, 444.74it/s] 46%|████▌     | 1467/3201 [00:03&lt;00:03, 446.30it/s] 47%|████▋     | 1512/3201 [00:03&lt;00:03, 446.52it/s] 49%|████▊     | 1557/3201 [00:03&lt;00:03, 446.73it/s] 50%|█████     | 1602/3201 [00:03&lt;00:03, 444.11it/s] 51%|█████▏    | 1647/3201 [00:03&lt;00:03, 441.48it/s] 53%|█████▎    | 1692/3201 [00:03&lt;00:03, 443.78it/s] 54%|█████▍    | 1737/3201 [00:03&lt;00:03, 445.33it/s] 56%|█████▌    | 1782/3201 [00:04&lt;00:03, 445.83it/s] 57%|█████▋    | 1828/3201 [00:04&lt;00:03, 447.55it/s] 59%|█████▊    | 1873/3201 [00:04&lt;00:02, 447.12it/s] 60%|█████▉    | 1918/3201 [00:04&lt;00:02, 447.26it/s] 61%|██████▏   | 1963/3201 [00:04&lt;00:02, 447.33it/s] 63%|██████▎   | 2008/3201 [00:04&lt;00:02, 447.37it/s] 64%|██████▍   | 2053/3201 [00:04&lt;00:02, 447.26it/s] 66%|██████▌   | 2098/3201 [00:04&lt;00:02, 447.30it/s] 67%|██████▋   | 2143/3201 [00:04&lt;00:02, 447.96it/s] 68%|██████▊   | 2188/3201 [00:04&lt;00:02, 448.04it/s] 70%|██████▉   | 2234/3201 [00:05&lt;00:02, 448.40it/s] 71%|███████   | 2279/3201 [00:05&lt;00:02, 447.09it/s] 73%|███████▎  | 2324/3201 [00:05&lt;00:01, 446.44it/s] 74%|███████▍  | 2370/3201 [00:05&lt;00:01, 447.81it/s] 75%|███████▌  | 2415/3201 [00:05&lt;00:01, 444.66it/s] 77%|███████▋  | 2461/3201 [00:05&lt;00:01, 447.19it/s] 78%|███████▊  | 2506/3201 [00:05&lt;00:01, 445.27it/s] 80%|███████▉  | 2551/3201 [00:05&lt;00:01, 445.60it/s] 81%|████████  | 2596/3201 [00:05&lt;00:01, 446.04it/s] 83%|████████▎ | 2642/3201 [00:05&lt;00:01, 446.93it/s] 84%|████████▍ | 2687/3201 [00:06&lt;00:01, 444.15it/s] 85%|████████▌ | 2732/3201 [00:06&lt;00:01, 444.66it/s] 87%|████████▋ | 2777/3201 [00:06&lt;00:00, 445.03it/s] 88%|████████▊ | 2822/3201 [00:06&lt;00:00, 445.70it/s] 90%|████████▉ | 2867/3201 [00:06&lt;00:00, 446.12it/s] 91%|█████████ | 2912/3201 [00:06&lt;00:00, 446.45it/s] 92%|█████████▏| 2957/3201 [00:06&lt;00:00, 440.97it/s] 94%|█████████▍| 3002/3201 [00:06&lt;00:00, 442.14it/s] 95%|█████████▌| 3047/3201 [00:06&lt;00:00, 442.77it/s] 97%|█████████▋| 3092/3201 [00:06&lt;00:00, 444.39it/s] 98%|█████████▊| 3137/3201 [00:07&lt;00:00, 445.22it/s] 99%|█████████▉| 3182/3201 [00:07&lt;00:00, 445.20it/s]100%|██████████| 3201/3201 [00:07&lt;00:00, 442.53it/s]\nPlot the results. We can see that the model has (roughly) learned the distribution of the two moons dataset.\nfig, axes = plt.subplots(1, len(prob_list), figsize=(10, 2), sharey=True)\nfor i, prob in enumerate(prob_list):\n    ax = axes[i]\n    c = ax.pcolormesh(xx, yy, prob, cmap='hot')\n    ax.set_aspect('equal', 'box')\n\n# Adjust the colorbar to have more padding\ncbar = fig.colorbar(c, ax=axes, orientation='vertical', fraction=0.02, pad=0.02)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Normalizing Flows</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Normalizing Flows</span>"
     ]
   },
   {
     "objectID": "18.html#coupling-flows",
     "href": "18.html#coupling-flows",
-    "title": "2  Normalizing Flows",
+    "title": "3  Normalizing Flows",
     "section": "",
     "text": "The transformation function \\(f\\) should be (easily enough) invertible, so that we can compute the latent variable likelihood.\nThe Jacobian determinant of the transformation should be easy to compute, so that we can correct the latent likelihood to get the data likelihood.\nWe should be able to sample from it. Once the above two are met, this is usually straightforward, although the computation cost might vary.\n\n\n\n\n\n\n\n\n\n\n\n\n\\(\\mathbf{Z}_A\\) is an identity transformation of \\(\\mathbf{X}_A\\), so \\(\\frac{\\partial \\mathbf{Z}_A}{\\partial \\mathbf{X}_A}\\) is an identity matrix.\n\\(\\frac{\\partial \\mathbf{Z}_A}{\\partial \\mathbf{X}_B}\\) is zero.\n\\(\\mathbf{Z}_B\\) is \\(\\mathbf{X}_B\\) minus a linear transformation of \\(\\mathbf{X}_A\\) (doesn’t involve \\(\\mathbf{Z}_B\\)), then element-wise multiplied by the exponential term (meaning no interaction among \\(\\mathbf{Z}_B\\)), so \\(\\frac{\\partial \\mathbf{Z}_B}{\\partial \\mathbf{X}_B}\\) is a diagonal matrix, and the diagonal values are the corresponding negatives of the exponential term. Up to this point we know the Jacobian matrix itselve is a lower triangular matrix.\n\\(\\frac{\\partial \\mathbf{Z}_B}{\\partial \\mathbf{X}_A}\\) is more complicated, but it doesn’t factor into the Jacobian determinant so can be safely ignored.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Normalizing Flows</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Normalizing Flows</span>"
     ]
   },
   {
     "objectID": "18.html#autoregressive-flows",
     "href": "18.html#autoregressive-flows",
-    "title": "2  Normalizing Flows",
-    "section": "2.2 autoregressive flows",
-    "text": "2.2 autoregressive flows",
+    "title": "3  Normalizing Flows",
+    "section": "3.2 autoregressive flows",
+    "text": "3.2 autoregressive flows",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Normalizing Flows</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Normalizing Flows</span>"
     ]
   },
   {
     "objectID": "18.html#continuous-flows",
     "href": "18.html#continuous-flows",
-    "title": "2  Normalizing Flows",
-    "section": "2.3 continuous flows",
-    "text": "2.3 continuous flows\n\n2.3.1 neural differential equation\n\n\n2.3.2 neural ODE backpropagation\n\n\n2.3.3 neural ODE flows",
+    "title": "3  Normalizing Flows",
+    "section": "3.3 continuous flows",
+    "text": "3.3 continuous flows\nIn normalizing flow models, for each transformation layer, the input and output always have the same dimensionality, we are thus looking for a more meaningful representation of the same data space. There is another neural network sharing this property, namely residual networks, but there is no guarantee that such a network will be invertible. Here we introduce a well known mathematical concept, the differential equation, into the neural network, and thus satisfying both the invertibility and the constant dimensionality requirements.\n\n3.3.1 neural differential equation\nNeural differential equation, as the name implies, is a neural network that is defined by a differential equation. We can consider the residual network as a discrete version of the differential equation, since the “residual” is already a difference between consecutive layers, and the differential is the limit of this difference as it approaches zero. Thus starting from a residual network\n\\[\n\\mathbf{z}_{t+1} = \\mathbf{z}_t + f(\\mathbf{z}_t, \\mathbf{w})\n\\]\nwe can readily convert it into a differential equation\n\\[\n\\frac{d\\mathbf{z(t)}}{dt} = f(\\mathbf{z(t)}, \\mathbf{w}).\n\\]\nNow defining something is easy, what really matters is what we can do with it. On the modeling side, starting from an initial state \\(\\mathbf{z}_0\\), we no longer need to define the number of layers in the network. we can integrate the differential equation to get the state at any time \\(t\\),\n\n\n\n3.3.2 neural ODE backpropagation\n\n\n3.3.3 neural ODE flows",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Normalizing Flows</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Normalizing Flows</span>"
     ]
   },
   {
@@ -147,6 +147,56 @@
     "text": "3.4 Guided diffusion\n  \n\n3.4.1 classifier guidance\n\n\n3.4.2 classifier-free guidance",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Diffusion Models</span>"
+    ]
+  },
+  {
+    "objectID": "07.html",
+    "href": "07.html",
+    "title": "2  Gradient Descent",
+    "section": "",
+    "text": "2.1 error surfaces\nerror function, local minimum A, global minimum B, and gradient at C",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Gradient Descent</span>"
+    ]
+  },
+  {
+    "objectID": "07.html#error-surfaces",
+    "href": "07.html#error-surfaces",
+    "title": "2  Gradient Descent",
+    "section": "",
+    "text": "2.1.1 local quadratic approximation",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Gradient Descent</span>"
+    ]
+  },
+  {
+    "objectID": "07.html#gradient-descent-optimisation",
+    "href": "07.html#gradient-descent-optimisation",
+    "title": "2  Gradient Descent",
+    "section": "2.2 gradient descent optimisation",
+    "text": "2.2 gradient descent optimisation\nsimply put, gradient descent initialize the weights somewhere, calculate an increment using gradient information, and modify the weights using this information.\n\\[\n\\mathbf{w}^{(\\tau)} = \\mathbf{w}^{(\\tau-1)} + \\Delta \\mathbf{w}^{(\\tau-1)}\n\\]\nthe bulk of our attention will be devoted to how to get the gradient, but the starting point is also quite important.\n\n2.2.1 use of gradient information\n\n\n2.2.2 batch gradient descent\n\n\n2.2.3 stochastic gradient descent\n\n\n2.2.4 mini-batches\n\n\n2.2.5 parameter initialisation",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Gradient Descent</span>"
+    ]
+  },
+  {
+    "objectID": "07.html#convergence",
+    "href": "07.html#convergence",
+    "title": "2  Gradient Descent",
+    "section": "2.3 convergence",
+    "text": "2.3 convergence\n\n\n2.3.1 momentum\n  \n\n\n2.3.2 learning rate schedule\n\n\n2.3.3 RMSProp and Adam",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Gradient Descent</span>"
+    ]
+  },
+  {
+    "objectID": "07.html#normalisation",
+    "href": "07.html#normalisation",
+    "title": "2  Gradient Descent",
+    "section": "2.4 normalisation",
+    "text": "2.4 normalisation\nThe gopher(2022) paper also introduced a RMSNorm normalisation method.\n\n2.4.1 data normalisation\n\n\n\n2.4.2 batch normalisation\n\n\n\n2.4.3 layer normalisation\n\n\nimport torch\nimport torch.nn as nn\nfrom einops import reduce\n\n# NLP Example\nbatch, sentence_length, embedding_dim = 2, 5, 3\nembedding = torch.randn(batch, sentence_length, embedding_dim)\nlayer_norm = nn.LayerNorm(embedding_dim)\n\n# Calculate mean before LayerNorm across all dimensions except batch\nmean_before = reduce(embedding, 'b s e -&gt; b', 'mean')\n\n# Calculate variance before LayerNorm across all dimensions except batch\nvar_before = reduce((embedding - mean_before.reshape(batch, 1, 1)) ** 2, 'b s e -&gt; b', 'mean')\n\n# Activate module\nnormalized_embedding = layer_norm(embedding)\n\n# Calculate mean after LayerNorm across all dimensions except batch\nmean_after = reduce(normalized_embedding, 'b s e -&gt; b', 'mean')\n\n# Calculate variance after LayerNorm across all dimensions except batch\nvar_after = reduce((normalized_embedding - mean_after.reshape(batch, 1, 1)) ** 2, 'b s e -&gt; b', 'mean')\n\n# Display mean and variance\nprint(\"Before LayerNorm - Mean: \", end=\"\")\nprint(*mean_before.tolist(), sep=\", \")\nprint(\"Before LayerNorm - Variance: \", end=\"\")\nprint(*var_before.tolist(), sep=\", \")\n\nprint(\"After LayerNorm - Mean: \", end=\"\")\nprint(*mean_after.tolist(), sep=\", \")\nprint(\"After LayerNorm - Variance: \", end=\"\")\nprint(*var_after.tolist(), sep=\", \")\n\nBefore LayerNorm - Mean: -0.1163964793086052, 0.16730044782161713\nBefore LayerNorm - Variance: 1.2326244115829468, 1.6592100858688354\nAfter LayerNorm - Mean: -7.947286384535346e-09, -7.947286384535346e-09\nAfter LayerNorm - Variance: 0.9999745488166809, 0.9999361634254456",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Gradient Descent</span>"
     ]
   }
 ]

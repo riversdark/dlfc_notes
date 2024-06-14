@@ -14,9 +14,7 @@ And although Stochastic Gradient Descent (and its variants and derivatives) are 
 
 ![](./img/DLFC/Chapter-7/Figure_1.png)
 
-``` example
 error function, local minimum A, global minimum B, and gradient at C
-```
 
 ### local quadratic approximation
 
@@ -75,7 +73,7 @@ The gopher(2022) paper also introduced a RMSNorm normalisation method.
 
 ![](./img/DLFC/Chapter-7/Figure_8_b.png)
 
-``` python
+``` {python}
 import torch
 import torch.nn as nn
 from einops import reduce
