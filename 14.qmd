@@ -1,0 +1,164 @@
+---
+title: "Sampling"
+jupyter: "torch"
+draft: true
+---
+
+
+## basic sampling algorithms
+
+### expectations
+
+![](./img/DLFC/Chapter-14/Figure_1.png)
+
+In Bayesian inference the single most important thing is to calculate function expectations. Well actually maybe the only important thing. The same can be said anywhere in statistical inference or machine learning that probability distributions are involved.
+
+### standard distributions
+
+![](./img/DLFC/Chapter-14/Figure_2.png) 
+
+geometric interpretation of the transformation method for generating non-uniform distributed random numbers. h is the indefinite integral of the desired distribution. we sample uniformly on $[0, 1]$, then transform it using $y=h^{-1}(z)$, then y is distributed according to p(y).
+
+to do this we need to 1) know h; 2) be able to inverse it.
+
+![](./img/DLFC/Chapter-14/Figure_3.png) 
+
+the Box-Muller method for generating Gaussian distributed random numbers by generating samples from a uniform distribution inside the unit circle
+
+### rejection sampling
+
+![](./img/DLFC/Chapter-14/Figure_4.png)
+![](./img/DLFC/Chapter-14/Figure_5.png)
+
+### adaptive rejection sampling
+
+![](./img/DLFC/Chapter-14/Figure_6.png)
+![](./img/DLFC/Chapter-14/Figure_7.png)
+
+### importance sampling
+
+![](./img/DLFC/Chapter-14/Figure_8.png)
+
+### sampling-importance-resampling (SIR)
+
+## MCMC
+
+MCMC algorithms construct Markov chains that are designed to have the target probability distribution as their stationary distribution. The chain progresses through states (sample points) where each state depends only on the previous state (Markov property).
+
+The **theory of Markov chains** underpins MCMC.
+
+The **Metropolis Algorithm** is one of the earliest and simplest MCMC methods. The **Metropolis-Hastings Algorithm** is an extension of the Metropolis algorithm that allows for asymmetric proposal distributions.
+
+**Gibbs Sampling** is a variant of the Metropolis-Hastings algorithm used when it's easier to sample from the conditional distributions of a multivariate distribution than from the full joint distribution.
+
+**Ancestral Sampling** is used primarily in directed graphical models (DGM).
+
+### the Metropolis algorithm
+
+![](./img/DLFC/Chapter-14/Figure_9.png)
+
+### Markov chains
+
+### the Metropolis-Hastings algorithm
+
+![](./img/DLFC/Chapter-14/Figure_10.png)
+
+### Gibbs sampling
+
+![](./img/DLFC/Chapter-14/Figure_11.png)
+![](./img/DLFC/Chapter-14/Figure_12.png)
+
+### ancestral sampling
+
+## Langevin sampling
+
+energy based models convert an energy function to probability, and normalise it using the integral over x.
+
+maximising logp turns out to be balance data and model.
+
+Langevin dynamics is used to calculate the gradients.
+
+![](./img/DLFC/Chapter-14/Figure_13.png)
+
+training an energy-based model by maximizing the likelihood.
+
+$$
+\nabla_{\mathbf{w}}\mathbb{E}_{\mathbf{x} \sim \mathcal{D}}[ \ln p(\mathbf{x}|\mathbf{w}) ] = -\mathbb{E}_{\mathbf{x} \sim p\mathcal{D}}[ \nabla_{\mathbf{w}}E(\mathbf{x},\mathbf{w}) ] + \mathbb{E}_{\mathbf{x} \sim p\mathcal{M}(\mathbf{x})}[ \nabla_{\mathbf{w}}E(\mathbf{x},\mathbf{w}) ].
+$$
+
+Increasing the expected data likelihood pushes the energy function up at points corresponding to samples from the model (current model belief) and pushes it down at points corresponding to samples from the data set (true data dist)
+
+### energy-based models
+
+we first define the density of one datum
+$$
+p(\mathbf{x}|\mathbf{w}) = \frac{1}{Z(\mathbf{w})} \exp\{-E(\mathbf{x}, \mathbf{w})\} 
+$$
+
+the normalizer just integrate over the whole space
+$$
+Z(\mathbf{w}) = \int \exp\{-E(\mathbf{x}, \mathbf{w})\} \, d\mathbf{x} 
+$$
+
+then the log likelihood of a whole data set
+$$ \ln p(\mathcal{D}|\mathbf{w}) = -\sum_{n=1}^{N} E(\mathbf{x}_n, \mathbf{w}) - N \ln Z(\mathbf{w}) $$
+
+this will be used as the optimization target.
+
+### maximising the likelihood
+
+to optimise we need the gradient (to be zero)
+$$
+\nabla_{\mathbf{w}} \ln p(\mathbf{x}|\mathbf{w}) = -\nabla_{\mathbf{w}} E(\mathbf{x}, \mathbf{w}) - \nabla_{\mathbf{w}} \ln Z(\mathbf{w}) 
+$$
+
+average over the dataset
+$$
+\mathbb{E}_{\mathbf{x} \sim p_{\mathcal{D}}}[\nabla_{\mathbf{w}} \ln p(\mathbf{x}|\mathbf{w})] = -\mathbb{E}_{\mathbf{x} \sim p_{\mathcal{D}}}[\nabla_{\mathbf{w}}E(\mathbf{x}, \mathbf{w})] - \nabla_{\mathbf{w}} \ln Z(\mathbf{w}) 
+$$
+
+and the gradient for the normalizing term can be expressed as
+$$
+-\nabla_{\mathbf{w}} \ln Z(\mathbf{w}) = \int \nabla_{\mathbf{w}}E(\mathbf{x}, \mathbf{w}) p(\mathbf{x}|\mathbf{w}) \, d\mathbf{x} 
+$$
+
+the derivative of a log of an integral involves a "trick" where we differentiate the integrand and normalize it by the integral itself, essentially creating an expected value of the gradient of the energy function under the distribution defined by the normalized exponential of the negative energy, which is essentially p(x|w).
+
+so the gradient for a dataset ends up to be
+$$
+\nabla_{\mathbf{w}}\mathbb{E}_{x \sim p_{\mathcal{D}}}[\ln p(\mathbf{x}|\mathbf{w})] = -\mathbb{E}_{x \sim p_{\mathcal{D}}}[\nabla_{\mathbf{w}}E(\mathbf{x}, \mathbf{w})] + \mathbb{E}_{\mathbf{x} \sim p(\mathbf{x}|\mathbf{w})}[\nabla_{\mathbf{w}}E(\mathbf{x}, \mathbf{w})] 
+$$
+
+it's the gradient of the energy function, averaged over the data and the (current) model, in opposite directions.
+
+### Langevin dynamics
+
+the expectation wrt the data distribution is easy, we can simply use bootstrapping.
+
+the expectation wrt the model distribution, however, is significantly more difficult, because although we can evaluate the current energy level, we cannot evaluate the normalizing constant.
+
+However, there exist a sampling algorithm, stochastic gradient Langevin dynamics sampling, which can sample the distribution using only the score of the logp wrt the data vectors, not the model parameters, and thus bypassing the problem. To see this, we first define the score
+function
+
+$$
+s(\mathbf{x}, \mathbf{w}) = \nabla_{\mathbf{x}} \ln p(\mathbf{x}|\mathbf{w}) 
+$$
+
+substitue in the definition of logp and we have
+
+$$
+\nabla_{\mathbf{x}} \ln p(\mathbf{x}|\mathbf{w}) = \nabla_{\mathbf{x}} \ln \frac{\exp(-E(\mathbf{x},\mathbf{w}))}{Z(\mathbf{w})} \\
+&= \nabla_{\mathbf{x}} [-E(\mathbf{x},\mathbf{w})] - \nabla_{\mathbf{x}} \ln Z(\mathbf{w}) \\
+&= -\nabla_{\mathbf{x}} E(\mathbf{x},\mathbf{w}) 
+$$
+
+since the gradient wrt the normalizing term is zero, we are left only
+with the energy function, of which we can calculate the gradient.
+
+The Langevin update process is
+
+$$
+\mathbf{x}^{(\tau+1)} = \mathbf{x}^{(\tau)} + \eta \nabla_{\mathbf{x}} \ln p(\mathbf{x}^{(\tau)}|\mathbf{w}) + \sqrt{2 \eta} \epsilon^{(\tau)}, \quad \tau \in \{1, \ldots, T\} 
+$$
+
+Each $T$ steps give us one sample, and to obtain N samples we need $NT$ steps. And with these samples we'll also be able to estimate the second expectation, and now we have all the means necessary for gradient update.
