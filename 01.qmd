@@ -8,9 +8,9 @@ One particular branch of machine learning, known as **deep learning** (DL), has 
 
 The field of **artificial intelligence** (AI), seeks to recreate the powerful capabilities of the brain in machines, using machine learning methods. Many of the AI systems in current use represent applications of machine learning which are designed to solve very specific and focused problems, and while these are extremely useful they fall far short of the tremendous breadth of capabilities of the human brain. This has led to the introduction of the term **artificial general intelligence** (AGI), to describe the aspiration of building machines with this much greater flexibility.  After many decades of steady progress, machine learning has now entered a phase of very rapid development. Recently, massive deep learning systems called **large language models** (LLMs) have started to exhibit remarkable capabilities that have been described as the first indications of artificial general intelligence.
 
-Will LLMs help us achieve the leap from AI to AGI? This is a question hotly debated everyday everwhere; only time will tell.
+This chapter offers a general discussion to the field of deep learning, its applications, and also introduces the basic concepts and procedures of machine learning through a working example. A double introduction to the ends and the begins!
 
-## the impact of DL (4)
+## The impact of DL (4)
 
 ### midical diagnosis
 

@@ -1,0 +1,111 @@
+---
+title: Probabilities
+---
+
+Probability is introduced to deal with uncertainty.
+
+Given a model, parameter uncertainty can be solved with more data. This
+is related to the concept of "degree of freedom".
+
+But model is always limiting, and sometimes somewhat arbitrary. This
+introduces model uncertainty. We can build more complex models, but
+there is no "solving" the problem, because real word data is always
+more complex than any model we can build.
+
+## The rules of probability
+
+uncertainty: collect more data; use a more capable model
+![](./img/DLFC/Chapter-2/Figure_1_a.png)
+![](./img/DLFC/Chapter-2/Figure_1_b.png)
+![](./img/DLFC/Chapter-2/Figure_1_c.png)
+
+probability as frequency: 
+
+![](./img/DLFC/Chapter-2/Figure_2.png)
+
+### A medical screening example
+
+![](./img/DLFC/Chapter-2/Figure_3.png)
+
+### The sum and product rules
+
+![](./img/DLFC/Chapter-2/Figure_4.png)
+
+### Bayes' theorem
+
+![](./img/DLFC/Chapter-2/Figure_5_a.png)
+![](./img/DLFC/Chapter-2/Figure_5_b.png)
+![](./img/DLFC/Chapter-2/Figure_5_c.png)
+![](./img/DLFC/Chapter-2/Figure_5_d.png)
+
+### Medical screening revisited
+
+### Prior and posterior probabilities
+
+### Independent variables
+
+## Probability densities
+
+![](./img/DLFC/Chapter-2/Figure_6.png)
+
+### Example distributions
+
+![](./img/DLFC/Chapter-2/Figure_7.png)
+
+### Expectations and covariances
+
+## the Gaussian distribution
+
+### Mean and variance
+
+### Likelihood function
+
+### Bias of maximum likelihood
+
+### Linear regression
+
+## transformation of densities
+
+![](./img/DLFC/Chapter-2/Figure_12.png)
+
+### Multivariate distributions
+
+## information theory
+
+![](./img/DLFC/Chapter-2/Figure_14_a.png)
+![](./img/DLFC/Chapter-2/Figure_14_b.png)
+
+the broader distribution has a higher entropy. A uniform distribution would have the largest entropy.
+
+### Entropy
+
+### Physics perspective
+
+### Differential entropy
+
+### Maximum entropy
+
+### Kullback--Leibler divergence
+
+### Conditional entropy
+
+### Mutual information
+
+## Bayesian probabilities
+
+more general, probability as measure of uncertainty
+
+### Model parameters
+
+using probability to model parameter uncertainty, and update the
+probability distribution with data.
+
+### Regularization
+
+using the rules of probability, we can establish a connection between
+MAP and ML estimation, and see that MAP is in fact a regularised ML
+estimation.
+
+### Bayesian machine learning
+
+from parameter uncertainty to outcome uncertainty

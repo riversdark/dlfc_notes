@@ -1,7 +1,5 @@
 ---
 title: "Single layer networks: classification"
-jupyter: "torch"
-draft: true
 ---
 
 In regression problems the output is modeled as a linear function of the model parameters. In classification problems, because the target is discrete, we need some extra step to convert the linear function output to match it. We talk about this extra step in this chapter, and its related complications.  And since the linear function output is continuous while the target is discrete, we need to decide how to cut the continuous space into discrete, disjoint regions. 

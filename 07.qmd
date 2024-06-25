@@ -10,7 +10,7 @@ To train a network we'd also need a loss function, which measures how well the n
 And although Stochastic Gradient Descent (and its variants and derivatives) are the most common method to train a network, it's actually not the only one. For example the optimization method might not be stochastic (using the whole dataset at once), or it might not be gradient based, but SGD is the most common one. For SGD to work we of course need the gradient, and to have gradient we'd need the loss function to be differentiable, and this necessitates some structural constraints on the network we are building, and the loss function we are using.
 
 
-## error surfaces 
+## Error surfaces 
 
 ![](./img/DLFC/Chapter-7/Figure_1.png)
 
@@ -20,7 +20,7 @@ error function, local minimum A, global minimum B, and gradient at C
 
 ![](./img/DLFC/Chapter-7/Figure_2.png)
 
-## gradient descent optimisation 
+## Gradient descent optimisation 
 
 simply put, gradient descent initialize the weights somewhere, calculate
 an increment using gradient information, and modify the weights using
@@ -33,9 +33,9 @@ $$
 the bulk of our attention will be devoted to how to get the gradient,
 but the starting point is also quite important.
 
-### use of gradient information
+### Use of gradient information
 
-### batch gradient descent
+### Batch gradient descent
 
 ### stochastic gradient descent
 
@@ -43,7 +43,7 @@ but the starting point is also quite important.
 
 ### parameter initialisation
 
-## convergence 
+## Convergence 
 
 ![](./img/DLFC/Chapter-7/Figure_3.png)
 
@@ -57,55 +57,18 @@ but the starting point is also quite important.
 
 ### RMSProp and Adam
 
-## normalisation 
+## Normalisation 
 
 The gopher(2022) paper also introduced a RMSNorm normalisation method.
 
-### data normalisation
+### Data normalisation
 
 ![](./img/DLFC/Chapter-7/Figure_7.png)
 
-### batch normalisation
+### Batch normalisation
 
 ![](./img/DLFC/Chapter-7/Figure_8_a.png)
 
-### layer normalisation
+### Layer normalisation
 
 ![](./img/DLFC/Chapter-7/Figure_8_b.png)
-
-``` {python}
-import torch
-import torch.nn as nn
-from einops import reduce
-
-# NLP Example
-batch, sentence_length, embedding_dim = 2, 5, 3
-embedding = torch.randn(batch, sentence_length, embedding_dim)
-layer_norm = nn.LayerNorm(embedding_dim)
-
-# Calculate mean before LayerNorm across all dimensions except batch
-mean_before = reduce(embedding, 'b s e -> b', 'mean')
-
-# Calculate variance before LayerNorm across all dimensions except batch
-var_before = reduce((embedding - mean_before.reshape(batch, 1, 1)) ** 2, 'b s e -> b', 'mean')
-
-# Activate module
-normalized_embedding = layer_norm(embedding)
-
-# Calculate mean after LayerNorm across all dimensions except batch
-mean_after = reduce(normalized_embedding, 'b s e -> b', 'mean')
-
-# Calculate variance after LayerNorm across all dimensions except batch
-var_after = reduce((normalized_embedding - mean_after.reshape(batch, 1, 1)) ** 2, 'b s e -> b', 'mean')
-
-# Display mean and variance
-print("Before LayerNorm - Mean: ", end="")
-print(*mean_before.tolist(), sep=", ")
-print("Before LayerNorm - Variance: ", end="")
-print(*var_before.tolist(), sep=", ")
-
-print("After LayerNorm - Mean: ", end="")
-print(*mean_after.tolist(), sep=", ")
-print("After LayerNorm - Variance: ", end="")
-print(*var_after.tolist(), sep=", ")
-```
