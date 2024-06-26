@@ -5,10 +5,13 @@ jupyter: "torch"
 
 Once we have a neural network, the next question is how to train it. Well maybe not so straightforward. Often model building and training is an iterative process, and what we can train directly determines what we will build. 
 
-To train a network we'd also need a loss function, which measures how well the network performs. Since model performance can be measured in different ways, for different purpose we might need different loss functions. But since many networks are building using various probability distributions, the most common one will be -logp, the negative log data likelihood.
+To train a network we'd also need a loss function, which measures how well the network performs. Since model performance can be measured in different ways, for different purposes we might need different loss functions. But since many network outcomes are modeled using various probability distributions, the most common one we use is -logp, the negative log data likelihood (often summed over a batch of data).
 
-And although Stochastic Gradient Descent (and its variants and derivatives) are the most common method to train a network, it's actually not the only one. For example the optimization method might not be stochastic (using the whole dataset at once), or it might not be gradient based, but SGD is the most common one. For SGD to work we of course need the gradient, and to have gradient we'd need the loss function to be differentiable, and this necessitates some structural constraints on the network we are building, and the loss function we are using.
+And although stochastic gradient descent (and its variants and derivatives) are the most common method to train a network, it's actually not the only one. For example the optimization method might not be stochastic (using the whole dataset at once), or it might not be gradient based (gradient free optimization, Bayesian optimization, etc), but SGD is the most common one. For SGD to work we of course need the gradient, and to have gradient we'd need the loss function to be differentiable, and this necessitates some structural constraints on the network we are building, and the loss function we are using.
 
+There have been many modifications to SGD, which improve the convergence properties of the optimizer, by studying the local curvature of the loss function. Most of these methods are actually heuristic, but some of them work quite well, especially the adaptive moments method (commonly known as Adam).
+
+This chapter also covers some common normalization methods, including data normalisation, batch normalisation, and layer normalisation. This is a typical case of modifying the network architecture to improve the training process, showing that it's not always easy to separate modeling building from model training.
 
 ## Error surfaces 
 

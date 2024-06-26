@@ -1,0 +1,68 @@
+---
+title: "Standard distributions"
+---
+
+density estimation is always an ill-posed problem, because as long as a distribution has support for the data, there is always chance of that distribution producing the data, albeit the probability might be slim.
+
+parameterized distributions can fell short for real world complex data non-parameterized methods still have parameters, just that the parameters serve a different purpose. For parameterized distributions they are used to determine the shape of the distribution, while for non-parameterized methods, they decide the model complexity.
+
+And model complexity can grow rapidly with data size.
+
+Deep neural nets offer the best of both worlds.
+
+## discrete variables
+
+### Bernoulli distribution
+
+### Binomial distribution
+
+### Multinomial distribution
+
+## the multivariate Gaussian
+
+### geometry of the Gaussian
+
+### moments
+
+### limitations
+
+### conditional distribution
+
+### marginal distribution
+
+### Bayes' theorem
+
+### maximum likelihood
+
+### sequential estimation
+
+### mixture of Gaussians
+
+## periodic variables
+
+### von Mises distribution
+
+## the exponential family
+
+$$
+p(\mathbf{x}|\mathbf{\eta}) = h(\mathbf{x})g(\mathbf{\eta}) \exp\{\mathbf{\eta}^T \mathbf{u}(\mathbf{x})\}
+$$
+
+The four key elements of the exponential family are:
+
+- base measure
+- partition function
+- natural parameter
+- sufficient statistics
+
+### sufficient statistics
+
+Due to the formula constraint of the exponential family, any information about the data that is not in the sufficient statistics is lost.
+
+## nonparametric methods
+
+### histograms
+
+### kernel density
+
+### nearest neighbors

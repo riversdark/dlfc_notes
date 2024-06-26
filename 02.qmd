@@ -4,13 +4,19 @@ title: Probabilities
 
 Probability is introduced to deal with uncertainty.
 
-Given a model, parameter uncertainty can be solved with more data. This
-is related to the concept of "degree of freedom".
+Given a model, parameter uncertainty can be solved with more data. This is related to the concept of "degree of freedom".
 
-But model is always limiting, and sometimes somewhat arbitrary. This
-introduces model uncertainty. We can build more complex models, but
-there is no "solving" the problem, because real word data is always
-more complex than any model we can build.
+But model is always limiting, and sometimes somewhat arbitrary. This introduces model uncertainty. We can build more complex models, but there is no "solving" the problem, because real word data is always more complex than any model we can build.
+
+Probability theory is easy, because there are, in total, only two rules. 
+
+Probability is a Lebesgue measure defined on the sample space. It's defined on sets, which are not easy to manipulate. So for simple spaces we introduce the concept of **densities**, the integral of which will be the probability. One most common density is the Gaussian.
+
+When transforming probability distributions, our goal is to keep the probability mass of a certain set consistent, not the density (remember density itself has no significance in probability, it's only a tool for constructing probability masses). For this reason we need to compensate for the space transformation (using the Jacobian) when transforming the density.
+
+**Information** is a formal way to describe the "surprise" we might expect from a random event. Starting from one event, the concept is then extended to one, or even multiple distributions. 
+
+Bayesian statistics (sometimes also called Laplacian statistics by source of contribution, and some other times also called inverse probability by way of calculation), is the rigorous application of probability theory to all aspects of statistical modeling. As such every element in Bayesian statistics is associated with a certain probability computation. In this book we won't systematically cover Bayesian statistics, because the rigorous Bayesian treatment of every aspect of very deep neural networks (the focus of this book) is simply computationally infeasible. However elements of Bayesian statistics will manifest here and there, in all corners of deep learning.
 
 ## The rules of probability
 
