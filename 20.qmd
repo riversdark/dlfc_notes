@@ -175,7 +175,7 @@ Here we decompose the joint distribution of {{observed and hidden}}
 variables.
 
 $$
-p(\mathbf{x},\mathbf{z}|\mathbf{w}) = p(\mathbf{x}|\mathbf{z},\mathbf{w})p(\mathbf{z}|\mathbf{w}) \quad (20.24)
+p(\mathbf{x},\mathbf{z}|\mathbf{w}) = p(\mathbf{x}|\mathbf{z},\mathbf{w})p(\mathbf{z}|\mathbf{w})
 $$
 
 $$
@@ -190,7 +190,7 @@ $$
 &= \int q(\mathbf{z}) \ln \frac{p(\mathbf{x},\mathbf{z}|\mathbf{w})}{p(\mathbf{z}|\mathbf{x},\mathbf{w})} \, d\mathbf{z} \\
 &= \int q(\mathbf{z}) \ln \frac{p(\mathbf{x},\mathbf{z}|\mathbf{w}) q(\mathbf{z})}{p(\mathbf{z}|\mathbf{x},\mathbf{w}) q(\mathbf{z})} \, d\mathbf{z} \\
 &= \int q(\mathbf{z}) \ln \frac{p(\mathbf{x},\mathbf{z}|\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z} - \int q(\mathbf{z}) \ln \frac{p(\mathbf{z}|\mathbf{x},\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z} \\
-&= \mathcal{L}(\mathbf{w}) + \text{KL}(q(\mathbf{z})||p(\mathbf{z}|\mathbf{x},\mathbf{w})) \quad (20.21)
+&= \mathcal{L}(\mathbf{w}) + \text{KL}(q(\mathbf{z})||p(\mathbf{z}|\mathbf{x},\mathbf{w}))
 \end{aligned}
 $$
 
@@ -198,7 +198,7 @@ the KL divergence term is the difference between two distributions, the
 model of hidden variables, and an approximate posterior of choice.
 
 $$
-\text{KL}(q(\mathbf{z})||p(\mathbf{z}|\mathbf{x},\mathbf{w})) = -\int q(\mathbf{z}) \ln \frac{p(\mathbf{z}|\mathbf{x},\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z} \quad (20.23)
+\text{KL}(q(\mathbf{z})||p(\mathbf{z}|\mathbf{x},\mathbf{w})) = -\int q(\mathbf{z}) \ln \frac{p(\mathbf{z}|\mathbf{x},\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z}
 $$
 
 the ELBO term is another integral term, integrating over the same
@@ -207,28 +207,28 @@ because the KL divergence term is non-negative, as such maximising ELBO
 also maximises the data likelihood.
 
 $$
-\mathcal{L}(\mathbf{w}) = \int q(\mathbf{z}) \ln \frac{p(\mathbf{x}, \mathbf{z}|\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z} \quad (20.22)
+\mathcal{L}(\mathbf{w}) = \int q(\mathbf{z}) \ln \frac{p(\mathbf{x}, \mathbf{z}|\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z}
 $$
 
 by lower bound we mean
 
 $$
-\ln p(\mathbf{x}|\mathbf{w}) \geq \mathcal{L}(\mathbf{w}) \quad (20.25)
+\ln p(\mathbf{x}|\mathbf{w}) \geq \mathcal{L}(\mathbf{w})
 $$
 
-Now let's take write out the ELBO and take a close look at its
-components.
+Now let's take write out the ELBO and take a close look at its components.
 
 $$
 \begin{aligned}
-\mathcal{L}(\mathbf{w}) &= \mathbb{E}_{q} \left[ \ln \frac{p(\mathbf{z}_T) \prod_{t=2}^{T}p(\mathbf{z}_{t-1}|\mathbf{z}_t, \mathbf{w}) p(\mathbf{x} | \mathbf{z}_1, \mathbf{w}) }{q(\mathbf{z}_1|\mathbf{x}) \prod_{t=2}^{T}q(\mathbf{z}_t|\mathbf{z}_{t-1} , \mathbf{x})} \right] \\
-&= \mathbb{E}_{q} \left[ \ln p(\mathbf{z}_T) + \sum_{t=2}^{T} \ln \frac{p(\mathbf{z}_{t-1}|\mathbf{z}_t, \mathbf{w})}{q(\mathbf{z}_{t}|\mathbf{z}_{t-1}, \mathbf{x})} + \ln p(\mathbf{z}_1|\mathbf{w}) + \ln p(\mathbf{x}|\mathbf{z}_1, \mathbf{w}) \right] \quad (20.26)
+\mathcal{L}(\mathbf{w}) &= \int q(\mathbf{z}) \ln \frac{p(\mathbf{x}, \mathbf{z}|\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z} \\
+&= \mathbb{E}_{q} \left[ \ln \frac{p(\mathbf{z}_T) \prod_{t=2}^{T}p(\mathbf{z}_{t-1}|\mathbf{z}_t, \mathbf{w}) p(\mathbf{x} | \mathbf{z}_1, \mathbf{w}) }{q(\mathbf{z}_1|\mathbf{x}) \prod_{t=2}^{T}q(\mathbf{z}_t|\mathbf{z}_{t-1} , \mathbf{x})} \right] \\
+&= \mathbb{E}_{q} \left[ \ln p(\mathbf{z}_T) - \ln q(\mathbf{z}_1|\mathbf{x}) + \sum_{t=2}^{T} \ln \frac{p(\mathbf{z}_{t-1}|\mathbf{z}_t, \mathbf{w})}{q(\mathbf{z}_{t}|\mathbf{z}_{t-1}, \mathbf{x})} + \ln p(\mathbf{x}|\mathbf{z}_1, \mathbf{w}) \right]
 \end{aligned}
 $$
 
 where 
 $$
-\mathbb{E}_{q}[\cdot] = \int \cdots \int q(\mathbf{z}_1|\mathbf{x}) \left[ \prod_{t=2}^{T}q(\mathbf{z}_t|\mathbf{z}_{t-1}) \right] [\cdot] \, d\mathbf{z}_1 \cdots d\mathbf{z}_T \quad (20.27)
+\mathbb{E}_{q}[\cdot] = \int \cdots \int q(\mathbf{z}_1|\mathbf{x}) \left[ \prod_{t=2}^{T}q(\mathbf{z}_t|\mathbf{z}_{t-1}) \right] [\cdot] \, d\mathbf{z}_1 \cdots d\mathbf{z}_T
 $$
 
 Note that we can choose **ANY** approximate posterior function, but the
@@ -251,7 +251,7 @@ For the fourth term we can first sample z~1~ and then calculate the
 value.
 
 $$
-\mathbb{E}_{q}[\ln p(\mathbf{x}|\mathbf{z}_1, \mathbf{w})] \approx \frac{1}{L} \sum_{l=1}^{L} \ln p(\mathbf{x}|\mathbf{z}_1^{(l)}, \mathbf{w}) \quad (20.28)
+\mathbb{E}_{q}[\ln p(\mathbf{x}|\mathbf{z}_1, \mathbf{w})] \approx \frac{1}{L} \sum_{l=1}^{L} \ln p(\mathbf{x}|\mathbf{z}_1^{(l)}, \mathbf{w})
 $$
 
 ### rewriting the ELBO
