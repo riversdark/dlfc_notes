@@ -1,0 +1,48 @@
+---
+title: "Single layer networks: classification"
+---
+
+In regression problems the output is modeled as a linear function of the model parameters. In classification problems, because the target is discrete, we need some extra step to convert the linear function output to match it. We talk about this extra step in this chapter, and its related complications.  And since the linear function output is continuous while the target is discrete, we need to decide how to cut the continuous space into discrete, disjoint regions. 
+
+based on how we achieve this: 
+
+1. discriminative learning learns a function f: input --> label.
+2. probabilistic discriminative learning learns a distribution p(label|input).
+3. probabilistic generative learning learns a joint distribution p(input, label).
+
+## discriminant functions
+
+### two classes
+
+### multiple classes
+
+### 1-of-K encoding
+
+### least squares for classification
+
+## decision theory
+
+### misclassification rate
+
+### expected loss
+
+### the reject option
+
+### inference and decision
+
+### classification accuracy
+
+### ROC curve
+
+
+## generative probabilistic classifiers
+
+### continuous inputs
+
+### maximum likelihood solution
+
+### discrete features
+
+### exponential family
+
+## discriminative probabilistic classifiers

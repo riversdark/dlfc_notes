@@ -31,6 +31,8 @@ will serve as the objective function to train the neural network. The first term
 
 To be able to model a wide range of distributions, we want the transformation function $\mathbf{x} = f(\mathbf{z}, \mathbf{w})$ to be highly flexible, so we use a deep neural network with multiple layers. We can ensure that the overall function is invertible if we make each layer of the network invertible. And the two terms in the data likelihood, the latent variable likelihood and the Jacobian determinant, can both be computed easily under such a layered structure, using the chain rule of calculus.
 
+Here we will cover some of the most common types of normalizing flows, coupling flows, autoregressive flows, residual flows and its continuous extension, Neural ODE flows. With neural ODE flowing the frontier of normalizing flow models are meeting the frontier of diffusion models, where we are also trying to replace the layered, residual based diffusion process using differential equations. We will also take a look at flow matching, a recently proposed technique for efficiently training differential equation based models.
+
 ##  coupling flows
 
 Recall that in flow models we aim for **the following goals**:
@@ -226,3 +228,5 @@ Now defining something is easy, what really matters is what we can do with it. O
 ![](./img/DLFC/Chapter-18/Figure_6_b.png)
 
 ![](./img/DLFC/Chapter-18/Figure_6_c.png)
+
+## Extra: Flow matching

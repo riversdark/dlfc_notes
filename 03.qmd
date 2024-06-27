@@ -2,13 +2,17 @@
 title: "Standard distributions"
 ---
 
-density estimation is always an ill-posed problem, because as long as a distribution has support for the data, there is always chance of that distribution producing the data, albeit the probability might be slim.
+After introducing probability theory, it's natural to introduce some concrete example distributions. These distributions will be the backbone of our modeling exercise.
 
-parameterized distributions can fell short for real world complex data non-parameterized methods still have parameters, just that the parameters serve a different purpose. For parameterized distributions they are used to determine the shape of the distribution, while for non-parameterized methods, they decide the model complexity.
+The first use of modeling data with probability distributions is density estimation. Here we assign a certain distribution to the data, and then determine the parameters of the distribution to best fit the data.
+Density estimation is always an ill-posed problem, because as long as a distribution has support for the data, there is always chance of that distribution producing the data, albeit the probability might be slim. 
+
+Parameterized distributions can fell short for real world complex data non-parameterized methods still have parameters, just that the parameters serve a different purpose. For parameterized distributions they are used to determine the shape of the distribution, while for non-parameterized methods, they decide the model complexity.
 
 And model complexity can grow rapidly with data size.
 
 Deep neural nets offer the best of both worlds.
+
 
 ## discrete variables
 

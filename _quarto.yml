@@ -10,7 +10,9 @@ book:
     - index.qmd
     - 01.qmd
     - 02.qmd
+    - 03.qmd
     - 04.qmd
+    - 05.qmd
     - 07.qmd
     - 14.qmd
     - 18.qmd

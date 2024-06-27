@@ -1,48 +1,27 @@
 ---
-title: "Single layer networks: classification"
+title: "Single layer networks: regression"
 ---
 
-In regression problems the output is modeled as a linear function of the model parameters. In classification problems, because the target is discrete, we need some extra step to convert the linear function output to match it. We talk about this extra step in this chapter, and its related complications.  And since the linear function output is continuous while the target is discrete, we need to decide how to cut the continuous space into discrete, disjoint regions. 
+In machine learning we often use x to denote the input data and y to denote the target. If we only have x but not y, this is a unsupervised learning problem, which means that we have some data, but we don't specifically have a task to take advantage of them. In this case we can use the probability theory we have just introduced to model their distributions. If we have both x and y, we'd often want to know how having x giving rise to the realization of y, and this will be a supervised learning problem. In this case not only do we want to model the distribution of y, we also want to know how the distribution of y can be affected by the value of x.
 
-based on how we achieve this: 
+Depending on the nature of y supervised learning problems can be further categorized into regression and classification. Regression when y is continuous and classification when it's discrete. We can talk about regression and classification all day long: they are the backbone of many statistical models used in many natural science and social science fields. But here we are only using them as components of deep neural networks, which we plan to build in later chapters.
 
-1. discriminative learning learns a function f: input --> label.
-2. probabilistic discriminative learning learns a distribution p(label|input).
-3. probabilistic generative learning learns a joint distribution p(input, label).
+## linear regression
 
-## discriminant functions
+### basis function
 
-### two classes
+### likelihood function
 
-### multiple classes
+### maximum likelihood
 
-### 1-of-K encoding
+### geometry of least squares
 
-### least squares for classification
+### sequential learning
+
+### regularised least squares
+
+### multiple outputs
 
 ## decision theory
 
-### misclassification rate
-
-### expected loss
-
-### the reject option
-
-### inference and decision
-
-### classification accuracy
-
-### ROC curve
-
-
-## generative probabilistic classifiers
-
-### continuous inputs
-
-### maximum likelihood solution
-
-### discrete features
-
-### exponential family
-
-## discriminative probabilistic classifiers
+## the bias-variance trade-off
