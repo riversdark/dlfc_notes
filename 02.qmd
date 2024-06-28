@@ -62,6 +62,11 @@ probability as frequency:
 
 ## the Gaussian distribution
 
+$$
+\mathcal{N}(x | \mu, \sigma^2) = \frac{1}{(2\pi\sigma^2)^{1/2}} \exp \left\{ -\frac{1}{2\sigma^2} (x - \mu)^2 \right\}
+$$
+
+
 ### Mean and variance
 
 ### Likelihood function

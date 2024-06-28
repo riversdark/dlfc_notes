@@ -10,17 +10,47 @@ Depending on the nature of y supervised learning problems can be further categor
 
 ### basis function
 
+Extending simple linear regression with basis functions.
+
+![](./img/DLFC/Chapter-4/Figure_1.png)
+
+Some basis functions are more localised than others.
+
+![](./img/DLFC/Chapter-4/Figure_2_a.png)
+![](./img/DLFC/Chapter-4/Figure_2_b.png)
+![](./img/DLFC/Chapter-4/Figure_2_c.png)
+
 ### likelihood function
+
+$$
+\begin{align}
+\ln p(\mathbf{t} | \mathbf{X}, \mathbf{w}, \sigma^2) &= \sum_{n=1}^{N} \ln \mathcal{N}(t_n | \mathbf{w}^\top \mathbf{\phi}(\mathbf{x}_n), \sigma^2) \\
+&= \sum_{n=1}^{N} \ln \left( \frac{1}{\sqrt{2\pi\sigma^2}} \exp \left\{ -\frac{1}{2\sigma^2} (t_n - \mathbf{w}^\top \mathbf{\phi}(\mathbf{x}_n))^2 \right\} \right) \\
+&= -\frac{N}{2} \ln (2\pi\sigma^2) - \frac{1}{2\sigma^2} E_D(\mathbf{w})
+\end{align}
+$$
+
+where the sum-of-squares error function is defined by
+
+$$
+E_D(\mathbf{w}) = \frac{1}{2} \sum_{n=1}^{N} \left\{ t_n - \mathbf{w}^\top \mathbf{\phi}(\mathbf{x}_n) \right\}^2.
+$$
 
 ### maximum likelihood
 
 ### geometry of least squares
+
+Geometrically, the least squares solution is the orthogonal projection of the target onto the subspace spanned by the basis functions.
+
+![](./img/DLFC/Chapter-4/Figure_3.png)
 
 ### sequential learning
 
 ### regularised least squares
 
 ### multiple outputs
+
+![](./img/DLFC/Chapter-4/Figure_4.png)
 
 ## decision theory
 
