@@ -13,7 +13,10 @@ book:
     - 03.qmd
     - 04.qmd
     - 05.qmd
+    - 06.qmd
     - 07.qmd
+    - 08.qmd
+    - 09.qmd
     - 14.qmd
     - 18.qmd
     - 20.qmd
@@ -26,6 +29,4 @@ format:
     theme: cosmo
   pdf:
     documentclass: scrreprt
-
-
 

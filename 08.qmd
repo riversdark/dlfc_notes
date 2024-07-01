@@ -1,0 +1,25 @@
+---
+title: "Backpropagation"
+---
+
+How to do backpropagation, and how to do it automatically.
+
+## Evaluation of gradient
+
+### Single layer networks
+
+### General feed-forward networks
+
+### A simple example
+
+### Numerical differentiation
+
+### The Jacobian matrix
+
+### The Hessian matrix
+
+## Automatic differentiation
+
+### Forward-mode autodiff
+
+### Reverse-mode autodiff

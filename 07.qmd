@@ -50,13 +50,13 @@ but the starting point is also quite important.
 
 ![](./img/DLFC/Chapter-7/Figure_3.png)
 
-### momentum
+### Momentum
 
 ![](./img/DLFC/Chapter-7/Figure_4.png)
 ![](./img/DLFC/Chapter-7/Figure_5.png)
 ![](./img/DLFC/Chapter-7/Figure_6.png)
 
-### learning rate schedule
+### Learning rate schedule
 
 ### RMSProp and Adam
 

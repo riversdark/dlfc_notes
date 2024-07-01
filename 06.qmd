@@ -1,0 +1,80 @@
+---
+title: "Deep Neural Networks"
+---
+
+If a two-layer network can already approximate everything, why go deeper? to be deep is to be flexible.
+
+![](./img/DLFC/Chapter-6/Figure_5.png)
+
+in high dimensional spaces, most of the probability mass is located in a thin shell at a specific radius
+
+![](./img/DLFC/Chapter-6/Figure_9.png)
+
+![](./img/DLFC/Chapter-6/Figure_17_a.png)
+![](./img/DLFC/Chapter-6/Figure_17_b.png)
+
+forward vs inverse problem. A single NN can deal with one but not the other (see red fitted curve)
+
+## Limitations of fixed basis functions
+
+### The curse of dimensionality
+
+### High dimensional spaces
+
+shells
+
+### Data manifolds
+
+digits
+
+### Data-dependent basis functions
+
+kernel methods
+
+## Multilayer networks
+
+### Parameter matrices
+
+### Universal approximation
+
+with examples
+
+### Hidden unit activation functions
+
+softmax
+
+### weight-space symmetries
+
+## Deep networks
+
+### Hierarchical representations
+
+### Distributed representations
+
+### Representation learning
+
+### Transfer learning
+
+### Contrastive learning
+
+### General network architectures
+
+### Tensors
+
+## Error functions
+
+### Regression
+
+### Binary classification
+
+### Multiclass classification
+
+## Mixture density networks
+
+### Robot kinematics example
+
+### Conditional mixture distributions
+
+### Gradient optimization
+
+### Predictive distribution

@@ -33,7 +33,7 @@ To be able to model a wide range of distributions, we want the transformation fu
 
 Here we will cover some of the most common types of normalizing flows, coupling flows, autoregressive flows, residual flows and its continuous extension, Neural ODE flows. With neural ODE flowing the frontier of normalizing flow models are meeting the frontier of diffusion models, where we are also trying to replace the layered, residual based diffusion process using differential equations. We will also take a look at flow matching, a recently proposed technique for efficiently training differential equation based models.
 
-##  coupling flows
+## Coupling flows
 
 Recall that in flow models we aim for **the following goals**:
 
@@ -191,17 +191,17 @@ for i, prob in enumerate(prob_list):
 cbar = fig.colorbar(c, ax=axes, orientation='vertical', fraction=0.02, pad=0.02)
 ```
 
-##  autoregressive flows
+## Autoregressive flows
 
 ![](./img/DLFC/Chapter-18/Figure_4_a.png)
 
 ![](./img/DLFC/Chapter-18/Figure_4_b.png)
 
-##  continuous flows
+## Continuous flows
 
 In normalizing flow models, for each transformation layer, the input and output always have the same dimensionality, we are thus looking for a more meaningful representation of the same data space. There is another neural network sharing this property, namely residual networks, but there is no guarantee that such a network will be invertible. Here we introduce a well known mathematical concept, the differential equation, into the neural network, and thus satisfying both the invertibility and the constant dimensionality requirements.
 
-###  neural differential equation
+### Neural differential equation
 
 Neural differential equation, as the name implies, is a neural network that is defined by a differential equation. We can consider the residual network as a discrete version of the differential equation, since the "residual" is already a difference between consecutive layers, and the differential is the limit of this difference as it approaches zero. Thus starting from a residual network
 
@@ -219,9 +219,9 @@ Now defining something is easy, what really matters is what we can do with it. O
 
 ![](./img/DLFC/Chapter-18/Figure_5.png)
 
-###  neural ODE backpropagation
+### Neural ODE backpropagation
 
-###  neural ODE flows
+### Neural ODE flows
 
 ![](./img/DLFC/Chapter-18/Figure_6_a.png)
 

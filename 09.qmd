@@ -1,0 +1,72 @@
+---
+title: "Regularisation"
+---
+
+
+## Inductive bias
+
+Inductive bias refers to the set of assumptions a model makes about the patterns it expects to find in the data. These biases help the model to generalize better from the training data to unseen instances, guiding the learning process towards more plausible solutions given limited information. In the context of deep learning, inductive bias can be inherent in the architecture of the network, the choice of optimization algorithm, or the data representation itself.
+
+### Inverse problem
+
+In the Bayesian sense, the forward problem is sampling, the inverse problem is inference. data --> parameter
+
+### No free lunch theorem
+
+Since there is no universally best learner for every task, the success of a learning algorithm on a particular task depends on how well its inductive bias aligns with the problem.
+
+Regularization methods contribute to an algorithm's inductive bias, thus affecting its performance across different tasks.
+
+**models are essentially a set of assumptions, and assumptions have consequences**
+
+### Symmetry and invariance
+
+### Equivariance
+
+## Weight decay
+
+smaller weights, simpler models L2 regularisation
+
+### Consistent regularizers
+
+### Generalised weight decay
+
+## Learning curves
+
+On the modeling side, there can be several different approaches to increase the generalization performance:
+
+1.  increase the model size (better representative capability);
+2.  increase the data size (capturing more pattern and less noise);
+3.  regulariation (through weight-decay or other methods);
+4.  improve the model architecture (inducing more inductive bias for certain problems);
+5.  model averaging (reduce the variance in specific models)
+
+Another factor that influences the bias-variance trade-off is the learning process itself. During optimization of the error function through gradient descent, the training error typically decreases as the model parameters are updated, whereas the error for hold-out data may be non-monotonic. This behaviour can be visualized using learning curves, which plot performance measures such as training set and validation set error as a function of iteration number during an iterative learning process such as stochastic gradient descent. These curves provide insight into the progress of training and also offer a practical methodology for controlling the effective model complexity.
+
+### Early stopping
+
+### Double descent
+
+![](./img/DLFC/Chapter-9/Figure_9.jpg)
+
+in the classical regime, we have limited data, thus we seek a bias-variance balance. in the modern regime, since we have so much data, increasing the model size always leads to better test results
+
+the black dashed line marks the interpolation threshold, where the model's capacity is just enough to perfectly fit the training data.
+
+![](./img/DLFC/Chapter-9/Figure_10.jpg)
+
+*stochastic* gradient descent not only makes the training more feasible, but also makes the model more robust.
+
+![](./img/DLFC/Chapter-9/Figure_11.jpg)
+
+## Parameter sharing
+
+### Soft parameter sharing
+
+## Residual connections
+
+## Model averaging
+
+### Dropout
+
+Randomly "dropping out" a subset of neurons or connections during training encourages the network to develop redundant representations and prevents co-adaptation of features. The inductive bias here is towards models that are robust to the loss of individual pieces of information, reflecting a kind of ensemble learning within a single model.
