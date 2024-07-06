@@ -197,6 +197,8 @@ cbar = fig.colorbar(c, ax=axes, orientation='vertical', fraction=0.02, pad=0.02)
 
 ![](./img/DLFC/Chapter-18/Figure_4_b.png)
 
+## Residual flows
+
 ## Continuous flows
 
 In normalizing flow models, for each transformation layer, the input and output always have the same dimensionality, we are thus looking for a more meaningful representation of the same data space. There is another neural network sharing this property, namely residual networks, but there is no guarantee that such a network will be invertible. Here we introduce a well known mathematical concept, the differential equation, into the neural network, and thus satisfying both the invertibility and the constant dimensionality requirements.
