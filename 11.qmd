@@ -1,0 +1,7 @@
+# structured distributions
+
+## graphical models
+
+## conditional independence
+
+## sequence models
