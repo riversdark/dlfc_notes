@@ -1,69 +1,16 @@
-# transformers
+---
+title: "Transformers"
+---
 
-27 plots, 3 algos
+Transformers represent one of the most important developments in deep learning. They are based on a processing concept called attention, which allows a network to give different weights to different inputs, with weighting coefficients that themselves depend on the input values, thereby capturing powerful inductive biases related to sequential and other forms of data.
 
-Transformers represent one of the most important developments in deep
-learning. They are based on a processing concept called attention
-([12.1](id:29305260-ac38-4f4a-961d-bf637c0d92bc)), which allows a
-network to give different weights to different inputs, with weighting
-coefficients that themselves depend on the input values, thereby
-capturing powerful inductive biases
-([9.1](id:adf27d81-79f1-4cef-a3de-6e1ab9c0a5e5)) related to sequential
-and other forms of data.
+These models are known as transformers because they transform a set of vectors in some representation space into a corresponding set of vectors, having **the same dimensionality**, in some new space. The goal of the transformation is that the new space will have a **richer internal representation** that is better suited to solving downstream tasks. Inputs to a transformer can take the form of unstructured sets of vectors, ordered sequences, or more general representations, giving transformers broad applicability.
 
-These models are known as transformers because they transform a set of
-vectors in some representation space into a corresponding set of
-vectors, having **the same dimensionality**, in some new space. The goal
-of the transformation is that the new space will have a **richer
-internal representation** that is better suited to solving downstream
-tasks. Inputs to a transformer can take the form of unstructured sets of
-vectors, ordered sequences, or more general representations, giving
-transformers broad applicability.
+Transformers were originally introduced in the context of natural language processing (NLP), and have greatly surpassed the previous state-of-the-art approaches based on recurrent neural networks (RNNs). Transformers have subsequently been found to achieve excellent results in many other domains. For example, **vision transformers** (ViT) often outperform CNNs in image processing tasks, whereas multimodal transformers that combine multiple types of data, such as text, images, audio, and video, are amongst the most powerful deep learning models.
 
-Transformers were originally introduced in the context of natural
-language processing (NLP,
-[12.2](id:0ee11514-fee2-4f15-a471-d21a78f5f6c4)), and have greatly
-surpassed the previous state-of-the-art approaches based on recurrent
-neural networks (RNNs,
-[12.2.5](id:f24d579b-4a2f-4c9b-9042-edce7369657e)). Transformers have
-subsequently been found to achieve excellent results in many other
-domains. For example, **vision transformers** (ViT,
-[12.4.1](id:c8c993a0-3d0a-446f-9583-ac2021d240da)) often outperform CNNs
-in image processing tasks, whereas multimodal transformers
-([12.4](id:eca16604-275e-42c2-a740-1e5878fb6d26)) that combine multiple
-types of data, such as text, images, audio, and video, are amongst the
-most powerful deep learning models.
+One major advantage of transformers is that transfer learning is very effective, so that a transformer model can be trained on a large body of data and then the trained model can be applied to many downstream tasks using some form of fine-tuning. A large-scale model that can subsequently be adapted to solve multiple different tasks is known as a foundation model. Furthermore, transformers can be trained in a self- supervised way using unlabelled data, which is especially effective with language models since transformers can exploit vast quantities of text available from the internet and other sources. **The scaling hypothesis** asserts that simply by increasing the scale of the model, as measured by the number of learnable parameters, and training on a commensurately large data set, significant improvements in performance can be achieved, even with no architectural changes. Moreover, the transformer is especially well suited to massively parallel processing hardware such as graphical processing units, or GPUs, allowing exceptionally large neural network language models having of the order of a trillion (10^12^ ) parameters to be trained in reasonable time. Such models have extraordinary capabilities and show clear indications of emergent properties that have been described as the early signs of artificial general intelligence.
 
-One major advantage of transformers is that transfer learning
-([6.3.4](id:a2155a91-0362-406e-8459-f98ec22db81f)) is very effective, so
-that a transformer model can be trained on a large body of data and then
-the trained model can be applied to many downstream tasks using some
-form of fine-tuning. A large-scale model that can subsequently be
-adapted to solve multiple different tasks is known as a foundation
-model. Furthermore, transformers can be trained in a self- supervised
-way using unlabelled data, which is especially effective with language
-models since transformers can exploit vast quantities of text available
-from the internet and other sources. **The scaling hypothesis** asserts
-that simply by increasing the scale of the model, as measured by the
-number of learnable parameters, and training on a commensurately large
-data set, significant improvements in performance can be achieved, even
-with no architectural changes. Moreover, the transformer is especially
-well suited to massively parallel processing hardware such as graphical
-processing units, or GPUs, allowing exceptionally large neural network
-language models having of the order of a trillion (10^12^ ) parameters
-to be trained in reasonable time. Such models have extraordinary
-capabilities and show clear indications of emergent properties that have
-been described as the early signs of artificial general intelligence
-(Bubeck et al., 2023).
-
-The architecture of a transformer can seem complex, or even daunting, to
-a newcomer as it involves multiple different components working
-together, in which the various design choices can seem arbitrary. In
-this chapter we therefore aim to give a comprehensive step-by-step
-introduction to all the key ideas behind transformers and to provide
-clear intuition to motivate the design of the various elements. We first
-describe the transformer architecture and then focus on natural language
-processing, before exploring other application domains.
+The architecture of a transformer can seem complex, or even daunting, to a newcomer as it involves multiple different components working together, in which the various design choices can seem arbitrary. In this chapter we therefore aim to give a comprehensive step-by-step introduction to all the key ideas behind transformers and to provide clear intuition to motivate the design of the various elements. We first describe the transformer architecture and then focus on natural language processing, before exploring other application domains.
 
 ## attention
 
@@ -110,15 +57,10 @@ values depend on the specific input data. Figure 12.2 shows the
 attention weights from a section of a transformer network trained on
 natural language.
 
-```{=org}
-#+ATTR_ORG: :width 500
-```
 ![](./img/DLFC/Chapter-12/Figure_2.jpg)
 
-``` example
 Figure 12.2 An example of learned attention weights. [From Vaswani et al. (2017) with permission.]
 The law will never be perfect, but its application should be just, this is what we are missing, in my opinion.
-```
 
 In natural language processing (NLP) we need to embed words into
 vectors, and these vectors can then be used as inputs for subsequent
@@ -137,11 +79,9 @@ representation might put it close to 'money'.
 
 ### transformer processing
 
-![](./img/DLFC/Chapter-12/Figure_3.png)
+the structure of the data matrix, of dimension NxD. It's kept unchange through the transformer layers.
 
-``` example
-fig 12.3 the structure of the data matrix, of dimension NxD. It's kept unchange through the transformer layers.
-```
+![](./img/DLFC/Chapter-12/Figure_3.png)
 
 the input and output have the same dimension, this, coupled with
 residual networks, is what makes really deep networks possible.
@@ -149,7 +89,7 @@ residual networks, is what makes really deep networks possible.
 ### attention coefficients
 
 $$
-\mathbf{y}_n = \sum_{m=1}^{N} a_{nm} \mathbf{x}_m \quad (12.2)
+\mathbf{y}_n = \sum_{m=1}^{N} a_{nm} \mathbf{x}_m
 $$
 
 in the attention layer, each output is a weighted sum of all the input.
@@ -162,14 +102,13 @@ in this sense, we can think of it as a combination of NN and GP.
 ### self-attention
 
 $$
-a_{nm} = \frac{\exp(\mathbf{x}_n^T \mathbf{x}_m)}{\sum_{m'=1}^{N} \exp(\mathbf{x}_n^T \mathbf{x}_{m'})} \quad (12.5)
+a_{nm} = \frac{\exp(\mathbf{x}_n^T \mathbf{x}_m)}{\sum_{m'=1}^{N} \exp(\mathbf{x}_n^T \mathbf{x}_{m'})}
 $$
 
-the weights are calculated as the exponential of the dot product between
-pairs of inputs.
+the weights are calculated as the exponential of the dot product between pairs of inputs.
 
 $$
-\mathbf{Y} = \text{Softmax}[\mathbf{X} \mathbf{X}^T] \mathbf{X} \quad (12.6)
+\mathbf{Y} = \text{Softmax}[\mathbf{X} \mathbf{X}^T] \mathbf{X}
 $$
 
 no mask, to fully understand the connections in language.
@@ -178,7 +117,7 @@ no mask, to fully understand the connections in language.
 
 As it stands, the transformation from input vectors {xn } to output
 vectors {yn } is fixed and has no capacity to learn from data because it
-has no adjustable parame- ters. Furthermore, each of the feature values
+has no adjustable parameters. Furthermore, each of the feature values
 within a token vector xn plays an equal role in determining the
 attention coefficients, whereas we would like the network to have the
 flexibility to focus more on some features than others when determining
@@ -188,58 +127,55 @@ We therefore transform the three input matrices, each with its our
 transformation, and consequently trainable parameters. The transformed
 input matrices are named query, key, and value respectively.
 
-$$\mathbf{Q} = \mathbf{X}\mathbf{W}^{(q)} \quad (12.10) $$
-
-$$\mathbf{K} = \mathbf{X}\mathbf{W}^{(k)} \quad (12.11) $$
-
-$$\mathbf{V} = \mathbf{X}\mathbf{W}^{(v)} \quad (12.12) $$
+$$
+\begin{aligned}
+\mathbf{Q} &= \mathbf{X}\mathbf{W}^{(q)} \\
+\mathbf{K} &= \mathbf{X}\mathbf{W}^{(k)} \\
+\mathbf{V} &= \mathbf{X}\mathbf{W}^{(v)}
+\end{aligned}
+$$
 
 and the attention layer is accordingly updated to be
-
 $$
-\mathbf{Y} = \text{Softmax}(\mathbf{Q}\mathbf{K}^T) \mathbf{V} \quad (12.13)
+\mathbf{Y} = \text{Softmax}(\mathbf{Q}\mathbf{K}^T) \mathbf{V}
 $$
 
-```{=org}
-#+ATTR_ORG: :width 300
-```
+determining the attention coefficients Q, K, and output Y
+
 ![](./img/DLFC/Chapter-12/Figure_4.png)
 ![](./img/DLFC/Chapter-12/Figure_5.png)
-
-``` example
-determining the attention coefficients Q, K, and output Y
-```
 
 ### scaled self-attention
 
 the fact that values do not go through the scaling in worth noting.
+
 ![](./img/DLFC/Chapter-12/Figure_6.png)
 ![](./img/DLFC/Chapter-12/algo12.1.png)
 
 ### multi-head attention
 
-![](./img/DLFC/Chapter-12/Figure_7.png)
-
-``` example
 in multi-head attention, the weight matrix dimension of the feedfoward layer increases accordings, however the output is kept the same dimension as the input. This is done by adjusting the input and output dimensions of the feed forward layers
-```
+
+![](./img/DLFC/Chapter-12/Figure_7.png)
 
 ![](./img/DLFC/Chapter-12/Figure_8.png)
 ![](./img/DLFC/Chapter-12/algo12.2.png)
 
 ### transformer layers
 
-![](./img/DLFC/Chapter-12/Figure_9.png)
-
-``` example
 residual connection and layer normalisation are added to the multi-head attention
-```
+
+![](./img/DLFC/Chapter-12/Figure_9.png)
 
 ![](./img/DLFC/Chapter-12/algo12.3.png)
 
 ### computational complexity
 
 ### positional encoding
+
+Positional encoding injects information about the relative or absolute position of the tokens in a sequence. This is crucial for transformers to capture the order of the sequence, as they do not inherently possess any notion of order due to their attention mechanism. 
+
+By adding positional encodings to the input embeddings, transformers can leverage the position information to better understand the structure of the data.
 
 ![](./img/DLFC/Chapter-12/Figure_10_a.png)
 ![](./img/DLFC/Chapter-12/Figure_10_b.png)
@@ -278,20 +214,18 @@ dimensions.
 
 ### word embedding
 
+CBOW (continuous bag of words) and skip-gram approach for word embedding
+
 ![](./img/DLFC/Chapter-12/Figure_11_a.png)
 ![](./img/DLFC/Chapter-12/Figure_11_b.png)
-
-``` example
-CBOW (continuous bag of words) and skip-gram approach for word embedding
-```
 
 ### tokenisation
 
 ![](./img/DLFC/Chapter-12/Figure_12.png)
 
-[SentencePiece](id:563B8E9F-FEF2-4284-86F3-D83E597C76AD) [Karpathy\'s
-tutorial on
-YT](https://www.youtube.com/watch?v=zduSFxRajkE&pp=ygUIa2FycGF0aHk%3D)
+SentencePiece
+
+[Karpathy's tutorial on YT](https://www.youtube.com/watch?v=zduSFxRajkE&pp=ygUIa2FycGF0aHk%3D)
 
 ### bag of words
 
@@ -379,42 +313,30 @@ from multiple sensors such as cameras, radar, and microphones. The
 important thing to note is that if we can tokenize the inputs and decode
 the output tokens, then it is likely that we can use a transformer.
 
-``` example
 For the input, as long as we can encode and align the inputs from different modalities, we can simply dump them all to the transformer. However, if the output is multimodal, we need to specify which output nodes correspond to which output.
-```
 
 ### vision transformers
 
-```{=org}
-#+ATTR_ORG: :width 600
-```
-![](./img/DLFC/Chapter-12/Figure_22.png)
-
-``` example
 Illustration of the vision transformer architecture for a classification task. Here a learnable hclassi token is included as an additional input, and the associated output is transformed by a linear layer with a softmax activation, denoted by LSM, to give the final class-vector output c.
-```
+
+
+![](./img/DLFC/Chapter-12/Figure_22.png)
 
 ### generative image transformers
 
 ![](./img/DLFC/Chapter-12/Figure_23.png)
 
-``` example
 a raster scan that defines a specific linear ordering of the pixels in a two-dimensional image.
-```
 
 ![](./img/DLFC/Chapter-12/Figure_24.png)
 
-``` example
 An illustration of how an image can be sampled from an autoregressive model. The first pixel is sampled from the marginal distribution p(x11), the second pixel from the conditional distribution p(x12 |x11 ), and so on in raster scan order until we have a complete image.
-```
 
 ### audio data
 
-![](./img/DLFC/Chapter-12/Figure_25.png)
-
-``` example
 An example mel spectrogram of a humpback whale song.
-```
+
+![](./img/DLFC/Chapter-12/Figure_25.png)
 
 ### text-to-speech
 
