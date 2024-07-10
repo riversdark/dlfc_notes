@@ -10,7 +10,7 @@ The field of **artificial intelligence** (AI), seeks to recreate the powerful ca
 
 This chapter offers a general discussion to the field of deep learning, its applications, and also introduces the basic concepts and procedures of machine learning through a working example. A double introduction to the ends and the begins!
 
-## The impact of DL (4)
+## The impact of DL 
 
 ### midical diagnosis
 
@@ -26,7 +26,7 @@ This chapter offers a general discussion to the field of deep learning, its appl
 
 ### LLM
 
-## a tutorial example (6)
+## A tutorial example 
 
 ### synthetic data
 

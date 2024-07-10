@@ -4,6 +4,9 @@ jupyter: "torch"
 draft: true
 ---
 
+It has been said that the only problem in machine learning is optimization, and the only problem in Bayesian machine learning is integration. Actually Bayesian machine learning can be both. In Bayesian machine learning we often need to calculate the (marginal) distribution of some variables, which normally means that we need to integrate out some other variables. And this is normally impossible, because integration is a terribly difficult problem. 
+
+So we are left with two approaches of approximations. The first is to use some simpler distributions that we actually can integrate, often something from the exponential family, to approximate the distribution of interest. The second is to use approximate that distribution with its samples, and compute the integral using sample averages. The first turns Bayesian inference into an optimization problem, the second directs us to sampling methods.
 
 ## basic sampling algorithms
 
@@ -72,11 +75,11 @@ The **Metropolis Algorithm** is one of the earliest and simplest MCMC methods. T
 
 ## Langevin sampling
 
-energy based models convert an energy function to probability, and normalise it using the integral over x.
+Langevin dynamics is used to calculate the gradients.
+
+Energy based models convert an energy function into a probability density function, and normalise it using the integral over x.
 
 maximising logp turns out to be balance data and model.
-
-Langevin dynamics is used to calculate the gradients.
 
 ![](./img/DLFC/Chapter-14/Figure_13.png)
 
