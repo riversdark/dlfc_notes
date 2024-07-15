@@ -47,11 +47,13 @@ Another factor that influences the bias-variance trade-off is the learning proce
 
 ### Double descent
 
+Double descent entends the bias-variance trade-off to the big-data/large-model regime where we have so much data that we can fit a model of any size to it.
+
 ![](./img/DLFC/Chapter-9/Figure_9.jpg)
 
-in the classical regime, we have limited data, thus we seek a bias-variance balance. in the modern regime, since we have so much data, increasing the model size always leads to better test results
+In the classical regime, we have limited data, thus we seek a bias-variance balance. In the modern regime, since we have so much data, increasing the model size always leads to better test results.
 
-the black dashed line marks the interpolation threshold, where the model's capacity is just enough to perfectly fit the training data.
+The black dashed line marks the interpolation threshold, where the model's capacity is just enough to perfectly fit the training data.
 
 ![](./img/DLFC/Chapter-9/Figure_10.jpg)
 

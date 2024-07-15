@@ -52,9 +52,16 @@ but the starting point is also quite important.
 
 ### Momentum
 
+Momentum is a method to accelerate SGD by adding a fraction of the previous gradient to the current gradient, but how much of an effect this has depends on the curvature of the loss function. When the curvature is low, consecutive gradients are similar in direction, and thus accumulate to speed up the exploration. When the curvature is high, the gradients are different in direction and thus cancel each other out, leading to dampened oscillations.
+
 ![](./img/DLFC/Chapter-7/Figure_4.png)
 ![](./img/DLFC/Chapter-7/Figure_5.png)
+
+Here we can see how dampening the oscillations helps the convergence.
+
 ![](./img/DLFC/Chapter-7/Figure_6.png)
+
+Nesterov momentum is similar, but it effectively introduces a 1/2 step, first computing a step using the previous momentum, then calculate the gradient at that point, and then update the momentum again.
 
 ### Learning rate schedule
 

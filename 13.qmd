@@ -88,6 +88,11 @@ ordering.
 
 ### graph convolution networks (GCN)
 
+Each node has an associated hidden variable that stores the aggragated info from all its neighbours.
+Each layer of the network updates the node embedding using the hidden state.
+
+algo13.1 simple message passing neural network. Aggregate then update.
+
 ### aggregation operators
 
 ![](./img/DLFC/Chapter-13/Figure_4.png)
@@ -107,6 +112,13 @@ ordering.
 ### edge embedding
 
 ### graph embedding
+
+Algo13.2: general graph network training scheme.
+
+1. update edge embeddings
+2. aggregate node info
+3. update node embeddings
+4. update graph embedding.
 
 ![](./img/DLFC/Chapter-13/Figure_5_a.png)
 ![](./img/DLFC/Chapter-13/Figure_5_b.png)
