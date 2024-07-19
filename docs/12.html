@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.53">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>12&nbsp; Transformers – dlfc_notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./13.html" rel="next">
+<link href="./11.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transformers</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">dlfc_notes</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Deep Learning Revolution</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probabilities</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Standard distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Single layer networks: regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Single layer networks: classification</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Deep Neural Networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Gradient Descent</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Backpropagation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regularisation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Convolutional networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">structured distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Graph neural networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Discrete latent variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Continuous latent variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Generative adversarial networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#attention" id="toc-attention" class="nav-link active" data-scroll-target="#attention"><span class="header-section-number">12.1</span> Attention</a>
+  <ul class="collapse">
+  <li><a href="#transformer-processing" id="toc-transformer-processing" class="nav-link" data-scroll-target="#transformer-processing"><span class="header-section-number">12.1.1</span> Transformer processing</a></li>
+  <li><a href="#attention-coefficients" id="toc-attention-coefficients" class="nav-link" data-scroll-target="#attention-coefficients"><span class="header-section-number">12.1.2</span> Attention coefficients</a></li>
+  <li><a href="#self-attention" id="toc-self-attention" class="nav-link" data-scroll-target="#self-attention"><span class="header-section-number">12.1.3</span> Self-attention</a></li>
+  <li><a href="#network-parameters" id="toc-network-parameters" class="nav-link" data-scroll-target="#network-parameters"><span class="header-section-number">12.1.4</span> Network parameters</a></li>
+  <li><a href="#scaled-self-attention" id="toc-scaled-self-attention" class="nav-link" data-scroll-target="#scaled-self-attention"><span class="header-section-number">12.1.5</span> Scaled self-attention</a></li>
+  <li><a href="#multi-head-attention" id="toc-multi-head-attention" class="nav-link" data-scroll-target="#multi-head-attention"><span class="header-section-number">12.1.6</span> Multi-head attention</a></li>
+  <li><a href="#transformer-layers" id="toc-transformer-layers" class="nav-link" data-scroll-target="#transformer-layers"><span class="header-section-number">12.1.7</span> Transformer layers</a></li>
+  <li><a href="#computational-complexity" id="toc-computational-complexity" class="nav-link" data-scroll-target="#computational-complexity"><span class="header-section-number">12.1.8</span> Computational complexity</a></li>
+  <li><a href="#positional-encoding" id="toc-positional-encoding" class="nav-link" data-scroll-target="#positional-encoding"><span class="header-section-number">12.1.9</span> Positional encoding</a></li>
+  </ul></li>
+  <li><a href="#natural-language" id="toc-natural-language" class="nav-link" data-scroll-target="#natural-language"><span class="header-section-number">12.2</span> Natural language</a>
+  <ul class="collapse">
+  <li><a href="#word-embedding" id="toc-word-embedding" class="nav-link" data-scroll-target="#word-embedding"><span class="header-section-number">12.2.1</span> Word embedding</a></li>
+  <li><a href="#tokenisation" id="toc-tokenisation" class="nav-link" data-scroll-target="#tokenisation"><span class="header-section-number">12.2.2</span> Tokenisation</a></li>
+  <li><a href="#bag-of-words" id="toc-bag-of-words" class="nav-link" data-scroll-target="#bag-of-words"><span class="header-section-number">12.2.3</span> Bag of words</a></li>
+  <li><a href="#autoregressive-models" id="toc-autoregressive-models" class="nav-link" data-scroll-target="#autoregressive-models"><span class="header-section-number">12.2.4</span> Autoregressive models</a></li>
+  <li><a href="#recurrent-neural-networks" id="toc-recurrent-neural-networks" class="nav-link" data-scroll-target="#recurrent-neural-networks"><span class="header-section-number">12.2.5</span> Recurrent neural networks</a></li>
+  <li><a href="#backpropagation-through-time" id="toc-backpropagation-through-time" class="nav-link" data-scroll-target="#backpropagation-through-time"><span class="header-section-number">12.2.6</span> Backpropagation through time</a></li>
+  </ul></li>
+  <li><a href="#transformer-language-models" id="toc-transformer-language-models" class="nav-link" data-scroll-target="#transformer-language-models"><span class="header-section-number">12.3</span> Transformer language models</a>
+  <ul class="collapse">
+  <li><a href="#decoder-transformers" id="toc-decoder-transformers" class="nav-link" data-scroll-target="#decoder-transformers"><span class="header-section-number">12.3.1</span> Decoder transformers</a></li>
+  <li><a href="#sampling-strategies" id="toc-sampling-strategies" class="nav-link" data-scroll-target="#sampling-strategies"><span class="header-section-number">12.3.2</span> Sampling strategies</a></li>
+  <li><a href="#encoder-transformers" id="toc-encoder-transformers" class="nav-link" data-scroll-target="#encoder-transformers"><span class="header-section-number">12.3.3</span> Encoder transformers</a></li>
+  <li><a href="#seq2seq-transformers" id="toc-seq2seq-transformers" class="nav-link" data-scroll-target="#seq2seq-transformers"><span class="header-section-number">12.3.4</span> Seq2seq transformers</a></li>
+  <li><a href="#large-language-models" id="toc-large-language-models" class="nav-link" data-scroll-target="#large-language-models"><span class="header-section-number">12.3.5</span> Large language models</a></li>
+  </ul></li>
+  <li><a href="#multimodal-transformers" id="toc-multimodal-transformers" class="nav-link" data-scroll-target="#multimodal-transformers"><span class="header-section-number">12.4</span> Multimodal transformers</a>
+  <ul class="collapse">
+  <li><a href="#vision-transformers" id="toc-vision-transformers" class="nav-link" data-scroll-target="#vision-transformers"><span class="header-section-number">12.4.1</span> Vision transformers</a></li>
+  <li><a href="#generative-image-transformers" id="toc-generative-image-transformers" class="nav-link" data-scroll-target="#generative-image-transformers"><span class="header-section-number">12.4.2</span> Generative image transformers</a></li>
+  <li><a href="#audio-data" id="toc-audio-data" class="nav-link" data-scroll-target="#audio-data"><span class="header-section-number">12.4.3</span> Audio data</a></li>
+  <li><a href="#text-to-speech" id="toc-text-to-speech" class="nav-link" data-scroll-target="#text-to-speech"><span class="header-section-number">12.4.4</span> Text-to-speech</a></li>
+  <li><a href="#vision-and-language-transformers" id="toc-vision-and-language-transformers" class="nav-link" data-scroll-target="#vision-and-language-transformers"><span class="header-section-number">12.4.5</span> Vision and language transformers</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transformers</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Transformers represent one of the most important developments in deep learning. They are based on a processing concept called attention, which allows a network to give different weights to different inputs, with weighting coefficients that themselves depend on the input values, thereby capturing powerful inductive biases related to sequential and other forms of data.</p>
+<p>These models are known as transformers because they transform a set of vectors in some representation space into a corresponding set of vectors, having <strong>the same dimensionality</strong>, in some new space. The goal of the transformation is that the new space will have a <strong>richer internal representation</strong> that is better suited to solving downstream tasks. Inputs to a transformer can take the form of unstructured sets of vectors, ordered sequences, or more general representations, giving transformers broad applicability.</p>
+<p>Transformers were originally introduced in the context of natural language processing (NLP), and have greatly surpassed the previous state-of-the-art approaches based on recurrent neural networks (RNNs). Transformers have subsequently been found to achieve excellent results in many other domains. For example, <strong>vision transformers</strong> (ViT) often outperform CNNs in image processing tasks, whereas multimodal transformers that combine multiple types of data, such as text, images, audio, and video, are amongst the most powerful deep learning models.</p>
+<p>One major advantage of transformers is that transfer learning is very effective, so that a transformer model can be trained on a large body of data and then the trained model can be applied to many downstream tasks using some form of fine-tuning. A large-scale model that can subsequently be adapted to solve multiple different tasks is known as a foundation model. Furthermore, transformers can be trained in a self- supervised way using unlabelled data, which is especially effective with language models since transformers can exploit vast quantities of text available from the internet and other sources. <strong>The scaling hypothesis</strong> asserts that simply by increasing the scale of the model, as measured by the number of learnable parameters, and training on a commensurately large data set, significant improvements in performance can be achieved, even with no architectural changes. Moreover, the transformer is especially well suited to massively parallel processing hardware such as graphical processing units, or GPUs, allowing exceptionally large neural network language models having of the order of a trillion (10<sup>12</sup> ) parameters to be trained in reasonable time. Such models have extraordinary capabilities and show clear indications of emergent properties that have been described as the early signs of artificial general intelligence.</p>
+<p>The architecture of a transformer can seem complex, or even daunting, to a newcomer as it involves multiple different components working together, in which the various design choices can seem arbitrary. In this chapter we therefore aim to give a comprehensive step-by-step introduction to all the key ideas behind transformers and to provide clear intuition to motivate the design of the various elements. We first describe the transformer architecture and then focus on natural language processing, before exploring other application domains.</p>
+<section id="attention" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="attention"><span class="header-section-number">12.1</span> Attention</h2>
+<p>attention was originally developed as an enhancement to RNNs for machine translation, however Vaswani et al.&nbsp;(2017) later showed that "attention is all you need", i.e.&nbsp;significantly improved performance could be obtained by eliminating the recurrence structure and instead focusing exclusively on the attention mechanism. Today, transformers based on attention have completely superseded RNNs in almost all applications.</p>
+<p>We will motivate the use of attention using natural language as an example, although it has much broader applicability. Consider the word "bank" in the following sentence: I swam across the river to get to the other bank.</p>
+<p>the word ‘bank’ can mean different things, However, this can be detected only by looking at the context provided by other words in the sequence. We also see that some words are more important than others in determining the interpretation of ‘bank’. We see that to determine the appropriate interpretation of ‘bank’, a neural network processing such a sentence should attend to specific words from the rest of the sequence.</p>
+<ol type="1">
+<li>its exact meaning should be determined from the context, i.e.&nbsp;other words in the same sentence.</li>
+<li>different words have different importance in determining its meaning,</li>
+<li>the words that we should attend to can be anywhere in the sentence.</li>
+</ol>
+<p><img src="./img/DLFC/Chapter-12/Figure_1.png" class="img-fluid"></p>
+<pre class="example"><code>Figure 12.1 Schematic illustration of attention in which the interpretation of the word ‘bank’ is influenced by the words ‘river’ and ‘swam’, with the thickness of each line being indicative of the strength of its influence</code></pre>
+<p>Moreover, we also see that the particular locations that should receive more attention depend on the input sequence itself: in the first sentence it is the second and fifth words that are important whereas in the second sentence it is the eighth word. In a standard neural network, different inputs will influence the output to different extents according to the values of the weights that multiply those inputs. Once the network is trained, however, those weights, and their associated inputs, are fixed. By contrast, attention uses weighting factors whose values depend on the specific input data. Figure 12.2 shows the attention weights from a section of a transformer network trained on natural language.</p>
+<p><img src="./img/DLFC/Chapter-12/Figure_2.jpg" class="img-fluid"></p>
+<p>Figure 12.2 An example of learned attention weights. [From Vaswani et al.&nbsp;(2017) with permission.] The law will never be perfect, but its application should be just, this is what we are missing, in my opinion.</p>
+<p>In natural language processing (NLP) we need to embed words into vectors, and these vectors can then be used as inputs for subsequent neural network processing. These embeddings capture elementary semantic properties, for example by mapping words with similar meanings to nearby locations in the embedding space. However such embeddings are one-to-one and deterministic, a given word always maps to the same embedding vector. A transformer can be viewed as a richer form of embedding in which a given vector is mapped to a location that depends on the other vectors in the sequence. Thus, the vector representing ‘bank’ in our example above could map to different places in a new embedding space for the two different sentences. For example, in the first sentence the transformed representation might put ‘bank’ close to ‘water’ in the embedding space, whereas in the second sentence the transformed representation might put it close to ‘money’.</p>
+<section id="transformer-processing" class="level3" data-number="12.1.1">
+<h3 data-number="12.1.1" class="anchored" data-anchor-id="transformer-processing"><span class="header-section-number">12.1.1</span> Transformer processing</h3>
+<p>the structure of the data matrix, of dimension NxD. It’s kept unchange through the transformer layers.</p>
+<p><img src="./img/DLFC/Chapter-12/Figure_3.png" class="img-fluid"></p>
+<p>the input and output have the same dimension, this, coupled with residual networks, is what makes really deep networks possible.</p>
+</section>
+<section id="attention-coefficients" class="level3" data-number="12.1.2">
+<h3 data-number="12.1.2" class="anchored" data-anchor-id="attention-coefficients"><span class="header-section-number">12.1.2</span> Attention coefficients</h3>
+<p><span class="math display">\[
+\mathbf{y}_n = \sum_{m=1}^{N} a_{nm} \mathbf{x}_m
+\]</span></p>
+<p>in the attention layer, each output is a weighted sum of all the input.</p>
+<p>attention can be understood in many different ways, a similarity kernel is most useful.</p>
+<p>in this sense, we can think of it as a combination of NN and GP.</p>
+</section>
+<section id="self-attention" class="level3" data-number="12.1.3">
+<h3 data-number="12.1.3" class="anchored" data-anchor-id="self-attention"><span class="header-section-number">12.1.3</span> Self-attention</h3>
+<p><span class="math display">\[
+a_{nm} = \frac{\exp(\mathbf{x}_n^T \mathbf{x}_m)}{\sum_{m'=1}^{N} \exp(\mathbf{x}_n^T \mathbf{x}_{m'})}
+\]</span></p>
+<p>the weights are calculated as the exponential of the dot product between pairs of inputs.</p>
+<p><span class="math display">\[
+\mathbf{Y} = \text{Softmax}[\mathbf{X} \mathbf{X}^T] \mathbf{X}
+\]</span></p>
+<p>no mask, to fully understand the connections in language.</p>
+</section>
+<section id="network-parameters" class="level3" data-number="12.1.4">
+<h3 data-number="12.1.4" class="anchored" data-anchor-id="network-parameters"><span class="header-section-number">12.1.4</span> Network parameters</h3>
+<p>As it stands, the transformation from input vectors {xn } to output vectors {yn } is fixed and has no capacity to learn from data because it has no adjustable parameters. Furthermore, each of the feature values within a token vector xn plays an equal role in determining the attention coefficients, whereas we would like the network to have the flexibility to focus more on some features than others when determining token similarity.</p>
+<p>We therefore transform the three input matrices, each with its our transformation, and consequently trainable parameters. The transformed input matrices are named query, key, and value respectively.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbf{Q} &amp;= \mathbf{X}\mathbf{W}^{(q)} \\
+\mathbf{K} &amp;= \mathbf{X}\mathbf{W}^{(k)} \\
+\mathbf{V} &amp;= \mathbf{X}\mathbf{W}^{(v)}
+\end{aligned}
+\]</span></p>
+<p>and the attention layer is accordingly updated to be <span class="math display">\[
+\mathbf{Y} = \text{Softmax}(\mathbf{Q}\mathbf{K}^T) \mathbf{V}
+\]</span></p>
+<p>determining the attention coefficients Q, K, and output Y</p>
+<p><img src="./img/DLFC/Chapter-12/Figure_4.png" class="img-fluid"> <img src="./img/DLFC/Chapter-12/Figure_5.png" class="img-fluid"></p>
+</section>
+<section id="scaled-self-attention" class="level3" data-number="12.1.5">
+<h3 data-number="12.1.5" class="anchored" data-anchor-id="scaled-self-attention"><span class="header-section-number">12.1.5</span> Scaled self-attention</h3>
+<p>the fact that values do not go through the scaling in worth noting.</p>
+<p><img src="./img/DLFC/Chapter-12/Figure_6.png" class="img-fluid"> <img src="./img/DLFC/Chapter-12/algo12.1.png" class="img-fluid"></p>
+</section>
+<section id="multi-head-attention" class="level3" data-number="12.1.6">
+<h3 data-number="12.1.6" class="anchored" data-anchor-id="multi-head-attention"><span class="header-section-number">12.1.6</span> Multi-head attention</h3>
+<p>in multi-head attention, the weight matrix dimension of the feedfoward layer increases accordings, however the output is kept the same dimension as the input. This is done by adjusting the input and output dimensions of the feed forward layers</p>
+<p><img src="./img/DLFC/Chapter-12/Figure_7.png" class="img-fluid"></p>
+<p><img src="./img/DLFC/Chapter-12/Figure_8.png" class="img-fluid"> <img src="./img/DLFC/Chapter-12/algo12.2.png" class="img-fluid"></p>
+</section>
+<section id="transformer-layers" class="level3" data-number="12.1.7">
+<h3 data-number="12.1.7" class="anchored" data-anchor-id="transformer-layers"><span class="header-section-number">12.1.7</span> Transformer layers</h3>
+<p>residual connection and layer normalisation are added to the multi-head attention</p>
+<p><img src="./img/DLFC/Chapter-12/Figure_9.png" class="img-fluid"></p>
+<p><img src="./img/DLFC/Chapter-12/algo12.3.png" class="img-fluid"></p>
+</section>
+<section id="computational-complexity" class="level3" data-number="12.1.8">
+<h3 data-number="12.1.8" class="anchored" data-anchor-id="computational-complexity"><span class="header-section-number">12.1.8</span> Computational complexity</h3>
+</section>
+<section id="positional-encoding" class="level3" data-number="12.1.9">
+<h3 data-number="12.1.9" class="anchored" data-anchor-id="positional-encoding"><span class="header-section-number">12.1.9</span> Positional encoding</h3>
+<p>Positional encoding injects information about the relative or absolute position of the tokens in a sequence. This is crucial for transformers to capture the order of the sequence, as they do not inherently possess any notion of order due to their attention mechanism.</p>
+<p>By adding positional encodings to the input embeddings, transformers can leverage the position information to better understand the structure of the data.</p>
+<p><img src="./img/DLFC/Chapter-12/Figure_10_a.png" class="img-fluid"> <img src="./img/DLFC/Chapter-12/Figure_10_b.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="natural-language" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="natural-language"><span class="header-section-number">12.2</span> Natural language</h2>
+<p>Now that we have studied the architecture of the transformer, we will explore how this can be used to process language data consisting of words, sentences, and paragraphs. Although this is the modality that transformers were originally developed to operate on, they have proved to be a very general class of models and have become the state-of-the-art for most input data types. Later in this chapter we will look at their use in other domains.</p>
+<p>Many languages, including English, comprise a series of words separated by white space, along with punctuation symbols, and therefore represent an example of sequential data. For the moment we will focus on the words, and we will return to punctuation later.</p>
+<p>The first challenge is to convert the words into a numerical representation that is suitable for use as the input to a deep neural network. One simple approach is to define a fixed dictionary of words and then introduce vectors of length equal to the size of the dictionary along with a ‘one hot’ representation for each word, in which the kth word in the dictionary is encoded with a vector having a 1 in position k and 0 in all other positions.</p>
+<p>An obvious problem with a one-hot representation is that a realistic dictionary might have several hundred thousand entries leading to vectors of very high dimensionality. Also, it does not capture any similarities or relationships that might exist between words. Both issues can be addressed by mapping the words into a lower-dimensional space through a process called word embedding in which each word is represented as a dense vector in a space of typically a few hundred dimensions.</p>
+<section id="word-embedding" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="word-embedding"><span class="header-section-number">12.2.1</span> Word embedding</h3>
+<p>CBOW (continuous bag of words) and skip-gram approach for word embedding</p>
+<p><img src="./img/DLFC/Chapter-12/Figure_11_a.png" class="img-fluid"> <img src="./img/DLFC/Chapter-12/Figure_11_b.png" class="img-fluid"></p>
+</section>
+<section id="tokenisation" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="tokenisation"><span class="header-section-number">12.2.2</span> Tokenisation</h3>
+<p><img src="./img/DLFC/Chapter-12/Figure_12.png" class="img-fluid"></p>
+<p>SentencePiece</p>
+<p><a href="https://www.youtube.com/watch?v=zduSFxRajkE&amp;pp=ygUIa2FycGF0aHk%3D">Karpathy’s tutorial on YT</a></p>
+</section>
+<section id="bag-of-words" class="level3" data-number="12.2.3">
+<h3 data-number="12.2.3" class="anchored" data-anchor-id="bag-of-words"><span class="header-section-number">12.2.3</span> Bag of words</h3>
+</section>
+<section id="autoregressive-models" class="level3" data-number="12.2.4">
+<h3 data-number="12.2.4" class="anchored" data-anchor-id="autoregressive-models"><span class="header-section-number">12.2.4</span> Autoregressive models</h3>
+</section>
+<section id="recurrent-neural-networks" class="level3" data-number="12.2.5">
+<h3 data-number="12.2.5" class="anchored" data-anchor-id="recurrent-neural-networks"><span class="header-section-number">12.2.5</span> Recurrent neural networks</h3>
+<p><img src="./img/DLFC/Chapter-12/Figure_13.png" class="img-fluid"> <img src="./img/DLFC/Chapter-12/Figure_14.png" class="img-fluid"></p>
+</section>
+<section id="backpropagation-through-time" class="level3" data-number="12.2.6">
+<h3 data-number="12.2.6" class="anchored" data-anchor-id="backpropagation-through-time"><span class="header-section-number">12.2.6</span> Backpropagation through time</h3>
+</section>
+</section>
+<section id="transformer-language-models" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="transformer-language-models"><span class="header-section-number">12.3</span> Transformer language models</h2>
+<p>The transformer processing layer is a highly flexible component for building powerful neural network models with broad applicability. In this section we explore the application of transformers to natural language. This has given rise to the development of massive neural networks known as large language models (LLMs), which have proven to be exceptionally capable (Zhao et al., 2023).</p>
+<p>Transformers can be applied to many different kinds of language processing task, and can be grouped into three categories according to the form of the input and output data. In a problem such as sentiment analysis, we take a sequence of words as input and provide a single variable representing the sentiment of the text, for example happy or sad, as output. Here a transformer is acting as an <u>encoder</u> of the sequence. Other problems might take a single vector as input and generate a word sequence as output, for example if we wish to generate a text caption given an input image. In such cases the transformer functions as a <u>decoder</u>, generating a sequence as output. Finally, in sequence-to-sequence processing tasks, both the input and the output comprise a sequence of words, for example if our goal is to translate from one language to another. In this case, transformers are used in both encoder and decoder roles. We discuss each of these classes of language model in turn, using illustrative examples of model architectures.</p>
+<section id="decoder-transformers" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="decoder-transformers"><span class="header-section-number">12.3.1</span> Decoder transformers</h3>
+<p><img src="./img/DLFC/Chapter-12/Figure_15.png" class="img-fluid"> <img src="./img/DLFC/Chapter-12/Figure_16.png" class="img-fluid"></p>
+</section>
+<section id="sampling-strategies" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="sampling-strategies"><span class="header-section-number">12.3.2</span> Sampling strategies</h3>
+<p><img src="./img/DLFC/Chapter-12/Figure_17.jpg" class="img-fluid"></p>
+</section>
+<section id="encoder-transformers" class="level3" data-number="12.3.3">
+<h3 data-number="12.3.3" class="anchored" data-anchor-id="encoder-transformers"><span class="header-section-number">12.3.3</span> Encoder transformers</h3>
+<p><img src="./img/DLFC/Chapter-12/Figure_18.png" class="img-fluid"></p>
+</section>
+<section id="seq2seq-transformers" class="level3" data-number="12.3.4">
+<h3 data-number="12.3.4" class="anchored" data-anchor-id="seq2seq-transformers"><span class="header-section-number">12.3.4</span> Seq2seq transformers</h3>
+<p><img src="./img/DLFC/Chapter-12/Figure_19.png" class="img-fluid"> <img src="./img/DLFC/Chapter-12/Figure_20.png" class="img-fluid"></p>
+</section>
+<section id="large-language-models" class="level3" data-number="12.3.5">
+<h3 data-number="12.3.5" class="anchored" data-anchor-id="large-language-models"><span class="header-section-number">12.3.5</span> Large language models</h3>
+<p><img src="./img/DLFC/Chapter-12/Figure_21.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="multimodal-transformers" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="multimodal-transformers"><span class="header-section-number">12.4</span> Multimodal transformers</h2>
+<p>Although transformers were initially developed as an alternative to recurrent networks for processing sequential language data, they have become prevalent in nearly all areas of deep learning. They have proved to be general-purpose models, as they make very few assumptions about the input data, in contrast, for example, to convolutional networks, which make strong assumptions about equivariances and locality. Due to their generality, transformers have become the state-of-the-art for many different modalities, including text, image, video, point cloud, and audio data, and have been used for both discriminative and generative applications within each of these domains. The core architecture of the transformer layer has remained relatively constant, both over time and across applications. Therefore, the key innovations that enabled the use of transformers in areas other than natural language have largely focused on the representation and encoding of the inputs and outputs.</p>
+<p>One big advantage of a single architecture that is capable of processing many different kinds of data is that it makes multimodal computation relatively straightforward. In this context, multimodal refers to applications that combine two or more different types of data, either in the inputs or outputs or both. For example, we may wish to generate an image from a text prompt or design a robot that can combine information from multiple sensors such as cameras, radar, and microphones. The important thing to note is that if we can tokenize the inputs and decode the output tokens, then it is likely that we can use a transformer.</p>
+<p>For the input, as long as we can encode and align the inputs from different modalities, we can simply dump them all to the transformer. However, if the output is multimodal, we need to specify which output nodes correspond to which output.</p>
+<section id="vision-transformers" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="vision-transformers"><span class="header-section-number">12.4.1</span> Vision transformers</h3>
+<p>Illustration of the vision transformer architecture for a classification task. Here a learnable hclassi token is included as an additional input, and the associated output is transformed by a linear layer with a softmax activation, denoted by LSM, to give the final class-vector output c.</p>
+<p><img src="./img/DLFC/Chapter-12/Figure_22.png" class="img-fluid"></p>
+</section>
+<section id="generative-image-transformers" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="generative-image-transformers"><span class="header-section-number">12.4.2</span> Generative image transformers</h3>
+<p><img src="./img/DLFC/Chapter-12/Figure_23.png" class="img-fluid"></p>
+<p>a raster scan that defines a specific linear ordering of the pixels in a two-dimensional image.</p>
+<p><img src="./img/DLFC/Chapter-12/Figure_24.png" class="img-fluid"></p>
+<p>An illustration of how an image can be sampled from an autoregressive model. The first pixel is sampled from the marginal distribution p(x11), the second pixel from the conditional distribution p(x12 |x11 ), and so on in raster scan order until we have a complete image.</p>
+</section>
+<section id="audio-data" class="level3" data-number="12.4.3">
+<h3 data-number="12.4.3" class="anchored" data-anchor-id="audio-data"><span class="header-section-number">12.4.3</span> Audio data</h3>
+<p>An example mel spectrogram of a humpback whale song.</p>
+<p><img src="./img/DLFC/Chapter-12/Figure_25.png" class="img-fluid"></p>
+</section>
+<section id="text-to-speech" class="level3" data-number="12.4.4">
+<h3 data-number="12.4.4" class="anchored" data-anchor-id="text-to-speech"><span class="header-section-number">12.4.4</span> Text-to-speech</h3>
+<p><img src="./img/DLFC/Chapter-12/Figure_26.png" class="img-fluid"> VALL-E</p>
+</section>
+<section id="vision-and-language-transformers" class="level3" data-number="12.4.5">
+<h3 data-number="12.4.5" class="anchored" data-anchor-id="vision-and-language-transformers"><span class="header-section-number">12.4.5</span> Vision and language transformers</h3>
+<p><img src="./img/DLFC/Chapter-12/Figure_27.png" class="img-fluid"></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./11.html" class="pagination-link" aria-label="structured distributions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">structured distributions</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./13.html" class="pagination-link" aria-label="Graph neural networks">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Graph neural networks</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

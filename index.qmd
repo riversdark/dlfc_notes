@@ -2,7 +2,7 @@
 
 *This project is a WIP.*
 
-I'm a great fan of Bishop's 2006 book, Pattern Recognition and Machine Learning (PRML), so as an AI practioner coming from a Bayesian background, I'm very much pleasantly surprised to learn that Bishop (and Bishop) have published a new book dedicated to deep learning and artificial intelligence. The focus on generative models is especially enticing, firstly because it is all the rage for the moment; secondly for a Bayesian statistician, doing generative modeling has always been what we are trained for.
+I'm a great fan of Bishop's 2006 book, Pattern Recognition and Machine Learning (PRML), so as an AI practioner coming from a Bayesian background, I'm quite happy to learn that Bishop (and Bishop) have published a new book dedicated to deep learning and artificial intelligence. The focus on generative models is especially enticing, firstly because it is all the rage for the moment; secondly for a Bayesian statistician, doing generative modeling has always been what we are trained for.
 
 The book has 20 chapters, I have divided them roughly into three parts.
 
@@ -10,6 +10,6 @@ The book has 20 chapters, I have divided them roughly into three parts.
 - Deep Learning: chapters 6-13, covers the nuts and bolts of deep learning.
 - Generative Models: chapters 14-20, covers generative modeling and some common model architectures.
 
-Herein collected are my notes on the book, and the code to implement the examples in the book. Since these are my understanding of the book, they might not be completely accurate, so please refer to the book for the authoritative source. And if you find any errors, do let me know!
+Herein collected are my notes of the book, and the code to implement some concepts from the book. Since these are my understanding of the book, they might not be completely accurate, so do refer to the book for the most accurate description. And let me know if you find any errors!
 
-The notes and code are written in a literate programming style (See @knuth84 for additional discussion). The references are not complete; I only included the ones I have read.
+The notes and code are written in a literate programming style (See @knuth84 for additional discussion). The references are not complete; I only included the ones I have reviewed myself.

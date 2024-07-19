@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – dlfc_notes</title>
+<title>16&nbsp; Continuous latent variables – dlfc_notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./20.html" rel="prev">
+<link href="./17.html" rel="next">
+<link href="./15.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -99,7 +81,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./16.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Continuous latent variables</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -222,7 +204,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16.html" class="sidebar-item-text sidebar-link">
+  <a href="./16.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Continuous latent variables</span></span></a>
   </div>
 </li>
@@ -252,7 +234,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -261,15 +243,50 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#principle-conponent-analysis" id="toc-principle-conponent-analysis" class="nav-link active" data-scroll-target="#principle-conponent-analysis"><span class="header-section-number">16.1</span> Principle conponent analysis</a>
+  <ul class="collapse">
+  <li><a href="#maximum-variance-formulation" id="toc-maximum-variance-formulation" class="nav-link" data-scroll-target="#maximum-variance-formulation"><span class="header-section-number">16.1.1</span> Maximum variance formulation</a></li>
+  <li><a href="#minimum-error-formulation" id="toc-minimum-error-formulation" class="nav-link" data-scroll-target="#minimum-error-formulation"><span class="header-section-number">16.1.2</span> Minimum error formulation</a></li>
+  <li><a href="#data-compression" id="toc-data-compression" class="nav-link" data-scroll-target="#data-compression"><span class="header-section-number">16.1.3</span> Data compression</a></li>
+  <li><a href="#data-whitening" id="toc-data-whitening" class="nav-link" data-scroll-target="#data-whitening"><span class="header-section-number">16.1.4</span> Data whitening</a></li>
+  <li><a href="#high-dimensional-data" id="toc-high-dimensional-data" class="nav-link" data-scroll-target="#high-dimensional-data"><span class="header-section-number">16.1.5</span> High dimensional data</a></li>
+  </ul></li>
+  <li><a href="#probabilistic-latent-variables" id="toc-probabilistic-latent-variables" class="nav-link" data-scroll-target="#probabilistic-latent-variables"><span class="header-section-number">16.2</span> Probabilistic latent variables</a>
+  <ul class="collapse">
+  <li><a href="#generative-method" id="toc-generative-method" class="nav-link" data-scroll-target="#generative-method"><span class="header-section-number">16.2.1</span> Generative method</a></li>
+  <li><a href="#likelihood-function" id="toc-likelihood-function" class="nav-link" data-scroll-target="#likelihood-function"><span class="header-section-number">16.2.2</span> Likelihood function</a></li>
+  <li><a href="#maximum-likelihood" id="toc-maximum-likelihood" class="nav-link" data-scroll-target="#maximum-likelihood"><span class="header-section-number">16.2.3</span> Maximum likelihood</a></li>
+  <li><a href="#factor-analysis-fa" id="toc-factor-analysis-fa" class="nav-link" data-scroll-target="#factor-analysis-fa"><span class="header-section-number">16.2.4</span> Factor analysis (FA)</a></li>
+  <li><a href="#independent-component-analysis-ica" id="toc-independent-component-analysis-ica" class="nav-link" data-scroll-target="#independent-component-analysis-ica"><span class="header-section-number">16.2.5</span> Independent component analysis (ICA)</a></li>
+  <li><a href="#kalman-filters" id="toc-kalman-filters" class="nav-link" data-scroll-target="#kalman-filters"><span class="header-section-number">16.2.6</span> Kalman filters</a></li>
+  </ul></li>
+  <li><a href="#evidence-lower-bound" id="toc-evidence-lower-bound" class="nav-link" data-scroll-target="#evidence-lower-bound"><span class="header-section-number">16.3</span> Evidence lower bound</a>
+  <ul class="collapse">
+  <li><a href="#expectation-maximisation" id="toc-expectation-maximisation" class="nav-link" data-scroll-target="#expectation-maximisation"><span class="header-section-number">16.3.1</span> Expectation maximisation</a></li>
+  <li><a href="#em-for-pca" id="toc-em-for-pca" class="nav-link" data-scroll-target="#em-for-pca"><span class="header-section-number">16.3.2</span> EM for PCA</a></li>
+  <li><a href="#em-for-fa" id="toc-em-for-fa" class="nav-link" data-scroll-target="#em-for-fa"><span class="header-section-number">16.3.3</span> EM for FA</a></li>
+  </ul></li>
+  <li><a href="#nonlinear-latent-variable-models" id="toc-nonlinear-latent-variable-models" class="nav-link" data-scroll-target="#nonlinear-latent-variable-models"><span class="header-section-number">16.4</span> Nonlinear latent variable models</a>
+  <ul class="collapse">
+  <li><a href="#nonlinear-manifolds" id="toc-nonlinear-manifolds" class="nav-link" data-scroll-target="#nonlinear-manifolds"><span class="header-section-number">16.4.1</span> Nonlinear manifolds</a></li>
+  <li><a href="#likelihood-function-1" id="toc-likelihood-function-1" class="nav-link" data-scroll-target="#likelihood-function-1"><span class="header-section-number">16.4.2</span> Likelihood function</a></li>
+  <li><a href="#discrete-data" id="toc-discrete-data" class="nav-link" data-scroll-target="#discrete-data"><span class="header-section-number">16.4.3</span> Discrete data</a></li>
+  <li><a href="#four-approaches-to-generative-modeling" id="toc-four-approaches-to-generative-modeling" class="nav-link" data-scroll-target="#four-approaches-to-generative-modeling"><span class="header-section-number">16.4.4</span> Four approaches to generative modeling</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Continuous latent variables</span></h1>
 </div>
 
 
@@ -286,14 +303,74 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-knuth84" class="csl-entry" role="listitem">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput.
-J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
-</div>
-</div>
+<section id="principle-conponent-analysis" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="principle-conponent-analysis"><span class="header-section-number">16.1</span> Principle conponent analysis</h2>
+<section id="maximum-variance-formulation" class="level3" data-number="16.1.1">
+<h3 data-number="16.1.1" class="anchored" data-anchor-id="maximum-variance-formulation"><span class="header-section-number">16.1.1</span> Maximum variance formulation</h3>
+</section>
+<section id="minimum-error-formulation" class="level3" data-number="16.1.2">
+<h3 data-number="16.1.2" class="anchored" data-anchor-id="minimum-error-formulation"><span class="header-section-number">16.1.2</span> Minimum error formulation</h3>
+</section>
+<section id="data-compression" class="level3" data-number="16.1.3">
+<h3 data-number="16.1.3" class="anchored" data-anchor-id="data-compression"><span class="header-section-number">16.1.3</span> Data compression</h3>
+</section>
+<section id="data-whitening" class="level3" data-number="16.1.4">
+<h3 data-number="16.1.4" class="anchored" data-anchor-id="data-whitening"><span class="header-section-number">16.1.4</span> Data whitening</h3>
+</section>
+<section id="high-dimensional-data" class="level3" data-number="16.1.5">
+<h3 data-number="16.1.5" class="anchored" data-anchor-id="high-dimensional-data"><span class="header-section-number">16.1.5</span> High dimensional data</h3>
+</section>
+</section>
+<section id="probabilistic-latent-variables" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="probabilistic-latent-variables"><span class="header-section-number">16.2</span> Probabilistic latent variables</h2>
+<section id="generative-method" class="level3" data-number="16.2.1">
+<h3 data-number="16.2.1" class="anchored" data-anchor-id="generative-method"><span class="header-section-number">16.2.1</span> Generative method</h3>
+</section>
+<section id="likelihood-function" class="level3" data-number="16.2.2">
+<h3 data-number="16.2.2" class="anchored" data-anchor-id="likelihood-function"><span class="header-section-number">16.2.2</span> Likelihood function</h3>
+</section>
+<section id="maximum-likelihood" class="level3" data-number="16.2.3">
+<h3 data-number="16.2.3" class="anchored" data-anchor-id="maximum-likelihood"><span class="header-section-number">16.2.3</span> Maximum likelihood</h3>
+</section>
+<section id="factor-analysis-fa" class="level3" data-number="16.2.4">
+<h3 data-number="16.2.4" class="anchored" data-anchor-id="factor-analysis-fa"><span class="header-section-number">16.2.4</span> Factor analysis (FA)</h3>
+</section>
+<section id="independent-component-analysis-ica" class="level3" data-number="16.2.5">
+<h3 data-number="16.2.5" class="anchored" data-anchor-id="independent-component-analysis-ica"><span class="header-section-number">16.2.5</span> Independent component analysis (ICA)</h3>
+</section>
+<section id="kalman-filters" class="level3" data-number="16.2.6">
+<h3 data-number="16.2.6" class="anchored" data-anchor-id="kalman-filters"><span class="header-section-number">16.2.6</span> Kalman filters</h3>
+</section>
+</section>
+<section id="evidence-lower-bound" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="evidence-lower-bound"><span class="header-section-number">16.3</span> Evidence lower bound</h2>
+<section id="expectation-maximisation" class="level3" data-number="16.3.1">
+<h3 data-number="16.3.1" class="anchored" data-anchor-id="expectation-maximisation"><span class="header-section-number">16.3.1</span> Expectation maximisation</h3>
+</section>
+<section id="em-for-pca" class="level3" data-number="16.3.2">
+<h3 data-number="16.3.2" class="anchored" data-anchor-id="em-for-pca"><span class="header-section-number">16.3.2</span> EM for PCA</h3>
+</section>
+<section id="em-for-fa" class="level3" data-number="16.3.3">
+<h3 data-number="16.3.3" class="anchored" data-anchor-id="em-for-fa"><span class="header-section-number">16.3.3</span> EM for FA</h3>
+</section>
+</section>
+<section id="nonlinear-latent-variable-models" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="nonlinear-latent-variable-models"><span class="header-section-number">16.4</span> Nonlinear latent variable models</h2>
+<section id="nonlinear-manifolds" class="level3" data-number="16.4.1">
+<h3 data-number="16.4.1" class="anchored" data-anchor-id="nonlinear-manifolds"><span class="header-section-number">16.4.1</span> Nonlinear manifolds</h3>
+</section>
+<section id="likelihood-function-1" class="level3" data-number="16.4.2">
+<h3 data-number="16.4.2" class="anchored" data-anchor-id="likelihood-function-1"><span class="header-section-number">16.4.2</span> Likelihood function</h3>
+</section>
+<section id="discrete-data" class="level3" data-number="16.4.3">
+<h3 data-number="16.4.3" class="anchored" data-anchor-id="discrete-data"><span class="header-section-number">16.4.3</span> Discrete data</h3>
+</section>
+<section id="four-approaches-to-generative-modeling" class="level3" data-number="16.4.4">
+<h3 data-number="16.4.4" class="anchored" data-anchor-id="four-approaches-to-generative-modeling"><span class="header-section-number">16.4.4</span> Four approaches to generative modeling</h3>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -718,11 +795,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./20.html" class="pagination-link" aria-label="Diffusion Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span>
+      <a href="./15.html" class="pagination-link" aria-label="Discrete latent variables">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Discrete latent variables</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./17.html" class="pagination-link" aria-label="Generative adversarial networks">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Generative adversarial networks</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

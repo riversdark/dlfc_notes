@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – dlfc_notes</title>
+<title>13&nbsp; Graph neural networks – dlfc_notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./20.html" rel="prev">
+<link href="./14.html" rel="next">
+<link href="./12.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -99,7 +81,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./13.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Graph neural networks</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -204,7 +186,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./13.html" class="sidebar-item-text sidebar-link">
+  <a href="./13.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Graph neural networks</span></span></a>
   </div>
 </li>
@@ -252,7 +234,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -261,15 +243,45 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#machine-learning-on-graphs" id="toc-machine-learning-on-graphs" class="nav-link active" data-scroll-target="#machine-learning-on-graphs"><span class="header-section-number">13.1</span> Machine learning on graphs</a>
+  <ul class="collapse">
+  <li><a href="#graph-properties" id="toc-graph-properties" class="nav-link" data-scroll-target="#graph-properties"><span class="header-section-number">13.1.1</span> Graph properties</a></li>
+  <li><a href="#adjacency-matrix" id="toc-adjacency-matrix" class="nav-link" data-scroll-target="#adjacency-matrix"><span class="header-section-number">13.1.2</span> Adjacency matrix</a></li>
+  <li><a href="#permutation-equivariance" id="toc-permutation-equivariance" class="nav-link" data-scroll-target="#permutation-equivariance"><span class="header-section-number">13.1.3</span> Permutation equivariance</a></li>
+  </ul></li>
+  <li><a href="#neural-message-passing" id="toc-neural-message-passing" class="nav-link" data-scroll-target="#neural-message-passing"><span class="header-section-number">13.2</span> Neural message passing</a>
+  <ul class="collapse">
+  <li><a href="#convolutional-filters" id="toc-convolutional-filters" class="nav-link" data-scroll-target="#convolutional-filters"><span class="header-section-number">13.2.1</span> Convolutional filters</a></li>
+  <li><a href="#graph-convolution-networks-gcn" id="toc-graph-convolution-networks-gcn" class="nav-link" data-scroll-target="#graph-convolution-networks-gcn"><span class="header-section-number">13.2.2</span> Graph convolution networks (GCN)</a></li>
+  <li><a href="#aggregation-operators" id="toc-aggregation-operators" class="nav-link" data-scroll-target="#aggregation-operators"><span class="header-section-number">13.2.3</span> Aggregation operators</a></li>
+  <li><a href="#update-operators" id="toc-update-operators" class="nav-link" data-scroll-target="#update-operators"><span class="header-section-number">13.2.4</span> Update operators</a></li>
+  <li><a href="#node-classification" id="toc-node-classification" class="nav-link" data-scroll-target="#node-classification"><span class="header-section-number">13.2.5</span> Node classification</a></li>
+  <li><a href="#edge-classification" id="toc-edge-classification" class="nav-link" data-scroll-target="#edge-classification"><span class="header-section-number">13.2.6</span> Edge classification</a></li>
+  <li><a href="#graph-classification" id="toc-graph-classification" class="nav-link" data-scroll-target="#graph-classification"><span class="header-section-number">13.2.7</span> Graph classification</a></li>
+  </ul></li>
+  <li><a href="#general-graph-networks" id="toc-general-graph-networks" class="nav-link" data-scroll-target="#general-graph-networks"><span class="header-section-number">13.3</span> General graph networks</a>
+  <ul class="collapse">
+  <li><a href="#graph-attention-networks" id="toc-graph-attention-networks" class="nav-link" data-scroll-target="#graph-attention-networks"><span class="header-section-number">13.3.1</span> Graph attention networks</a></li>
+  <li><a href="#edge-embedding" id="toc-edge-embedding" class="nav-link" data-scroll-target="#edge-embedding"><span class="header-section-number">13.3.2</span> Edge embedding</a></li>
+  <li><a href="#graph-embedding" id="toc-graph-embedding" class="nav-link" data-scroll-target="#graph-embedding"><span class="header-section-number">13.3.3</span> Graph embedding</a></li>
+  <li><a href="#over-smoothing" id="toc-over-smoothing" class="nav-link" data-scroll-target="#over-smoothing"><span class="header-section-number">13.3.4</span> Over-smoothing</a></li>
+  <li><a href="#regularisation" id="toc-regularisation" class="nav-link" data-scroll-target="#regularisation"><span class="header-section-number">13.3.5</span> Regularisation</a></li>
+  <li><a href="#geometric-deep-learning" id="toc-geometric-deep-learning" class="nav-link" data-scroll-target="#geometric-deep-learning"><span class="header-section-number">13.3.6</span> Geometric deep learning</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Graph neural networks</span></h1>
 </div>
 
 
@@ -286,14 +298,85 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-knuth84" class="csl-entry" role="listitem">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput.
-J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
-</div>
-</div>
+<p>In previous chapters we have encountered structured data in the form of <em>sequences and images</em>, corresponding to one-dimensional and two-dimensional arrays of variables respectively. More generally, there are many types of structured data that are best described by a graph as illustrated in Figure 13.1. In general a graph consists of a set of objects, known as nodes, connected by edges. Both the nodes and the edges can have data associated with them. For example, in a <strong>molecule</strong> the nodes and edges are associated with discrete variables corresponding to the types of atom (carbon, nitrogen, hydrogen, etc.) and the types of bonds (single bond, double bond, etc.). For a <strong>rail network</strong>, each railway line might be associated with a continuous variable given by the average journey time between two cities. Here we are assuming that the edges are symmetrical, for example that the journey time from London to Cambridge is the same as the journey time from Cambridge to London. Such edges are depicted by undirected links between the nodes. For the <strong>worldwide web</strong> the edges are directed since if there is a hyperlink on page A that points to page B there is not necessarily a hyperlink on page B pointing back to page A.</p>
+<p><img src="./img/DLFC/Chapter-13/Figure_1.png" class="img-fluid"></p>
+<p>Other examples of graph-structured data include a <strong>protein interaction network</strong>, in which the nodes are proteins and the edges express how strongly pairs of proteins interact, an electrical circuit where the nodes are components and the edges are conductors, or a social network where the nodes are people and the edges are ‘friendships’. More complex graphical structures are also possible, for example the <strong>knowledge graph</strong> inside a company comprises multiple different kinds of nodes such as people, documents, and meetings, along with multiple kinds of edges capturing different properties such as a person being present at a meeting or a document refer- encing another document.</p>
+<p>In this chapter we explore how to apply deep learning to graph-structured data. We have already encountered an example of structured data when we discussed images, in which the individual elements of an image data vector x correspond to pixels on a regular grid. An image is therefore a special instance of graph-structured data in which the nodes are the pixels and the edges describe which pixels are adjacent. Convolutional neural networks (CNNs) take this structure into account, incorporating prior knowledge of the relative positions of the pixels, together with the equivariance of properties such as segmentation and the invariance of properties such as classification. We will use CNNs for images as a source of inspiration to construct more general approaches to deep learning for graphical data known as graph neural networks (Zhou et al., 2018; Wu et al., 2019; Hamilton, 2020; Veličković, 2023). We will see that a key consideration when applying deep learning to graph-structured data is to <strong>ensure either equivariance or invariance</strong> with respect to a reordering of the nodes in the graph.</p>
+<section id="machine-learning-on-graphs" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="machine-learning-on-graphs"><span class="header-section-number">13.1</span> Machine learning on graphs</h2>
+<p>Graph properties include features such as connectivity, the presence of cycles, community structure, and other characteristics that can inform both the structure of the neural network model and the features used within those models.</p>
+<p>An adjacency matrix is a fundamental way to represent a graph. It captures the presence or absence (and sometimes the weight) of edges between nodes in the graph. This matrix plays a critical role in the operations of GNNs, particularly in defining graph convolution operations.</p>
+<p>Permutation Equivariance is a desirable property in graph neural networks, ensuring that the output of the GNN does not change when the nodes of the input graph are reordered. This property is crucial for learning consistent representations of graphs regardless of node ordering.</p>
+<section id="graph-properties" class="level3" data-number="13.1.1">
+<h3 data-number="13.1.1" class="anchored" data-anchor-id="graph-properties"><span class="header-section-number">13.1.1</span> Graph properties</h3>
+</section>
+<section id="adjacency-matrix" class="level3" data-number="13.1.2">
+<h3 data-number="13.1.2" class="anchored" data-anchor-id="adjacency-matrix"><span class="header-section-number">13.1.2</span> Adjacency matrix</h3>
+<p><img src="./img/DLFC/Chapter-13/Figure_2_a.png" class="img-fluid"> <img src="./img/DLFC/Chapter-13/Figure_2_b.png" class="img-fluid"> <img src="./img/DLFC/Chapter-13/Figure_2_c.png" class="img-fluid"></p>
+</section>
+<section id="permutation-equivariance" class="level3" data-number="13.1.3">
+<h3 data-number="13.1.3" class="anchored" data-anchor-id="permutation-equivariance"><span class="header-section-number">13.1.3</span> Permutation equivariance</h3>
+</section>
+</section>
+<section id="neural-message-passing" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="neural-message-passing"><span class="header-section-number">13.2</span> Neural message passing</h2>
+<section id="convolutional-filters" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="convolutional-filters"><span class="header-section-number">13.2.1</span> Convolutional filters</h3>
+<p><img src="./img/DLFC/Chapter-13/Figure_3_a.png" class="img-fluid"> <img src="./img/DLFC/Chapter-13/Figure_3_b.png" class="img-fluid"></p>
+</section>
+<section id="graph-convolution-networks-gcn" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="graph-convolution-networks-gcn"><span class="header-section-number">13.2.2</span> Graph convolution networks (GCN)</h3>
+<p>Each node has an associated hidden variable that stores the aggragated info from all its neighbours. Each layer of the network updates the node embedding using the hidden state.</p>
+<p>algo13.1 simple message passing neural network. Aggregate then update.</p>
+</section>
+<section id="aggregation-operators" class="level3" data-number="13.2.3">
+<h3 data-number="13.2.3" class="anchored" data-anchor-id="aggregation-operators"><span class="header-section-number">13.2.3</span> Aggregation operators</h3>
+<p><img src="./img/DLFC/Chapter-13/Figure_4.png" class="img-fluid"></p>
+</section>
+<section id="update-operators" class="level3" data-number="13.2.4">
+<h3 data-number="13.2.4" class="anchored" data-anchor-id="update-operators"><span class="header-section-number">13.2.4</span> Update operators</h3>
+</section>
+<section id="node-classification" class="level3" data-number="13.2.5">
+<h3 data-number="13.2.5" class="anchored" data-anchor-id="node-classification"><span class="header-section-number">13.2.5</span> Node classification</h3>
+</section>
+<section id="edge-classification" class="level3" data-number="13.2.6">
+<h3 data-number="13.2.6" class="anchored" data-anchor-id="edge-classification"><span class="header-section-number">13.2.6</span> Edge classification</h3>
+</section>
+<section id="graph-classification" class="level3" data-number="13.2.7">
+<h3 data-number="13.2.7" class="anchored" data-anchor-id="graph-classification"><span class="header-section-number">13.2.7</span> Graph classification</h3>
+</section>
+</section>
+<section id="general-graph-networks" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="general-graph-networks"><span class="header-section-number">13.3</span> General graph networks</h2>
+<section id="graph-attention-networks" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1" class="anchored" data-anchor-id="graph-attention-networks"><span class="header-section-number">13.3.1</span> Graph attention networks</h3>
+</section>
+<section id="edge-embedding" class="level3" data-number="13.3.2">
+<h3 data-number="13.3.2" class="anchored" data-anchor-id="edge-embedding"><span class="header-section-number">13.3.2</span> Edge embedding</h3>
+</section>
+<section id="graph-embedding" class="level3" data-number="13.3.3">
+<h3 data-number="13.3.3" class="anchored" data-anchor-id="graph-embedding"><span class="header-section-number">13.3.3</span> Graph embedding</h3>
+<p>Algo13.2: general graph network training scheme.</p>
+<ol type="1">
+<li>update edge embeddings</li>
+<li>aggregate node info</li>
+<li>update node embeddings</li>
+<li>update graph embedding.</li>
+</ol>
+<p><img src="./img/DLFC/Chapter-13/Figure_5_a.png" class="img-fluid"> <img src="./img/DLFC/Chapter-13/Figure_5_b.png" class="img-fluid"> <img src="./img/DLFC/Chapter-13/Figure_5_c.png" class="img-fluid"></p>
+</section>
+<section id="over-smoothing" class="level3" data-number="13.3.4">
+<h3 data-number="13.3.4" class="anchored" data-anchor-id="over-smoothing"><span class="header-section-number">13.3.4</span> Over-smoothing</h3>
+</section>
+<section id="regularisation" class="level3" data-number="13.3.5">
+<h3 data-number="13.3.5" class="anchored" data-anchor-id="regularisation"><span class="header-section-number">13.3.5</span> Regularisation</h3>
+</section>
+<section id="geometric-deep-learning" class="level3" data-number="13.3.6">
+<h3 data-number="13.3.6" class="anchored" data-anchor-id="geometric-deep-learning"><span class="header-section-number">13.3.6</span> Geometric deep learning</h3>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -718,11 +801,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./20.html" class="pagination-link" aria-label="Diffusion Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span>
+      <a href="./12.html" class="pagination-link" aria-label="Transformers">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transformers</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./14.html" class="pagination-link" aria-label="Sampling">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Sampling</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

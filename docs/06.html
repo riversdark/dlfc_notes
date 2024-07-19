@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – dlfc_notes</title>
+<title>6&nbsp; Deep Neural Networks – dlfc_notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./20.html" rel="prev">
+<link href="./07.html" rel="next">
+<link href="./05.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -99,7 +81,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Deep Neural Networks</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -162,7 +144,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06.html" class="sidebar-item-text sidebar-link">
+  <a href="./06.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Deep Neural Networks</span></span></a>
   </div>
 </li>
@@ -252,7 +234,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -261,15 +243,57 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#limitations-of-fixed-basis-functions" id="toc-limitations-of-fixed-basis-functions" class="nav-link active" data-scroll-target="#limitations-of-fixed-basis-functions"><span class="header-section-number">6.1</span> Limitations of fixed basis functions</a>
+  <ul class="collapse">
+  <li><a href="#the-curse-of-dimensionality" id="toc-the-curse-of-dimensionality" class="nav-link" data-scroll-target="#the-curse-of-dimensionality"><span class="header-section-number">6.1.1</span> The curse of dimensionality</a></li>
+  <li><a href="#high-dimensional-spaces" id="toc-high-dimensional-spaces" class="nav-link" data-scroll-target="#high-dimensional-spaces"><span class="header-section-number">6.1.2</span> High dimensional spaces</a></li>
+  <li><a href="#data-manifolds" id="toc-data-manifolds" class="nav-link" data-scroll-target="#data-manifolds"><span class="header-section-number">6.1.3</span> Data manifolds</a></li>
+  <li><a href="#data-dependent-basis-functions" id="toc-data-dependent-basis-functions" class="nav-link" data-scroll-target="#data-dependent-basis-functions"><span class="header-section-number">6.1.4</span> Data-dependent basis functions</a></li>
+  </ul></li>
+  <li><a href="#multilayer-networks" id="toc-multilayer-networks" class="nav-link" data-scroll-target="#multilayer-networks"><span class="header-section-number">6.2</span> Multilayer networks</a>
+  <ul class="collapse">
+  <li><a href="#parameter-matrices" id="toc-parameter-matrices" class="nav-link" data-scroll-target="#parameter-matrices"><span class="header-section-number">6.2.1</span> Parameter matrices</a></li>
+  <li><a href="#universal-approximation" id="toc-universal-approximation" class="nav-link" data-scroll-target="#universal-approximation"><span class="header-section-number">6.2.2</span> Universal approximation</a></li>
+  <li><a href="#hidden-unit-activation-functions" id="toc-hidden-unit-activation-functions" class="nav-link" data-scroll-target="#hidden-unit-activation-functions"><span class="header-section-number">6.2.3</span> Hidden unit activation functions</a></li>
+  <li><a href="#weight-space-symmetries" id="toc-weight-space-symmetries" class="nav-link" data-scroll-target="#weight-space-symmetries"><span class="header-section-number">6.2.4</span> weight-space symmetries</a></li>
+  </ul></li>
+  <li><a href="#deep-networks" id="toc-deep-networks" class="nav-link" data-scroll-target="#deep-networks"><span class="header-section-number">6.3</span> Deep networks</a>
+  <ul class="collapse">
+  <li><a href="#hierarchical-representations" id="toc-hierarchical-representations" class="nav-link" data-scroll-target="#hierarchical-representations"><span class="header-section-number">6.3.1</span> Hierarchical representations</a></li>
+  <li><a href="#distributed-representations" id="toc-distributed-representations" class="nav-link" data-scroll-target="#distributed-representations"><span class="header-section-number">6.3.2</span> Distributed representations</a></li>
+  <li><a href="#representation-learning" id="toc-representation-learning" class="nav-link" data-scroll-target="#representation-learning"><span class="header-section-number">6.3.3</span> Representation learning</a></li>
+  <li><a href="#transfer-learning" id="toc-transfer-learning" class="nav-link" data-scroll-target="#transfer-learning"><span class="header-section-number">6.3.4</span> Transfer learning</a></li>
+  <li><a href="#contrastive-learning" id="toc-contrastive-learning" class="nav-link" data-scroll-target="#contrastive-learning"><span class="header-section-number">6.3.5</span> Contrastive learning</a></li>
+  <li><a href="#general-network-architectures" id="toc-general-network-architectures" class="nav-link" data-scroll-target="#general-network-architectures"><span class="header-section-number">6.3.6</span> General network architectures</a></li>
+  <li><a href="#tensors" id="toc-tensors" class="nav-link" data-scroll-target="#tensors"><span class="header-section-number">6.3.7</span> Tensors</a></li>
+  </ul></li>
+  <li><a href="#error-functions" id="toc-error-functions" class="nav-link" data-scroll-target="#error-functions"><span class="header-section-number">6.4</span> Error functions</a>
+  <ul class="collapse">
+  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression"><span class="header-section-number">6.4.1</span> Regression</a></li>
+  <li><a href="#binary-classification" id="toc-binary-classification" class="nav-link" data-scroll-target="#binary-classification"><span class="header-section-number">6.4.2</span> Binary classification</a></li>
+  <li><a href="#multiclass-classification" id="toc-multiclass-classification" class="nav-link" data-scroll-target="#multiclass-classification"><span class="header-section-number">6.4.3</span> Multiclass classification</a></li>
+  </ul></li>
+  <li><a href="#mixture-density-networks" id="toc-mixture-density-networks" class="nav-link" data-scroll-target="#mixture-density-networks"><span class="header-section-number">6.5</span> Mixture density networks</a>
+  <ul class="collapse">
+  <li><a href="#robot-kinematics-example" id="toc-robot-kinematics-example" class="nav-link" data-scroll-target="#robot-kinematics-example"><span class="header-section-number">6.5.1</span> Robot kinematics example</a></li>
+  <li><a href="#conditional-mixture-distributions" id="toc-conditional-mixture-distributions" class="nav-link" data-scroll-target="#conditional-mixture-distributions"><span class="header-section-number">6.5.2</span> Conditional mixture distributions</a></li>
+  <li><a href="#gradient-optimization" id="toc-gradient-optimization" class="nav-link" data-scroll-target="#gradient-optimization"><span class="header-section-number">6.5.3</span> Gradient optimization</a></li>
+  <li><a href="#predictive-distribution" id="toc-predictive-distribution" class="nav-link" data-scroll-target="#predictive-distribution"><span class="header-section-number">6.5.4</span> Predictive distribution</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Deep Neural Networks</span></h1>
 </div>
 
 
@@ -286,14 +310,100 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-knuth84" class="csl-entry" role="listitem">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput.
-J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
-</div>
-</div>
+<p>If a two-layer network can already approximate everything, why go deeper? to be deep is to be flexible.</p>
+<p><img src="./img/DLFC/Chapter-6/Figure_5.png" class="img-fluid"></p>
+<p>in high dimensional spaces, most of the probability mass is located in a thin shell at a specific radius</p>
+<p><img src="./img/DLFC/Chapter-6/Figure_9.png" class="img-fluid"></p>
+<p><img src="./img/DLFC/Chapter-6/Figure_17_a.png" class="img-fluid"> <img src="./img/DLFC/Chapter-6/Figure_17_b.png" class="img-fluid"></p>
+<p>forward vs inverse problem. A single NN can deal with one but not the other (see red fitted curve)</p>
+<section id="limitations-of-fixed-basis-functions" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="limitations-of-fixed-basis-functions"><span class="header-section-number">6.1</span> Limitations of fixed basis functions</h2>
+<section id="the-curse-of-dimensionality" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="the-curse-of-dimensionality"><span class="header-section-number">6.1.1</span> The curse of dimensionality</h3>
+</section>
+<section id="high-dimensional-spaces" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="high-dimensional-spaces"><span class="header-section-number">6.1.2</span> High dimensional spaces</h3>
+<p>shells</p>
+</section>
+<section id="data-manifolds" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="data-manifolds"><span class="header-section-number">6.1.3</span> Data manifolds</h3>
+<p>digits</p>
+</section>
+<section id="data-dependent-basis-functions" class="level3" data-number="6.1.4">
+<h3 data-number="6.1.4" class="anchored" data-anchor-id="data-dependent-basis-functions"><span class="header-section-number">6.1.4</span> Data-dependent basis functions</h3>
+<p>kernel methods</p>
+</section>
+</section>
+<section id="multilayer-networks" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="multilayer-networks"><span class="header-section-number">6.2</span> Multilayer networks</h2>
+<section id="parameter-matrices" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="parameter-matrices"><span class="header-section-number">6.2.1</span> Parameter matrices</h3>
+</section>
+<section id="universal-approximation" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="universal-approximation"><span class="header-section-number">6.2.2</span> Universal approximation</h3>
+<p>with examples</p>
+</section>
+<section id="hidden-unit-activation-functions" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="hidden-unit-activation-functions"><span class="header-section-number">6.2.3</span> Hidden unit activation functions</h3>
+<p>softmax</p>
+</section>
+<section id="weight-space-symmetries" class="level3" data-number="6.2.4">
+<h3 data-number="6.2.4" class="anchored" data-anchor-id="weight-space-symmetries"><span class="header-section-number">6.2.4</span> weight-space symmetries</h3>
+</section>
+</section>
+<section id="deep-networks" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="deep-networks"><span class="header-section-number">6.3</span> Deep networks</h2>
+<section id="hierarchical-representations" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="hierarchical-representations"><span class="header-section-number">6.3.1</span> Hierarchical representations</h3>
+</section>
+<section id="distributed-representations" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="distributed-representations"><span class="header-section-number">6.3.2</span> Distributed representations</h3>
+</section>
+<section id="representation-learning" class="level3" data-number="6.3.3">
+<h3 data-number="6.3.3" class="anchored" data-anchor-id="representation-learning"><span class="header-section-number">6.3.3</span> Representation learning</h3>
+</section>
+<section id="transfer-learning" class="level3" data-number="6.3.4">
+<h3 data-number="6.3.4" class="anchored" data-anchor-id="transfer-learning"><span class="header-section-number">6.3.4</span> Transfer learning</h3>
+</section>
+<section id="contrastive-learning" class="level3" data-number="6.3.5">
+<h3 data-number="6.3.5" class="anchored" data-anchor-id="contrastive-learning"><span class="header-section-number">6.3.5</span> Contrastive learning</h3>
+</section>
+<section id="general-network-architectures" class="level3" data-number="6.3.6">
+<h3 data-number="6.3.6" class="anchored" data-anchor-id="general-network-architectures"><span class="header-section-number">6.3.6</span> General network architectures</h3>
+</section>
+<section id="tensors" class="level3" data-number="6.3.7">
+<h3 data-number="6.3.7" class="anchored" data-anchor-id="tensors"><span class="header-section-number">6.3.7</span> Tensors</h3>
+</section>
+</section>
+<section id="error-functions" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="error-functions"><span class="header-section-number">6.4</span> Error functions</h2>
+<section id="regression" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="regression"><span class="header-section-number">6.4.1</span> Regression</h3>
+</section>
+<section id="binary-classification" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="binary-classification"><span class="header-section-number">6.4.2</span> Binary classification</h3>
+</section>
+<section id="multiclass-classification" class="level3" data-number="6.4.3">
+<h3 data-number="6.4.3" class="anchored" data-anchor-id="multiclass-classification"><span class="header-section-number">6.4.3</span> Multiclass classification</h3>
+</section>
+</section>
+<section id="mixture-density-networks" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="mixture-density-networks"><span class="header-section-number">6.5</span> Mixture density networks</h2>
+<section id="robot-kinematics-example" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="robot-kinematics-example"><span class="header-section-number">6.5.1</span> Robot kinematics example</h3>
+</section>
+<section id="conditional-mixture-distributions" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="conditional-mixture-distributions"><span class="header-section-number">6.5.2</span> Conditional mixture distributions</h3>
+</section>
+<section id="gradient-optimization" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="gradient-optimization"><span class="header-section-number">6.5.3</span> Gradient optimization</h3>
+</section>
+<section id="predictive-distribution" class="level3" data-number="6.5.4">
+<h3 data-number="6.5.4" class="anchored" data-anchor-id="predictive-distribution"><span class="header-section-number">6.5.4</span> Predictive distribution</h3>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -718,11 +828,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./20.html" class="pagination-link" aria-label="Diffusion Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span>
+      <a href="./05.html" class="pagination-link" aria-label="Single layer networks: classification">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Single layer networks: classification</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./07.html" class="pagination-link" aria-label="Gradient Descent">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Gradient Descent</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – dlfc_notes</title>
+<title>9&nbsp; Regularisation – dlfc_notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./20.html" rel="prev">
+<link href="./10.html" rel="next">
+<link href="./08.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -99,7 +81,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regularisation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -180,7 +162,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09.html" class="sidebar-item-text sidebar-link">
+  <a href="./09.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regularisation</span></span></a>
   </div>
 </li>
@@ -252,7 +234,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -261,15 +243,46 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#inductive-bias" id="toc-inductive-bias" class="nav-link active" data-scroll-target="#inductive-bias"><span class="header-section-number">9.1</span> Inductive bias</a>
+  <ul class="collapse">
+  <li><a href="#inverse-problem" id="toc-inverse-problem" class="nav-link" data-scroll-target="#inverse-problem"><span class="header-section-number">9.1.1</span> Inverse problem</a></li>
+  <li><a href="#no-free-lunch-theorem" id="toc-no-free-lunch-theorem" class="nav-link" data-scroll-target="#no-free-lunch-theorem"><span class="header-section-number">9.1.2</span> No free lunch theorem</a></li>
+  <li><a href="#symmetry-and-invariance" id="toc-symmetry-and-invariance" class="nav-link" data-scroll-target="#symmetry-and-invariance"><span class="header-section-number">9.1.3</span> Symmetry and invariance</a></li>
+  <li><a href="#equivariance" id="toc-equivariance" class="nav-link" data-scroll-target="#equivariance"><span class="header-section-number">9.1.4</span> Equivariance</a></li>
+  </ul></li>
+  <li><a href="#weight-decay" id="toc-weight-decay" class="nav-link" data-scroll-target="#weight-decay"><span class="header-section-number">9.2</span> Weight decay</a>
+  <ul class="collapse">
+  <li><a href="#consistent-regularizers" id="toc-consistent-regularizers" class="nav-link" data-scroll-target="#consistent-regularizers"><span class="header-section-number">9.2.1</span> Consistent regularizers</a></li>
+  <li><a href="#generalised-weight-decay" id="toc-generalised-weight-decay" class="nav-link" data-scroll-target="#generalised-weight-decay"><span class="header-section-number">9.2.2</span> Generalised weight decay</a></li>
+  </ul></li>
+  <li><a href="#learning-curves" id="toc-learning-curves" class="nav-link" data-scroll-target="#learning-curves"><span class="header-section-number">9.3</span> Learning curves</a>
+  <ul class="collapse">
+  <li><a href="#early-stopping" id="toc-early-stopping" class="nav-link" data-scroll-target="#early-stopping"><span class="header-section-number">9.3.1</span> Early stopping</a></li>
+  <li><a href="#double-descent" id="toc-double-descent" class="nav-link" data-scroll-target="#double-descent"><span class="header-section-number">9.3.2</span> Double descent</a></li>
+  </ul></li>
+  <li><a href="#parameter-sharing" id="toc-parameter-sharing" class="nav-link" data-scroll-target="#parameter-sharing"><span class="header-section-number">9.4</span> Parameter sharing</a>
+  <ul class="collapse">
+  <li><a href="#soft-parameter-sharing" id="toc-soft-parameter-sharing" class="nav-link" data-scroll-target="#soft-parameter-sharing"><span class="header-section-number">9.4.1</span> Soft parameter sharing</a></li>
+  </ul></li>
+  <li><a href="#residual-connections" id="toc-residual-connections" class="nav-link" data-scroll-target="#residual-connections"><span class="header-section-number">9.5</span> Residual connections</a></li>
+  <li><a href="#model-averaging" id="toc-model-averaging" class="nav-link" data-scroll-target="#model-averaging"><span class="header-section-number">9.6</span> Model averaging</a>
+  <ul class="collapse">
+  <li><a href="#dropout" id="toc-dropout" class="nav-link" data-scroll-target="#dropout"><span class="header-section-number">9.6.1</span> Dropout</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regularisation</span></h1>
 </div>
 
 
@@ -286,14 +299,79 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-knuth84" class="csl-entry" role="listitem">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput.
-J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
-</div>
-</div>
+<section id="inductive-bias" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="inductive-bias"><span class="header-section-number">9.1</span> Inductive bias</h2>
+<p>Inductive bias refers to the set of assumptions a model makes about the patterns it expects to find in the data. These biases help the model to generalize better from the training data to unseen instances, guiding the learning process towards more plausible solutions given limited information. In the context of deep learning, inductive bias can be inherent in the architecture of the network, the choice of optimization algorithm, or the data representation itself.</p>
+<section id="inverse-problem" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="inverse-problem"><span class="header-section-number">9.1.1</span> Inverse problem</h3>
+<p>In the Bayesian sense, the forward problem is sampling, the inverse problem is inference. data –&gt; parameter</p>
+</section>
+<section id="no-free-lunch-theorem" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="no-free-lunch-theorem"><span class="header-section-number">9.1.2</span> No free lunch theorem</h3>
+<p>Since there is no universally best learner for every task, the success of a learning algorithm on a particular task depends on how well its inductive bias aligns with the problem.</p>
+<p>Regularization methods contribute to an algorithm’s inductive bias, thus affecting its performance across different tasks.</p>
+<p><strong>models are essentially a set of assumptions, and assumptions have consequences</strong></p>
+</section>
+<section id="symmetry-and-invariance" class="level3" data-number="9.1.3">
+<h3 data-number="9.1.3" class="anchored" data-anchor-id="symmetry-and-invariance"><span class="header-section-number">9.1.3</span> Symmetry and invariance</h3>
+</section>
+<section id="equivariance" class="level3" data-number="9.1.4">
+<h3 data-number="9.1.4" class="anchored" data-anchor-id="equivariance"><span class="header-section-number">9.1.4</span> Equivariance</h3>
+</section>
+</section>
+<section id="weight-decay" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="weight-decay"><span class="header-section-number">9.2</span> Weight decay</h2>
+<p>smaller weights, simpler models L2 regularisation</p>
+<section id="consistent-regularizers" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="consistent-regularizers"><span class="header-section-number">9.2.1</span> Consistent regularizers</h3>
+</section>
+<section id="generalised-weight-decay" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="generalised-weight-decay"><span class="header-section-number">9.2.2</span> Generalised weight decay</h3>
+</section>
+</section>
+<section id="learning-curves" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="learning-curves"><span class="header-section-number">9.3</span> Learning curves</h2>
+<p>On the modeling side, there can be several different approaches to increase the generalization performance:</p>
+<ol type="1">
+<li>increase the model size (better representative capability);</li>
+<li>increase the data size (capturing more pattern and less noise);</li>
+<li>regulariation (through weight-decay or other methods);</li>
+<li>improve the model architecture (inducing more inductive bias for certain problems);</li>
+<li>model averaging (reduce the variance in specific models)</li>
+</ol>
+<p>Another factor that influences the bias-variance trade-off is the learning process itself. During optimization of the error function through gradient descent, the training error typically decreases as the model parameters are updated, whereas the error for hold-out data may be non-monotonic. This behaviour can be visualized using learning curves, which plot performance measures such as training set and validation set error as a function of iteration number during an iterative learning process such as stochastic gradient descent. These curves provide insight into the progress of training and also offer a practical methodology for controlling the effective model complexity.</p>
+<section id="early-stopping" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="early-stopping"><span class="header-section-number">9.3.1</span> Early stopping</h3>
+</section>
+<section id="double-descent" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="double-descent"><span class="header-section-number">9.3.2</span> Double descent</h3>
+<p>Double descent entends the bias-variance trade-off to the big-data/large-model regime where we have so much data that we can fit a model of any size to it.</p>
+<p><img src="./img/DLFC/Chapter-9/Figure_9.jpg" class="img-fluid"></p>
+<p>In the classical regime, we have limited data, thus we seek a bias-variance balance. In the modern regime, since we have so much data, increasing the model size always leads to better test results.</p>
+<p>The black dashed line marks the interpolation threshold, where the model’s capacity is just enough to perfectly fit the training data.</p>
+<p><img src="./img/DLFC/Chapter-9/Figure_10.jpg" class="img-fluid"></p>
+<p><em>stochastic</em> gradient descent not only makes the training more feasible, but also makes the model more robust.</p>
+<p><img src="./img/DLFC/Chapter-9/Figure_11.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="parameter-sharing" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="parameter-sharing"><span class="header-section-number">9.4</span> Parameter sharing</h2>
+<section id="soft-parameter-sharing" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="soft-parameter-sharing"><span class="header-section-number">9.4.1</span> Soft parameter sharing</h3>
+</section>
+</section>
+<section id="residual-connections" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="residual-connections"><span class="header-section-number">9.5</span> Residual connections</h2>
+</section>
+<section id="model-averaging" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="model-averaging"><span class="header-section-number">9.6</span> Model averaging</h2>
+<section id="dropout" class="level3" data-number="9.6.1">
+<h3 data-number="9.6.1" class="anchored" data-anchor-id="dropout"><span class="header-section-number">9.6.1</span> Dropout</h3>
+<p>Randomly “dropping out” a subset of neurons or connections during training encourages the network to develop redundant representations and prevents co-adaptation of features. The inductive bias here is towards models that are robust to the loss of individual pieces of information, reflecting a kind of ensemble learning within a single model.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -718,11 +796,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./20.html" class="pagination-link" aria-label="Diffusion Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span>
+      <a href="./08.html" class="pagination-link" aria-label="Backpropagation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Backpropagation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./10.html" class="pagination-link" aria-label="Convolutional networks">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Convolutional networks</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

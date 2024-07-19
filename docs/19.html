@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – dlfc_notes</title>
+<title>19&nbsp; Autoencoders – dlfc_notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./20.html" rel="prev">
+<link href="./20.html" rel="next">
+<link href="./18.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -99,7 +81,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./19.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Autoencoders</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -240,7 +222,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./19.html" class="sidebar-item-text sidebar-link">
+  <a href="./19.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
   </div>
 </li>
@@ -252,7 +234,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -261,15 +243,33 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#deterministic-autoencoders" id="toc-deterministic-autoencoders" class="nav-link active" data-scroll-target="#deterministic-autoencoders"><span class="header-section-number">19.1</span> Deterministic autoencoders</a>
+  <ul class="collapse">
+  <li><a href="#linear-aes" id="toc-linear-aes" class="nav-link" data-scroll-target="#linear-aes"><span class="header-section-number">19.1.1</span> Linear AEs</a></li>
+  <li><a href="#deep-aes" id="toc-deep-aes" class="nav-link" data-scroll-target="#deep-aes"><span class="header-section-number">19.1.2</span> Deep AEs</a></li>
+  <li><a href="#sparse-aes" id="toc-sparse-aes" class="nav-link" data-scroll-target="#sparse-aes"><span class="header-section-number">19.1.3</span> Sparse AEs</a></li>
+  <li><a href="#denoising-aes" id="toc-denoising-aes" class="nav-link" data-scroll-target="#denoising-aes"><span class="header-section-number">19.1.4</span> Denoising AEs</a></li>
+  <li><a href="#masked-aes" id="toc-masked-aes" class="nav-link" data-scroll-target="#masked-aes"><span class="header-section-number">19.1.5</span> Masked AEs</a></li>
+  </ul></li>
+  <li><a href="#variational-autoencoders" id="toc-variational-autoencoders" class="nav-link" data-scroll-target="#variational-autoencoders"><span class="header-section-number">19.2</span> Variational autoencoders</a>
+  <ul class="collapse">
+  <li><a href="#amortized-inference" id="toc-amortized-inference" class="nav-link" data-scroll-target="#amortized-inference"><span class="header-section-number">19.2.1</span> Amortized inference</a></li>
+  <li><a href="#the-reparameterization-trick" id="toc-the-reparameterization-trick" class="nav-link" data-scroll-target="#the-reparameterization-trick"><span class="header-section-number">19.2.2</span> The reparameterization trick</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Autoencoders</span></h1>
 </div>
 
 
@@ -286,14 +286,35 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-knuth84" class="csl-entry" role="listitem">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput.
-J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
-</div>
-</div>
+<section id="deterministic-autoencoders" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="deterministic-autoencoders"><span class="header-section-number">19.1</span> Deterministic autoencoders</h2>
+<section id="linear-aes" class="level3" data-number="19.1.1">
+<h3 data-number="19.1.1" class="anchored" data-anchor-id="linear-aes"><span class="header-section-number">19.1.1</span> Linear AEs</h3>
+</section>
+<section id="deep-aes" class="level3" data-number="19.1.2">
+<h3 data-number="19.1.2" class="anchored" data-anchor-id="deep-aes"><span class="header-section-number">19.1.2</span> Deep AEs</h3>
+</section>
+<section id="sparse-aes" class="level3" data-number="19.1.3">
+<h3 data-number="19.1.3" class="anchored" data-anchor-id="sparse-aes"><span class="header-section-number">19.1.3</span> Sparse AEs</h3>
+</section>
+<section id="denoising-aes" class="level3" data-number="19.1.4">
+<h3 data-number="19.1.4" class="anchored" data-anchor-id="denoising-aes"><span class="header-section-number">19.1.4</span> Denoising AEs</h3>
+</section>
+<section id="masked-aes" class="level3" data-number="19.1.5">
+<h3 data-number="19.1.5" class="anchored" data-anchor-id="masked-aes"><span class="header-section-number">19.1.5</span> Masked AEs</h3>
+</section>
+</section>
+<section id="variational-autoencoders" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="variational-autoencoders"><span class="header-section-number">19.2</span> Variational autoencoders</h2>
+<section id="amortized-inference" class="level3" data-number="19.2.1">
+<h3 data-number="19.2.1" class="anchored" data-anchor-id="amortized-inference"><span class="header-section-number">19.2.1</span> Amortized inference</h3>
+</section>
+<section id="the-reparameterization-trick" class="level3" data-number="19.2.2">
+<h3 data-number="19.2.2" class="anchored" data-anchor-id="the-reparameterization-trick"><span class="header-section-number">19.2.2</span> The reparameterization trick</h3>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -718,11 +739,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./20.html" class="pagination-link" aria-label="Diffusion Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span>
+      <a href="./18.html" class="pagination-link" aria-label="Normalizing Flows">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./20.html" class="pagination-link" aria-label="Diffusion Models">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

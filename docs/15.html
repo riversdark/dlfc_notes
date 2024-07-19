@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – dlfc_notes</title>
+<title>15&nbsp; Discrete latent variables – dlfc_notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./20.html" rel="prev">
+<link href="./16.html" rel="next">
+<link href="./14.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -87,6 +69,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -99,7 +110,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Discrete latent variables</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -216,7 +227,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15.html" class="sidebar-item-text sidebar-link">
+  <a href="./15.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Discrete latent variables</span></span></a>
   </div>
 </li>
@@ -252,7 +263,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -261,15 +272,43 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link active" data-scroll-target="#k-means-clustering"><span class="header-section-number">15.1</span> K-means clustering</a>
+  <ul class="collapse">
+  <li><a href="#image-segmentation" id="toc-image-segmentation" class="nav-link" data-scroll-target="#image-segmentation"><span class="header-section-number">15.1.1</span> Image segmentation</a></li>
+  </ul></li>
+  <li><a href="#mixture-of-gaussian" id="toc-mixture-of-gaussian" class="nav-link" data-scroll-target="#mixture-of-gaussian"><span class="header-section-number">15.2</span> Mixture of Gaussian</a>
+  <ul class="collapse">
+  <li><a href="#likelihood-function" id="toc-likelihood-function" class="nav-link" data-scroll-target="#likelihood-function"><span class="header-section-number">15.2.1</span> Likelihood function</a></li>
+  <li><a href="#maximum-likelihood" id="toc-maximum-likelihood" class="nav-link" data-scroll-target="#maximum-likelihood"><span class="header-section-number">15.2.2</span> Maximum likelihood</a></li>
+  </ul></li>
+  <li><a href="#expectation-maximisation" id="toc-expectation-maximisation" class="nav-link" data-scroll-target="#expectation-maximisation"><span class="header-section-number">15.3</span> Expectation maximisation</a>
+  <ul class="collapse">
+  <li><a href="#gaussian-mixtures" id="toc-gaussian-mixtures" class="nav-link" data-scroll-target="#gaussian-mixtures"><span class="header-section-number">15.3.1</span> Gaussian mixtures</a></li>
+  <li><a href="#relation-to-k-means" id="toc-relation-to-k-means" class="nav-link" data-scroll-target="#relation-to-k-means"><span class="header-section-number">15.3.2</span> Relation to K-means</a></li>
+  <li><a href="#bernoulli-mixtures" id="toc-bernoulli-mixtures" class="nav-link" data-scroll-target="#bernoulli-mixtures"><span class="header-section-number">15.3.3</span> Bernoulli mixtures</a></li>
+  </ul></li>
+  <li><a href="#evidence-lower-bond" id="toc-evidence-lower-bond" class="nav-link" data-scroll-target="#evidence-lower-bond"><span class="header-section-number">15.4</span> Evidence lower bond</a>
+  <ul class="collapse">
+  <li><a href="#em-revisited" id="toc-em-revisited" class="nav-link" data-scroll-target="#em-revisited"><span class="header-section-number">15.4.1</span> EM revisited</a></li>
+  <li><a href="#iid-data" id="toc-iid-data" class="nav-link" data-scroll-target="#iid-data"><span class="header-section-number">15.4.2</span> IID data</a></li>
+  <li><a href="#parameter-priors" id="toc-parameter-priors" class="nav-link" data-scroll-target="#parameter-priors"><span class="header-section-number">15.4.3</span> Parameter priors</a></li>
+  <li><a href="#generalised-em" id="toc-generalised-em" class="nav-link" data-scroll-target="#generalised-em"><span class="header-section-number">15.4.4</span> Generalised EM</a></li>
+  <li><a href="#sequential-em" id="toc-sequential-em" class="nav-link" data-scroll-target="#sequential-em"><span class="header-section-number">15.4.5</span> Sequential EM</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Discrete latent variables</span></h1>
 </div>
 
 
@@ -286,14 +325,65 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-knuth84" class="csl-entry" role="listitem">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput.
-J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
-</div>
-</div>
+<p>mixture models and their solutions, because all deep generative models use variational inference, we also gradually build to it.</p>
+<section id="k-means-clustering" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="k-means-clustering"><span class="header-section-number">15.1</span> K-means clustering</h2>
+<p>update assignments (E) and centers (M) till convergence</p>
+<p><img src="./img/DLFC/Chapter-15/Figure_1_a.png" class="img-fluid"> <img src="./img/DLFC/Chapter-15/Figure_1_b.png" class="img-fluid"> <img src="./img/DLFC/Chapter-15/Figure_1_c.png" class="img-fluid"> <img src="./img/DLFC/Chapter-15/Figure_1_d.png" class="img-fluid"> <img src="./img/DLFC/Chapter-15/Figure_1_e.png" class="img-fluid"> <img src="./img/DLFC/Chapter-15/Figure_1_f.png" class="img-fluid"> <img src="./img/DLFC/Chapter-15/Figure_1_g.png" class="img-fluid"> <img src="./img/DLFC/Chapter-15/Figure_1_h.png" class="img-fluid"> <img src="./img/DLFC/Chapter-15/Figure_1_i.png" class="img-fluid"></p>
+<p>plot of the cost function after each E step (in blue) and M step (in red).</p>
+<p><img src="./img/DLFC/Chapter-15/Figure_2.png" class="img-fluid"></p>
+<section id="image-segmentation" class="level3" data-number="15.1.1">
+<h3 data-number="15.1.1" class="anchored" data-anchor-id="image-segmentation"><span class="header-section-number">15.1.1</span> Image segmentation</h3>
+<p>applying K-means to image segmentation, with varying Ks</p>
+<p><img src="./img/DLFC/Chapter-15/Figure_3_a.png" class="img-fluid"> <img src="./img/DLFC/Chapter-15/Figure_3_b.png" class="img-fluid"> <img src="./img/DLFC/Chapter-15/Figure_3_c.png" class="img-fluid"> <img src="./img/DLFC/Chapter-15/Figure_3_d.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="mixture-of-gaussian" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="mixture-of-gaussian"><span class="header-section-number">15.2</span> Mixture of Gaussian</h2>
+<p>graph representation of mixture model (VERY SIMPLE!)</p>
+<p><img src="./img/DLFC/Chapter-15/Figure_4.png" class="img-fluid"></p>
+<p><span class="math display">\[
+\ln p(\mathbf{X}|\boldsymbol{\pi}, \boldsymbol{\mu}, \boldsymbol{\Sigma}) = \sum_{n=1}^{N} \ln \left\{ \sum_{k=1}^{K} \pi_k \mathcal{N}(\mathbf{x}_n|\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k) \right\}
+\]</span></p>
+<section id="likelihood-function" class="level3" data-number="15.2.1">
+<h3 data-number="15.2.1" class="anchored" data-anchor-id="likelihood-function"><span class="header-section-number">15.2.1</span> Likelihood function</h3>
+</section>
+<section id="maximum-likelihood" class="level3" data-number="15.2.2">
+<h3 data-number="15.2.2" class="anchored" data-anchor-id="maximum-likelihood"><span class="header-section-number">15.2.2</span> Maximum likelihood</h3>
+</section>
+</section>
+<section id="expectation-maximisation" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="expectation-maximisation"><span class="header-section-number">15.3</span> Expectation maximisation</h2>
+<section id="gaussian-mixtures" class="level3" data-number="15.3.1">
+<h3 data-number="15.3.1" class="anchored" data-anchor-id="gaussian-mixtures"><span class="header-section-number">15.3.1</span> Gaussian mixtures</h3>
+</section>
+<section id="relation-to-k-means" class="level3" data-number="15.3.2">
+<h3 data-number="15.3.2" class="anchored" data-anchor-id="relation-to-k-means"><span class="header-section-number">15.3.2</span> Relation to K-means</h3>
+</section>
+<section id="bernoulli-mixtures" class="level3" data-number="15.3.3">
+<h3 data-number="15.3.3" class="anchored" data-anchor-id="bernoulli-mixtures"><span class="header-section-number">15.3.3</span> Bernoulli mixtures</h3>
+</section>
+</section>
+<section id="evidence-lower-bond" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="evidence-lower-bond"><span class="header-section-number">15.4</span> Evidence lower bond</h2>
+<section id="em-revisited" class="level3" data-number="15.4.1">
+<h3 data-number="15.4.1" class="anchored" data-anchor-id="em-revisited"><span class="header-section-number">15.4.1</span> EM revisited</h3>
+</section>
+<section id="iid-data" class="level3" data-number="15.4.2">
+<h3 data-number="15.4.2" class="anchored" data-anchor-id="iid-data"><span class="header-section-number">15.4.2</span> IID data</h3>
+</section>
+<section id="parameter-priors" class="level3" data-number="15.4.3">
+<h3 data-number="15.4.3" class="anchored" data-anchor-id="parameter-priors"><span class="header-section-number">15.4.3</span> Parameter priors</h3>
+</section>
+<section id="generalised-em" class="level3" data-number="15.4.4">
+<h3 data-number="15.4.4" class="anchored" data-anchor-id="generalised-em"><span class="header-section-number">15.4.4</span> Generalised EM</h3>
+</section>
+<section id="sequential-em" class="level3" data-number="15.4.5">
+<h3 data-number="15.4.5" class="anchored" data-anchor-id="sequential-em"><span class="header-section-number">15.4.5</span> Sequential EM</h3>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -718,11 +808,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./20.html" class="pagination-link" aria-label="Diffusion Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span>
+      <a href="./14.html" class="pagination-link" aria-label="Sampling">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Sampling</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./16.html" class="pagination-link" aria-label="Continuous latent variables">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Continuous latent variables</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

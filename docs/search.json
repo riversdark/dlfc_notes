@@ -44,7 +44,7 @@
     "href": "index.html",
     "title": "dlfc_notes",
     "section": "",
-    "text": "Preface\nThis project is a WIP.\nI’m a great fan of Bishop’s 2006 book, Pattern Recognition and Machine Learning (PRML), so as an AI practioner coming from a Bayesian background, I’m very much pleasantly surprised to learn that Bishop (and Bishop) have published a new book dedicated to deep learning and artificial intelligence. The focus on generative models is especially enticing, firstly because it is all the rage for the moment; secondly for a Bayesian statistician, doing generative modeling has always been what we are trained for.\nThe book has 20 chapters, I have divided them roughly into three parts.\n\nFoundations: chapters 1-5, covers the basics of machine learning.\nDeep Learning: chapters 6-13, covers the nuts and bolts of deep learning.\nGenerative Models: chapters 14-20, covers generative modeling and some common model architectures.\n\nHerein collected are my notes on the book, and the code to implement the examples in the book. Since these are my understanding of the book, they might not be completely accurate, so please refer to the book for the authoritative source. And if you find any errors, do let me know!\nThe notes and code are written in a literate programming style (See Knuth (1984) for additional discussion). The references are not complete; I only included the ones I have read.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "text": "Preface\nThis project is a WIP.\nI’m a great fan of Bishop’s 2006 book, Pattern Recognition and Machine Learning (PRML), so as an AI practioner coming from a Bayesian background, I’m quite happy to learn that Bishop (and Bishop) have published a new book dedicated to deep learning and artificial intelligence. The focus on generative models is especially enticing, firstly because it is all the rage for the moment; secondly for a Bayesian statistician, doing generative modeling has always been what we are trained for.\nThe book has 20 chapters, I have divided them roughly into three parts.\n\nFoundations: chapters 1-5, covers the basics of machine learning.\nDeep Learning: chapters 6-13, covers the nuts and bolts of deep learning.\nGenerative Models: chapters 14-20, covers generative modeling and some common model architectures.\n\nHerein collected are my notes of the book, and the code to implement some concepts from the book. Since these are my understanding of the book, they might not be completely accurate, so do refer to the book for the most accurate description. And let me know if you find any errors!\nThe notes and code are written in a literate programming style (See Knuth (1984) for additional discussion). The references are not complete; I only included the ones I have reviewed myself.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
     "crumbs": [
       "Preface"
     ]
@@ -197,6 +197,766 @@
     "text": "2.4 normalisation\nThe gopher(2022) paper also introduced a RMSNorm normalisation method.\n\n2.4.1 data normalisation\n\n\n\n2.4.2 batch normalisation\n\n\n\n2.4.3 layer normalisation\n\n\nimport torch\nimport torch.nn as nn\nfrom einops import reduce\n\n# NLP Example\nbatch, sentence_length, embedding_dim = 2, 5, 3\nembedding = torch.randn(batch, sentence_length, embedding_dim)\nlayer_norm = nn.LayerNorm(embedding_dim)\n\n# Calculate mean before LayerNorm across all dimensions except batch\nmean_before = reduce(embedding, 'b s e -&gt; b', 'mean')\n\n# Calculate variance before LayerNorm across all dimensions except batch\nvar_before = reduce((embedding - mean_before.reshape(batch, 1, 1)) ** 2, 'b s e -&gt; b', 'mean')\n\n# Activate module\nnormalized_embedding = layer_norm(embedding)\n\n# Calculate mean after LayerNorm across all dimensions except batch\nmean_after = reduce(normalized_embedding, 'b s e -&gt; b', 'mean')\n\n# Calculate variance after LayerNorm across all dimensions except batch\nvar_after = reduce((normalized_embedding - mean_after.reshape(batch, 1, 1)) ** 2, 'b s e -&gt; b', 'mean')\n\n# Display mean and variance\nprint(\"Before LayerNorm - Mean: \", end=\"\")\nprint(*mean_before.tolist(), sep=\", \")\nprint(\"Before LayerNorm - Variance: \", end=\"\")\nprint(*var_before.tolist(), sep=\", \")\n\nprint(\"After LayerNorm - Mean: \", end=\"\")\nprint(*mean_after.tolist(), sep=\", \")\nprint(\"After LayerNorm - Variance: \", end=\"\")\nprint(*var_after.tolist(), sep=\", \")\n\nBefore LayerNorm - Mean: -0.1163964793086052, 0.16730044782161713\nBefore LayerNorm - Variance: 1.2326244115829468, 1.6592100858688354\nAfter LayerNorm - Mean: -7.947286384535346e-09, -7.947286384535346e-09\nAfter LayerNorm - Variance: 0.9999745488166809, 0.9999361634254456",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Gradient Descent</span>"
+    ]
+  },
+  {
+    "objectID": "02.html",
+    "href": "02.html",
+    "title": "2  Probabilities",
+    "section": "",
+    "text": "2.1 The rules of probability\nuncertainty: collect more data; use a more capable model\nprobability as frequency:",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probabilities</span>"
+    ]
+  },
+  {
+    "objectID": "02.html#the-rules-of-probability",
+    "href": "02.html#the-rules-of-probability",
+    "title": "2  Probabilities",
+    "section": "",
+    "text": "2.1.1 A medical screening example\n\n\n\n2.1.2 The sum and product rules\n\n\n\n2.1.3 Bayes’ theorem\n   \n\n\n2.1.4 Medical screening revisited\n\n\n2.1.5 Prior and posterior probabilities\n\n\n2.1.6 Independent variables",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probabilities</span>"
+    ]
+  },
+  {
+    "objectID": "02.html#probability-densities",
+    "href": "02.html#probability-densities",
+    "title": "2  Probabilities",
+    "section": "2.2 Probability densities",
+    "text": "2.2 Probability densities\n\n\n2.2.1 Example distributions\n\n\n\n2.2.2 Expectations and covariances",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probabilities</span>"
+    ]
+  },
+  {
+    "objectID": "02.html#the-gaussian-distribution",
+    "href": "02.html#the-gaussian-distribution",
+    "title": "2  Probabilities",
+    "section": "2.3 The Gaussian distribution",
+    "text": "2.3 The Gaussian distribution\n\\[\n\\mathcal{N}(x | \\mu, \\sigma^2) = \\frac{1}{(2\\pi\\sigma^2)^{1/2}} \\exp \\left\\{ -\\frac{1}{2\\sigma^2} (x - \\mu)^2 \\right\\}\n\\]\n\n2.3.1 Mean and variance\n\n\n2.3.2 Likelihood function\n\n\n2.3.3 Bias of maximum likelihood\n\n\n2.3.4 Linear regression",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probabilities</span>"
+    ]
+  },
+  {
+    "objectID": "02.html#transformation-of-densities",
+    "href": "02.html#transformation-of-densities",
+    "title": "2  Probabilities",
+    "section": "2.4 Transformation of densities",
+    "text": "2.4 Transformation of densities\n\n\n2.4.1 Multivariate distributions",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probabilities</span>"
+    ]
+  },
+  {
+    "objectID": "02.html#information-theory",
+    "href": "02.html#information-theory",
+    "title": "2  Probabilities",
+    "section": "2.5 Information theory",
+    "text": "2.5 Information theory\n \nthe broader distribution has a higher entropy. A uniform distribution would have the largest entropy.\n\n2.5.1 Entropy\n\n\n2.5.2 Physics perspective\n\n\n2.5.3 Differential entropy\n\n\n2.5.4 Maximum entropy\n\n\n2.5.5 Kullback–Leibler divergence\n\n\n2.5.6 Conditional entropy\n\n\n2.5.7 Mutual information",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probabilities</span>"
+    ]
+  },
+  {
+    "objectID": "02.html#bayesian-probabilities",
+    "href": "02.html#bayesian-probabilities",
+    "title": "2  Probabilities",
+    "section": "2.6 Bayesian probabilities",
+    "text": "2.6 Bayesian probabilities\nmore general, probability as measure of uncertainty\n\n2.6.1 Model parameters\nusing probability to model parameter uncertainty, and update the probability distribution with data.\n\n\n2.6.2 Regularization\nusing the rules of probability, we can establish a connection between MAP and ML estimation, and see that MAP is in fact a regularised ML estimation.\n\n\n2.6.3 Bayesian machine learning\nfrom parameter uncertainty to outcome uncertainty",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Probabilities</span>"
+    ]
+  },
+  {
+    "objectID": "03.html",
+    "href": "03.html",
+    "title": "3  Standard distributions",
+    "section": "",
+    "text": "3.1 Discrete variables",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Standard distributions</span>"
+    ]
+  },
+  {
+    "objectID": "03.html#discrete-variables",
+    "href": "03.html#discrete-variables",
+    "title": "3  Standard distributions",
+    "section": "",
+    "text": "3.1.1 Bernoulli distribution\n\n\n3.1.2 Binomial distribution\n\n\n3.1.3 Multinomial distribution",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Standard distributions</span>"
+    ]
+  },
+  {
+    "objectID": "03.html#the-multivariate-gaussian",
+    "href": "03.html#the-multivariate-gaussian",
+    "title": "3  Standard distributions",
+    "section": "3.2 The multivariate Gaussian",
+    "text": "3.2 The multivariate Gaussian\n\n3.2.1 Geometry of the Gaussian\n\n\n3.2.2 Moments\n\n\n3.2.3 Limitations\n\n\n3.2.4 Conditional distribution\n\n\n3.2.5 Marginal distribution\n\n\n3.2.6 Bayes’ theorem\n\n\n3.2.7 Maximum likelihood\n\n\n3.2.8 Sequential estimation\n\n\n3.2.9 mixture of Gaussians",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Standard distributions</span>"
+    ]
+  },
+  {
+    "objectID": "03.html#periodic-variables",
+    "href": "03.html#periodic-variables",
+    "title": "3  Standard distributions",
+    "section": "3.3 Periodic variables",
+    "text": "3.3 Periodic variables\n\n3.3.1 von Mises distribution",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Standard distributions</span>"
+    ]
+  },
+  {
+    "objectID": "03.html#the-exponential-family",
+    "href": "03.html#the-exponential-family",
+    "title": "3  Standard distributions",
+    "section": "3.4 The exponential family",
+    "text": "3.4 The exponential family\n\\[\np(\\mathbf{x}|\\mathbf{\\eta}) = h(\\mathbf{x})g(\\mathbf{\\eta}) \\exp\\{\\mathbf{\\eta}^T \\mathbf{u}(\\mathbf{x})\\}\n\\]\nThe four key elements of the exponential family are:\n\nbase measure\npartition function\nnatural parameter\nsufficient statistics\n\n\n3.4.1 Sufficient statistics\nDue to the formula constraint of the exponential family, any information about the data that is not in the sufficient statistics is lost.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Standard distributions</span>"
+    ]
+  },
+  {
+    "objectID": "03.html#nonparametric-methods",
+    "href": "03.html#nonparametric-methods",
+    "title": "3  Standard distributions",
+    "section": "3.5 Nonparametric methods",
+    "text": "3.5 Nonparametric methods\n\n3.5.1 Histograms\n\n\n3.5.2 Kernel density\n\n\n3.5.3 Nearest neighbors",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Standard distributions</span>"
+    ]
+  },
+  {
+    "objectID": "04.html",
+    "href": "04.html",
+    "title": "4  Single layer networks: regression",
+    "section": "",
+    "text": "4.1 Linear regression",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Single layer networks: regression</span>"
+    ]
+  },
+  {
+    "objectID": "04.html#linear-regression",
+    "href": "04.html#linear-regression",
+    "title": "4  Single layer networks: regression",
+    "section": "",
+    "text": "4.1.1 Basis function\nExtending simple linear regression with basis functions.\n\nSome basis functions are more localised than others.\n  \n\n\n4.1.2 Likelihood function\n\\[\n\\begin{align}\n\\ln p(\\mathbf{t} | \\mathbf{X}, \\mathbf{w}, \\sigma^2) &= \\sum_{n=1}^{N} \\ln \\mathcal{N}(t_n | \\mathbf{w}^\\top \\mathbf{\\phi}(\\mathbf{x}_n), \\sigma^2) \\\\\n&= \\sum_{n=1}^{N} \\ln \\left( \\frac{1}{\\sqrt{2\\pi\\sigma^2}} \\exp \\left\\{ -\\frac{1}{2\\sigma^2} (t_n - \\mathbf{w}^\\top \\mathbf{\\phi}(\\mathbf{x}_n))^2 \\right\\} \\right) \\\\\n&= -\\frac{N}{2} \\ln (2\\pi\\sigma^2) - \\frac{1}{2\\sigma^2} E_D(\\mathbf{w})\n\\end{align}\n\\]\nwhere the sum-of-squares error function is defined by\n\\[\nE_D(\\mathbf{w}) = \\frac{1}{2} \\sum_{n=1}^{N} \\left\\{ t_n - \\mathbf{w}^\\top \\mathbf{\\phi}(\\mathbf{x}_n) \\right\\}^2.\n\\]\n\n\n4.1.3 Maximum likelihood\n\n\n4.1.4 Geometry of least squares\nGeometrically, the least squares solution is the orthogonal projection of the target onto the subspace spanned by the basis functions.\n\n\n\n4.1.5 Sequential learning\n\n\n4.1.6 Regularised least squares\n\n\n4.1.7 Multiple outputs",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Single layer networks: regression</span>"
+    ]
+  },
+  {
+    "objectID": "04.html#decision-theory",
+    "href": "04.html#decision-theory",
+    "title": "4  Single layer networks: regression",
+    "section": "4.2 Decision theory",
+    "text": "4.2 Decision theory",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Single layer networks: regression</span>"
+    ]
+  },
+  {
+    "objectID": "04.html#the-bias-variance-trade-off",
+    "href": "04.html#the-bias-variance-trade-off",
+    "title": "4  Single layer networks: regression",
+    "section": "4.3 The bias-variance trade-off",
+    "text": "4.3 The bias-variance trade-off",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Single layer networks: regression</span>"
+    ]
+  },
+  {
+    "objectID": "05.html",
+    "href": "05.html",
+    "title": "5  Single layer networks: classification",
+    "section": "",
+    "text": "5.1 Discriminant functions",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Single layer networks: classification</span>"
+    ]
+  },
+  {
+    "objectID": "05.html#discriminant-functions",
+    "href": "05.html#discriminant-functions",
+    "title": "5  Single layer networks: classification",
+    "section": "",
+    "text": "5.1.1 Two classes\n\n\n5.1.2 Multiple classes\n\n\n5.1.3 1-of-K encoding\n\n\n5.1.4 Least squares for classification",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Single layer networks: classification</span>"
+    ]
+  },
+  {
+    "objectID": "05.html#decision-theory",
+    "href": "05.html#decision-theory",
+    "title": "5  Single layer networks: classification",
+    "section": "5.2 Decision theory",
+    "text": "5.2 Decision theory\n\n5.2.1 Misclassification rate\n\n\n5.2.2 Expected loss\n\n\n5.2.3 The reject option\n\n\n5.2.4 Inference and decision\n\n\n5.2.5 Classification accuracy\n\n\n5.2.6 ROC curve",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Single layer networks: classification</span>"
+    ]
+  },
+  {
+    "objectID": "05.html#generative-probabilistic-classifiers",
+    "href": "05.html#generative-probabilistic-classifiers",
+    "title": "5  Single layer networks: classification",
+    "section": "5.3 Generative probabilistic classifiers",
+    "text": "5.3 Generative probabilistic classifiers\n\n5.3.1 Continuous inputs\n\n\n5.3.2 Maximum likelihood solution\n\n\n5.3.3 Discrete features\n\n\n5.3.4 Exponential family",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Single layer networks: classification</span>"
+    ]
+  },
+  {
+    "objectID": "05.html#discriminative-probabilistic-classifiers",
+    "href": "05.html#discriminative-probabilistic-classifiers",
+    "title": "5  Single layer networks: classification",
+    "section": "5.4 Discriminative probabilistic classifiers",
+    "text": "5.4 Discriminative probabilistic classifiers",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Single layer networks: classification</span>"
+    ]
+  },
+  {
+    "objectID": "06.html",
+    "href": "06.html",
+    "title": "6  Deep Neural Networks",
+    "section": "",
+    "text": "6.1 Limitations of fixed basis functions",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Deep Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "06.html#limitations-of-fixed-basis-functions",
+    "href": "06.html#limitations-of-fixed-basis-functions",
+    "title": "6  Deep Neural Networks",
+    "section": "",
+    "text": "6.1.1 The curse of dimensionality\n\n\n6.1.2 High dimensional spaces\nshells\n\n\n6.1.3 Data manifolds\ndigits\n\n\n6.1.4 Data-dependent basis functions\nkernel methods",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Deep Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "06.html#multilayer-networks",
+    "href": "06.html#multilayer-networks",
+    "title": "6  Deep Neural Networks",
+    "section": "6.2 Multilayer networks",
+    "text": "6.2 Multilayer networks\n\n6.2.1 Parameter matrices\n\n\n6.2.2 Universal approximation\nwith examples\n\n\n6.2.3 Hidden unit activation functions\nsoftmax\n\n\n6.2.4 weight-space symmetries",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Deep Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "06.html#deep-networks",
+    "href": "06.html#deep-networks",
+    "title": "6  Deep Neural Networks",
+    "section": "6.3 Deep networks",
+    "text": "6.3 Deep networks\n\n6.3.1 Hierarchical representations\n\n\n6.3.2 Distributed representations\n\n\n6.3.3 Representation learning\n\n\n6.3.4 Transfer learning\n\n\n6.3.5 Contrastive learning\n\n\n6.3.6 General network architectures\n\n\n6.3.7 Tensors",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Deep Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "06.html#error-functions",
+    "href": "06.html#error-functions",
+    "title": "6  Deep Neural Networks",
+    "section": "6.4 Error functions",
+    "text": "6.4 Error functions\n\n6.4.1 Regression\n\n\n6.4.2 Binary classification\n\n\n6.4.3 Multiclass classification",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Deep Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "06.html#mixture-density-networks",
+    "href": "06.html#mixture-density-networks",
+    "title": "6  Deep Neural Networks",
+    "section": "6.5 Mixture density networks",
+    "text": "6.5 Mixture density networks\n\n6.5.1 Robot kinematics example\n\n\n6.5.2 Conditional mixture distributions\n\n\n6.5.3 Gradient optimization\n\n\n6.5.4 Predictive distribution",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Deep Neural Networks</span>"
+    ]
+  },
+  {
+    "objectID": "08.html",
+    "href": "08.html",
+    "title": "8  Backpropagation",
+    "section": "",
+    "text": "8.1 Evaluation of gradient",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Backpropagation</span>"
+    ]
+  },
+  {
+    "objectID": "08.html#evaluation-of-gradient",
+    "href": "08.html#evaluation-of-gradient",
+    "title": "8  Backpropagation",
+    "section": "",
+    "text": "8.1.1 Single layer networks\n\n\n8.1.2 General feed-forward networks\n\n\n8.1.3 A simple example\n\n\n8.1.4 Numerical differentiation\n\n\n8.1.5 The Jacobian matrix\n\n\n8.1.6 The Hessian matrix",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Backpropagation</span>"
+    ]
+  },
+  {
+    "objectID": "08.html#automatic-differentiation",
+    "href": "08.html#automatic-differentiation",
+    "title": "8  Backpropagation",
+    "section": "8.2 Automatic differentiation",
+    "text": "8.2 Automatic differentiation\n\n8.2.1 Forward-mode autodiff\n\n\n8.2.2 Reverse-mode autodiff",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Backpropagation</span>"
+    ]
+  },
+  {
+    "objectID": "09.html",
+    "href": "09.html",
+    "title": "9  Regularisation",
+    "section": "",
+    "text": "9.1 Inductive bias\nInductive bias refers to the set of assumptions a model makes about the patterns it expects to find in the data. These biases help the model to generalize better from the training data to unseen instances, guiding the learning process towards more plausible solutions given limited information. In the context of deep learning, inductive bias can be inherent in the architecture of the network, the choice of optimization algorithm, or the data representation itself.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Regularisation</span>"
+    ]
+  },
+  {
+    "objectID": "09.html#inductive-bias",
+    "href": "09.html#inductive-bias",
+    "title": "9  Regularisation",
+    "section": "",
+    "text": "9.1.1 Inverse problem\nIn the Bayesian sense, the forward problem is sampling, the inverse problem is inference. data –&gt; parameter\n\n\n9.1.2 No free lunch theorem\nSince there is no universally best learner for every task, the success of a learning algorithm on a particular task depends on how well its inductive bias aligns with the problem.\nRegularization methods contribute to an algorithm’s inductive bias, thus affecting its performance across different tasks.\nmodels are essentially a set of assumptions, and assumptions have consequences\n\n\n9.1.3 Symmetry and invariance\n\n\n9.1.4 Equivariance",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Regularisation</span>"
+    ]
+  },
+  {
+    "objectID": "09.html#weight-decay",
+    "href": "09.html#weight-decay",
+    "title": "9  Regularisation",
+    "section": "9.2 Weight decay",
+    "text": "9.2 Weight decay\nsmaller weights, simpler models L2 regularisation\n\n9.2.1 Consistent regularizers\n\n\n9.2.2 Generalised weight decay",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Regularisation</span>"
+    ]
+  },
+  {
+    "objectID": "09.html#learning-curves",
+    "href": "09.html#learning-curves",
+    "title": "9  Regularisation",
+    "section": "9.3 Learning curves",
+    "text": "9.3 Learning curves\nOn the modeling side, there can be several different approaches to increase the generalization performance:\n\nincrease the model size (better representative capability);\nincrease the data size (capturing more pattern and less noise);\nregulariation (through weight-decay or other methods);\nimprove the model architecture (inducing more inductive bias for certain problems);\nmodel averaging (reduce the variance in specific models)\n\nAnother factor that influences the bias-variance trade-off is the learning process itself. During optimization of the error function through gradient descent, the training error typically decreases as the model parameters are updated, whereas the error for hold-out data may be non-monotonic. This behaviour can be visualized using learning curves, which plot performance measures such as training set and validation set error as a function of iteration number during an iterative learning process such as stochastic gradient descent. These curves provide insight into the progress of training and also offer a practical methodology for controlling the effective model complexity.\n\n9.3.1 Early stopping\n\n\n9.3.2 Double descent\nDouble descent entends the bias-variance trade-off to the big-data/large-model regime where we have so much data that we can fit a model of any size to it.\n\nIn the classical regime, we have limited data, thus we seek a bias-variance balance. In the modern regime, since we have so much data, increasing the model size always leads to better test results.\nThe black dashed line marks the interpolation threshold, where the model’s capacity is just enough to perfectly fit the training data.\n\nstochastic gradient descent not only makes the training more feasible, but also makes the model more robust.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Regularisation</span>"
+    ]
+  },
+  {
+    "objectID": "09.html#parameter-sharing",
+    "href": "09.html#parameter-sharing",
+    "title": "9  Regularisation",
+    "section": "9.4 Parameter sharing",
+    "text": "9.4 Parameter sharing\n\n9.4.1 Soft parameter sharing",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Regularisation</span>"
+    ]
+  },
+  {
+    "objectID": "09.html#residual-connections",
+    "href": "09.html#residual-connections",
+    "title": "9  Regularisation",
+    "section": "9.5 Residual connections",
+    "text": "9.5 Residual connections",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Regularisation</span>"
+    ]
+  },
+  {
+    "objectID": "09.html#model-averaging",
+    "href": "09.html#model-averaging",
+    "title": "9  Regularisation",
+    "section": "9.6 Model averaging",
+    "text": "9.6 Model averaging\n\n9.6.1 Dropout\nRandomly “dropping out” a subset of neurons or connections during training encourages the network to develop redundant representations and prevents co-adaptation of features. The inductive bias here is towards models that are robust to the loss of individual pieces of information, reflecting a kind of ensemble learning within a single model.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Regularisation</span>"
+    ]
+  },
+  {
+    "objectID": "10.html",
+    "href": "10.html",
+    "title": "10  Convolutional networks",
+    "section": "",
+    "text": "10.1 Computer vision",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Convolutional networks</span>"
+    ]
+  },
+  {
+    "objectID": "10.html#computer-vision",
+    "href": "10.html#computer-vision",
+    "title": "10  Convolutional networks",
+    "section": "",
+    "text": "10.1.1 Image data\n\n\n10.1.2 Convolutional filters\n\n\n10.1.3 Feature detectors\n\n\n10.1.4 Translation equivariance\n\n\n10.1.5 Padding\n\n\n10.1.6 Strided convolutions\n\n\n10.1.7 Multi-dimensional convolutions\n\n\n10.1.8 Pooling\n\n\n10.1.9 Multilayer convolutions\n\n\n10.1.10 Example network architectures\nLeNet ImageNet VGG16 AlexNet",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Convolutional networks</span>"
+    ]
+  },
+  {
+    "objectID": "10.html#visualising-trained-cnns",
+    "href": "10.html#visualising-trained-cnns",
+    "title": "10  Convolutional networks",
+    "section": "10.2 Visualising trained CNNs",
+    "text": "10.2 Visualising trained CNNs\n\n10.2.1 Visual cortex\n\n\n10.2.2 Visualizing trained filters\n\n\n10.2.3 Saliency maps\n\n\n10.2.4 Adversarial attacks\n\n\n10.2.5 Synthetic images",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Convolutional networks</span>"
+    ]
+  },
+  {
+    "objectID": "10.html#object-detection",
+    "href": "10.html#object-detection",
+    "title": "10  Convolutional networks",
+    "section": "10.3 Object detection",
+    "text": "10.3 Object detection",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Convolutional networks</span>"
+    ]
+  },
+  {
+    "objectID": "10.html#image-segmentation",
+    "href": "10.html#image-segmentation",
+    "title": "10  Convolutional networks",
+    "section": "10.4 Image segmentation",
+    "text": "10.4 Image segmentation",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Convolutional networks</span>"
+    ]
+  },
+  {
+    "objectID": "10.html#style-transfer",
+    "href": "10.html#style-transfer",
+    "title": "10  Convolutional networks",
+    "section": "10.5 Style transfer",
+    "text": "10.5 Style transfer",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Convolutional networks</span>"
+    ]
+  },
+  {
+    "objectID": "11.html",
+    "href": "11.html",
+    "title": "11  structured distributions",
+    "section": "",
+    "text": "11.1 Graphical models",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>structured distributions</span>"
+    ]
+  },
+  {
+    "objectID": "11.html#conditional-independence",
+    "href": "11.html#conditional-independence",
+    "title": "11  structured distributions",
+    "section": "11.2 Conditional independence",
+    "text": "11.2 Conditional independence",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>structured distributions</span>"
+    ]
+  },
+  {
+    "objectID": "11.html#sequence-models",
+    "href": "11.html#sequence-models",
+    "title": "11  structured distributions",
+    "section": "11.3 Sequence models",
+    "text": "11.3 Sequence models",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>structured distributions</span>"
+    ]
+  },
+  {
+    "objectID": "12.html",
+    "href": "12.html",
+    "title": "12  Transformers",
+    "section": "",
+    "text": "12.1 Attention\nattention was originally developed as an enhancement to RNNs for machine translation, however Vaswani et al. (2017) later showed that \"attention is all you need\", i.e. significantly improved performance could be obtained by eliminating the recurrence structure and instead focusing exclusively on the attention mechanism. Today, transformers based on attention have completely superseded RNNs in almost all applications.\nWe will motivate the use of attention using natural language as an example, although it has much broader applicability. Consider the word \"bank\" in the following sentence: I swam across the river to get to the other bank.\nthe word ‘bank’ can mean different things, However, this can be detected only by looking at the context provided by other words in the sequence. We also see that some words are more important than others in determining the interpretation of ‘bank’. We see that to determine the appropriate interpretation of ‘bank’, a neural network processing such a sentence should attend to specific words from the rest of the sequence.\nMoreover, we also see that the particular locations that should receive more attention depend on the input sequence itself: in the first sentence it is the second and fifth words that are important whereas in the second sentence it is the eighth word. In a standard neural network, different inputs will influence the output to different extents according to the values of the weights that multiply those inputs. Once the network is trained, however, those weights, and their associated inputs, are fixed. By contrast, attention uses weighting factors whose values depend on the specific input data. Figure 12.2 shows the attention weights from a section of a transformer network trained on natural language.\nFigure 12.2 An example of learned attention weights. [From Vaswani et al. (2017) with permission.] The law will never be perfect, but its application should be just, this is what we are missing, in my opinion.\nIn natural language processing (NLP) we need to embed words into vectors, and these vectors can then be used as inputs for subsequent neural network processing. These embeddings capture elementary semantic properties, for example by mapping words with similar meanings to nearby locations in the embedding space. However such embeddings are one-to-one and deterministic, a given word always maps to the same embedding vector. A transformer can be viewed as a richer form of embedding in which a given vector is mapped to a location that depends on the other vectors in the sequence. Thus, the vector representing ‘bank’ in our example above could map to different places in a new embedding space for the two different sentences. For example, in the first sentence the transformed representation might put ‘bank’ close to ‘water’ in the embedding space, whereas in the second sentence the transformed representation might put it close to ‘money’.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Transformers</span>"
+    ]
+  },
+  {
+    "objectID": "12.html#attention",
+    "href": "12.html#attention",
+    "title": "12  Transformers",
+    "section": "",
+    "text": "its exact meaning should be determined from the context, i.e. other words in the same sentence.\ndifferent words have different importance in determining its meaning,\nthe words that we should attend to can be anywhere in the sentence.\n\n\nFigure 12.1 Schematic illustration of attention in which the interpretation of the word ‘bank’ is influenced by the words ‘river’ and ‘swam’, with the thickness of each line being indicative of the strength of its influence\n\n\n\n\n\n12.1.1 Transformer processing\nthe structure of the data matrix, of dimension NxD. It’s kept unchange through the transformer layers.\n\nthe input and output have the same dimension, this, coupled with residual networks, is what makes really deep networks possible.\n\n\n12.1.2 Attention coefficients\n\\[\n\\mathbf{y}_n = \\sum_{m=1}^{N} a_{nm} \\mathbf{x}_m\n\\]\nin the attention layer, each output is a weighted sum of all the input.\nattention can be understood in many different ways, a similarity kernel is most useful.\nin this sense, we can think of it as a combination of NN and GP.\n\n\n12.1.3 Self-attention\n\\[\na_{nm} = \\frac{\\exp(\\mathbf{x}_n^T \\mathbf{x}_m)}{\\sum_{m'=1}^{N} \\exp(\\mathbf{x}_n^T \\mathbf{x}_{m'})}\n\\]\nthe weights are calculated as the exponential of the dot product between pairs of inputs.\n\\[\n\\mathbf{Y} = \\text{Softmax}[\\mathbf{X} \\mathbf{X}^T] \\mathbf{X}\n\\]\nno mask, to fully understand the connections in language.\n\n\n12.1.4 Network parameters\nAs it stands, the transformation from input vectors {xn } to output vectors {yn } is fixed and has no capacity to learn from data because it has no adjustable parameters. Furthermore, each of the feature values within a token vector xn plays an equal role in determining the attention coefficients, whereas we would like the network to have the flexibility to focus more on some features than others when determining token similarity.\nWe therefore transform the three input matrices, each with its our transformation, and consequently trainable parameters. The transformed input matrices are named query, key, and value respectively.\n\\[\n\\begin{aligned}\n\\mathbf{Q} &= \\mathbf{X}\\mathbf{W}^{(q)} \\\\\n\\mathbf{K} &= \\mathbf{X}\\mathbf{W}^{(k)} \\\\\n\\mathbf{V} &= \\mathbf{X}\\mathbf{W}^{(v)}\n\\end{aligned}\n\\]\nand the attention layer is accordingly updated to be \\[\n\\mathbf{Y} = \\text{Softmax}(\\mathbf{Q}\\mathbf{K}^T) \\mathbf{V}\n\\]\ndetermining the attention coefficients Q, K, and output Y\n \n\n\n12.1.5 Scaled self-attention\nthe fact that values do not go through the scaling in worth noting.\n \n\n\n12.1.6 Multi-head attention\nin multi-head attention, the weight matrix dimension of the feedfoward layer increases accordings, however the output is kept the same dimension as the input. This is done by adjusting the input and output dimensions of the feed forward layers\n\n \n\n\n12.1.7 Transformer layers\nresidual connection and layer normalisation are added to the multi-head attention\n\n\n\n\n12.1.8 Computational complexity\n\n\n12.1.9 Positional encoding\nPositional encoding injects information about the relative or absolute position of the tokens in a sequence. This is crucial for transformers to capture the order of the sequence, as they do not inherently possess any notion of order due to their attention mechanism.\nBy adding positional encodings to the input embeddings, transformers can leverage the position information to better understand the structure of the data.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Transformers</span>"
+    ]
+  },
+  {
+    "objectID": "12.html#natural-language",
+    "href": "12.html#natural-language",
+    "title": "12  Transformers",
+    "section": "12.2 Natural language",
+    "text": "12.2 Natural language\nNow that we have studied the architecture of the transformer, we will explore how this can be used to process language data consisting of words, sentences, and paragraphs. Although this is the modality that transformers were originally developed to operate on, they have proved to be a very general class of models and have become the state-of-the-art for most input data types. Later in this chapter we will look at their use in other domains.\nMany languages, including English, comprise a series of words separated by white space, along with punctuation symbols, and therefore represent an example of sequential data. For the moment we will focus on the words, and we will return to punctuation later.\nThe first challenge is to convert the words into a numerical representation that is suitable for use as the input to a deep neural network. One simple approach is to define a fixed dictionary of words and then introduce vectors of length equal to the size of the dictionary along with a ‘one hot’ representation for each word, in which the kth word in the dictionary is encoded with a vector having a 1 in position k and 0 in all other positions.\nAn obvious problem with a one-hot representation is that a realistic dictionary might have several hundred thousand entries leading to vectors of very high dimensionality. Also, it does not capture any similarities or relationships that might exist between words. Both issues can be addressed by mapping the words into a lower-dimensional space through a process called word embedding in which each word is represented as a dense vector in a space of typically a few hundred dimensions.\n\n12.2.1 Word embedding\nCBOW (continuous bag of words) and skip-gram approach for word embedding\n \n\n\n12.2.2 Tokenisation\n\nSentencePiece\nKarpathy’s tutorial on YT\n\n\n12.2.3 Bag of words\n\n\n12.2.4 Autoregressive models\n\n\n12.2.5 Recurrent neural networks\n \n\n\n12.2.6 Backpropagation through time",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Transformers</span>"
+    ]
+  },
+  {
+    "objectID": "12.html#transformer-language-models",
+    "href": "12.html#transformer-language-models",
+    "title": "12  Transformers",
+    "section": "12.3 Transformer language models",
+    "text": "12.3 Transformer language models\nThe transformer processing layer is a highly flexible component for building powerful neural network models with broad applicability. In this section we explore the application of transformers to natural language. This has given rise to the development of massive neural networks known as large language models (LLMs), which have proven to be exceptionally capable (Zhao et al., 2023).\nTransformers can be applied to many different kinds of language processing task, and can be grouped into three categories according to the form of the input and output data. In a problem such as sentiment analysis, we take a sequence of words as input and provide a single variable representing the sentiment of the text, for example happy or sad, as output. Here a transformer is acting as an encoder of the sequence. Other problems might take a single vector as input and generate a word sequence as output, for example if we wish to generate a text caption given an input image. In such cases the transformer functions as a decoder, generating a sequence as output. Finally, in sequence-to-sequence processing tasks, both the input and the output comprise a sequence of words, for example if our goal is to translate from one language to another. In this case, transformers are used in both encoder and decoder roles. We discuss each of these classes of language model in turn, using illustrative examples of model architectures.\n\n12.3.1 Decoder transformers\n \n\n\n12.3.2 Sampling strategies\n\n\n\n12.3.3 Encoder transformers\n\n\n\n12.3.4 Seq2seq transformers\n \n\n\n12.3.5 Large language models",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Transformers</span>"
+    ]
+  },
+  {
+    "objectID": "12.html#multimodal-transformers",
+    "href": "12.html#multimodal-transformers",
+    "title": "12  Transformers",
+    "section": "12.4 Multimodal transformers",
+    "text": "12.4 Multimodal transformers\nAlthough transformers were initially developed as an alternative to recurrent networks for processing sequential language data, they have become prevalent in nearly all areas of deep learning. They have proved to be general-purpose models, as they make very few assumptions about the input data, in contrast, for example, to convolutional networks, which make strong assumptions about equivariances and locality. Due to their generality, transformers have become the state-of-the-art for many different modalities, including text, image, video, point cloud, and audio data, and have been used for both discriminative and generative applications within each of these domains. The core architecture of the transformer layer has remained relatively constant, both over time and across applications. Therefore, the key innovations that enabled the use of transformers in areas other than natural language have largely focused on the representation and encoding of the inputs and outputs.\nOne big advantage of a single architecture that is capable of processing many different kinds of data is that it makes multimodal computation relatively straightforward. In this context, multimodal refers to applications that combine two or more different types of data, either in the inputs or outputs or both. For example, we may wish to generate an image from a text prompt or design a robot that can combine information from multiple sensors such as cameras, radar, and microphones. The important thing to note is that if we can tokenize the inputs and decode the output tokens, then it is likely that we can use a transformer.\nFor the input, as long as we can encode and align the inputs from different modalities, we can simply dump them all to the transformer. However, if the output is multimodal, we need to specify which output nodes correspond to which output.\n\n12.4.1 Vision transformers\nIllustration of the vision transformer architecture for a classification task. Here a learnable hclassi token is included as an additional input, and the associated output is transformed by a linear layer with a softmax activation, denoted by LSM, to give the final class-vector output c.\n\n\n\n12.4.2 Generative image transformers\n\na raster scan that defines a specific linear ordering of the pixels in a two-dimensional image.\n\nAn illustration of how an image can be sampled from an autoregressive model. The first pixel is sampled from the marginal distribution p(x11), the second pixel from the conditional distribution p(x12 |x11 ), and so on in raster scan order until we have a complete image.\n\n\n12.4.3 Audio data\nAn example mel spectrogram of a humpback whale song.\n\n\n\n12.4.4 Text-to-speech\n VALL-E\n\n\n12.4.5 Vision and language transformers",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Transformers</span>"
+    ]
+  },
+  {
+    "objectID": "13.html",
+    "href": "13.html",
+    "title": "13  Graph neural networks",
+    "section": "",
+    "text": "13.1 Machine learning on graphs\nGraph properties include features such as connectivity, the presence of cycles, community structure, and other characteristics that can inform both the structure of the neural network model and the features used within those models.\nAn adjacency matrix is a fundamental way to represent a graph. It captures the presence or absence (and sometimes the weight) of edges between nodes in the graph. This matrix plays a critical role in the operations of GNNs, particularly in defining graph convolution operations.\nPermutation Equivariance is a desirable property in graph neural networks, ensuring that the output of the GNN does not change when the nodes of the input graph are reordered. This property is crucial for learning consistent representations of graphs regardless of node ordering.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Graph neural networks</span>"
+    ]
+  },
+  {
+    "objectID": "13.html#machine-learning-on-graphs",
+    "href": "13.html#machine-learning-on-graphs",
+    "title": "13  Graph neural networks",
+    "section": "",
+    "text": "13.1.1 Graph properties\n\n\n13.1.2 Adjacency matrix\n  \n\n\n13.1.3 Permutation equivariance",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Graph neural networks</span>"
+    ]
+  },
+  {
+    "objectID": "13.html#neural-message-passing",
+    "href": "13.html#neural-message-passing",
+    "title": "13  Graph neural networks",
+    "section": "13.2 Neural message passing",
+    "text": "13.2 Neural message passing\n\n13.2.1 Convolutional filters\n \n\n\n13.2.2 Graph convolution networks (GCN)\nEach node has an associated hidden variable that stores the aggragated info from all its neighbours. Each layer of the network updates the node embedding using the hidden state.\nalgo13.1 simple message passing neural network. Aggregate then update.\n\n\n13.2.3 Aggregation operators\n\n\n\n13.2.4 Update operators\n\n\n13.2.5 Node classification\n\n\n13.2.6 Edge classification\n\n\n13.2.7 Graph classification",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Graph neural networks</span>"
+    ]
+  },
+  {
+    "objectID": "13.html#general-graph-networks",
+    "href": "13.html#general-graph-networks",
+    "title": "13  Graph neural networks",
+    "section": "13.3 General graph networks",
+    "text": "13.3 General graph networks\n\n13.3.1 Graph attention networks\n\n\n13.3.2 Edge embedding\n\n\n13.3.3 Graph embedding\nAlgo13.2: general graph network training scheme.\n\nupdate edge embeddings\naggregate node info\nupdate node embeddings\nupdate graph embedding.\n\n  \n\n\n13.3.4 Over-smoothing\n\n\n13.3.5 Regularisation\n\n\n13.3.6 Geometric deep learning",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Graph neural networks</span>"
+    ]
+  },
+  {
+    "objectID": "14.html",
+    "href": "14.html",
+    "title": "14  Sampling",
+    "section": "",
+    "text": "14.1 basic sampling algorithms",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "14.html#basic-sampling-algorithms",
+    "href": "14.html#basic-sampling-algorithms",
+    "title": "14  Sampling",
+    "section": "",
+    "text": "14.1.1 expectations\n\nIn Bayesian inference the single most important thing is to calculate function expectations. Well actually maybe the only important thing. The same can be said anywhere in statistical inference or machine learning that probability distributions are involved.\n\n\n14.1.2 standard distributions\n\ngeometric interpretation of the transformation method for generating non-uniform distributed random numbers. h is the indefinite integral of the desired distribution. we sample uniformly on \\([0, 1]\\), then transform it using \\(y=h^{-1}(z)\\), then y is distributed according to p(y).\nto do this we need to 1) know h; 2) be able to inverse it.\n\nthe Box-Muller method for generating Gaussian distributed random numbers by generating samples from a uniform distribution inside the unit circle\n\n\n14.1.3 rejection sampling\n \n\n\n14.1.4 adaptive rejection sampling\n \n\n\n14.1.5 importance sampling\n\n\n\n14.1.6 sampling-importance-resampling (SIR)",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "14.html#mcmc",
+    "href": "14.html#mcmc",
+    "title": "14  Sampling",
+    "section": "14.2 MCMC",
+    "text": "14.2 MCMC\nMCMC algorithms construct Markov chains that are designed to have the target probability distribution as their stationary distribution. The chain progresses through states (sample points) where each state depends only on the previous state (Markov property).\nThe theory of Markov chains underpins MCMC.\nThe Metropolis Algorithm is one of the earliest and simplest MCMC methods. The Metropolis-Hastings Algorithm is an extension of the Metropolis algorithm that allows for asymmetric proposal distributions.\nGibbs Sampling is a variant of the Metropolis-Hastings algorithm used when it’s easier to sample from the conditional distributions of a multivariate distribution than from the full joint distribution.\nAncestral Sampling is used primarily in directed graphical models (DGM).\n\n14.2.1 the Metropolis algorithm\n\n\n\n14.2.2 Markov chains\n\n\n14.2.3 the Metropolis-Hastings algorithm\n\n\n\n14.2.4 Gibbs sampling\n \n\n\n14.2.5 ancestral sampling",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "14.html#langevin-sampling",
+    "href": "14.html#langevin-sampling",
+    "title": "14  Sampling",
+    "section": "14.3 Langevin sampling",
+    "text": "14.3 Langevin sampling\nLangevin dynamics is used to calculate the gradients.\nEnergy based models convert an energy function into a probability density function, and normalise it using the integral over x.\nmaximising logp turns out to be balance data and model.\n\ntraining an energy-based model by maximizing the likelihood.\n\\[\n\\nabla_{\\mathbf{w}}\\mathbb{E}_{\\mathbf{x} \\sim \\mathcal{D}}[ \\ln p(\\mathbf{x}|\\mathbf{w}) ] = -\\mathbb{E}_{\\mathbf{x} \\sim p\\mathcal{D}}[ \\nabla_{\\mathbf{w}}E(\\mathbf{x},\\mathbf{w}) ] + \\mathbb{E}_{\\mathbf{x} \\sim p\\mathcal{M}(\\mathbf{x})}[ \\nabla_{\\mathbf{w}}E(\\mathbf{x},\\mathbf{w}) ].\n\\]\nIncreasing the expected data likelihood pushes the energy function up at points corresponding to samples from the model (current model belief) and pushes it down at points corresponding to samples from the data set (true data dist)\n\n14.3.1 energy-based models\nwe first define the density of one datum \\[\np(\\mathbf{x}|\\mathbf{w}) = \\frac{1}{Z(\\mathbf{w})} \\exp\\{-E(\\mathbf{x}, \\mathbf{w})\\}\n\\]\nthe normalizer just integrate over the whole space \\[\nZ(\\mathbf{w}) = \\int \\exp\\{-E(\\mathbf{x}, \\mathbf{w})\\} \\, d\\mathbf{x}\n\\]\nthen the log likelihood of a whole data set \\[ \\ln p(\\mathcal{D}|\\mathbf{w}) = -\\sum_{n=1}^{N} E(\\mathbf{x}_n, \\mathbf{w}) - N \\ln Z(\\mathbf{w}) \\]\nthis will be used as the optimization target.\n\n\n14.3.2 maximising the likelihood\nto optimise we need the gradient (to be zero) \\[\n\\nabla_{\\mathbf{w}} \\ln p(\\mathbf{x}|\\mathbf{w}) = -\\nabla_{\\mathbf{w}} E(\\mathbf{x}, \\mathbf{w}) - \\nabla_{\\mathbf{w}} \\ln Z(\\mathbf{w})\n\\]\naverage over the dataset \\[\n\\mathbb{E}_{\\mathbf{x} \\sim p_{\\mathcal{D}}}[\\nabla_{\\mathbf{w}} \\ln p(\\mathbf{x}|\\mathbf{w})] = -\\mathbb{E}_{\\mathbf{x} \\sim p_{\\mathcal{D}}}[\\nabla_{\\mathbf{w}}E(\\mathbf{x}, \\mathbf{w})] - \\nabla_{\\mathbf{w}} \\ln Z(\\mathbf{w})\n\\]\nand the gradient for the normalizing term can be expressed as \\[\n-\\nabla_{\\mathbf{w}} \\ln Z(\\mathbf{w}) = \\int \\nabla_{\\mathbf{w}}E(\\mathbf{x}, \\mathbf{w}) p(\\mathbf{x}|\\mathbf{w}) \\, d\\mathbf{x}\n\\]\nthe derivative of a log of an integral involves a “trick” where we differentiate the integrand and normalize it by the integral itself, essentially creating an expected value of the gradient of the energy function under the distribution defined by the normalized exponential of the negative energy, which is essentially p(x|w).\nso the gradient for a dataset ends up to be \\[\n\\nabla_{\\mathbf{w}}\\mathbb{E}_{x \\sim p_{\\mathcal{D}}}[\\ln p(\\mathbf{x}|\\mathbf{w})] = -\\mathbb{E}_{x \\sim p_{\\mathcal{D}}}[\\nabla_{\\mathbf{w}}E(\\mathbf{x}, \\mathbf{w})] + \\mathbb{E}_{\\mathbf{x} \\sim p(\\mathbf{x}|\\mathbf{w})}[\\nabla_{\\mathbf{w}}E(\\mathbf{x}, \\mathbf{w})]\n\\]\nit’s the gradient of the energy function, averaged over the data and the (current) model, in opposite directions.\n\n\n14.3.3 Langevin dynamics\nthe expectation wrt the data distribution is easy, we can simply use bootstrapping.\nthe expectation wrt the model distribution, however, is significantly more difficult, because although we can evaluate the current energy level, we cannot evaluate the normalizing constant.\nHowever, there exist a sampling algorithm, stochastic gradient Langevin dynamics sampling, which can sample the distribution using only the score of the logp wrt the data vectors, not the model parameters, and thus bypassing the problem. To see this, we first define the score function\n\\[\ns(\\mathbf{x}, \\mathbf{w}) = \\nabla_{\\mathbf{x}} \\ln p(\\mathbf{x}|\\mathbf{w})\n\\]\nsubstitue in the definition of logp and we have\n\\[\n\\nabla_{\\mathbf{x}} \\ln p(\\mathbf{x}|\\mathbf{w}) = \\nabla_{\\mathbf{x}} \\ln \\frac{\\exp(-E(\\mathbf{x},\\mathbf{w}))}{Z(\\mathbf{w})} \\\\\n&= \\nabla_{\\mathbf{x}} [-E(\\mathbf{x},\\mathbf{w})] - \\nabla_{\\mathbf{x}} \\ln Z(\\mathbf{w}) \\\\\n&= -\\nabla_{\\mathbf{x}} E(\\mathbf{x},\\mathbf{w})\n\\]\nsince the gradient wrt the normalizing term is zero, we are left only with the energy function, of which we can calculate the gradient.\nThe Langevin update process is\n\\[\n\\mathbf{x}^{(\\tau+1)} = \\mathbf{x}^{(\\tau)} + \\eta \\nabla_{\\mathbf{x}} \\ln p(\\mathbf{x}^{(\\tau)}|\\mathbf{w}) + \\sqrt{2 \\eta} \\epsilon^{(\\tau)}, \\quad \\tau \\in \\{1, \\ldots, T\\}\n\\]\nEach \\(T\\) steps give us one sample, and to obtain N samples we need \\(NT\\) steps. And with these samples we’ll also be able to estimate the second expectation, and now we have all the means necessary for gradient update.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "15.html",
+    "href": "15.html",
+    "title": "15  Discrete latent variables",
+    "section": "",
+    "text": "15.1 K-means clustering\nupdate assignments (E) and centers (M) till convergence\nplot of the cost function after each E step (in blue) and M step (in red).",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Discrete latent variables</span>"
+    ]
+  },
+  {
+    "objectID": "15.html#k-means-clustering",
+    "href": "15.html#k-means-clustering",
+    "title": "15  Discrete latent variables",
+    "section": "",
+    "text": "15.1.1 Image segmentation\napplying K-means to image segmentation, with varying Ks",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Discrete latent variables</span>"
+    ]
+  },
+  {
+    "objectID": "15.html#mixture-of-gaussian",
+    "href": "15.html#mixture-of-gaussian",
+    "title": "15  Discrete latent variables",
+    "section": "15.2 Mixture of Gaussian",
+    "text": "15.2 Mixture of Gaussian\ngraph representation of mixture model (VERY SIMPLE!)\n\n\\[\n\\ln p(\\mathbf{X}|\\boldsymbol{\\pi}, \\boldsymbol{\\mu}, \\boldsymbol{\\Sigma}) = \\sum_{n=1}^{N} \\ln \\left\\{ \\sum_{k=1}^{K} \\pi_k \\mathcal{N}(\\mathbf{x}_n|\\boldsymbol{\\mu}_k, \\boldsymbol{\\Sigma}_k) \\right\\}\n\\]\n\n15.2.1 Likelihood function\n\n\n15.2.2 Maximum likelihood",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Discrete latent variables</span>"
+    ]
+  },
+  {
+    "objectID": "15.html#expectation-maximisation",
+    "href": "15.html#expectation-maximisation",
+    "title": "15  Discrete latent variables",
+    "section": "15.3 Expectation maximisation",
+    "text": "15.3 Expectation maximisation\n\n15.3.1 Gaussian mixtures\n\n\n15.3.2 Relation to K-means\n\n\n15.3.3 Bernoulli mixtures",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Discrete latent variables</span>"
+    ]
+  },
+  {
+    "objectID": "15.html#evidence-lower-bond",
+    "href": "15.html#evidence-lower-bond",
+    "title": "15  Discrete latent variables",
+    "section": "15.4 Evidence lower bond",
+    "text": "15.4 Evidence lower bond\n\n15.4.1 EM revisited\n\n\n15.4.2 IID data\n\n\n15.4.3 Parameter priors\n\n\n15.4.4 Generalised EM\n\n\n15.4.5 Sequential EM",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Discrete latent variables</span>"
+    ]
+  },
+  {
+    "objectID": "16.html",
+    "href": "16.html",
+    "title": "16  Continuous latent variables",
+    "section": "",
+    "text": "16.1 Principle conponent analysis",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Continuous latent variables</span>"
+    ]
+  },
+  {
+    "objectID": "16.html#principle-conponent-analysis",
+    "href": "16.html#principle-conponent-analysis",
+    "title": "16  Continuous latent variables",
+    "section": "",
+    "text": "16.1.1 Maximum variance formulation\n\n\n16.1.2 Minimum error formulation\n\n\n16.1.3 Data compression\n\n\n16.1.4 Data whitening\n\n\n16.1.5 High dimensional data",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Continuous latent variables</span>"
+    ]
+  },
+  {
+    "objectID": "16.html#probabilistic-latent-variables",
+    "href": "16.html#probabilistic-latent-variables",
+    "title": "16  Continuous latent variables",
+    "section": "16.2 Probabilistic latent variables",
+    "text": "16.2 Probabilistic latent variables\n\n16.2.1 Generative method\n\n\n16.2.2 Likelihood function\n\n\n16.2.3 Maximum likelihood\n\n\n16.2.4 Factor analysis (FA)\n\n\n16.2.5 Independent component analysis (ICA)\n\n\n16.2.6 Kalman filters",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Continuous latent variables</span>"
+    ]
+  },
+  {
+    "objectID": "16.html#evidence-lower-bound",
+    "href": "16.html#evidence-lower-bound",
+    "title": "16  Continuous latent variables",
+    "section": "16.3 Evidence lower bound",
+    "text": "16.3 Evidence lower bound\n\n16.3.1 Expectation maximisation\n\n\n16.3.2 EM for PCA\n\n\n16.3.3 EM for FA",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Continuous latent variables</span>"
+    ]
+  },
+  {
+    "objectID": "16.html#nonlinear-latent-variable-models",
+    "href": "16.html#nonlinear-latent-variable-models",
+    "title": "16  Continuous latent variables",
+    "section": "16.4 Nonlinear latent variable models",
+    "text": "16.4 Nonlinear latent variable models\n\n16.4.1 Nonlinear manifolds\n\n\n16.4.2 Likelihood function\n\n\n16.4.3 Discrete data\n\n\n16.4.4 Four approaches to generative modeling",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Continuous latent variables</span>"
+    ]
+  },
+  {
+    "objectID": "17.html",
+    "href": "17.html",
+    "title": "17  Generative adversarial networks",
+    "section": "",
+    "text": "17.1 Adversarial training",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Generative adversarial networks</span>"
+    ]
+  },
+  {
+    "objectID": "17.html#adversarial-training",
+    "href": "17.html#adversarial-training",
+    "title": "17  Generative adversarial networks",
+    "section": "",
+    "text": "17.1.1 Loss functions\n\n\n17.1.2 GAN training in practice",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Generative adversarial networks</span>"
+    ]
+  },
+  {
+    "objectID": "17.html#image-gans",
+    "href": "17.html#image-gans",
+    "title": "17  Generative adversarial networks",
+    "section": "17.2 Image GANs",
+    "text": "17.2 Image GANs\n\n17.2.1 CycleGAN",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Generative adversarial networks</span>"
+    ]
+  },
+  {
+    "objectID": "19.html",
+    "href": "19.html",
+    "title": "19  Autoencoders",
+    "section": "",
+    "text": "19.1 Deterministic autoencoders",
+    "crumbs": [
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Autoencoders</span>"
+    ]
+  },
+  {
+    "objectID": "19.html#deterministic-autoencoders",
+    "href": "19.html#deterministic-autoencoders",
+    "title": "19  Autoencoders",
+    "section": "",
+    "text": "19.1.1 Linear AEs\n\n\n19.1.2 Deep AEs\n\n\n19.1.3 Sparse AEs\n\n\n19.1.4 Denoising AEs\n\n\n19.1.5 Masked AEs",
+    "crumbs": [
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Autoencoders</span>"
+    ]
+  },
+  {
+    "objectID": "19.html#variational-autoencoders",
+    "href": "19.html#variational-autoencoders",
+    "title": "19  Autoencoders",
+    "section": "19.2 Variational autoencoders",
+    "text": "19.2 Variational autoencoders\n\n19.2.1 Amortized inference\n\n\n19.2.2 The reparameterization trick",
+    "crumbs": [
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Autoencoders</span>"
     ]
   }
 ]

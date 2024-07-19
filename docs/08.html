@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – dlfc_notes</title>
+<title>8&nbsp; Backpropagation – dlfc_notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./20.html" rel="prev">
+<link href="./09.html" rel="next">
+<link href="./07.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -99,7 +81,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Backpropagation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -174,7 +156,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08.html" class="sidebar-item-text sidebar-link">
+  <a href="./08.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Backpropagation</span></span></a>
   </div>
 </li>
@@ -252,7 +234,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -261,15 +243,34 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#evaluation-of-gradient" id="toc-evaluation-of-gradient" class="nav-link active" data-scroll-target="#evaluation-of-gradient"><span class="header-section-number">8.1</span> Evaluation of gradient</a>
+  <ul class="collapse">
+  <li><a href="#single-layer-networks" id="toc-single-layer-networks" class="nav-link" data-scroll-target="#single-layer-networks"><span class="header-section-number">8.1.1</span> Single layer networks</a></li>
+  <li><a href="#general-feed-forward-networks" id="toc-general-feed-forward-networks" class="nav-link" data-scroll-target="#general-feed-forward-networks"><span class="header-section-number">8.1.2</span> General feed-forward networks</a></li>
+  <li><a href="#a-simple-example" id="toc-a-simple-example" class="nav-link" data-scroll-target="#a-simple-example"><span class="header-section-number">8.1.3</span> A simple example</a></li>
+  <li><a href="#numerical-differentiation" id="toc-numerical-differentiation" class="nav-link" data-scroll-target="#numerical-differentiation"><span class="header-section-number">8.1.4</span> Numerical differentiation</a></li>
+  <li><a href="#the-jacobian-matrix" id="toc-the-jacobian-matrix" class="nav-link" data-scroll-target="#the-jacobian-matrix"><span class="header-section-number">8.1.5</span> The Jacobian matrix</a></li>
+  <li><a href="#the-hessian-matrix" id="toc-the-hessian-matrix" class="nav-link" data-scroll-target="#the-hessian-matrix"><span class="header-section-number">8.1.6</span> The Hessian matrix</a></li>
+  </ul></li>
+  <li><a href="#automatic-differentiation" id="toc-automatic-differentiation" class="nav-link" data-scroll-target="#automatic-differentiation"><span class="header-section-number">8.2</span> Automatic differentiation</a>
+  <ul class="collapse">
+  <li><a href="#forward-mode-autodiff" id="toc-forward-mode-autodiff" class="nav-link" data-scroll-target="#forward-mode-autodiff"><span class="header-section-number">8.2.1</span> Forward-mode autodiff</a></li>
+  <li><a href="#reverse-mode-autodiff" id="toc-reverse-mode-autodiff" class="nav-link" data-scroll-target="#reverse-mode-autodiff"><span class="header-section-number">8.2.2</span> Reverse-mode autodiff</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Backpropagation</span></h1>
 </div>
 
 
@@ -286,14 +287,39 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-knuth84" class="csl-entry" role="listitem">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput.
-J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
-</div>
-</div>
+<p>How to do backpropagation, and how to do it automatically.</p>
+<section id="evaluation-of-gradient" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="evaluation-of-gradient"><span class="header-section-number">8.1</span> Evaluation of gradient</h2>
+<section id="single-layer-networks" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="single-layer-networks"><span class="header-section-number">8.1.1</span> Single layer networks</h3>
+</section>
+<section id="general-feed-forward-networks" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="general-feed-forward-networks"><span class="header-section-number">8.1.2</span> General feed-forward networks</h3>
+</section>
+<section id="a-simple-example" class="level3" data-number="8.1.3">
+<h3 data-number="8.1.3" class="anchored" data-anchor-id="a-simple-example"><span class="header-section-number">8.1.3</span> A simple example</h3>
+</section>
+<section id="numerical-differentiation" class="level3" data-number="8.1.4">
+<h3 data-number="8.1.4" class="anchored" data-anchor-id="numerical-differentiation"><span class="header-section-number">8.1.4</span> Numerical differentiation</h3>
+</section>
+<section id="the-jacobian-matrix" class="level3" data-number="8.1.5">
+<h3 data-number="8.1.5" class="anchored" data-anchor-id="the-jacobian-matrix"><span class="header-section-number">8.1.5</span> The Jacobian matrix</h3>
+</section>
+<section id="the-hessian-matrix" class="level3" data-number="8.1.6">
+<h3 data-number="8.1.6" class="anchored" data-anchor-id="the-hessian-matrix"><span class="header-section-number">8.1.6</span> The Hessian matrix</h3>
+</section>
+</section>
+<section id="automatic-differentiation" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="automatic-differentiation"><span class="header-section-number">8.2</span> Automatic differentiation</h2>
+<section id="forward-mode-autodiff" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="forward-mode-autodiff"><span class="header-section-number">8.2.1</span> Forward-mode autodiff</h3>
+</section>
+<section id="reverse-mode-autodiff" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="reverse-mode-autodiff"><span class="header-section-number">8.2.2</span> Reverse-mode autodiff</h3>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -718,11 +744,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./20.html" class="pagination-link" aria-label="Diffusion Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span>
+      <a href="./07.html" class="pagination-link" aria-label="Gradient Descent">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Gradient Descent</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./09.html" class="pagination-link" aria-label="Regularisation">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regularisation</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

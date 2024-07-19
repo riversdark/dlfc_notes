@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – dlfc_notes</title>
+<title>2&nbsp; Probabilities – dlfc_notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./20.html" rel="prev">
+<link href="./03.html" rel="next">
+<link href="./01.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -87,6 +69,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -99,7 +110,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probabilities</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -138,7 +149,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02.html" class="sidebar-item-text sidebar-link">
+  <a href="./02.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probabilities</span></span></a>
   </div>
 </li>
@@ -252,7 +263,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -261,15 +272,61 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-rules-of-probability" id="toc-the-rules-of-probability" class="nav-link active" data-scroll-target="#the-rules-of-probability"><span class="header-section-number">2.1</span> The rules of probability</a>
+  <ul class="collapse">
+  <li><a href="#a-medical-screening-example" id="toc-a-medical-screening-example" class="nav-link" data-scroll-target="#a-medical-screening-example"><span class="header-section-number">2.1.1</span> A medical screening example</a></li>
+  <li><a href="#the-sum-and-product-rules" id="toc-the-sum-and-product-rules" class="nav-link" data-scroll-target="#the-sum-and-product-rules"><span class="header-section-number">2.1.2</span> The sum and product rules</a></li>
+  <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link" data-scroll-target="#bayes-theorem"><span class="header-section-number">2.1.3</span> Bayes’ theorem</a></li>
+  <li><a href="#medical-screening-revisited" id="toc-medical-screening-revisited" class="nav-link" data-scroll-target="#medical-screening-revisited"><span class="header-section-number">2.1.4</span> Medical screening revisited</a></li>
+  <li><a href="#prior-and-posterior-probabilities" id="toc-prior-and-posterior-probabilities" class="nav-link" data-scroll-target="#prior-and-posterior-probabilities"><span class="header-section-number">2.1.5</span> Prior and posterior probabilities</a></li>
+  <li><a href="#independent-variables" id="toc-independent-variables" class="nav-link" data-scroll-target="#independent-variables"><span class="header-section-number">2.1.6</span> Independent variables</a></li>
+  </ul></li>
+  <li><a href="#probability-densities" id="toc-probability-densities" class="nav-link" data-scroll-target="#probability-densities"><span class="header-section-number">2.2</span> Probability densities</a>
+  <ul class="collapse">
+  <li><a href="#example-distributions" id="toc-example-distributions" class="nav-link" data-scroll-target="#example-distributions"><span class="header-section-number">2.2.1</span> Example distributions</a></li>
+  <li><a href="#expectations-and-covariances" id="toc-expectations-and-covariances" class="nav-link" data-scroll-target="#expectations-and-covariances"><span class="header-section-number">2.2.2</span> Expectations and covariances</a></li>
+  </ul></li>
+  <li><a href="#the-gaussian-distribution" id="toc-the-gaussian-distribution" class="nav-link" data-scroll-target="#the-gaussian-distribution"><span class="header-section-number">2.3</span> The Gaussian distribution</a>
+  <ul class="collapse">
+  <li><a href="#mean-and-variance" id="toc-mean-and-variance" class="nav-link" data-scroll-target="#mean-and-variance"><span class="header-section-number">2.3.1</span> Mean and variance</a></li>
+  <li><a href="#likelihood-function" id="toc-likelihood-function" class="nav-link" data-scroll-target="#likelihood-function"><span class="header-section-number">2.3.2</span> Likelihood function</a></li>
+  <li><a href="#bias-of-maximum-likelihood" id="toc-bias-of-maximum-likelihood" class="nav-link" data-scroll-target="#bias-of-maximum-likelihood"><span class="header-section-number">2.3.3</span> Bias of maximum likelihood</a></li>
+  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression"><span class="header-section-number">2.3.4</span> Linear regression</a></li>
+  </ul></li>
+  <li><a href="#transformation-of-densities" id="toc-transformation-of-densities" class="nav-link" data-scroll-target="#transformation-of-densities"><span class="header-section-number">2.4</span> Transformation of densities</a>
+  <ul class="collapse">
+  <li><a href="#multivariate-distributions" id="toc-multivariate-distributions" class="nav-link" data-scroll-target="#multivariate-distributions"><span class="header-section-number">2.4.1</span> Multivariate distributions</a></li>
+  </ul></li>
+  <li><a href="#information-theory" id="toc-information-theory" class="nav-link" data-scroll-target="#information-theory"><span class="header-section-number">2.5</span> Information theory</a>
+  <ul class="collapse">
+  <li><a href="#entropy" id="toc-entropy" class="nav-link" data-scroll-target="#entropy"><span class="header-section-number">2.5.1</span> Entropy</a></li>
+  <li><a href="#physics-perspective" id="toc-physics-perspective" class="nav-link" data-scroll-target="#physics-perspective"><span class="header-section-number">2.5.2</span> Physics perspective</a></li>
+  <li><a href="#differential-entropy" id="toc-differential-entropy" class="nav-link" data-scroll-target="#differential-entropy"><span class="header-section-number">2.5.3</span> Differential entropy</a></li>
+  <li><a href="#maximum-entropy" id="toc-maximum-entropy" class="nav-link" data-scroll-target="#maximum-entropy"><span class="header-section-number">2.5.4</span> Maximum entropy</a></li>
+  <li><a href="#kullbackleibler-divergence" id="toc-kullbackleibler-divergence" class="nav-link" data-scroll-target="#kullbackleibler-divergence"><span class="header-section-number">2.5.5</span> Kullback–Leibler divergence</a></li>
+  <li><a href="#conditional-entropy" id="toc-conditional-entropy" class="nav-link" data-scroll-target="#conditional-entropy"><span class="header-section-number">2.5.6</span> Conditional entropy</a></li>
+  <li><a href="#mutual-information" id="toc-mutual-information" class="nav-link" data-scroll-target="#mutual-information"><span class="header-section-number">2.5.7</span> Mutual information</a></li>
+  </ul></li>
+  <li><a href="#bayesian-probabilities" id="toc-bayesian-probabilities" class="nav-link" data-scroll-target="#bayesian-probabilities"><span class="header-section-number">2.6</span> Bayesian probabilities</a>
+  <ul class="collapse">
+  <li><a href="#model-parameters" id="toc-model-parameters" class="nav-link" data-scroll-target="#model-parameters"><span class="header-section-number">2.6.1</span> Model parameters</a></li>
+  <li><a href="#regularization" id="toc-regularization" class="nav-link" data-scroll-target="#regularization"><span class="header-section-number">2.6.2</span> Regularization</a></li>
+  <li><a href="#bayesian-machine-learning" id="toc-bayesian-machine-learning" class="nav-link" data-scroll-target="#bayesian-machine-learning"><span class="header-section-number">2.6.3</span> Bayesian machine learning</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probabilities</span></h1>
 </div>
 
 
@@ -286,14 +343,121 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-knuth84" class="csl-entry" role="listitem">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput.
-J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
-</div>
-</div>
+<p>Probability is introduced to deal with uncertainty.</p>
+<p>Given a model, parameter uncertainty can be solved with more data. This is related to the concept of “degree of freedom”.</p>
+<p>But model is always limiting, and sometimes somewhat arbitrary. This introduces model uncertainty. We can build more complex models, but there is no “solving” the problem, because real word data is always more complex than any model we can build.</p>
+<p>Probability theory is easy, because there are, in total, only two rules.</p>
+<p>Probability is a Lebesgue measure defined on the sample space. It’s defined on sets, which are not easy to manipulate. So for simple spaces we introduce the concept of <strong>densities</strong>, the integral of which will be the probability. One most common density is the Gaussian.</p>
+<p>When transforming probability distributions, our goal is to keep the probability mass of a certain set consistent, not the density (remember density itself has no significance in probability, it’s only a tool for constructing probability masses). For this reason we need to compensate for the space transformation (using the Jacobian) when transforming the density.</p>
+<p><strong>Information</strong> is a formal way to describe the “surprise” we might expect from a random event. Starting from one event, the concept is then extended to one, or even multiple distributions.</p>
+<p>Bayesian statistics (sometimes also called Laplacian statistics by source of contribution, and some other times also called inverse probability by way of calculation), is the rigorous application of probability theory to all aspects of statistical modeling. As such every element in Bayesian statistics is associated with a certain probability computation. In this book we won’t systematically cover Bayesian statistics, because the rigorous Bayesian treatment of every aspect of very deep neural networks (the focus of this book) is simply computationally infeasible. However elements of Bayesian statistics will manifest here and there, in all corners of deep learning.</p>
+<section id="the-rules-of-probability" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="the-rules-of-probability"><span class="header-section-number">2.1</span> The rules of probability</h2>
+<p>uncertainty: collect more data; use a more capable model <img src="./img/DLFC/Chapter-2/Figure_1_a.png" class="img-fluid"> <img src="./img/DLFC/Chapter-2/Figure_1_b.png" class="img-fluid"> <img src="./img/DLFC/Chapter-2/Figure_1_c.png" class="img-fluid"></p>
+<p>probability as frequency:</p>
+<p><img src="./img/DLFC/Chapter-2/Figure_2.png" class="img-fluid"></p>
+<section id="a-medical-screening-example" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="a-medical-screening-example"><span class="header-section-number">2.1.1</span> A medical screening example</h3>
+<p><img src="./img/DLFC/Chapter-2/Figure_3.png" class="img-fluid"></p>
+</section>
+<section id="the-sum-and-product-rules" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="the-sum-and-product-rules"><span class="header-section-number">2.1.2</span> The sum and product rules</h3>
+<p><img src="./img/DLFC/Chapter-2/Figure_4.png" class="img-fluid"></p>
+</section>
+<section id="bayes-theorem" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="bayes-theorem"><span class="header-section-number">2.1.3</span> Bayes’ theorem</h3>
+<p><img src="./img/DLFC/Chapter-2/Figure_5_a.png" class="img-fluid"> <img src="./img/DLFC/Chapter-2/Figure_5_b.png" class="img-fluid"> <img src="./img/DLFC/Chapter-2/Figure_5_c.png" class="img-fluid"> <img src="./img/DLFC/Chapter-2/Figure_5_d.png" class="img-fluid"></p>
+</section>
+<section id="medical-screening-revisited" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="medical-screening-revisited"><span class="header-section-number">2.1.4</span> Medical screening revisited</h3>
+</section>
+<section id="prior-and-posterior-probabilities" class="level3" data-number="2.1.5">
+<h3 data-number="2.1.5" class="anchored" data-anchor-id="prior-and-posterior-probabilities"><span class="header-section-number">2.1.5</span> Prior and posterior probabilities</h3>
+</section>
+<section id="independent-variables" class="level3" data-number="2.1.6">
+<h3 data-number="2.1.6" class="anchored" data-anchor-id="independent-variables"><span class="header-section-number">2.1.6</span> Independent variables</h3>
+</section>
+</section>
+<section id="probability-densities" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="probability-densities"><span class="header-section-number">2.2</span> Probability densities</h2>
+<p><img src="./img/DLFC/Chapter-2/Figure_6.png" class="img-fluid"></p>
+<section id="example-distributions" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="example-distributions"><span class="header-section-number">2.2.1</span> Example distributions</h3>
+<p><img src="./img/DLFC/Chapter-2/Figure_7.png" class="img-fluid"></p>
+</section>
+<section id="expectations-and-covariances" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="expectations-and-covariances"><span class="header-section-number">2.2.2</span> Expectations and covariances</h3>
+</section>
+</section>
+<section id="the-gaussian-distribution" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="the-gaussian-distribution"><span class="header-section-number">2.3</span> The Gaussian distribution</h2>
+<p><span class="math display">\[
+\mathcal{N}(x | \mu, \sigma^2) = \frac{1}{(2\pi\sigma^2)^{1/2}} \exp \left\{ -\frac{1}{2\sigma^2} (x - \mu)^2 \right\}
+\]</span></p>
+<section id="mean-and-variance" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="mean-and-variance"><span class="header-section-number">2.3.1</span> Mean and variance</h3>
+</section>
+<section id="likelihood-function" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="likelihood-function"><span class="header-section-number">2.3.2</span> Likelihood function</h3>
+</section>
+<section id="bias-of-maximum-likelihood" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="bias-of-maximum-likelihood"><span class="header-section-number">2.3.3</span> Bias of maximum likelihood</h3>
+</section>
+<section id="linear-regression" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="linear-regression"><span class="header-section-number">2.3.4</span> Linear regression</h3>
+</section>
+</section>
+<section id="transformation-of-densities" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="transformation-of-densities"><span class="header-section-number">2.4</span> Transformation of densities</h2>
+<p><img src="./img/DLFC/Chapter-2/Figure_12.png" class="img-fluid"></p>
+<section id="multivariate-distributions" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="multivariate-distributions"><span class="header-section-number">2.4.1</span> Multivariate distributions</h3>
+</section>
+</section>
+<section id="information-theory" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="information-theory"><span class="header-section-number">2.5</span> Information theory</h2>
+<p><img src="./img/DLFC/Chapter-2/Figure_14_a.png" class="img-fluid"> <img src="./img/DLFC/Chapter-2/Figure_14_b.png" class="img-fluid"></p>
+<p>the broader distribution has a higher entropy. A uniform distribution would have the largest entropy.</p>
+<section id="entropy" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="entropy"><span class="header-section-number">2.5.1</span> Entropy</h3>
+</section>
+<section id="physics-perspective" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="physics-perspective"><span class="header-section-number">2.5.2</span> Physics perspective</h3>
+</section>
+<section id="differential-entropy" class="level3" data-number="2.5.3">
+<h3 data-number="2.5.3" class="anchored" data-anchor-id="differential-entropy"><span class="header-section-number">2.5.3</span> Differential entropy</h3>
+</section>
+<section id="maximum-entropy" class="level3" data-number="2.5.4">
+<h3 data-number="2.5.4" class="anchored" data-anchor-id="maximum-entropy"><span class="header-section-number">2.5.4</span> Maximum entropy</h3>
+</section>
+<section id="kullbackleibler-divergence" class="level3" data-number="2.5.5">
+<h3 data-number="2.5.5" class="anchored" data-anchor-id="kullbackleibler-divergence"><span class="header-section-number">2.5.5</span> Kullback–Leibler divergence</h3>
+</section>
+<section id="conditional-entropy" class="level3" data-number="2.5.6">
+<h3 data-number="2.5.6" class="anchored" data-anchor-id="conditional-entropy"><span class="header-section-number">2.5.6</span> Conditional entropy</h3>
+</section>
+<section id="mutual-information" class="level3" data-number="2.5.7">
+<h3 data-number="2.5.7" class="anchored" data-anchor-id="mutual-information"><span class="header-section-number">2.5.7</span> Mutual information</h3>
+</section>
+</section>
+<section id="bayesian-probabilities" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="bayesian-probabilities"><span class="header-section-number">2.6</span> Bayesian probabilities</h2>
+<p>more general, probability as measure of uncertainty</p>
+<section id="model-parameters" class="level3" data-number="2.6.1">
+<h3 data-number="2.6.1" class="anchored" data-anchor-id="model-parameters"><span class="header-section-number">2.6.1</span> Model parameters</h3>
+<p>using probability to model parameter uncertainty, and update the probability distribution with data.</p>
+</section>
+<section id="regularization" class="level3" data-number="2.6.2">
+<h3 data-number="2.6.2" class="anchored" data-anchor-id="regularization"><span class="header-section-number">2.6.2</span> Regularization</h3>
+<p>using the rules of probability, we can establish a connection between MAP and ML estimation, and see that MAP is in fact a regularised ML estimation.</p>
+</section>
+<section id="bayesian-machine-learning" class="level3" data-number="2.6.3">
+<h3 data-number="2.6.3" class="anchored" data-anchor-id="bayesian-machine-learning"><span class="header-section-number">2.6.3</span> Bayesian machine learning</h3>
+<p>from parameter uncertainty to outcome uncertainty</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -718,11 +882,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./20.html" class="pagination-link" aria-label="Diffusion Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span>
+      <a href="./01.html" class="pagination-link" aria-label="The Deep Learning Revolution">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Deep Learning Revolution</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./03.html" class="pagination-link" aria-label="Standard distributions">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Standard distributions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
