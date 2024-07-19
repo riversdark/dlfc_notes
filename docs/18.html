@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.43">
+<meta name="generator" content="quarto-1.5.53">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>dlfc_notes – 3&nbsp; Normalizing Flows</title>
+<title>18&nbsp; Normalizing Flows – dlfc_notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./20.html" rel="next">
-<link href="./07.html" rel="prev">
+<link href="./19.html" rel="next">
+<link href="./17.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -144,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./18.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./18.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -183,20 +183,116 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probabilities</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Standard distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Single layer networks: regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Single layer networks: classification</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Deep Neural Networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./07.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Gradient Descent</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Gradient Descent</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Backpropagation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regularisation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Convolutional networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">structured distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Graph neural networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Discrete latent variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Continuous latent variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Generative adversarial networks</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./18.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./20.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -215,14 +311,16 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#coupling-flows" id="toc-coupling-flows" class="nav-link active" data-scroll-target="#coupling-flows"><span class="header-section-number">3.1</span> coupling flows</a></li>
-  <li><a href="#autoregressive-flows" id="toc-autoregressive-flows" class="nav-link" data-scroll-target="#autoregressive-flows"><span class="header-section-number">3.2</span> autoregressive flows</a></li>
-  <li><a href="#continuous-flows" id="toc-continuous-flows" class="nav-link" data-scroll-target="#continuous-flows"><span class="header-section-number">3.3</span> continuous flows</a>
+  <li><a href="#coupling-flows" id="toc-coupling-flows" class="nav-link active" data-scroll-target="#coupling-flows"><span class="header-section-number">18.1</span> Coupling flows</a></li>
+  <li><a href="#autoregressive-flows" id="toc-autoregressive-flows" class="nav-link" data-scroll-target="#autoregressive-flows"><span class="header-section-number">18.2</span> Autoregressive flows</a></li>
+  <li><a href="#residual-flows" id="toc-residual-flows" class="nav-link" data-scroll-target="#residual-flows"><span class="header-section-number">18.3</span> Residual flows</a></li>
+  <li><a href="#continuous-flows" id="toc-continuous-flows" class="nav-link" data-scroll-target="#continuous-flows"><span class="header-section-number">18.4</span> Continuous flows</a>
   <ul class="collapse">
-  <li><a href="#neural-differential-equation" id="toc-neural-differential-equation" class="nav-link" data-scroll-target="#neural-differential-equation"><span class="header-section-number">3.3.1</span> neural differential equation</a></li>
-  <li><a href="#neural-ode-backpropagation" id="toc-neural-ode-backpropagation" class="nav-link" data-scroll-target="#neural-ode-backpropagation"><span class="header-section-number">3.3.2</span> neural ODE backpropagation</a></li>
-  <li><a href="#neural-ode-flows" id="toc-neural-ode-flows" class="nav-link" data-scroll-target="#neural-ode-flows"><span class="header-section-number">3.3.3</span> neural ODE flows</a></li>
+  <li><a href="#neural-differential-equation" id="toc-neural-differential-equation" class="nav-link" data-scroll-target="#neural-differential-equation"><span class="header-section-number">18.4.1</span> Neural differential equation</a></li>
+  <li><a href="#neural-ode-backpropagation" id="toc-neural-ode-backpropagation" class="nav-link" data-scroll-target="#neural-ode-backpropagation"><span class="header-section-number">18.4.2</span> Neural ODE backpropagation</a></li>
+  <li><a href="#neural-ode-flows" id="toc-neural-ode-flows" class="nav-link" data-scroll-target="#neural-ode-flows"><span class="header-section-number">18.4.3</span> Neural ODE flows</a></li>
   </ul></li>
+  <li><a href="#extra-flow-matching" id="toc-extra-flow-matching" class="nav-link" data-scroll-target="#extra-flow-matching"><span class="header-section-number">18.5</span> Extra: Flow matching</a></li>
   </ul>
 </nav>
     </div>
@@ -231,7 +329,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></h1>
+<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></h1>
 </div>
 
 
@@ -265,8 +363,9 @@ J_{ij}(\mathbf{x}) = \frac{\partial g_i(\mathbf{x}, \mathbf{w})}{\partial x_j}.
 \]</span></p>
 <p>will serve as the objective function to train the neural network. The first term is the log likelihood of the latent variable, the second term is the log determinant of the Jacobian matrix.</p>
 <p>To be able to model a wide range of distributions, we want the transformation function <span class="math inline">\(\mathbf{x} = f(\mathbf{z}, \mathbf{w})\)</span> to be highly flexible, so we use a deep neural network with multiple layers. We can ensure that the overall function is invertible if we make each layer of the network invertible. And the two terms in the data likelihood, the latent variable likelihood and the Jacobian determinant, can both be computed easily under such a layered structure, using the chain rule of calculus.</p>
-<section id="coupling-flows" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="coupling-flows"><span class="header-section-number">3.1</span> coupling flows</h2>
+<p>Here we will cover some of the most common types of normalizing flows, coupling flows, autoregressive flows, residual flows and its continuous extension, Neural ODE flows. With neural ODE flowing the frontier of normalizing flow models are meeting the frontier of diffusion models, where we are also trying to replace the layered, residual based diffusion process using differential equations. We will also take a look at flow matching, a recently proposed technique for efficiently training differential equation based models.</p>
+<section id="coupling-flows" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="coupling-flows"><span class="header-section-number">18.1</span> Coupling flows</h2>
 <p>Recall that in flow models we aim for <strong>the following goals</strong>:</p>
 <ol type="1">
 <li>The transformation function <span class="math inline">\(f\)</span> should be (easily enough) invertible, so that we can compute the latent variable likelihood.</li>
@@ -308,7 +407,7 @@ J_{ij}(\mathbf{x}) = \frac{\partial g_i(\mathbf{x}, \mathbf{w})}{\partial x_j}.
 <p><img src="./img/DLFC/Chapter-18/Figure_2.png" class="img-fluid"></p>
 <p><strong>Third</strong> is sampling. Once the model is trained, we can start with <span class="math inline">\(\mathbf{Z}_A\)</span>, and follow the flow till we get to <span class="math inline">\(\mathbf{X}\)</span>. The sampling process is deterministic and easy to compute.</p>
 <p>As an example we can train a normalizing flow model on a two-moons dataset, using the <code>normflows</code> package. The following code is adapted from the package’s example code.</p>
-<div id="e85c2d5d" class="cell" data-execution_count="1">
+<div id="4fd2b833" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import required packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -318,7 +417,7 @@ J_{ij}(\mathbf{x}) = \frac{\partial g_i(\mathbf{x}, \mathbf{w})}{\partial x_j}.
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> <span class="st">'cuda'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This is the target distribution</p>
-<div id="38d1c196" class="cell" data-execution_count="2">
+<div id="6ad553b7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define target distribution</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> nf.distributions.TwoMoons()</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot target distribution</span></span>
@@ -342,7 +441,7 @@ J_{ij}(\mathbf{x}) = \frac{\partial g_i(\mathbf{x}, \mathbf{w})}{\partial x_j}.
 </div>
 </div>
 <p>Construct the model. To define a normalizing flow model, we first specify the base distribution and the transformation layers, and then combine them in the <code>NormalizingFlow</code> class.</p>
-<div id="b130ed87" class="cell" data-execution_count="3">
+<div id="e4ecac3a" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define 2D Gaussian base distribution</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> nf.distributions.base.DiagGaussian(<span class="dv">2</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -362,7 +461,7 @@ J_{ij}(\mathbf{x}) = \frac{\partial g_i(\mathbf{x}, \mathbf{w})}{\partial x_j}.
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> model.to(device)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Train the model.</p>
-<div id="2379d11c" class="cell" data-execution_count="4">
+<div id="bc287284" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>max_iter <span class="op">=</span> <span class="dv">3201</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>num_samples <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> <span class="dv">9</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>show_iter <span class="op">=</span> <span class="dv">800</span></span>
@@ -398,7 +497,7 @@ J_{ij}(\mathbf{x}) = \frac{\partial g_i(\mathbf{x}, \mathbf{w})}{\partial x_j}.
 <span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        prob_list.append(prob.data.numpy())</span>
 <span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>plt.plot(loss_hist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>  0%|          | 0/3201 [00:00&lt;?, ?it/s]  0%|          | 15/3201 [00:00&lt;00:21, 149.57it/s]  2%|▏         | 64/3201 [00:00&lt;00:09, 348.03it/s]  3%|▎         | 111/3201 [00:00&lt;00:07, 400.08it/s]  5%|▍         | 157/3201 [00:00&lt;00:07, 420.78it/s]  6%|▋         | 202/3201 [00:00&lt;00:06, 430.97it/s]  8%|▊         | 248/3201 [00:00&lt;00:06, 438.31it/s]  9%|▉         | 294/3201 [00:00&lt;00:06, 442.53it/s] 11%|█         | 339/3201 [00:00&lt;00:06, 444.55it/s] 12%|█▏        | 384/3201 [00:00&lt;00:06, 446.14it/s] 13%|█▎        | 430/3201 [00:01&lt;00:06, 448.35it/s] 15%|█▍        | 475/3201 [00:01&lt;00:06, 448.17it/s] 16%|█▌        | 520/3201 [00:01&lt;00:05, 447.81it/s] 18%|█▊        | 566/3201 [00:01&lt;00:05, 448.81it/s] 19%|█▉        | 611/3201 [00:01&lt;00:05, 445.47it/s] 20%|██        | 656/3201 [00:01&lt;00:05, 446.51it/s] 22%|██▏       | 701/3201 [00:01&lt;00:05, 446.64it/s] 23%|██▎       | 746/3201 [00:01&lt;00:05, 446.91it/s] 25%|██▍       | 791/3201 [00:01&lt;00:05, 447.78it/s] 26%|██▌       | 836/3201 [00:01&lt;00:05, 438.08it/s] 28%|██▊       | 881/3201 [00:02&lt;00:05, 441.20it/s] 29%|██▉       | 926/3201 [00:02&lt;00:05, 441.27it/s] 30%|███       | 971/3201 [00:02&lt;00:05, 442.14it/s] 32%|███▏      | 1017/3201 [00:02&lt;00:04, 444.51it/s] 33%|███▎      | 1062/3201 [00:02&lt;00:04, 444.95it/s] 35%|███▍      | 1107/3201 [00:02&lt;00:04, 446.39it/s] 36%|███▌      | 1152/3201 [00:02&lt;00:04, 446.95it/s] 37%|███▋      | 1197/3201 [00:02&lt;00:04, 443.93it/s] 39%|███▉      | 1242/3201 [00:02&lt;00:04, 445.48it/s] 40%|████      | 1287/3201 [00:02&lt;00:04, 445.54it/s] 42%|████▏     | 1332/3201 [00:03&lt;00:04, 446.29it/s] 43%|████▎     | 1377/3201 [00:03&lt;00:04, 445.23it/s] 44%|████▍     | 1422/3201 [00:03&lt;00:04, 444.74it/s] 46%|████▌     | 1467/3201 [00:03&lt;00:03, 446.30it/s] 47%|████▋     | 1512/3201 [00:03&lt;00:03, 446.52it/s] 49%|████▊     | 1557/3201 [00:03&lt;00:03, 446.73it/s] 50%|█████     | 1602/3201 [00:03&lt;00:03, 444.11it/s] 51%|█████▏    | 1647/3201 [00:03&lt;00:03, 441.48it/s] 53%|█████▎    | 1692/3201 [00:03&lt;00:03, 443.78it/s] 54%|█████▍    | 1737/3201 [00:03&lt;00:03, 445.33it/s] 56%|█████▌    | 1782/3201 [00:04&lt;00:03, 445.83it/s] 57%|█████▋    | 1828/3201 [00:04&lt;00:03, 447.55it/s] 59%|█████▊    | 1873/3201 [00:04&lt;00:02, 447.12it/s] 60%|█████▉    | 1918/3201 [00:04&lt;00:02, 447.26it/s] 61%|██████▏   | 1963/3201 [00:04&lt;00:02, 447.33it/s] 63%|██████▎   | 2008/3201 [00:04&lt;00:02, 447.37it/s] 64%|██████▍   | 2053/3201 [00:04&lt;00:02, 447.26it/s] 66%|██████▌   | 2098/3201 [00:04&lt;00:02, 447.30it/s] 67%|██████▋   | 2143/3201 [00:04&lt;00:02, 447.96it/s] 68%|██████▊   | 2188/3201 [00:04&lt;00:02, 448.04it/s] 70%|██████▉   | 2234/3201 [00:05&lt;00:02, 448.40it/s] 71%|███████   | 2279/3201 [00:05&lt;00:02, 447.09it/s] 73%|███████▎  | 2324/3201 [00:05&lt;00:01, 446.44it/s] 74%|███████▍  | 2370/3201 [00:05&lt;00:01, 447.81it/s] 75%|███████▌  | 2415/3201 [00:05&lt;00:01, 444.66it/s] 77%|███████▋  | 2461/3201 [00:05&lt;00:01, 447.19it/s] 78%|███████▊  | 2506/3201 [00:05&lt;00:01, 445.27it/s] 80%|███████▉  | 2551/3201 [00:05&lt;00:01, 445.60it/s] 81%|████████  | 2596/3201 [00:05&lt;00:01, 446.04it/s] 83%|████████▎ | 2642/3201 [00:05&lt;00:01, 446.93it/s] 84%|████████▍ | 2687/3201 [00:06&lt;00:01, 444.15it/s] 85%|████████▌ | 2732/3201 [00:06&lt;00:01, 444.66it/s] 87%|████████▋ | 2777/3201 [00:06&lt;00:00, 445.03it/s] 88%|████████▊ | 2822/3201 [00:06&lt;00:00, 445.70it/s] 90%|████████▉ | 2867/3201 [00:06&lt;00:00, 446.12it/s] 91%|█████████ | 2912/3201 [00:06&lt;00:00, 446.45it/s] 92%|█████████▏| 2957/3201 [00:06&lt;00:00, 440.97it/s] 94%|█████████▍| 3002/3201 [00:06&lt;00:00, 442.14it/s] 95%|█████████▌| 3047/3201 [00:06&lt;00:00, 442.77it/s] 97%|█████████▋| 3092/3201 [00:06&lt;00:00, 444.39it/s] 98%|█████████▊| 3137/3201 [00:07&lt;00:00, 445.22it/s] 99%|█████████▉| 3182/3201 [00:07&lt;00:00, 445.20it/s]100%|██████████| 3201/3201 [00:07&lt;00:00, 442.53it/s]</code></pre>
+<pre><code>  0%|          | 0/3201 [00:00&lt;?, ?it/s]  0%|          | 11/3201 [00:00&lt;00:29, 109.71it/s]  2%|▏         | 55/3201 [00:00&lt;00:10, 302.95it/s]  3%|▎         | 97/3201 [00:00&lt;00:08, 353.19it/s]  4%|▍         | 141/3201 [00:00&lt;00:07, 386.44it/s]  6%|▌         | 187/3201 [00:00&lt;00:07, 409.83it/s]  7%|▋         | 233/3201 [00:00&lt;00:07, 423.82it/s]  9%|▊         | 279/3201 [00:00&lt;00:06, 432.92it/s] 10%|█         | 323/3201 [00:00&lt;00:06, 430.85it/s] 12%|█▏        | 369/3201 [00:00&lt;00:06, 438.81it/s] 13%|█▎        | 415/3201 [00:01&lt;00:06, 443.67it/s] 14%|█▍        | 461/3201 [00:01&lt;00:06, 446.60it/s] 16%|█▌        | 506/3201 [00:01&lt;00:06, 444.93it/s] 17%|█▋        | 551/3201 [00:01&lt;00:06, 440.09it/s] 19%|█▊        | 596/3201 [00:01&lt;00:05, 439.51it/s] 20%|█▉        | 640/3201 [00:01&lt;00:05, 439.00it/s] 21%|██▏       | 684/3201 [00:01&lt;00:05, 437.07it/s] 23%|██▎       | 729/3201 [00:01&lt;00:05, 438.43it/s] 24%|██▍       | 773/3201 [00:01&lt;00:05, 437.61it/s] 26%|██▌       | 817/3201 [00:01&lt;00:05, 433.61it/s] 27%|██▋       | 862/3201 [00:02&lt;00:05, 435.33it/s] 28%|██▊       | 906/3201 [00:02&lt;00:05, 432.15it/s] 30%|██▉       | 950/3201 [00:02&lt;00:05, 433.52it/s] 31%|███       | 994/3201 [00:02&lt;00:05, 431.11it/s] 32%|███▏      | 1038/3201 [00:02&lt;00:05, 429.26it/s] 34%|███▍      | 1081/3201 [00:02&lt;00:04, 428.54it/s] 35%|███▌      | 1126/3201 [00:02&lt;00:04, 432.76it/s] 37%|███▋      | 1170/3201 [00:02&lt;00:04, 430.26it/s] 38%|███▊      | 1214/3201 [00:02&lt;00:04, 429.07it/s] 39%|███▉      | 1257/3201 [00:02&lt;00:04, 427.33it/s] 41%|████      | 1300/3201 [00:03&lt;00:04, 427.90it/s] 42%|████▏     | 1343/3201 [00:03&lt;00:04, 424.54it/s] 43%|████▎     | 1386/3201 [00:03&lt;00:04, 425.49it/s] 45%|████▍     | 1429/3201 [00:03&lt;00:04, 425.52it/s] 46%|████▌     | 1473/3201 [00:03&lt;00:04, 427.38it/s] 47%|████▋     | 1516/3201 [00:03&lt;00:03, 426.00it/s] 49%|████▊     | 1559/3201 [00:03&lt;00:03, 424.96it/s] 50%|█████     | 1602/3201 [00:03&lt;00:03, 423.34it/s] 51%|█████▏    | 1647/3201 [00:03&lt;00:03, 428.69it/s] 53%|█████▎    | 1690/3201 [00:03&lt;00:03, 419.48it/s] 54%|█████▍    | 1733/3201 [00:04&lt;00:03, 421.89it/s] 55%|█████▌    | 1776/3201 [00:04&lt;00:03, 421.52it/s] 57%|█████▋    | 1819/3201 [00:04&lt;00:03, 414.22it/s] 58%|█████▊    | 1862/3201 [00:04&lt;00:03, 417.40it/s] 60%|█████▉    | 1905/3201 [00:04&lt;00:03, 419.26it/s] 61%|██████    | 1947/3201 [00:04&lt;00:03, 415.89it/s] 62%|██████▏   | 1989/3201 [00:04&lt;00:02, 416.85it/s] 63%|██████▎   | 2032/3201 [00:04&lt;00:02, 418.09it/s] 65%|██████▍   | 2074/3201 [00:04&lt;00:02, 417.17it/s] 66%|██████▌   | 2117/3201 [00:05&lt;00:02, 420.19it/s] 67%|██████▋   | 2160/3201 [00:05&lt;00:02, 421.98it/s] 69%|██████▉   | 2203/3201 [00:05&lt;00:02, 421.50it/s] 70%|███████   | 2246/3201 [00:05&lt;00:02, 422.99it/s] 72%|███████▏  | 2289/3201 [00:05&lt;00:02, 424.32it/s] 73%|███████▎  | 2334/3201 [00:05&lt;00:02, 430.28it/s] 74%|███████▍  | 2379/3201 [00:05&lt;00:01, 435.78it/s] 76%|███████▌  | 2423/3201 [00:05&lt;00:01, 432.82it/s] 77%|███████▋  | 2467/3201 [00:05&lt;00:01, 429.39it/s] 78%|███████▊  | 2510/3201 [00:05&lt;00:01, 427.75it/s] 80%|███████▉  | 2553/3201 [00:06&lt;00:01, 427.39it/s] 81%|████████  | 2596/3201 [00:06&lt;00:01, 427.28it/s] 82%|████████▏ | 2639/3201 [00:06&lt;00:01, 425.32it/s] 84%|████████▍ | 2682/3201 [00:06&lt;00:01, 424.01it/s] 85%|████████▌ | 2725/3201 [00:06&lt;00:01, 424.89it/s] 86%|████████▋ | 2768/3201 [00:06&lt;00:01, 425.26it/s] 88%|████████▊ | 2811/3201 [00:06&lt;00:00, 424.13it/s] 89%|████████▉ | 2854/3201 [00:06&lt;00:00, 421.46it/s] 91%|█████████ | 2897/3201 [00:06&lt;00:00, 421.48it/s] 92%|█████████▏| 2940/3201 [00:06&lt;00:00, 418.77it/s] 93%|█████████▎| 2983/3201 [00:07&lt;00:00, 420.74it/s] 95%|█████████▍| 3026/3201 [00:07&lt;00:00, 422.01it/s] 96%|█████████▌| 3069/3201 [00:07&lt;00:00, 423.36it/s] 97%|█████████▋| 3112/3201 [00:07&lt;00:00, 423.18it/s] 99%|█████████▊| 3155/3201 [00:07&lt;00:00, 420.18it/s]100%|█████████▉| 3198/3201 [00:07&lt;00:00, 418.36it/s]100%|██████████| 3201/3201 [00:07&lt;00:00, 423.49it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
@@ -409,7 +508,7 @@ J_{ij}(\mathbf{x}) = \frac{\partial g_i(\mathbf{x}, \mathbf{w})}{\partial x_j}.
 </div>
 </div>
 <p>Plot the results. We can see that the model has (roughly) learned the distribution of the two moons dataset.</p>
-<div id="7e15b4bb" class="cell" data-execution_count="5">
+<div id="9e85d0f5" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="bu">len</span>(prob_list), figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">2</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, prob <span class="kw">in</span> <span class="bu">enumerate</span>(prob_list):</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[i]</span>
@@ -427,16 +526,19 @@ J_{ij}(\mathbf{x}) = \frac{\partial g_i(\mathbf{x}, \mathbf{w})}{\partial x_j}.
 </div>
 </div>
 </section>
-<section id="autoregressive-flows" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="autoregressive-flows"><span class="header-section-number">3.2</span> autoregressive flows</h2>
+<section id="autoregressive-flows" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="autoregressive-flows"><span class="header-section-number">18.2</span> Autoregressive flows</h2>
 <p><img src="./img/DLFC/Chapter-18/Figure_4_a.png" class="img-fluid"></p>
 <p><img src="./img/DLFC/Chapter-18/Figure_4_b.png" class="img-fluid"></p>
 </section>
-<section id="continuous-flows" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="continuous-flows"><span class="header-section-number">3.3</span> continuous flows</h2>
+<section id="residual-flows" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="residual-flows"><span class="header-section-number">18.3</span> Residual flows</h2>
+</section>
+<section id="continuous-flows" class="level2" data-number="18.4">
+<h2 data-number="18.4" class="anchored" data-anchor-id="continuous-flows"><span class="header-section-number">18.4</span> Continuous flows</h2>
 <p>In normalizing flow models, for each transformation layer, the input and output always have the same dimensionality, we are thus looking for a more meaningful representation of the same data space. There is another neural network sharing this property, namely residual networks, but there is no guarantee that such a network will be invertible. Here we introduce a well known mathematical concept, the differential equation, into the neural network, and thus satisfying both the invertibility and the constant dimensionality requirements.</p>
-<section id="neural-differential-equation" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="neural-differential-equation"><span class="header-section-number">3.3.1</span> neural differential equation</h3>
+<section id="neural-differential-equation" class="level3" data-number="18.4.1">
+<h3 data-number="18.4.1" class="anchored" data-anchor-id="neural-differential-equation"><span class="header-section-number">18.4.1</span> Neural differential equation</h3>
 <p>Neural differential equation, as the name implies, is a neural network that is defined by a differential equation. We can consider the residual network as a discrete version of the differential equation, since the “residual” is already a difference between consecutive layers, and the differential is the limit of this difference as it approaches zero. Thus starting from a residual network</p>
 <p><span class="math display">\[
 \mathbf{z}_{t+1} = \mathbf{z}_t + f(\mathbf{z}_t, \mathbf{w})
@@ -448,17 +550,20 @@ J_{ij}(\mathbf{x}) = \frac{\partial g_i(\mathbf{x}, \mathbf{w})}{\partial x_j}.
 <p>Now defining something is easy, what really matters is what we can do with it. On the modeling side, starting from an initial state <span class="math inline">\(\mathbf{z}_0\)</span>, we no longer need to define the number of layers in the network. we can integrate the differential equation to get the state at any time <span class="math inline">\(t\)</span>,</p>
 <p><img src="./img/DLFC/Chapter-18/Figure_5.png" class="img-fluid"></p>
 </section>
-<section id="neural-ode-backpropagation" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="neural-ode-backpropagation"><span class="header-section-number">3.3.2</span> neural ODE backpropagation</h3>
+<section id="neural-ode-backpropagation" class="level3" data-number="18.4.2">
+<h3 data-number="18.4.2" class="anchored" data-anchor-id="neural-ode-backpropagation"><span class="header-section-number">18.4.2</span> Neural ODE backpropagation</h3>
 </section>
-<section id="neural-ode-flows" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="neural-ode-flows"><span class="header-section-number">3.3.3</span> neural ODE flows</h3>
+<section id="neural-ode-flows" class="level3" data-number="18.4.3">
+<h3 data-number="18.4.3" class="anchored" data-anchor-id="neural-ode-flows"><span class="header-section-number">18.4.3</span> Neural ODE flows</h3>
 <p><img src="./img/DLFC/Chapter-18/Figure_6_a.png" class="img-fluid"></p>
 <p><img src="./img/DLFC/Chapter-18/Figure_6_b.png" class="img-fluid"></p>
 <p><img src="./img/DLFC/Chapter-18/Figure_6_c.png" class="img-fluid"></p>
-
-
 </section>
+</section>
+<section id="extra-flow-matching" class="level2" data-number="18.5">
+<h2 data-number="18.5" class="anchored" data-anchor-id="extra-flow-matching"><span class="header-section-number">18.5</span> Extra: Flow matching</h2>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -884,13 +989,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./07.html" class="pagination-link" aria-label="Gradient Descent">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Gradient Descent</span></span>
+      <a href="./17.html" class="pagination-link" aria-label="Generative adversarial networks">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Generative adversarial networks</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./20.html" class="pagination-link" aria-label="Diffusion Models">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./19.html" class="pagination-link" aria-label="Autoencoders">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Autoencoders</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

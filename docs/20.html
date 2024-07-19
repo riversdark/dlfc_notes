@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.40">
+<meta name="generator" content="quarto-1.5.53">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>dlfc_notes – 3&nbsp; Diffusion Models</title>
+<title>20&nbsp; Diffusion Models – dlfc_notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./references.html" rel="next">
-<link href="./18.html" rel="prev">
+<link href="./19.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -110,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./20.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Diffusion Models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./20.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -149,14 +149,116 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probabilities</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Standard distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Single layer networks: regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Single layer networks: classification</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Deep Neural Networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Gradient Descent</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Backpropagation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regularisation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Convolutional networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">structured distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Graph neural networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Discrete latent variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Continuous latent variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Generative adversarial networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./18.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./20.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -175,30 +277,30 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#forward-encoder" id="toc-forward-encoder" class="nav-link active" data-scroll-target="#forward-encoder"><span class="header-section-number">3.1</span> forward encoder</a>
+  <li><a href="#forward-encoder" id="toc-forward-encoder" class="nav-link active" data-scroll-target="#forward-encoder"><span class="header-section-number">20.1</span> forward encoder</a>
   <ul class="collapse">
-  <li><a href="#diffusion-kernel" id="toc-diffusion-kernel" class="nav-link" data-scroll-target="#diffusion-kernel"><span class="header-section-number">3.1.1</span> diffusion kernel</a></li>
-  <li><a href="#conditional-distribuitons" id="toc-conditional-distribuitons" class="nav-link" data-scroll-target="#conditional-distribuitons"><span class="header-section-number">3.1.2</span> conditional distribuitons</a></li>
+  <li><a href="#diffusion-kernel" id="toc-diffusion-kernel" class="nav-link" data-scroll-target="#diffusion-kernel"><span class="header-section-number">20.1.1</span> diffusion kernel</a></li>
+  <li><a href="#conditional-distribuitons" id="toc-conditional-distribuitons" class="nav-link" data-scroll-target="#conditional-distribuitons"><span class="header-section-number">20.1.2</span> conditional distribuitons</a></li>
   </ul></li>
-  <li><a href="#reverse-decoder" id="toc-reverse-decoder" class="nav-link" data-scroll-target="#reverse-decoder"><span class="header-section-number">3.2</span> reverse decoder</a>
+  <li><a href="#reverse-decoder" id="toc-reverse-decoder" class="nav-link" data-scroll-target="#reverse-decoder"><span class="header-section-number">20.2</span> reverse decoder</a>
   <ul class="collapse">
-  <li><a href="#training-the-decoder" id="toc-training-the-decoder" class="nav-link" data-scroll-target="#training-the-decoder"><span class="header-section-number">3.2.1</span> training the decoder</a></li>
-  <li><a href="#evidence-lower-bound" id="toc-evidence-lower-bound" class="nav-link" data-scroll-target="#evidence-lower-bound"><span class="header-section-number">3.2.2</span> evidence lower bound</a></li>
-  <li><a href="#rewriting-the-elbo" id="toc-rewriting-the-elbo" class="nav-link" data-scroll-target="#rewriting-the-elbo"><span class="header-section-number">3.2.3</span> rewriting the ELBO</a></li>
-  <li><a href="#predicting-the-noise" id="toc-predicting-the-noise" class="nav-link" data-scroll-target="#predicting-the-noise"><span class="header-section-number">3.2.4</span> predicting the noise</a></li>
-  <li><a href="#generating-new-samples" id="toc-generating-new-samples" class="nav-link" data-scroll-target="#generating-new-samples"><span class="header-section-number">3.2.5</span> generating new samples</a></li>
+  <li><a href="#training-the-decoder" id="toc-training-the-decoder" class="nav-link" data-scroll-target="#training-the-decoder"><span class="header-section-number">20.2.1</span> training the decoder</a></li>
+  <li><a href="#evidence-lower-bound" id="toc-evidence-lower-bound" class="nav-link" data-scroll-target="#evidence-lower-bound"><span class="header-section-number">20.2.2</span> evidence lower bound</a></li>
+  <li><a href="#rewriting-the-elbo" id="toc-rewriting-the-elbo" class="nav-link" data-scroll-target="#rewriting-the-elbo"><span class="header-section-number">20.2.3</span> rewriting the ELBO</a></li>
+  <li><a href="#predicting-the-noise" id="toc-predicting-the-noise" class="nav-link" data-scroll-target="#predicting-the-noise"><span class="header-section-number">20.2.4</span> predicting the noise</a></li>
+  <li><a href="#generating-new-samples" id="toc-generating-new-samples" class="nav-link" data-scroll-target="#generating-new-samples"><span class="header-section-number">20.2.5</span> generating new samples</a></li>
   </ul></li>
-  <li><a href="#score-matching" id="toc-score-matching" class="nav-link" data-scroll-target="#score-matching"><span class="header-section-number">3.3</span> score matching</a>
+  <li><a href="#score-matching" id="toc-score-matching" class="nav-link" data-scroll-target="#score-matching"><span class="header-section-number">20.3</span> Score matching</a>
   <ul class="collapse">
-  <li><a href="#score-loss-function" id="toc-score-loss-function" class="nav-link" data-scroll-target="#score-loss-function"><span class="header-section-number">3.3.1</span> score loss function</a></li>
-  <li><a href="#modified-score-loss" id="toc-modified-score-loss" class="nav-link" data-scroll-target="#modified-score-loss"><span class="header-section-number">3.3.2</span> modified score loss</a></li>
-  <li><a href="#noise-variance" id="toc-noise-variance" class="nav-link" data-scroll-target="#noise-variance"><span class="header-section-number">3.3.3</span> noise variance</a></li>
-  <li><a href="#stochastic-differential-equations" id="toc-stochastic-differential-equations" class="nav-link" data-scroll-target="#stochastic-differential-equations"><span class="header-section-number">3.3.4</span> stochastic differential equations</a></li>
+  <li><a href="#score-loss-function" id="toc-score-loss-function" class="nav-link" data-scroll-target="#score-loss-function"><span class="header-section-number">20.3.1</span> score loss function</a></li>
+  <li><a href="#modified-score-loss" id="toc-modified-score-loss" class="nav-link" data-scroll-target="#modified-score-loss"><span class="header-section-number">20.3.2</span> modified score loss</a></li>
+  <li><a href="#noise-variance" id="toc-noise-variance" class="nav-link" data-scroll-target="#noise-variance"><span class="header-section-number">20.3.3</span> noise variance</a></li>
+  <li><a href="#stochastic-differential-equations" id="toc-stochastic-differential-equations" class="nav-link" data-scroll-target="#stochastic-differential-equations"><span class="header-section-number">20.3.4</span> stochastic differential equations</a></li>
   </ul></li>
-  <li><a href="#guided-diffusion" id="toc-guided-diffusion" class="nav-link" data-scroll-target="#guided-diffusion"><span class="header-section-number">3.4</span> Guided diffusion</a>
+  <li><a href="#guided-diffusion" id="toc-guided-diffusion" class="nav-link" data-scroll-target="#guided-diffusion"><span class="header-section-number">20.4</span> Guided diffusion</a>
   <ul class="collapse">
-  <li><a href="#classifier-guidance" id="toc-classifier-guidance" class="nav-link" data-scroll-target="#classifier-guidance"><span class="header-section-number">3.4.1</span> classifier guidance</a></li>
-  <li><a href="#classifier-free-guidance" id="toc-classifier-free-guidance" class="nav-link" data-scroll-target="#classifier-free-guidance"><span class="header-section-number">3.4.2</span> classifier-free guidance</a></li>
+  <li><a href="#classifier-guidance" id="toc-classifier-guidance" class="nav-link" data-scroll-target="#classifier-guidance"><span class="header-section-number">20.4.1</span> classifier guidance</a></li>
+  <li><a href="#classifier-free-guidance" id="toc-classifier-free-guidance" class="nav-link" data-scroll-target="#classifier-free-guidance"><span class="header-section-number">20.4.2</span> classifier-free guidance</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -208,7 +310,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Diffusion Models</span></h1>
+<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></h1>
 </div>
 
 
@@ -231,8 +333,8 @@ window.Quarto = {
 <p>Because directly calculating the reverse conditional distribution is infeasible (unlike <strong>Normalizing Flows</strong>), we train a neural network to approximate the <strong>reverse decoder</strong>, which, starting from pure noise, attempts to remove the noise added in the forward process. The training objective is a lower bound approximation of the data likelihood, and the network predicts the noise added to the data at each step.</p>
 <p>Maximizing the data likelihood is one possible training objective, but it’s not the only one. Another approach is <strong>score matching</strong>, which trains a network to match the gradients of the log data likelihood (the so-called score). We of course don’t know the data likelihood, even less its gradients, so a fair amount of approximations are (again) in order.</p>
 <p><strong>Guided diffusion</strong> adds some additional conditioning information during the reverse diffusion process to steer the generation process towards desired characteristics.</p>
-<section id="forward-encoder" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="forward-encoder"><span class="header-section-number">3.1</span> forward encoder</h2>
+<section id="forward-encoder" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="forward-encoder"><span class="header-section-number">20.1</span> forward encoder</h2>
 <p><img src="./img/DLFC/Chapter-20/Figure_2.png" class="img-fluid"></p>
 <p>following the Bayesian tradition, we denote the hidden variables, i.e. the noisy images as z, and the observed image as x.</p>
 <p>the forward encoder transforms an image to pure Gaussian noise, by adding some noise to the image at each step.</p>
@@ -243,8 +345,8 @@ q(\mathbf{z}_1 | \mathbf{x}) = \mathcal{N}(\mathbf{z}_1 | \sqrt{1 - \boldsymbol{
 q(\mathbf{z}_t | \mathbf{z}_{t-1}) = \mathcal{N}(\mathbf{z}_t | \sqrt{1 - \boldsymbol{\beta}_t} \, \mathbf{z}_{t-1}, \boldsymbol{\beta}_t \mathbf{I}).
 \]</span></p>
 <p>We then calculate the conditional (on observed data) distributions of the hidden variables, and derive the reverse conditional (on next step hidden variable) distribution using Bayes’ rule.</p>
-<section id="diffusion-kernel" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="diffusion-kernel"><span class="header-section-number">3.1.1</span> diffusion kernel</h3>
+<section id="diffusion-kernel" class="level3" data-number="20.1.1">
+<h3 data-number="20.1.1" class="anchored" data-anchor-id="diffusion-kernel"><span class="header-section-number">20.1.1</span> diffusion kernel</h3>
 <p>because each step of the transformation is Gaussian, we can combine the Gaussian transformations between any two random points in time; for this reason, we can derive the hidden variable distribution at any time using just the original image, and the noise schedule up to that time.</p>
 <p><span class="math display">\[
 q(\mathbf{z}_1, \ldots, \mathbf{z}_t | \mathbf{x}) = q(\mathbf{z}_1 | \mathbf{x}) \prod_{\tau=2}^{t} q(\mathbf{z}_{\tau} | \mathbf{z}_{\tau-1}). \quad (20.5)
@@ -266,8 +368,8 @@ q(\mathbf{z}_T) = \mathcal{N}(\mathbf{z}_T | \mathbf{0}, \mathbf{I}). \quad (20.
 \]</span></p>
 <p>since the final hidden variable is pure Gaussian noise, it does not depend on any other variable.</p>
 </section>
-<section id="conditional-distribuitons" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="conditional-distribuitons"><span class="header-section-number">3.1.2</span> conditional distribuitons</h3>
+<section id="conditional-distribuitons" class="level3" data-number="20.1.2">
+<h3 data-number="20.1.2" class="anchored" data-anchor-id="conditional-distribuitons"><span class="header-section-number">20.1.2</span> conditional distribuitons</h3>
 <p>after specifying the diffusion kernel, it is of interest to reverse the process, to arrive at the original image from pure Gaussian noise.</p>
 <p>since we already have the forward diffusion kernel, to get the reverse distribution we’ll turn to the Bayes’ rule, as we have done many times before, and as we’ll do many times after.</p>
 <p>however this turns out to be intractable, because to obtain the reverse conditional distribution, from z<sub>t</sub> to z<sub>t-1</sub>, we need the marginal distribution of z<sub>t-1</sub>, but this is impossible, since we have to integrate over the unknown data distribution.</p>
@@ -297,8 +399,8 @@ q(\mathbf{z}_{t-1} | \mathbf{z}_t, \mathbf{x}) = \mathcal{N}(\mathbf{z}_{t-1} | 
 <p>this is very neat but when we generate new data from the model we don’t normally already have the image we want. for this reason we learn a neural network to do the generation instead.</p>
 </section>
 </section>
-<section id="reverse-decoder" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="reverse-decoder"><span class="header-section-number">3.2</span> reverse decoder</h2>
+<section id="reverse-decoder" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="reverse-decoder"><span class="header-section-number">20.2</span> reverse decoder</h2>
 <p>So the basic idea is to find a distribution p to approximate reverse distribution q. We’ll parameterise p with a deep neural network and train it to optimise the parameters, so that when the original data is available, the conditional distribution can reproduce the original image as faithfully as possible; and when origial image not available, the model has been well trained to generate images from the data distribution.</p>
 <p><span class="math display">\[
 p(\mathbf{z}_{t-1} | \mathbf{z}_t, \mathbf{w}) = \mathcal{N}(\mathbf{z}_{t-1} | \mathbf{\mu} (\mathbf{z}_t, \mathbf{w}, t), \beta_t \mathbf{I}) \quad (20.18)
@@ -310,20 +412,20 @@ p(\mathbf{x}, \mathbf{z}_1, \ldots, \mathbf{z}_T | \mathbf{w}) = p(\mathbf{z}_T)
 <p><img src="./img/DLFC/Chapter-20/Figure_4_a.png" class="img-fluid"> <img src="./img/DLFC/Chapter-20/Figure_4_b.png" class="img-fluid"></p>
 <p>the reverse conditional distribution, parameterised by a deep neural network</p>
 <p>the joint distribution of the reverse process, parameterised by the deep neural network</p>
-<section id="training-the-decoder" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="training-the-decoder"><span class="header-section-number">3.2.1</span> training the decoder</h3>
+<section id="training-the-decoder" class="level3" data-number="20.2.1">
+<h3 data-number="20.2.1" class="anchored" data-anchor-id="training-the-decoder"><span class="header-section-number">20.2.1</span> training the decoder</h3>
 <p>to train the network, our first attempt is to directly maximise the data likelihood, which can be obtained by marginaling out the hidden variables.</p>
 <p>this is clearly impossible, since we’d need the posterior in the first place.</p>
 <p><span class="math display">\[
 p(\mathbf{x}|\mathbf{w}) = \int \cdots \int p(\mathbf{x}, \mathbf{z}_1, \ldots, \mathbf{z}_T|\mathbf{w}) \, d\mathbf{z}_1 \cdots d\mathbf{z}_T \quad (20.20)
 \]</span></p>
 </section>
-<section id="evidence-lower-bound" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="evidence-lower-bound"><span class="header-section-number">3.2.2</span> evidence lower bound</h3>
+<section id="evidence-lower-bound" class="level3" data-number="20.2.2">
+<h3 data-number="20.2.2" class="anchored" data-anchor-id="evidence-lower-bound"><span class="header-section-number">20.2.2</span> evidence lower bound</h3>
 <p>as a second attempt, we’ll decompose the data likelihood function into two terms, the ELBO term and the KL divergence term.</p>
 <p>This can be done, again, by applying the good old rules of probability. Here we decompose the joint distribution of {{observed and hidden}} variables.</p>
 <p><span class="math display">\[
-p(\mathbf{x},\mathbf{z}|\mathbf{w}) = p(\mathbf{x}|\mathbf{z},\mathbf{w})p(\mathbf{z}|\mathbf{w}) \quad (20.24)
+p(\mathbf{x},\mathbf{z}|\mathbf{w}) = p(\mathbf{x}|\mathbf{z},\mathbf{w})p(\mathbf{z}|\mathbf{w})
 \]</span></p>
 <p><span class="math display">\[
 p(\mathbf{x}|\mathbf{w}) = \frac{p(\mathbf{x},\mathbf{z}|\mathbf{w})}{p(\mathbf{z}|\mathbf{x},\mathbf{w})}
@@ -335,30 +437,31 @@ p(\mathbf{x}|\mathbf{w}) = \frac{p(\mathbf{x},\mathbf{z}|\mathbf{w})}{p(\mathbf{
 &amp;= \int q(\mathbf{z}) \ln \frac{p(\mathbf{x},\mathbf{z}|\mathbf{w})}{p(\mathbf{z}|\mathbf{x},\mathbf{w})} \, d\mathbf{z} \\
 &amp;= \int q(\mathbf{z}) \ln \frac{p(\mathbf{x},\mathbf{z}|\mathbf{w}) q(\mathbf{z})}{p(\mathbf{z}|\mathbf{x},\mathbf{w}) q(\mathbf{z})} \, d\mathbf{z} \\
 &amp;= \int q(\mathbf{z}) \ln \frac{p(\mathbf{x},\mathbf{z}|\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z} - \int q(\mathbf{z}) \ln \frac{p(\mathbf{z}|\mathbf{x},\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z} \\
-&amp;= \mathcal{L}(\mathbf{w}) + \text{KL}(q(\mathbf{z})||p(\mathbf{z}|\mathbf{x},\mathbf{w})) \quad (20.21)
+&amp;= \mathcal{L}(\mathbf{w}) + \text{KL}(q(\mathbf{z})||p(\mathbf{z}|\mathbf{x},\mathbf{w}))
 \end{aligned}
 \]</span></p>
 <p>the KL divergence term is the difference between two distributions, the model of hidden variables, and an approximate posterior of choice.</p>
 <p><span class="math display">\[
-\text{KL}(q(\mathbf{z})||p(\mathbf{z}|\mathbf{x},\mathbf{w})) = -\int q(\mathbf{z}) \ln \frac{p(\mathbf{z}|\mathbf{x},\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z} \quad (20.23)
+\text{KL}(q(\mathbf{z})||p(\mathbf{z}|\mathbf{x},\mathbf{w})) = -\int q(\mathbf{z}) \ln \frac{p(\mathbf{z}|\mathbf{x},\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z}
 \]</span></p>
 <p>the ELBO term is another integral term, integrating over the same approximate posterior. We can use the ELBO as a surrogate target, because the KL divergence term is non-negative, as such maximising ELBO also maximises the data likelihood.</p>
 <p><span class="math display">\[
-\mathcal{L}(\mathbf{w}) = \int q(\mathbf{z}) \ln \frac{p(\mathbf{x}, \mathbf{z}|\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z} \quad (20.22)
+\mathcal{L}(\mathbf{w}) = \int q(\mathbf{z}) \ln \frac{p(\mathbf{x}, \mathbf{z}|\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z}
 \]</span></p>
 <p>by lower bound we mean</p>
 <p><span class="math display">\[
-\ln p(\mathbf{x}|\mathbf{w}) \geq \mathcal{L}(\mathbf{w}) \quad (20.25)
+\ln p(\mathbf{x}|\mathbf{w}) \geq \mathcal{L}(\mathbf{w})
 \]</span></p>
 <p>Now let’s take write out the ELBO and take a close look at its components.</p>
 <p><span class="math display">\[
 \begin{aligned}
-\mathcal{L}(\mathbf{w}) &amp;= \mathbb{E}_{q} \left[ \ln \frac{p(\mathbf{z}_T) \prod_{t=2}^{T}p(\mathbf{z}_{t-1}|\mathbf{z}_t, \mathbf{w}) p(\mathbf{x} | \mathbf{z}_1, \mathbf{w}) }{q(\mathbf{z}_1|\mathbf{x}) \prod_{t=2}^{T}q(\mathbf{z}_t|\mathbf{z}_{t-1} , \mathbf{x})} \right] \\
-&amp;= \mathbb{E}_{q} \left[ \ln p(\mathbf{z}_T) + \sum_{t=2}^{T} \ln \frac{p(\mathbf{z}_{t-1}|\mathbf{z}_t, \mathbf{w})}{q(\mathbf{z}_{t}|\mathbf{z}_{t-1}, \mathbf{x})} + \ln p(\mathbf{z}_1|\mathbf{w}) + \ln p(\mathbf{x}|\mathbf{z}_1, \mathbf{w}) \right] \quad (20.26)
+\mathcal{L}(\mathbf{w}) &amp;= \int q(\mathbf{z}) \ln \frac{p(\mathbf{x}, \mathbf{z}|\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z} \\
+&amp;= \mathbb{E}_{q} \left[ \ln \frac{p(\mathbf{z}_T) \prod_{t=2}^{T}p(\mathbf{z}_{t-1}|\mathbf{z}_t, \mathbf{w}) p(\mathbf{x} | \mathbf{z}_1, \mathbf{w}) }{q(\mathbf{z}_1|\mathbf{x}) \prod_{t=2}^{T}q(\mathbf{z}_t|\mathbf{z}_{t-1} , \mathbf{x})} \right] \\
+&amp;= \mathbb{E}_{q} \left[ \ln p(\mathbf{z}_T) - \ln q(\mathbf{z}_1|\mathbf{x}) + \sum_{t=2}^{T} \ln \frac{p(\mathbf{z}_{t-1}|\mathbf{z}_t, \mathbf{w})}{q(\mathbf{z}_{t}|\mathbf{z}_{t-1}, \mathbf{x})} + \ln p(\mathbf{x}|\mathbf{z}_1, \mathbf{w}) \right]
 \end{aligned}
 \]</span></p>
 <p>where <span class="math display">\[
-\mathbb{E}_{q}[\cdot] = \int \cdots \int q(\mathbf{z}_1|\mathbf{x}) \left[ \prod_{t=2}^{T}q(\mathbf{z}_t|\mathbf{z}_{t-1}) \right] [\cdot] \, d\mathbf{z}_1 \cdots d\mathbf{z}_T \quad (20.27)
+\mathbb{E}_{q}[\cdot] = \int \cdots \int q(\mathbf{z}_1|\mathbf{x}) \left[ \prod_{t=2}^{T}q(\mathbf{z}_t|\mathbf{z}_{t-1}) \right] [\cdot] \, d\mathbf{z}_1 \cdots d\mathbf{z}_T
 \]</span></p>
 <p>Note that we can choose <strong>ANY</strong> approximate posterior function, but the one we <strong>ACTUALLY</strong> choose is the forward encoder distribution. This is no coincidence, we introduced the forward encoder, exactly for the purpose that it can be used here.</p>
 <p>The first term of the ELBO is constant w.r.t. the model parameters and is thus ignored.</p>
@@ -366,11 +469,11 @@ p(\mathbf{x}|\mathbf{w}) = \frac{p(\mathbf{x},\mathbf{z}|\mathbf{w})}{p(\mathbf{
 <p>The third term is constant w.r.t. the model parameters and is thus ignored.</p>
 <p>For the fourth term we can first sample z<sub>1</sub> and then calculate the value.</p>
 <p><span class="math display">\[
-\mathbb{E}_{q}[\ln p(\mathbf{x}|\mathbf{z}_1, \mathbf{w})] \approx \frac{1}{L} \sum_{l=1}^{L} \ln p(\mathbf{x}|\mathbf{z}_1^{(l)}, \mathbf{w}) \quad (20.28)
+\mathbb{E}_{q}[\ln p(\mathbf{x}|\mathbf{z}_1, \mathbf{w})] \approx \frac{1}{L} \sum_{l=1}^{L} \ln p(\mathbf{x}|\mathbf{z}_1^{(l)}, \mathbf{w})
 \]</span></p>
 </section>
-<section id="rewriting-the-elbo" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="rewriting-the-elbo"><span class="header-section-number">3.2.3</span> rewriting the ELBO</h3>
+<section id="rewriting-the-elbo" class="level3" data-number="20.2.3">
+<h3 data-number="20.2.3" class="anchored" data-anchor-id="rewriting-the-elbo"><span class="header-section-number">20.2.3</span> rewriting the ELBO</h3>
 <p>As a third attempt, we will further decompose the second term of the ELBO, again by applying the good old rules of probability. This time we apply them on the joint distribution of the adjacent latent variables in the forward encoder.</p>
 <p>we have the reverse process in the numerator, we want to also have the reverse process in the denominator to match it.</p>
 <p><span class="math display">\[
@@ -385,20 +488,20 @@ q(\mathbf{z}_t | \mathbf{z}_{t-1}, \mathbf{x}) = \frac{q(\mathbf{z}_{t-1} | \mat
 <p>The reconstruction term is the logp weighted by z1, and thus measures how much we can reconstruct the data once the latent variable distribution is know. The consistency term is the KL divergence between the forward diffusion distribution and the reverse decoder network. So now we are finally able to connect what we need to compute, the (approximate) data likelihood, to what we have actually defined, the forward diffusion process and the backward denoising neural network. And we can happily proceed with the parameter optimization that we are so fond of.</p>
 <p>Since the two distributions in the KL divergence are both Gaussian, the divergence can be easily computed. 20.33</p>
 </section>
-<section id="predicting-the-noise" class="level3" data-number="3.2.4">
-<h3 data-number="3.2.4" class="anchored" data-anchor-id="predicting-the-noise"><span class="header-section-number">3.2.4</span> predicting the noise</h3>
+<section id="predicting-the-noise" class="level3" data-number="20.2.4">
+<h3 data-number="20.2.4" class="anchored" data-anchor-id="predicting-the-noise"><span class="header-section-number">20.2.4</span> predicting the noise</h3>
 <p>we are already able to optimize the model parameters, by matching the reverse denoising network to the forward diffusion network, by representing the KL devergence as the squared difference between the means of the forward and reverse process.</p>
 <p>it turns out we can use a simply trick, not modeling the mean of the reverse process, but the noise added to the latent variable, to improve the training and the generated image quality.</p>
 <p>it also turns out that when using this formulation, the reconstruction term can be viewd as a special case of the consistency term and merged together. So now we are left with a simple training procedure as follows:</p>
 <p><img src="./img/DLFC/Chapter-20/algo20.1.png" class="img-fluid"></p>
 </section>
-<section id="generating-new-samples" class="level3" data-number="3.2.5">
-<h3 data-number="3.2.5" class="anchored" data-anchor-id="generating-new-samples"><span class="header-section-number">3.2.5</span> generating new samples</h3>
+<section id="generating-new-samples" class="level3" data-number="20.2.5">
+<h3 data-number="20.2.5" class="anchored" data-anchor-id="generating-new-samples"><span class="header-section-number">20.2.5</span> generating new samples</h3>
 <p><img src="./img/DLFC/Chapter-20/algo20.2.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="score-matching" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="score-matching"><span class="header-section-number">3.3</span> score matching</h2>
+<section id="score-matching" class="level2" data-number="20.3">
+<h2 data-number="20.3" class="anchored" data-anchor-id="score-matching"><span class="header-section-number">20.3</span> Score matching</h2>
 <p>The denoising diffusion models discussed so far in this chapter are closely related to another class of deep generative models that were developed relatively independently and which are based on score matching. These make use of the score function or Stein score, which is defined as the gradient of the log likelihood with respect to the data vector</p>
 <p>Here it is important to emphasize that the gradient is with respect to the data vector, not with respect to any parameter vector. Since the score function is the gradient wrt the input data</p>
 <ol type="1">
@@ -407,62 +510,65 @@ q(\mathbf{z}_t | \mathbf{z}_{t-1}, \mathbf{x}) = \frac{q(\mathbf{z}_{t-1} | \mat
 </ol>
 <p>So if we parameterize the score function as s(x, w), optimize the parameters w so that the parameterized score matches the empirical data score, we have effectively modeled the data distribution. And if we can further generate samples using the parameterized score function, we have built a generative model of the data that we can sample from.</p>
 <p>Figure 20.5 shows an example of a probability density in two dimensions, along with the corresponding score function.</p>
-<p>define a model for the data, calculate the logp and the score function define a second model for the score, optimizing the parameters by matching the data score function do sampling using the parameterized score model</p>
+<p>To use score matching, we need to define two models</p>
+<ul>
+<li>define a model for the data, calculate the logp and the score function</li>
+<li>define a second model for the score, optimizing the parameters by</li>
+<li>matching the data score function do sampling using the parameterized score model</li>
+</ul>
 <p><img src="./img/DLFC/Chapter-20/Figure_5.png" class="img-fluid"> <img src="./img/DLFC/Chapter-20/Figure_6.png" class="img-fluid"></p>
-<section id="score-loss-function" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="score-loss-function"><span class="header-section-number">3.3.1</span> score loss function</h3>
+<section id="score-loss-function" class="level3" data-number="20.3.1">
+<h3 data-number="20.3.1" class="anchored" data-anchor-id="score-loss-function"><span class="header-section-number">20.3.1</span> score loss function</h3>
 <p>the training match the model score to the data distribution score.</p>
 <p><span class="math display">\[
-J(\mathbf{w}) = \frac{1}{2} \int \left\| \mathbf{s}(\mathbf{x}, \mathbf{w}) - \nabla_{\mathbf{x}} \ln p(\mathbf{x}) \right\|^2 p(\mathbf{x}) \, d\mathbf{x} \quad (20.43)
+J(\mathbf{w}) = \frac{1}{2} \int \left\| \mathbf{s}(\mathbf{x}, \mathbf{w}) - \nabla_{\mathbf{x}} \ln p(\mathbf{x}) \right\|^2 p(\mathbf{x}) \, d\mathbf{x}
 \]</span></p>
 <p>of course this is only theoretically; we don’t actually know the data distribution. we now move on to workarounds.</p>
 </section>
-<section id="modified-score-loss" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="modified-score-loss"><span class="header-section-number">3.3.2</span> modified score loss</h3>
+<section id="modified-score-loss" class="level3" data-number="20.3.2">
+<h3 data-number="20.3.2" class="anchored" data-anchor-id="modified-score-loss"><span class="header-section-number">20.3.2</span> modified score loss</h3>
 <p>we first approximate the data distribution with the empirical one <span class="math display">\[
-p_{\mathcal{D}}(\mathbf{x}) = \frac{1}{N} \sum_{n=1}^{N} \delta(\mathbf{x} - \mathbf{x}_n) \quad (20.44)
+p_{\mathcal{D}}(\mathbf{x}) = \frac{1}{N} \sum_{n=1}^{N} \delta(\mathbf{x} - \mathbf{x}_n)
 \]</span></p>
 <p>since the empirical distribution is not differentiable, we then smooth it with the Parzen estimator <span class="math display">\[
-q_{\sigma}(\mathbf{z}) = \int q(\mathbf{z} | \mathbf{x}, \sigma)p(\mathbf{x}) \, d\mathbf{x} \quad (20.47)
+q_{\sigma}(\mathbf{z}) = \int q(\mathbf{z} | \mathbf{x}, \sigma)p(\mathbf{x}) \, d\mathbf{x}
 \]</span></p>
-<p>using this result the loss function can be modified to <span class="math display">\[
-J(\mathbf{w}) = \frac{1}{2N} \sum_{n=1}^{N} \int \left\| \mathbf{s}(\mathbf{z}, \mathbf{w}) - \nabla_{\mathbf{z}} \ln q(\mathbf{z}|\mathbf{x}_n, \sigma) \right\|^2 q(\mathbf{z}|\mathbf{x}_n, \sigma) \, d\mathbf{z} + \text{const.} \quad (20.51)
+<p>this results in the loss function <span class="math display">\[
+J(\mathbf{w}) = \frac{1}{2N} \sum_{n=1}^{N} \int \left\| \mathbf{s}(\mathbf{z}, \mathbf{w}) - \nabla_{\mathbf{z}} \ln q(\mathbf{z}|\mathbf{x}_n, \sigma) \right\|^2 q(\mathbf{z}|\mathbf{x}_n, \sigma) \, d\mathbf{z} + \text{const.}
 \]</span></p>
 <p>in the end, note we are matching scores of the latents, not the data.</p>
 </section>
-<section id="noise-variance" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="noise-variance"><span class="header-section-number">3.3.3</span> noise variance</h3>
+<section id="noise-variance" class="level3" data-number="20.3.3">
+<h3 data-number="20.3.3" class="anchored" data-anchor-id="noise-variance"><span class="header-section-number">20.3.3</span> noise variance</h3>
 </section>
-<section id="stochastic-differential-equations" class="level3" data-number="3.3.4">
-<h3 data-number="3.3.4" class="anchored" data-anchor-id="stochastic-differential-equations"><span class="header-section-number">3.3.4</span> stochastic differential equations</h3>
-<p>We have seen that it is helpful to use a large number of steps, often several thousand, when constructing the noise process for a diffusion model. It is therefore natural to ask what happens if we consider the limit of an infinite number of steps, much as we did for infinitely deep neural networks when we introduced neural differential equations. In taking such a limit, we need to ensure that the noise variance <span class="math inline">\(\hat{\beta}_t\)</span> at each step becomes smaller in keeping with the step size. This leads to a formulation of diffusion models for continuous time as stochastic differential equations. Both denoising diffusion probabilistic models and score matching models can then be viewed as a discretization of a continuous-time SDE.</p>
-<p>the forward process We can write a general SDE as an infinitesimal update to the vector <span class="math inline">\(\mathbf{z}\)</span> in the form</p>
+<section id="stochastic-differential-equations" class="level3" data-number="20.3.4">
+<h3 data-number="20.3.4" class="anchored" data-anchor-id="stochastic-differential-equations"><span class="header-section-number">20.3.4</span> stochastic differential equations</h3>
+<p>the forward process as a SDE</p>
 <p><span class="math display">\[
-dz = f(\mathbf{z}, t) \, dt + g(t) \, d\mathbf{v} \quad (20.55)
+dz = f(\mathbf{z}, t) \, dt + g(t) \, d\mathbf{v}
 \]</span></p>
-<p>with drift and diffusion terms, respectively, where the drift term is deterministic, as in an ODE, but the diffusion term is stochastic, for example given by infinitesimal Gaussian steps. Here the parameter <span class="math inline">\(t\)</span> is often called ‘time’ by analogy with physical systems. The forward noise process (20.3) for a diffusion model can be written as an SDE of the form (20.55) by taking the continuous-time limit.</p>
-<p>the reverse process rooted in the time-reversibility of stochastic processes</p>
-<p>For the SDE (20.55), there is a corresponding reverse SDE (Song et al., 2020) given by</p>
+<p>with drift and diffusion terms, respectively, where the drift term is deterministic, as in an ODE, but the diffusion term is stochastic, for example given by infinitesimal Gaussian steps. We use the schotastic process to add noise to data.</p>
+<p>use the reverse time stochastic process to remove the noise.</p>
 <p><span class="math display">\[
-dz = \left\{ f(\mathbf{z}, t) - g^2(t) \nabla_{\mathbf{z}} \ln p(\mathbf{z}) \right\} dt + g(t) \, d\mathbf{v} \quad (20.56)
+dz = \left\{ f(\mathbf{z}, t) - g^2(t) \nabla_{\mathbf{z}} \ln p(\mathbf{z}) \right\} dt + g(t) \, d\mathbf{v}
 \]</span></p>
 <p>where we recognize <span class="math inline">\(\nabla_{\mathbf{z}} \ln p(\mathbf{z})\)</span> as the score function. The SDE given by (20.55) is to be solved in reverse from <span class="math inline">\(t = T\)</span> to <span class="math inline">\(t = 0\)</span>.</p>
-<p>equal-spaced solver To solve an SDE numerically, we need to discretize the time variable. The simplest approach is to use fixed, equally spaced time steps, which is known as the Euler–Maruyama solver. For the reverse SDE, we then recover a form of the Langevin equation. However, more sophisticated solvers can be employed that use more flexible forms of discretization.</p>
-<p>adaptive-step solver For all diffusion processes governed by an SDE, there exists a corresponding deterministic process described by an ODE whose trajectories have the same marginal probability densities <span class="math inline">\(p(\mathbf{z}|t)\)</span> as the SDE (Song et al., 2020). For an SDE of the form (20.56), the corresponding ODE is given by</p>
+<p>To actually solve the SDE numerically, we need to discretize the time variable. The simplest approach is to use fixed, equally spaced time steps, which is known as the Euler–Maruyama solver. For the reverse SDE, we then recover a form of the Langevin equation. However, more sophisticated solvers can be employed that use more flexible forms of discretization.</p>
+<p>For all diffusion processes governed by an SDE, there exists a corresponding deterministic process described by an ODE whose trajectories have the same marginal probability densities <span class="math inline">\(p(\mathbf{z}|t)\)</span> as the SDE.</p>
 <p><span class="math display">\[
-\frac{d\mathbf{z}}{dt} = f(\mathbf{z}, t) - \frac{1}{2} g^2(t) \nabla_{\mathbf{z}} \ln p(\mathbf{z}). \quad (20.57)
+\frac{d\mathbf{z}}{dt} = f(\mathbf{z}, t) - \frac{1}{2} g^2(t) \nabla_{\mathbf{z}} \ln p(\mathbf{z}).
 \]</span></p>
 <p>The ODE formulation allows the use of efficient adaptive-step solvers to reduce the number of function evaluations dramatically. Moreover, it allows probabilistic diffusion models to be related to normalizing flow models, from which the change-of-variables formula (18.1) can be used to provide an exact evaluation of the log likelihood.</p>
 </section>
 </section>
-<section id="guided-diffusion" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="guided-diffusion"><span class="header-section-number">3.4</span> Guided diffusion</h2>
+<section id="guided-diffusion" class="level2" data-number="20.4">
+<h2 data-number="20.4" class="anchored" data-anchor-id="guided-diffusion"><span class="header-section-number">20.4</span> Guided diffusion</h2>
 <p><img src="./img/DLFC/Chapter-20/Figure_7.png" class="img-fluid"> <img src="./img/DLFC/Chapter-20/Figure_8.png" class="img-fluid"> <img src="./img/DLFC/Chapter-20/Figure_9.png" class="img-fluid"></p>
-<section id="classifier-guidance" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="classifier-guidance"><span class="header-section-number">3.4.1</span> classifier guidance</h3>
+<section id="classifier-guidance" class="level3" data-number="20.4.1">
+<h3 data-number="20.4.1" class="anchored" data-anchor-id="classifier-guidance"><span class="header-section-number">20.4.1</span> classifier guidance</h3>
 </section>
-<section id="classifier-free-guidance" class="level3" data-number="3.4.2">
-<h3 data-number="3.4.2" class="anchored" data-anchor-id="classifier-free-guidance"><span class="header-section-number">3.4.2</span> classifier-free guidance</h3>
+<section id="classifier-free-guidance" class="level3" data-number="20.4.2">
+<h3 data-number="20.4.2" class="anchored" data-anchor-id="classifier-free-guidance"><span class="header-section-number">20.4.2</span> classifier-free guidance</h3>
 
 
 </section>
@@ -891,8 +997,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./18.html" class="pagination-link" aria-label="Normalizing Flows">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></span>
+      <a href="./19.html" class="pagination-link" aria-label="Autoencoders">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Autoencoders</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.43">
+<meta name="generator" content="quarto-1.5.53">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>dlfc_notes – 2&nbsp; Gradient Descent</title>
+<title>7&nbsp; Gradient Descent – dlfc_notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -64,8 +30,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./18.html" rel="next">
-<link href="./01.html" rel="prev">
+<link href="./08.html" rel="next">
+<link href="./06.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -144,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Gradient Descent</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Gradient Descent</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -183,20 +149,116 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probabilities</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Standard distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Single layer networks: regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Single layer networks: classification</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Deep Neural Networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./07.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Gradient Descent</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Gradient Descent</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Backpropagation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regularisation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Convolutional networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">structured distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transformers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Graph neural networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Discrete latent variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Continuous latent variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Generative adversarial networks</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./18.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Autoencoders</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./20.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Diffusion Models</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -215,29 +277,29 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#error-surfaces" id="toc-error-surfaces" class="nav-link active" data-scroll-target="#error-surfaces"><span class="header-section-number">2.1</span> error surfaces</a>
+  <li><a href="#error-surfaces" id="toc-error-surfaces" class="nav-link active" data-scroll-target="#error-surfaces"><span class="header-section-number">7.1</span> Error surfaces</a>
   <ul class="collapse">
-  <li><a href="#local-quadratic-approximation" id="toc-local-quadratic-approximation" class="nav-link" data-scroll-target="#local-quadratic-approximation"><span class="header-section-number">2.1.1</span> local quadratic approximation</a></li>
+  <li><a href="#local-quadratic-approximation" id="toc-local-quadratic-approximation" class="nav-link" data-scroll-target="#local-quadratic-approximation"><span class="header-section-number">7.1.1</span> Local quadratic approximation</a></li>
   </ul></li>
-  <li><a href="#gradient-descent-optimisation" id="toc-gradient-descent-optimisation" class="nav-link" data-scroll-target="#gradient-descent-optimisation"><span class="header-section-number">2.2</span> gradient descent optimisation</a>
+  <li><a href="#gradient-descent-optimisation" id="toc-gradient-descent-optimisation" class="nav-link" data-scroll-target="#gradient-descent-optimisation"><span class="header-section-number">7.2</span> Gradient descent optimisation</a>
   <ul class="collapse">
-  <li><a href="#use-of-gradient-information" id="toc-use-of-gradient-information" class="nav-link" data-scroll-target="#use-of-gradient-information"><span class="header-section-number">2.2.1</span> use of gradient information</a></li>
-  <li><a href="#batch-gradient-descent" id="toc-batch-gradient-descent" class="nav-link" data-scroll-target="#batch-gradient-descent"><span class="header-section-number">2.2.2</span> batch gradient descent</a></li>
-  <li><a href="#stochastic-gradient-descent" id="toc-stochastic-gradient-descent" class="nav-link" data-scroll-target="#stochastic-gradient-descent"><span class="header-section-number">2.2.3</span> stochastic gradient descent</a></li>
-  <li><a href="#mini-batches" id="toc-mini-batches" class="nav-link" data-scroll-target="#mini-batches"><span class="header-section-number">2.2.4</span> mini-batches</a></li>
-  <li><a href="#parameter-initialisation" id="toc-parameter-initialisation" class="nav-link" data-scroll-target="#parameter-initialisation"><span class="header-section-number">2.2.5</span> parameter initialisation</a></li>
+  <li><a href="#use-of-gradient-information" id="toc-use-of-gradient-information" class="nav-link" data-scroll-target="#use-of-gradient-information"><span class="header-section-number">7.2.1</span> Use of gradient information</a></li>
+  <li><a href="#batch-gradient-descent" id="toc-batch-gradient-descent" class="nav-link" data-scroll-target="#batch-gradient-descent"><span class="header-section-number">7.2.2</span> Batch gradient descent</a></li>
+  <li><a href="#stochastic-gradient-descent" id="toc-stochastic-gradient-descent" class="nav-link" data-scroll-target="#stochastic-gradient-descent"><span class="header-section-number">7.2.3</span> Stochastic gradient descent</a></li>
+  <li><a href="#mini-batches" id="toc-mini-batches" class="nav-link" data-scroll-target="#mini-batches"><span class="header-section-number">7.2.4</span> Mini-batches</a></li>
+  <li><a href="#parameter-initialisation" id="toc-parameter-initialisation" class="nav-link" data-scroll-target="#parameter-initialisation"><span class="header-section-number">7.2.5</span> Parameter initialisation</a></li>
   </ul></li>
-  <li><a href="#convergence" id="toc-convergence" class="nav-link" data-scroll-target="#convergence"><span class="header-section-number">2.3</span> convergence</a>
+  <li><a href="#convergence" id="toc-convergence" class="nav-link" data-scroll-target="#convergence"><span class="header-section-number">7.3</span> Convergence</a>
   <ul class="collapse">
-  <li><a href="#momentum" id="toc-momentum" class="nav-link" data-scroll-target="#momentum"><span class="header-section-number">2.3.1</span> momentum</a></li>
-  <li><a href="#learning-rate-schedule" id="toc-learning-rate-schedule" class="nav-link" data-scroll-target="#learning-rate-schedule"><span class="header-section-number">2.3.2</span> learning rate schedule</a></li>
-  <li><a href="#rmsprop-and-adam" id="toc-rmsprop-and-adam" class="nav-link" data-scroll-target="#rmsprop-and-adam"><span class="header-section-number">2.3.3</span> RMSProp and Adam</a></li>
+  <li><a href="#momentum" id="toc-momentum" class="nav-link" data-scroll-target="#momentum"><span class="header-section-number">7.3.1</span> Momentum</a></li>
+  <li><a href="#learning-rate-schedule" id="toc-learning-rate-schedule" class="nav-link" data-scroll-target="#learning-rate-schedule"><span class="header-section-number">7.3.2</span> Learning rate schedule</a></li>
+  <li><a href="#rmsprop-and-adam" id="toc-rmsprop-and-adam" class="nav-link" data-scroll-target="#rmsprop-and-adam"><span class="header-section-number">7.3.3</span> RMSProp and Adam</a></li>
   </ul></li>
-  <li><a href="#normalisation" id="toc-normalisation" class="nav-link" data-scroll-target="#normalisation"><span class="header-section-number">2.4</span> normalisation</a>
+  <li><a href="#normalisation" id="toc-normalisation" class="nav-link" data-scroll-target="#normalisation"><span class="header-section-number">7.4</span> Normalisation</a>
   <ul class="collapse">
-  <li><a href="#data-normalisation" id="toc-data-normalisation" class="nav-link" data-scroll-target="#data-normalisation"><span class="header-section-number">2.4.1</span> data normalisation</a></li>
-  <li><a href="#batch-normalisation" id="toc-batch-normalisation" class="nav-link" data-scroll-target="#batch-normalisation"><span class="header-section-number">2.4.2</span> batch normalisation</a></li>
-  <li><a href="#layer-normalisation" id="toc-layer-normalisation" class="nav-link" data-scroll-target="#layer-normalisation"><span class="header-section-number">2.4.3</span> layer normalisation</a></li>
+  <li><a href="#data-normalisation" id="toc-data-normalisation" class="nav-link" data-scroll-target="#data-normalisation"><span class="header-section-number">7.4.1</span> Data normalisation</a></li>
+  <li><a href="#batch-normalisation" id="toc-batch-normalisation" class="nav-link" data-scroll-target="#batch-normalisation"><span class="header-section-number">7.4.2</span> Batch normalisation</a></li>
+  <li><a href="#layer-normalisation" id="toc-layer-normalisation" class="nav-link" data-scroll-target="#layer-normalisation"><span class="header-section-number">7.4.3</span> Layer normalisation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -247,7 +309,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Gradient Descent</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Gradient Descent</span></h1>
 </div>
 
 
@@ -265,110 +327,74 @@ window.Quarto = {
 
 
 <p>Once we have a neural network, the next question is how to train it. Well maybe not so straightforward. Often model building and training is an iterative process, and what we can train directly determines what we will build.</p>
-<p>To train a network we’d also need a loss function, which measures how well the network performs. Since model performance can be measured in different ways, for different purpose we might need different loss functions. But since many networks are building using various probability distributions, the most common one will be -logp, the negative log data likelihood.</p>
-<p>And although Stochastic Gradient Descent (and its variants and derivatives) are the most common method to train a network, it’s actually not the only one. For example the optimization method might not be stochastic (using the whole dataset at once), or it might not be gradient based, but SGD is the most common one. For SGD to work we of course need the gradient, and to have gradient we’d need the loss function to be differentiable, and this necessitates some structural constraints on the network we are building, and the loss function we are using.</p>
-<section id="error-surfaces" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="error-surfaces"><span class="header-section-number">2.1</span> error surfaces</h2>
+<p>To train a network we’d also need a loss function, which measures how well the network performs. Since model performance can be measured in different ways, for different purposes we might need different loss functions. But since many network outcomes are modeled using various probability distributions, the most common one we use is -logp, the negative log data likelihood (often summed over a batch of data).</p>
+<p>And although stochastic gradient descent (and its variants and derivatives) are the most common method to train a network, it’s actually not the only one. For example the optimization method might not be stochastic (using the whole dataset at once), or it might not be gradient based (gradient free optimization, Bayesian optimization, etc), but SGD is the most common one. For SGD to work we of course need the gradient, and to have gradient we’d need the loss function to be differentiable, and this necessitates some structural constraints on the network we are building, and the loss function we are using.</p>
+<p>There have been many modifications to SGD, which improve the convergence properties of the optimizer, by studying the local curvature of the loss function. Most of these methods are actually heuristic, but some of them work quite well, especially the adaptive moments method (commonly known as Adam).</p>
+<p>This chapter also covers some common normalization methods, including data normalisation, batch normalisation, and layer normalisation. This is a typical case of modifying the network architecture to improve the training process, showing that it’s not always easy to separate modeling building from model training.</p>
+<section id="error-surfaces" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="error-surfaces"><span class="header-section-number">7.1</span> Error surfaces</h2>
 <p><img src="./img/DLFC/Chapter-7/Figure_1.png" class="img-fluid"></p>
 <p>error function, local minimum A, global minimum B, and gradient at C</p>
-<section id="local-quadratic-approximation" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="local-quadratic-approximation"><span class="header-section-number">2.1.1</span> local quadratic approximation</h3>
+<section id="local-quadratic-approximation" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="local-quadratic-approximation"><span class="header-section-number">7.1.1</span> Local quadratic approximation</h3>
 <p><img src="./img/DLFC/Chapter-7/Figure_2.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="gradient-descent-optimisation" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="gradient-descent-optimisation"><span class="header-section-number">2.2</span> gradient descent optimisation</h2>
+<section id="gradient-descent-optimisation" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="gradient-descent-optimisation"><span class="header-section-number">7.2</span> Gradient descent optimisation</h2>
 <p>simply put, gradient descent initialize the weights somewhere, calculate an increment using gradient information, and modify the weights using this information.</p>
 <p><span class="math display">\[
 \mathbf{w}^{(\tau)} = \mathbf{w}^{(\tau-1)} + \Delta \mathbf{w}^{(\tau-1)}
 \]</span></p>
 <p>the bulk of our attention will be devoted to how to get the gradient, but the starting point is also quite important.</p>
-<section id="use-of-gradient-information" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="use-of-gradient-information"><span class="header-section-number">2.2.1</span> use of gradient information</h3>
+<section id="use-of-gradient-information" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="use-of-gradient-information"><span class="header-section-number">7.2.1</span> Use of gradient information</h3>
 </section>
-<section id="batch-gradient-descent" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="batch-gradient-descent"><span class="header-section-number">2.2.2</span> batch gradient descent</h3>
+<section id="batch-gradient-descent" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="batch-gradient-descent"><span class="header-section-number">7.2.2</span> Batch gradient descent</h3>
 </section>
-<section id="stochastic-gradient-descent" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="stochastic-gradient-descent"><span class="header-section-number">2.2.3</span> stochastic gradient descent</h3>
+<section id="stochastic-gradient-descent" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="stochastic-gradient-descent"><span class="header-section-number">7.2.3</span> Stochastic gradient descent</h3>
 </section>
-<section id="mini-batches" class="level3" data-number="2.2.4">
-<h3 data-number="2.2.4" class="anchored" data-anchor-id="mini-batches"><span class="header-section-number">2.2.4</span> mini-batches</h3>
+<section id="mini-batches" class="level3" data-number="7.2.4">
+<h3 data-number="7.2.4" class="anchored" data-anchor-id="mini-batches"><span class="header-section-number">7.2.4</span> Mini-batches</h3>
 </section>
-<section id="parameter-initialisation" class="level3" data-number="2.2.5">
-<h3 data-number="2.2.5" class="anchored" data-anchor-id="parameter-initialisation"><span class="header-section-number">2.2.5</span> parameter initialisation</h3>
+<section id="parameter-initialisation" class="level3" data-number="7.2.5">
+<h3 data-number="7.2.5" class="anchored" data-anchor-id="parameter-initialisation"><span class="header-section-number">7.2.5</span> Parameter initialisation</h3>
 </section>
 </section>
-<section id="convergence" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="convergence"><span class="header-section-number">2.3</span> convergence</h2>
+<section id="convergence" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="convergence"><span class="header-section-number">7.3</span> Convergence</h2>
 <p><img src="./img/DLFC/Chapter-7/Figure_3.png" class="img-fluid"></p>
-<section id="momentum" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="momentum"><span class="header-section-number">2.3.1</span> momentum</h3>
-<p><img src="./img/DLFC/Chapter-7/Figure_4.png" class="img-fluid"> <img src="./img/DLFC/Chapter-7/Figure_5.png" class="img-fluid"> <img src="./img/DLFC/Chapter-7/Figure_6.png" class="img-fluid"></p>
+<section id="momentum" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="momentum"><span class="header-section-number">7.3.1</span> Momentum</h3>
+<p>Momentum is a method to accelerate SGD by adding a fraction of the previous gradient to the current gradient, but how much of an effect this has depends on the curvature of the loss function. When the curvature is low, consecutive gradients are similar in direction, and thus accumulate to speed up the exploration. When the curvature is high, the gradients are different in direction and thus cancel each other out, leading to dampened oscillations.</p>
+<p><img src="./img/DLFC/Chapter-7/Figure_4.png" class="img-fluid"> <img src="./img/DLFC/Chapter-7/Figure_5.png" class="img-fluid"></p>
+<p>Here we can see how dampening the oscillations helps the convergence.</p>
+<p><img src="./img/DLFC/Chapter-7/Figure_6.png" class="img-fluid"></p>
+<p>Nesterov momentum is similar, but it effectively introduces a 1/2 step, first computing a step using the previous momentum, then calculate the gradient at that point, and then update the momentum again.</p>
 </section>
-<section id="learning-rate-schedule" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="learning-rate-schedule"><span class="header-section-number">2.3.2</span> learning rate schedule</h3>
+<section id="learning-rate-schedule" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="learning-rate-schedule"><span class="header-section-number">7.3.2</span> Learning rate schedule</h3>
 </section>
-<section id="rmsprop-and-adam" class="level3" data-number="2.3.3">
-<h3 data-number="2.3.3" class="anchored" data-anchor-id="rmsprop-and-adam"><span class="header-section-number">2.3.3</span> RMSProp and Adam</h3>
+<section id="rmsprop-and-adam" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="rmsprop-and-adam"><span class="header-section-number">7.3.3</span> RMSProp and Adam</h3>
 </section>
 </section>
-<section id="normalisation" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="normalisation"><span class="header-section-number">2.4</span> normalisation</h2>
+<section id="normalisation" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="normalisation"><span class="header-section-number">7.4</span> Normalisation</h2>
 <p>The gopher(2022) paper also introduced a RMSNorm normalisation method.</p>
-<section id="data-normalisation" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="data-normalisation"><span class="header-section-number">2.4.1</span> data normalisation</h3>
+<section id="data-normalisation" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="data-normalisation"><span class="header-section-number">7.4.1</span> Data normalisation</h3>
 <p><img src="./img/DLFC/Chapter-7/Figure_7.png" class="img-fluid"></p>
 </section>
-<section id="batch-normalisation" class="level3" data-number="2.4.2">
-<h3 data-number="2.4.2" class="anchored" data-anchor-id="batch-normalisation"><span class="header-section-number">2.4.2</span> batch normalisation</h3>
+<section id="batch-normalisation" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="batch-normalisation"><span class="header-section-number">7.4.2</span> Batch normalisation</h3>
 <p><img src="./img/DLFC/Chapter-7/Figure_8_a.png" class="img-fluid"></p>
 </section>
-<section id="layer-normalisation" class="level3" data-number="2.4.3">
-<h3 data-number="2.4.3" class="anchored" data-anchor-id="layer-normalisation"><span class="header-section-number">2.4.3</span> layer normalisation</h3>
+<section id="layer-normalisation" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="layer-normalisation"><span class="header-section-number">7.4.3</span> Layer normalisation</h3>
 <p><img src="./img/DLFC/Chapter-7/Figure_8_b.png" class="img-fluid"></p>
-<div id="69b3f642" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> einops <span class="im">import</span> <span class="bu">reduce</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># NLP Example</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>batch, sentence_length, embedding_dim <span class="op">=</span> <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>embedding <span class="op">=</span> torch.randn(batch, sentence_length, embedding_dim)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>layer_norm <span class="op">=</span> nn.LayerNorm(embedding_dim)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean before LayerNorm across all dimensions except batch</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>mean_before <span class="op">=</span> <span class="bu">reduce</span>(embedding, <span class="st">'b s e -&gt; b'</span>, <span class="st">'mean'</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate variance before LayerNorm across all dimensions except batch</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>var_before <span class="op">=</span> <span class="bu">reduce</span>((embedding <span class="op">-</span> mean_before.reshape(batch, <span class="dv">1</span>, <span class="dv">1</span>)) <span class="op">**</span> <span class="dv">2</span>, <span class="st">'b s e -&gt; b'</span>, <span class="st">'mean'</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate module</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>normalized_embedding <span class="op">=</span> layer_norm(embedding)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean after LayerNorm across all dimensions except batch</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>mean_after <span class="op">=</span> <span class="bu">reduce</span>(normalized_embedding, <span class="st">'b s e -&gt; b'</span>, <span class="st">'mean'</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate variance after LayerNorm across all dimensions except batch</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>var_after <span class="op">=</span> <span class="bu">reduce</span>((normalized_embedding <span class="op">-</span> mean_after.reshape(batch, <span class="dv">1</span>, <span class="dv">1</span>)) <span class="op">**</span> <span class="dv">2</span>, <span class="st">'b s e -&gt; b'</span>, <span class="st">'mean'</span>)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Display mean and variance</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Before LayerNorm - Mean: "</span>, end<span class="op">=</span><span class="st">""</span>)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="op">*</span>mean_before.tolist(), sep<span class="op">=</span><span class="st">", "</span>)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Before LayerNorm - Variance: "</span>, end<span class="op">=</span><span class="st">""</span>)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="op">*</span>var_before.tolist(), sep<span class="op">=</span><span class="st">", "</span>)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After LayerNorm - Mean: "</span>, end<span class="op">=</span><span class="st">""</span>)</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="op">*</span>mean_after.tolist(), sep<span class="op">=</span><span class="st">", "</span>)</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After LayerNorm - Variance: "</span>, end<span class="op">=</span><span class="st">""</span>)</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="op">*</span>var_after.tolist(), sep<span class="op">=</span><span class="st">", "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Before LayerNorm - Mean: -0.1163964793086052, 0.16730044782161713
-Before LayerNorm - Variance: 1.2326244115829468, 1.6592100858688354
-After LayerNorm - Mean: -7.947286384535346e-09, -7.947286384535346e-09
-After LayerNorm - Variance: 0.9999745488166809, 0.9999361634254456</code></pre>
-</div>
-</div>
 
 
 </section>
@@ -797,13 +823,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./01.html" class="pagination-link" aria-label="The Deep Learning Revolution">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Deep Learning Revolution</span></span>
+      <a href="./06.html" class="pagination-link" aria-label="Deep Neural Networks">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Deep Neural Networks</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./18.html" class="pagination-link" aria-label="Normalizing Flows">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalizing Flows</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./08.html" class="pagination-link" aria-label="Backpropagation">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Backpropagation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
