@@ -1,4 +1,6 @@
-# convolutional networks
+---
+title: Convolutional networks
+---
 
 The simplest machine learning models assume that the observed data
 values are **unstructured**, meaning that the elements of the data
@@ -89,44 +91,44 @@ print("Output from the new network:", y_new)
 print("Output shape from the new network:", y_new.shape)
 ```
 
-## computer vision
+## Computer vision
 
-### image data
+### Image data
 
-## convolutional filters
+### Convolutional filters
 
-### feature detectors
+### Feature detectors
 
-### translation equivariance
+### Translation equivariance
 
-### padding
+### Padding
 
-### strided convolutions
+### Strided convolutions
 
-### multi-dimensional convolutions
+### Multi-dimensional convolutions
 
-### pooling
+### Pooling
 
-### multilayer convolutions
+### Multilayer convolutions
 
-### example network architectures
+### Example network architectures
 
 LeNet ImageNet VGG16 AlexNet
 
-## visualising trained CNNs
+## Visualising trained CNNs
 
-### visual cortex
+### Visual cortex
 
-### visualizing trained filters
+### Visualizing trained filters
 
-### saliency maps
+### Saliency maps
 
-### adversarial attacks
+### Adversarial attacks
 
-### synthetic images
+### Synthetic images
 
-## object detection
+## Object detection
 
-## image segmentation
+## Image segmentation
 
-## style transfer
+## Style transfer

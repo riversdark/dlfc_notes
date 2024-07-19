@@ -1,7 +1,6 @@
 ---
 title: "Sampling"
 jupyter: "torch"
-draft: true
 ---
 
 It has been said that the only problem in machine learning is optimization, and the only problem in Bayesian machine learning is integration. Actually Bayesian machine learning can be both. In Bayesian machine learning we often need to calculate the (marginal) distribution of some variables, which normally means that we need to integrate out some other variables. And this is normally impossible, because integration is a terribly difficult problem. 

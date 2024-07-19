@@ -1,0 +1,15 @@
+---
+title: "Generative adversarial networks"
+---
+
+a short introduction.
+
+## Adversarial training
+
+### Loss functions
+
+### GAN training in practice
+
+## Image GANs
+
+### CycleGAN

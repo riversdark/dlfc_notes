@@ -1,0 +1,47 @@
+---
+title: "Continuous latent variables"
+---
+
+## Principle conponent analysis
+
+### Maximum variance formulation
+
+### Minimum error formulation
+
+### Data compression
+
+### Data whitening
+
+### High dimensional data
+
+## Probabilistic latent variables
+
+### Generative method
+
+### Likelihood function
+
+### Maximum likelihood
+
+### Factor analysis (FA)
+
+### Independent component analysis (ICA)
+
+### Kalman filters
+
+## Evidence lower bound
+
+### Expectation maximisation
+
+### EM for PCA
+
+### EM for FA
+
+## Nonlinear latent variable models
+
+### Nonlinear manifolds
+
+### Likelihood function
+
+### Discrete data
+
+### Four approaches to generative modeling

@@ -60,7 +60,7 @@ probability as frequency:
 
 ### Expectations and covariances
 
-## the Gaussian distribution
+## The Gaussian distribution
 
 $$
 \mathcal{N}(x | \mu, \sigma^2) = \frac{1}{(2\pi\sigma^2)^{1/2}} \exp \left\{ -\frac{1}{2\sigma^2} (x - \mu)^2 \right\}
@@ -75,13 +75,13 @@ $$
 
 ### Linear regression
 
-## transformation of densities
+## Transformation of densities
 
 ![](./img/DLFC/Chapter-2/Figure_12.png)
 
 ### Multivariate distributions
 
-## information theory
+## Information theory
 
 ![](./img/DLFC/Chapter-2/Figure_14_a.png)
 ![](./img/DLFC/Chapter-2/Figure_14_b.png)

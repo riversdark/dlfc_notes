@@ -14,7 +14,7 @@ And model complexity can grow rapidly with data size.
 Deep neural nets offer the best of both worlds.
 
 
-## discrete variables
+## Discrete variables
 
 ### Bernoulli distribution
 
@@ -22,31 +22,31 @@ Deep neural nets offer the best of both worlds.
 
 ### Multinomial distribution
 
-## the multivariate Gaussian
+## The multivariate Gaussian
 
-### geometry of the Gaussian
+### Geometry of the Gaussian
 
-### moments
+### Moments
 
-### limitations
+### Limitations
 
-### conditional distribution
+### Conditional distribution
 
-### marginal distribution
+### Marginal distribution
 
 ### Bayes' theorem
 
-### maximum likelihood
+### Maximum likelihood
 
-### sequential estimation
+### Sequential estimation
 
 ### mixture of Gaussians
 
-## periodic variables
+## Periodic variables
 
 ### von Mises distribution
 
-## the exponential family
+## The exponential family
 
 $$
 p(\mathbf{x}|\mathbf{\eta}) = h(\mathbf{x})g(\mathbf{\eta}) \exp\{\mathbf{\eta}^T \mathbf{u}(\mathbf{x})\}
@@ -59,14 +59,14 @@ The four key elements of the exponential family are:
 - natural parameter
 - sufficient statistics
 
-### sufficient statistics
+### Sufficient statistics
 
 Due to the formula constraint of the exponential family, any information about the data that is not in the sufficient statistics is lost.
 
-## nonparametric methods
+## Nonparametric methods
 
-### histograms
+### Histograms
 
-### kernel density
+### Kernel density
 
-### nearest neighbors
+### Nearest neighbors

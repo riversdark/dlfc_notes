@@ -12,7 +12,7 @@ One major advantage of transformers is that transfer learning is very effective,
 
 The architecture of a transformer can seem complex, or even daunting, to a newcomer as it involves multiple different components working together, in which the various design choices can seem arbitrary. In this chapter we therefore aim to give a comprehensive step-by-step introduction to all the key ideas behind transformers and to provide clear intuition to motivate the design of the various elements. We first describe the transformer architecture and then focus on natural language processing, before exploring other application domains.
 
-## attention
+## Attention
 
 attention was originally developed as an enhancement to RNNs for machine
 translation, however Vaswani et al. (2017) later showed that \"attention
@@ -77,7 +77,7 @@ transformed representation might put 'bank' close to 'water' in the
 embedding space, whereas in the second sentence the transformed
 representation might put it close to 'money'.
 
-### transformer processing
+### Transformer processing
 
 the structure of the data matrix, of dimension NxD. It's kept unchange through the transformer layers.
 
@@ -86,7 +86,7 @@ the structure of the data matrix, of dimension NxD. It's kept unchange through t
 the input and output have the same dimension, this, coupled with
 residual networks, is what makes really deep networks possible.
 
-### attention coefficients
+### Attention coefficients
 
 $$
 \mathbf{y}_n = \sum_{m=1}^{N} a_{nm} \mathbf{x}_m
@@ -99,7 +99,7 @@ is most useful.
 
 in this sense, we can think of it as a combination of NN and GP.
 
-### self-attention
+### Self-attention
 
 $$
 a_{nm} = \frac{\exp(\mathbf{x}_n^T \mathbf{x}_m)}{\sum_{m'=1}^{N} \exp(\mathbf{x}_n^T \mathbf{x}_{m'})}
@@ -113,7 +113,7 @@ $$
 
 no mask, to fully understand the connections in language.
 
-### network parameters
+### Network parameters
 
 As it stands, the transformation from input vectors {xn } to output
 vectors {yn } is fixed and has no capacity to learn from data because it
@@ -145,14 +145,14 @@ determining the attention coefficients Q, K, and output Y
 ![](./img/DLFC/Chapter-12/Figure_4.png)
 ![](./img/DLFC/Chapter-12/Figure_5.png)
 
-### scaled self-attention
+### Scaled self-attention
 
 the fact that values do not go through the scaling in worth noting.
 
 ![](./img/DLFC/Chapter-12/Figure_6.png)
 ![](./img/DLFC/Chapter-12/algo12.1.png)
 
-### multi-head attention
+### Multi-head attention
 
 in multi-head attention, the weight matrix dimension of the feedfoward layer increases accordings, however the output is kept the same dimension as the input. This is done by adjusting the input and output dimensions of the feed forward layers
 
@@ -161,7 +161,7 @@ in multi-head attention, the weight matrix dimension of the feedfoward layer inc
 ![](./img/DLFC/Chapter-12/Figure_8.png)
 ![](./img/DLFC/Chapter-12/algo12.2.png)
 
-### transformer layers
+### Transformer layers
 
 residual connection and layer normalisation are added to the multi-head attention
 
@@ -169,9 +169,9 @@ residual connection and layer normalisation are added to the multi-head attentio
 
 ![](./img/DLFC/Chapter-12/algo12.3.png)
 
-### computational complexity
+### Computational complexity
 
-### positional encoding
+### Positional encoding
 
 Positional encoding injects information about the relative or absolute position of the tokens in a sequence. This is crucial for transformers to capture the order of the sequence, as they do not inherently possess any notion of order due to their attention mechanism. 
 
@@ -180,7 +180,7 @@ By adding positional encodings to the input embeddings, transformers can leverag
 ![](./img/DLFC/Chapter-12/Figure_10_a.png)
 ![](./img/DLFC/Chapter-12/Figure_10_b.png)
 
-## natural language
+## Natural language
 
 Now that we have studied the architecture of the transformer, we will
 explore how this can be used to process language data consisting of
@@ -212,14 +212,14 @@ space through a process called word embedding in which each word is
 represented as a dense vector in a space of typically a few hundred
 dimensions.
 
-### word embedding
+### Word embedding
 
 CBOW (continuous bag of words) and skip-gram approach for word embedding
 
 ![](./img/DLFC/Chapter-12/Figure_11_a.png)
 ![](./img/DLFC/Chapter-12/Figure_11_b.png)
 
-### tokenisation
+### Tokenisation
 
 ![](./img/DLFC/Chapter-12/Figure_12.png)
 
@@ -227,18 +227,18 @@ SentencePiece
 
 [Karpathy's tutorial on YT](https://www.youtube.com/watch?v=zduSFxRajkE&pp=ygUIa2FycGF0aHk%3D)
 
-### bag of words
+### Bag of words
 
-### autoregressive models
+### Autoregressive models
 
-### recurrent neural networks
+### Recurrent neural networks
 
 ![](./img/DLFC/Chapter-12/Figure_13.png)
 ![](./img/DLFC/Chapter-12/Figure_14.png)
 
-### backpropagation through time
+### Backpropagation through time
 
-## transformer language models
+## Transformer language models
 
 The transformer processing layer is a highly flexible component for
 building powerful neural network models with broad applicability. In
@@ -264,29 +264,29 @@ used in both encoder and decoder roles. We discuss each of these classes
 of language model in turn, using illustrative examples of model
 architectures.
 
-### decoder transformers
+### Decoder transformers
 
 ![](./img/DLFC/Chapter-12/Figure_15.png)
 ![](./img/DLFC/Chapter-12/Figure_16.png)
 
-### sampling strategies
+### Sampling strategies
 
 ![](./img/DLFC/Chapter-12/Figure_17.jpg)
 
-### encoder transformers
+### Encoder transformers
 
 ![](./img/DLFC/Chapter-12/Figure_18.png)
 
-### seq2seq transformers
+### Seq2seq transformers
 
 ![](./img/DLFC/Chapter-12/Figure_19.png)
 ![](./img/DLFC/Chapter-12/Figure_20.png)
 
-### large language models
+### Large language models
 
 ![](./img/DLFC/Chapter-12/Figure_21.png)
 
-## multimodal transformers
+## Multimodal transformers
 
 Although transformers were initially developed as an alternative to
 recurrent networks for processing sequential language data, they have
@@ -315,14 +315,14 @@ the output tokens, then it is likely that we can use a transformer.
 
 For the input, as long as we can encode and align the inputs from different modalities, we can simply dump them all to the transformer. However, if the output is multimodal, we need to specify which output nodes correspond to which output.
 
-### vision transformers
+### Vision transformers
 
 Illustration of the vision transformer architecture for a classification task. Here a learnable hclassi token is included as an additional input, and the associated output is transformed by a linear layer with a softmax activation, denoted by LSM, to give the final class-vector output c.
 
 
 ![](./img/DLFC/Chapter-12/Figure_22.png)
 
-### generative image transformers
+### Generative image transformers
 
 ![](./img/DLFC/Chapter-12/Figure_23.png)
 
@@ -332,16 +332,16 @@ a raster scan that defines a specific linear ordering of the pixels in a two-dim
 
 An illustration of how an image can be sampled from an autoregressive model. The first pixel is sampled from the marginal distribution p(x11), the second pixel from the conditional distribution p(x12 |x11 ), and so on in raster scan order until we have a complete image.
 
-### audio data
+### Audio data
 
 An example mel spectrogram of a humpback whale song.
 
 ![](./img/DLFC/Chapter-12/Figure_25.png)
 
-### text-to-speech
+### Text-to-speech
 
 ![](./img/DLFC/Chapter-12/Figure_26.png) VALL-E
 
-### vision and language transformers
+### Vision and language transformers
 
 ![](./img/DLFC/Chapter-12/Figure_27.png)

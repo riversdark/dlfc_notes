@@ -1,7 +1,9 @@
-# structured distributions
+---
+title: structured distributions
+---
 
-## graphical models
+## Graphical models
 
-## conditional independence
+## Conditional independence
 
-## sequence models
+## Sequence models

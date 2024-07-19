@@ -19,7 +19,7 @@ This chapter also covers some common normalization methods, including data norma
 
 error function, local minimum A, global minimum B, and gradient at C
 
-### local quadratic approximation
+### Local quadratic approximation
 
 ![](./img/DLFC/Chapter-7/Figure_2.png)
 
@@ -40,11 +40,11 @@ but the starting point is also quite important.
 
 ### Batch gradient descent
 
-### stochastic gradient descent
+### Stochastic gradient descent
 
-### mini-batches
+### Mini-batches
 
-### parameter initialisation
+### Parameter initialisation
 
 ## Convergence 
 

@@ -1,4 +1,6 @@
-# graph neural networks
+---
+title: "Graph neural networks"
+---
 
 In previous chapters we have encountered structured data in the form of
 *sequences and images*, corresponding to one-dimensional and
@@ -50,7 +52,7 @@ deep learning to graph-structured data is to **ensure either
 equivariance or invariance** with respect to a reordering of the nodes
 in the graph.
 
-## machine learning on graphs
+## Machine learning on graphs
 
 Graph properties include features such as connectivity, the presence of
 cycles, community structure, and other characteristics that can inform
@@ -69,49 +71,49 @@ nodes of the input graph are reordered. This property is crucial for
 learning consistent representations of graphs regardless of node
 ordering.
 
-### graph properties
+### Graph properties
 
-### adjacency matrix
+### Adjacency matrix
 
 ![](./img/DLFC/Chapter-13/Figure_2_a.png)
 ![](./img/DLFC/Chapter-13/Figure_2_b.png)
 ![](./img/DLFC/Chapter-13/Figure_2_c.png)
 
-### permutation equivariance
+### Permutation equivariance
 
-## neural message passing
+## Neural message passing
 
-### convolutional filters
+### Convolutional filters
 
 ![](./img/DLFC/Chapter-13/Figure_3_a.png)
 ![](./img/DLFC/Chapter-13/Figure_3_b.png)
 
-### graph convolution networks (GCN)
+### Graph convolution networks (GCN)
 
 Each node has an associated hidden variable that stores the aggragated info from all its neighbours.
 Each layer of the network updates the node embedding using the hidden state.
 
 algo13.1 simple message passing neural network. Aggregate then update.
 
-### aggregation operators
+### Aggregation operators
 
 ![](./img/DLFC/Chapter-13/Figure_4.png)
 
-### update operators
+### Update operators
 
-### node classification
+### Node classification
 
-### edge classification
+### Edge classification
 
-### graph classification
+### Graph classification
 
-## general graph networks
+## General graph networks
 
-### graph attention networks
+### Graph attention networks
 
-### edge embedding
+### Edge embedding
 
-### graph embedding
+### Graph embedding
 
 Algo13.2: general graph network training scheme.
 
@@ -124,8 +126,8 @@ Algo13.2: general graph network training scheme.
 ![](./img/DLFC/Chapter-13/Figure_5_b.png)
 ![](./img/DLFC/Chapter-13/Figure_5_c.png)
 
-### over-smoothing
+### Over-smoothing
 
-### regularisation
+### Regularisation
 
-### geometric deep learning
+### Geometric deep learning

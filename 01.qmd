@@ -12,15 +12,15 @@ This chapter offers a general discussion to the field of deep learning, its appl
 
 ## The impact of DL 
 
-### midical diagnosis
+### Medical diagnosis
 
 ![](./img/DLFC/Chapter-1/Figure_1.png)
 
-### protein structure
+### Protein structure
 
 ![](./img/DLFC/Chapter-1/Figure_2.png)
 
-### image synthesis
+### Image synthesis
 
 ![](./img/DLFC/Chapter-1/Figure_3.png)
 
@@ -28,17 +28,17 @@ This chapter offers a general discussion to the field of deep learning, its appl
 
 ## A tutorial example 
 
-### synthetic data
+### Synthetic data
 
 ![](./img/DLFC/Chapter-1/Figure_4.png)
 
-### linear models
+### Linear models
 
-### error function
+### Error function
 
 ![](./img/DLFC/Chapter-1/Figure_5.png)
 
-### model complexity
+### Model complexity
 
 ![](./img/DLFC/Chapter-1/Figure_6_a.png)
 ![](./img/DLFC/Chapter-1/Figure_6_b.png)
@@ -48,28 +48,28 @@ This chapter offers a general discussion to the field of deep learning, its appl
 ![](./img/DLFC/Chapter-1/Figure_8_a.png)
 ![](./img/DLFC/Chapter-1/Figure_8_b.png)
 
-### regularization
+### Regularization
 
 ![](./img/DLFC/Chapter-1/Figure_9_a.png)
 ![](./img/DLFC/Chapter-1/Figure_9_b.png)
 ![](./img/DLFC/Chapter-1/Figure_10.png)
 
-### model selection
+### Model selection
 
 ![](./img/DLFC/Chapter-1/Figure_11.png)
 
-## a brief history of ML
+## A brief history of ML
 
 ![](./img/DLFC/Chapter-1/Figure_12.jpg)
 
-### single layer networks
+### Single layer networks
 
 ![](./img/DLFC/Chapter-1/Figure_13.png)
 
-### backpropagation
+### Backpropagation
 
 ![](./img/DLFC/Chapter-1/Figure_15.png)
 
-### deep networks
+### Deep networks
 
 ![](./img/DLFC/Chapter-1/Figure_16.png)

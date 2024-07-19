@@ -10,39 +10,38 @@ based on how we achieve this:
 2. probabilistic discriminative learning learns a distribution p(label|input).
 3. probabilistic generative learning learns a joint distribution p(input, label).
 
-## discriminant functions
+## Discriminant functions
 
-### two classes
+### Two classes
 
-### multiple classes
+### Multiple classes
 
 ### 1-of-K encoding
 
-### least squares for classification
+### Least squares for classification
 
-## decision theory
+## Decision theory
 
-### misclassification rate
+### Misclassification rate
 
-### expected loss
+### Expected loss
 
-### the reject option
+### The reject option
 
-### inference and decision
+### Inference and decision
 
-### classification accuracy
+### Classification accuracy
 
 ### ROC curve
 
+## Generative probabilistic classifiers
 
-## generative probabilistic classifiers
+### Continuous inputs
 
-### continuous inputs
+### Maximum likelihood solution
 
-### maximum likelihood solution
+### Discrete features
 
-### discrete features
+### Exponential family
 
-### exponential family
-
-## discriminative probabilistic classifiers
+## Discriminative probabilistic classifiers

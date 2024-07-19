@@ -1,0 +1,68 @@
+---
+title: "Discrete latent variables"
+---
+
+
+mixture models and their solutions, because all deep generative models
+use variational inference, we also gradually build to it.
+
+## K-means clustering
+
+update assignments (E) and centers (M) till convergence
+
+![](./img/DLFC/Chapter-15/Figure_1_a.png)
+![](./img/DLFC/Chapter-15/Figure_1_b.png)
+![](./img/DLFC/Chapter-15/Figure_1_c.png)
+![](./img/DLFC/Chapter-15/Figure_1_d.png)
+![](./img/DLFC/Chapter-15/Figure_1_e.png)
+![](./img/DLFC/Chapter-15/Figure_1_f.png)
+![](./img/DLFC/Chapter-15/Figure_1_g.png)
+![](./img/DLFC/Chapter-15/Figure_1_h.png)
+![](./img/DLFC/Chapter-15/Figure_1_i.png)
+
+plot of the cost function after each E step (in blue) and M step (in red).
+
+![](./img/DLFC/Chapter-15/Figure_2.png)
+
+### Image segmentation
+
+applying K-means to image segmentation, with varying Ks
+
+![](./img/DLFC/Chapter-15/Figure_3_a.png)
+![](./img/DLFC/Chapter-15/Figure_3_b.png)
+![](./img/DLFC/Chapter-15/Figure_3_c.png)
+![](./img/DLFC/Chapter-15/Figure_3_d.png)
+
+## Mixture of Gaussian
+
+graph representation of mixture model (VERY SIMPLE!)
+
+![](./img/DLFC/Chapter-15/Figure_4.png)
+
+$$ 
+\ln p(\mathbf{X}|\boldsymbol{\pi}, \boldsymbol{\mu}, \boldsymbol{\Sigma}) = \sum_{n=1}^{N} \ln \left\{ \sum_{k=1}^{K} \pi_k \mathcal{N}(\mathbf{x}_n|\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k) \right\} 
+$$
+
+### Likelihood function
+
+### Maximum likelihood
+
+## Expectation maximisation
+
+### Gaussian mixtures
+
+### Relation to K-means
+
+### Bernoulli mixtures
+
+## Evidence lower bond
+
+### EM revisited
+
+### IID data
+
+### Parameter priors
+
+### Generalised EM
+
+### Sequential EM
