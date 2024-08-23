@@ -38,6 +38,15 @@ title: "Continuous latent variables"
 
 ## Nonlinear latent variable models
 
+![](./img/DLFC/Chapter-16/Figure_11.png) 
+![](./img/DLFC/Chapter-16/Figure_12.png) 
+
+![](./img/DLFC/Chapter-16/Figure_13_a.png) ![](./img/DLFC/Chapter-16/Figure_13_b.png)
+
+![](./img/DLFC/Chapter-16/Figure_14.png)   
+
+![](./img/DLFC/Chapter-16/Figure_15_a.png) ![](./img/DLFC/Chapter-16/Figure_15_b.png)
+
 ### Nonlinear manifolds
 
 ### Likelihood function
