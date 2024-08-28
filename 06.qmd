@@ -2,18 +2,9 @@
 title: "Deep Neural Networks"
 ---
 
-If a two-layer network can already approximate everything, why go deeper? to be deep is to be flexible.
+According to the universal approximation theory, a two-layer network can already approximate all possible smooth functions. If so, why go deeper? This is the question we want to answer in this chapter. 
 
-![](./img/DLFC/Chapter-6/Figure_5.png)
-
-in high dimensional spaces, most of the probability mass is located in a thin shell at a specific radius
-
-![](./img/DLFC/Chapter-6/Figure_9.png)
-
-![](./img/DLFC/Chapter-6/Figure_17_a.png)
-![](./img/DLFC/Chapter-6/Figure_17_b.png)
-
-forward vs inverse problem. A single NN can deal with one but not the other (see red fitted curve)
+This chapter is largely theoretical, concrete implementations of specific model architectures are deferred to later chapters.
 
 ## Limitations of fixed basis functions
 
@@ -21,7 +12,9 @@ forward vs inverse problem. A single NN can deal with one but not the other (see
 
 ### High dimensional spaces
 
-shells
+![](./img/DLFC/Chapter-6/Figure_5.png)
+
+In high dimensional spaces, consider a local mode: the probability density decreases further away from the mode, while the volume of the sphere increases exponentially with the number of dimensions. As the combined consequence of these two contradicting effects, the probability mass will concentrate somewhere in between. (The typical set.)
 
 ### Data manifolds
 
@@ -32,6 +25,8 @@ digits
 kernel methods
 
 ## Multilayer networks
+
+![](./img/DLFC/Chapter-6/Figure_9.png)
 
 ### Parameter matrices
 
@@ -70,6 +65,13 @@ softmax
 ### Multiclass classification
 
 ## Mixture density networks
+
+This is in fact a mixture model, where each component is parameterized by a neural network.
+
+![](./img/DLFC/Chapter-6/Figure_17_a.png)
+![](./img/DLFC/Chapter-6/Figure_17_b.png)
+
+forward vs inverse problem. A single NN can deal with one but not the other (see red fitted curve)
 
 ### Robot kinematics example
 
