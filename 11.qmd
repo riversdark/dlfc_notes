@@ -4,6 +4,17 @@ title: structured distributions
 
 ## Graphical models
 
+"Graphical models" is a misleading term. 
+The full name should be "Graphical representations of statistical models", or "independence diagrams of joint probability distributions".
+Anyway, just like in life, we take shortcuts here and there to make things easier, while actually make them much harder in the end.
+
 ## Conditional independence
+
+To say a is conditionally (on c) independent of b is to say $p(a|b,c) = p(a|c)$. 
+That is, once you are conditioning on c, knowing b doesn't give you any additional information about a.
+Applying this to the product rule $p(a,b|c) = p(a|b,c) p(b|c)$ we get $p(a,b|c) = p(a|c) p(b|c)$. 
+
+As we can see, conditional independence is a purely mathematical concept, and can always be verified using a bit of algebraic calculation.
+However, with the help of graphical models we can directly read off the conditional independence properties without having to do any such tedious calculation.
 
 ## Sequence models

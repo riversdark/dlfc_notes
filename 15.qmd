@@ -3,8 +3,26 @@ title: "Discrete latent variables"
 ---
 
 
-mixture models and their solutions, because all deep generative models
-use variational inference, we also gradually build to it.
+This chapter deals with mixture models and their solutions. 
+Because all deep generative models use variational inference, we also gradually build to it.
+
+EM is used to train models with local hidden variables.
+
+the Gaussian mixture DATA log likelihood is the sum of individual LLs, each being a weighted sum of the components
+
+to train K-means (algo 15.1): iteratively update assignments(E) and centers(M)
+
+to train Gaussian mixture with EM (algo 15.2)
+- E step: given K centers, update NK responsibilities
+- M step: reverse update
+
+to train with general EM (algo 15.3)
+- E step: given current param, sample z, compute expected logp
+- M step: maximize logp wrt param
+
+![](./img/DLFC/Chapter-15/algo15.1.png)
+![](./img/DLFC/Chapter-15/algo15.2.png)
+![](./img/DLFC/Chapter-15/algo15.3.png)
 
 ## K-means clustering
 
@@ -35,13 +53,33 @@ applying K-means to image segmentation, with varying Ks
 
 ## Mixture of Gaussian
 
-graph representation of mixture model (VERY SIMPLE!)
+Graphical representations of mixture models are quite simple, there is one hidden variable for each observed variable that determines how it's distributed.
+
 
 ![](./img/DLFC/Chapter-15/Figure_4.png)
 
+The log likelihood for a whole dataset is given by
 $$ 
-\ln p(\mathbf{X}|\boldsymbol{\pi}, \boldsymbol{\mu}, \boldsymbol{\Sigma}) = \sum_{n=1}^{N} \ln \left\{ \sum_{k=1}^{K} \pi_k \mathcal{N}(\mathbf{x}_n|\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k) \right\} 
+\ln p(\mathcal{D}|\pi, \mu, \Sigma) = \sum_{n=1}^{N} \ln \left\{ \sum_{k=1}^{K} \pi_k \mathcal{N}(\mathbf{x}_n|\mu_k, \Sigma_k) \right\} 
 $$
+
+![](./img/DLFC/Chapter-15/Figure_5_a.png)
+![](./img/DLFC/Chapter-15/Figure_5_b.png)
+![](./img/DLFC/Chapter-15/Figure_5_c.png)
+
+![](./img/DLFC/Chapter-15/Figure_6.png)
+
+![](./img/DLFC/Chapter-15/Figure_7_a.png)
+![](./img/DLFC/Chapter-15/Figure_7_b.png)
+![](./img/DLFC/Chapter-15/Figure_7_c.png)
+![](./img/DLFC/Chapter-15/Figure_7_d.png)
+![](./img/DLFC/Chapter-15/Figure_7_e.png)
+![](./img/DLFC/Chapter-15/Figure_7_f.png)
+
+
+Theoretically a mixture model can be used to approximate data distribution of arbitrary complexity, because we can always increase the number of components, and use any distribution for each component. However if we do that, the fitted model will also become arbitrarily complex, and generalization can turn out to be a big issue.
+
+![](./img/DLFC/Chapter-15/Figure_8.png)
 
 ### Likelihood function
 
