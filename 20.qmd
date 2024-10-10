@@ -222,7 +222,7 @@ $$
 \begin{aligned}
 \mathcal{L}(\mathbf{w}) &= \int q(\mathbf{z}) \ln \frac{p(\mathbf{x}, \mathbf{z}|\mathbf{w})}{q(\mathbf{z})} \, d\mathbf{z} \\
 &= \mathbb{E}_{q} \left[ \ln \frac{p(\mathbf{z}_T) \prod_{t=2}^{T}p(\mathbf{z}_{t-1}|\mathbf{z}_t, \mathbf{w}) p(\mathbf{x} | \mathbf{z}_1, \mathbf{w}) }{q(\mathbf{z}_1|\mathbf{x}) \prod_{t=2}^{T}q(\mathbf{z}_t|\mathbf{z}_{t-1} , \mathbf{x})} \right] \\
-&= \mathbb{E}_{q} \left[ \ln p(\mathbf{z}_T) - \ln q(\mathbf{z}_1|\mathbf{x}) + \sum_{t=2}^{T} \ln \frac{p(\mathbf{z}_{t-1}|\mathbf{z}_t, \mathbf{w})}{q(\mathbf{z}_{t}|\mathbf{z}_{t-1}, \mathbf{x})} + \ln p(\mathbf{x}|\mathbf{z}_1, \mathbf{w}) \right]
+&= \mathbb{E}_{q} \left[ \ln p(\mathbf{z}_T) + \sum_{t=2}^{T} \ln \frac{p(\mathbf{z}_{t-1}|\mathbf{z}_t, \mathbf{w})}{q(\mathbf{z}_{t}|\mathbf{z}_{t-1}, \mathbf{x})} - \ln q(\mathbf{z}_1|\mathbf{x}) + \ln p(\mathbf{x}|\mathbf{z}_1, \mathbf{w}) \right]
 \end{aligned}
 $$
 
@@ -231,24 +231,15 @@ $$
 \mathbb{E}_{q}[\cdot] = \int \cdots \int q(\mathbf{z}_1|\mathbf{x}) \left[ \prod_{t=2}^{T}q(\mathbf{z}_t|\mathbf{z}_{t-1}) \right] [\cdot] \, d\mathbf{z}_1 \cdots d\mathbf{z}_T
 $$
 
-Note that we can choose **ANY** approximate posterior function, but the
-one we **ACTUALLY** choose is the forward encoder distribution. This is
-no coincidence, we introduced the forward encoder, exactly for the
-purpose that it can be used here.
+Note that we can choose **ANY** approximate posterior function (first line, just like the ELBO for VAEs), but the one we **ACTUALLY** choose is the forward encoder distribution (second line). This is no coincidence, we introduced the forward encoder, exactly for the purpose that it can be used here. And this is exactly how we expanded VAE models to diffusion models.
 
-The first term of the ELBO is constant w.r.t. the model parameters and
-is thus ignored.
+The first term of the ELBO is constant w.r.t. the model parameters and is thus ignored.
 
-For the second term, we can first sample z~t-1~ using 20.3, then sample
-z~t~ using 20.4, then we can compute p and q with no problem. This is
-procedurally right, however the estimation will be very noisy, since we
-consecutively did two sampling steps.
+For the second term, we can first sample z~t-1~ using the forward process, then sample z~t~ using the transition kernel, then we will be able to compute p and q with no problem. This is procedurally right, however the estimation will be very noisy, since we consecutively did two sampling steps.
 
-The third term is constant w.r.t. the model parameters and is thus
-ignored.
+The third term is constant w.r.t. the model parameters and is thus ignored.
 
-For the fourth term we can first sample z~1~ and then calculate the
-value.
+For the fourth term we can first sample z~1~ and then calculate the value.
 
 $$
 \mathbb{E}_{q}[\ln p(\mathbf{x}|\mathbf{z}_1, \mathbf{w})] \approx \frac{1}{L} \sum_{l=1}^{L} \ln p(\mathbf{x}|\mathbf{z}_1^{(l)}, \mathbf{w})
@@ -276,7 +267,13 @@ they are defined by the forward encoder) and is thus ignored. The first
 term is two distributions of the same variable, so we are again dealing
 with a KL divergence term.
 
-Using this, we can rewrite the ELBO as 20.31
+Using this, we can rewrite the ELBO as 
+
+$$
+\begin{aligned}
+\mathcal{L}(\mathbf{w}) = \mathbb{E}_{q} \left[ \sum_{t=2}^{T} \ln \frac{p(\mathbf{z}_{t-1}|\mathbf{z}_t, \mathbf{w})}{q(\mathbf{z}_{t-1}|\mathbf{z}_{t}, \mathbf{x})} + \ln p(\mathbf{x}|\mathbf{z}_1, \mathbf{w}) \right]
+\end{aligned}
+$$
 
 Now the ELBO consist of two terms, which we call the reconstruction term
 and the consistency term.
@@ -312,9 +309,23 @@ follows:
 
 ![](./img/DLFC/Chapter-20/algo20.1.png)
 
+1. sample x, t, e
+2. forward diffusion to compute z
+3. forward pass to compute g, L
+4. backward pass to update w
+
+/the forward encoder is precomputed./
+
 ### generating new samples
 
 ![](./img/DLFC/Chapter-20/algo20.2.png)
+
+the sampling has to been done step by step.
+
+1. draw last z
+2. forward pass to compute g
+3. denoise to compute previous mu
+4. add noise to get previous z
 
 ## Score matching
 
@@ -398,6 +409,8 @@ $$
 The ODE formulation allows the use of efficient adaptive-step solvers to reduce the number of function evaluations dramatically. Moreover, it allows probabilistic diffusion models to be related to normalizing flow models, from which the change-of-variables formula (18.1) can be used to provide an exact evaluation of the log likelihood.
 
 ## Guided diffusion
+
+To generate a desired image, we can collect a dataset with similar images, learn its distribution, and then sample from it; or we can collect a dataset with many different images, learn a distribution with different modes, and then, when we want to generate an image with certain traits, we can somehow guide the sampling process to find the mode that corresponds to these desired traits. Obviously the second approach is more flexible and powerful, and that's what we'd expect from a good fundation model. It also turns out that this guided diffusion process can be used for many other purposes, such as image inpainting, outpainting, and super-resolution.
 
 ![](./img/DLFC/Chapter-20/Figure_7.png)
 ![](./img/DLFC/Chapter-20/Figure_8.png)

@@ -2,11 +2,42 @@
 title: structured distributions
 ---
 
+no algorithms, 32 plots
+
 ## Graphical models
 
-"Graphical models" is a misleading term. 
-The full name should be "Graphical representations of statistical models", or "independence diagrams of joint probability distributions".
-Anyway, just like in life, we take shortcuts here and there to make things easier, while actually make them much harder in the end.
+"Graphical models" is a misleading term.  The full name should be "Graphical representations of statistical models", or "independence diagrams of joint probability distributions".  Anyway, just like in life, we take shortcuts here and there to make things easier, while actually make them much harder in the end.
+
+![](./img/DLFC/Chapter-11/Figure_1.png)
+![](./img/DLFC/Chapter-11/Figure_2.png)
+![](./img/DLFC/Chapter-11/Figure_3_a.png)
+![](./img/DLFC/Chapter-11/Figure_3_b.png)
+![](./img/DLFC/Chapter-11/Figure_4.png)
+![](./img/DLFC/Chapter-11/Figure_5.png)
+![](./img/DLFC/Chapter-11/Figure_6.png)
+![](./img/DLFC/Chapter-11/Figure_7.png)
+![](./img/DLFC/Chapter-11/Figure_8.png)
+![](./img/DLFC/Chapter-11/Figure_9.png)
+![](./img/DLFC/Chapter-11/Figure_10.png)
+![](./img/DLFC/Chapter-11/Figure_11.png)
+![](./img/DLFC/Chapter-11/Figure_12.png)
+![](./img/DLFC/Chapter-11/Figure_13_a.png)
+![](./img/DLFC/Chapter-11/Figure_13_b.png)
+![](./img/DLFC/Chapter-11/Figure_13_c.png)
+
+### Directed graphs
+
+### Factorization
+
+### Discrete variables
+
+### Gaussian variables
+
+### Binary classifier
+
+### Parameters and observations
+
+### Bayes' theorem
 
 ## Conditional independence
 
@@ -17,4 +48,37 @@ Applying this to the product rule $p(a,b|c) = p(a|b,c) p(b|c)$ we get $p(a,b|c) 
 As we can see, conditional independence is a purely mathematical concept, and can always be verified using a bit of algebraic calculation.
 However, with the help of graphical models we can directly read off the conditional independence properties without having to do any such tedious calculation.
 
+### Three example graphs
+
+![](./img/DLFC/Chapter-11/Figure_14.png)
+![](./img/DLFC/Chapter-11/Figure_15.png)
+![](./img/DLFC/Chapter-11/Figure_16.png)
+![](./img/DLFC/Chapter-11/Figure_17.png)
+![](./img/DLFC/Chapter-11/Figure_18.png)
+![](./img/DLFC/Chapter-11/Figure_19.png)
+
+### Explaining away
+
+![](./img/DLFC/Chapter-11/Figure_20.png)
+
+### D-separation
+
+![](./img/DLFC/Chapter-11/Figure_21.png)
+
+### Naive Bayes
+
+![](./img/DLFC/Chapter-11/Figure_22.png)
+
+### Generative models
+
+![](./img/DLFC/Chapter-11/Figure_24.png)
+
+### Markov blanket
+
+![](./img/DLFC/Chapter-11/Figure_25.png)
+
+### Graph as filters
+
 ## Sequence models
+
+### Hidden variables

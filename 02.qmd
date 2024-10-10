@@ -6,6 +6,10 @@ Probability is introduced to deal with uncertainty.
 
 Given a model, parameter uncertainty can be solved with more data. This is related to the concept of "degree of freedom".
 
+![](./img/DLFC/Chapter-2/Figure_1_a.png)
+![](./img/DLFC/Chapter-2/Figure_1_b.png)
+![](./img/DLFC/Chapter-2/Figure_1_c.png)
+
 But model is always limiting, and sometimes somewhat arbitrary. This introduces model uncertainty. We can build more complex models, but there is no "solving" the problem, because real word data is always more complex than any model we can build.
 
 Probability theory is easy, because there are, in total, only two rules. 
@@ -16,18 +20,13 @@ When transforming probability distributions, our goal is to keep the probability
 
 **Information** is a formal way to describe the "surprise" we might expect from a random event. Starting from one event, the concept is then extended to one, or even multiple distributions. 
 
-Bayesian statistics (sometimes also called Laplacian statistics by source of contribution, and some other times also called inverse probability by way of calculation), is the rigorous application of probability theory to all aspects of statistical modeling. As such every element in Bayesian statistics is associated with a certain probability computation. In this book we won't systematically cover Bayesian statistics, because the rigorous Bayesian treatment of every aspect of very deep neural networks (the focus of this book) is simply computationally infeasible. However elements of Bayesian statistics will manifest here and there, in all corners of deep learning.
-
-## The rules of probability
-
-uncertainty: collect more data; use a more capable model
-![](./img/DLFC/Chapter-2/Figure_1_a.png)
-![](./img/DLFC/Chapter-2/Figure_1_b.png)
-![](./img/DLFC/Chapter-2/Figure_1_c.png)
+Bayesian statistics (sometimes also called Laplacian statistics by source of contribution, and some other times also called inverse probability by way of reasoning), is the rigorous application of probability theory to all aspects of statistical modeling. As such every element in Bayesian statistics is associated with a certain probability computation. In this book we won't systematically cover Bayesian statistics, because the rigorous Bayesian treatment of every aspect of very deep neural networks (the focus of this book) is simply computationally infeasible. However elements of Bayesian statistics will manifest here and there, in all corners of deep learning.
 
 probability as frequency: 
 
 ![](./img/DLFC/Chapter-2/Figure_2.png)
+
+## The rules of probability
 
 ### A medical screening example
 
@@ -77,18 +76,28 @@ $$
 
 ## Transformation of densities
 
+p(y) = p(g(y)) |dg/dy|, g being the inverse of f
+
 ![](./img/DLFC/Chapter-2/Figure_12.png)
 
 ### Multivariate distributions
 
 ## Information theory
 
+Using probability theory, we can build a principled way to measure uncertainty in various phenomena. "Information" here implies surprise, or unexpectedness.
+
+Information for a given event is defined as $-\log p(x)$, where $p(x)$ is the probability of the event.
+
 ![](./img/DLFC/Chapter-2/Figure_14_a.png)
 ![](./img/DLFC/Chapter-2/Figure_14_b.png)
 
 the broader distribution has a higher entropy. A uniform distribution would have the largest entropy.
 
+![](./img/DLFC/Chapter-2/Figure_15.png)
+
 ### Entropy
+
+Entropy is the expected value of information: $H(X) = \mathbb{E}_p[-\log p(X)] = -\sum_x p(x) \log p(x)$. It's the information of all possible events, weighted by their probability.
 
 ### Physics perspective
 
@@ -98,24 +107,25 @@ the broader distribution has a higher entropy. A uniform distribution would have
 
 ### Kullback--Leibler divergence
 
+Cross-entropy is the expected value of $-\log q(x)$ with respect to $p(x)$: $H(p,q) = \mathbb{E}_p[-\log q(X)] = -\sum_x p(x) \log q(x)$. It's the information of all possible events, but characterized by the wrong distribution. i.e. the events happen according to $p$ but we characterized them using $q$.
+
+Kullback-Leibler (KL) divergence is the expected value of $\log p(x) - \log q(x)$ with respect to $p(x)$: $D_{KL}(p||q) = \mathbb{E}_p[\log p(X) - \log q(X)] = \sum_x p(x) \log \frac{p(x)}{q(x)}$. It's the difference between entropy and cross-entropy, i.e. the extra information when characterizing events using the wrong distribution.
+
 ### Conditional entropy
 
 ### Mutual information
 
 ## Bayesian probabilities
 
-more general, probability as measure of uncertainty
+As a general measure of uncertainty, Bayesian probability expands the use of probability to broader scenarios.
 
 ### Model parameters
 
-using probability to model parameter uncertainty, and update the
-probability distribution with data.
+using probability to model parameter uncertainty, and update the probability distribution with data.
 
 ### Regularization
 
-using the rules of probability, we can establish a connection between
-MAP and ML estimation, and see that MAP is in fact a regularised ML
-estimation.
+using the rules of probability, we can establish a connection between MAP and ML estimation, and see that MAP is in fact a regularised ML estimation.
 
 ### Bayesian machine learning
 
