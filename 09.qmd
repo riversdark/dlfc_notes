@@ -2,10 +2,17 @@
 title: "Regularisation"
 ---
 
+> Models are essentially assumptions, and assumptions have consequences.
+>
+> -- Me.
 
 ## Inductive bias
 
 Inductive bias refers to the set of assumptions a model makes about the patterns it expects to find in the data. These biases help the model to generalize better from the training data to unseen instances, guiding the learning process towards more plausible solutions given limited information. In the context of deep learning, inductive bias can be inherent in the architecture of the network, the choice of optimization algorithm, or the data representation itself.
+
+
+![](./img/DLFC/Chapter-9/Figure_1.png)
+![](./img/DLFC/Chapter-9/Figure_2.png)
 
 ### Inverse problem
 
@@ -17,8 +24,6 @@ Since there is no universally best learner for every task, the success of a lear
 
 Regularization methods contribute to an algorithm's inductive bias, thus affecting its performance across different tasks.
 
-**models are essentially a set of assumptions, and assumptions have consequences**
-
 ### Symmetry and invariance
 
 ### Equivariance
@@ -27,11 +32,20 @@ Regularization methods contribute to an algorithm's inductive bias, thus affecti
 
 smaller weights, simpler models L2 regularisation
 
+
+[[./img/DLFC/Chapter-9/Figure_3.png]] [[./img/DLFC/Chapter-9/Figure_4_a.png]] [[./img/DLFC/Chapter-9/Figure_4_b.png]] [[./img/DLFC/Chapter-9/Figure_4_c.png]] [[./img/DLFC/Chapter-9/Figure_4_d.png]]
+
+[[./img/DLFC/Chapter-9/Figure_5_a.png]] [[./img/DLFC/Chapter-9/Figure_5_b.png]] [[./img/DLFC/Chapter-9/Figure_5_c.png]] [[./img/DLFC/Chapter-9/Figure_5_d.png]] [[./img/DLFC/Chapter-9/Figure_6_a.png]] [[./img/DLFC/Chapter-9/Figure_6_b.png]]
+
+
 ### Consistent regularizers
 
 ### Generalised weight decay
 
 ## Learning curves
+
+[[./img/DLFC/Chapter-9/Figure_7_a.png]] [[./img/DLFC/Chapter-9/Figure_7_b.png]] [[./img/DLFC/Chapter-9/Figure_8.png]]
+
 
 On the modeling side, there can be several different approaches to increase the generalization performance:
 
@@ -66,6 +80,11 @@ The black dashed line marks the interpolation threshold, where the model's capac
 ### Soft parameter sharing
 
 ## Residual connections
+
+resnet aims to solve shattered gradients, by smoothing the error surface.
+
+[[./img/DLFC/Chapter-9/Figure_12.png]]
+[[./img/DLFC/Chapter-9/Figure_14.png]]
 
 ## Model averaging
 
