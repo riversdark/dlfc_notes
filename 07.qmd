@@ -62,6 +62,13 @@ Local gradient vector is perpendicular to local contour, thus not pointing towar
 
 ### Momentum
 
+
+keep a running dw, update with g
+
+: hyperparams(3) B, eta, mu
+
+![](./img/DLFC/Chapter-7/algo7.3.png)
+
 Momentum is a method to accelerate SGD by adding a fraction of the previous gradient to the current gradient, but how much of an effect this has depends on the curvature of the loss function. When the curvature is low, consecutive gradients are similar in direction, and thus accumulate to speed up the exploration. When the curvature is high, the gradients are different in direction and thus cancel each other out, leading to dampened oscillations. (Either way the effect seems to be positive.)
 
 ![](./img/DLFC/Chapter-7/Figure_4.png)
@@ -76,6 +83,13 @@ Nesterov momentum is similar, but it effectively introduces a 1/2 step, first co
 ### Learning rate schedule
 
 ### RMSProp and Adam
+
+keep a running s/r, updated with g, bias correction
+compute dw, update w
+
+: hyperparams(6) B, beta1, beta2, tau, delta, eta
+
+![](../img/DLFC/Chapter-7/algo7.4.png)
 
 ## Normalisation 
 

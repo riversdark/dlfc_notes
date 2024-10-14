@@ -2,7 +2,7 @@
 title: "Single layer networks: regression"
 ---
 
-In machine learning we often use x to denote the input data and y to denote the target. If we only have x but not y, this is a unsupervised learning problem, which means that we have some data, but we don't specifically have a task to take advantage of them. In this case we can use the probability theory we have just introduced to model their distributions. If we have both x and y, we'd often want to know how having x giving rise to the realization of y, and this will be a supervised learning problem. In this case not only do we want to model the distribution of y, we also want to know how the distribution of y can be affected by the value of x.
+In machine learning we often use x to denote the input data and y to denote the target. If we only have x but not y, this is a unsupervised learning problem, which means that we have some data, but we don't specifically have a task to take advantage of them. In this case we can use probability theory we have just introduced to model their distributions. If we have both x and y, we'd often want to know how having x giving rise to the realization of y, at least statistically, and this will be a supervised learning problem. In this case not only do we want to model the distribution of y, we also want to know how the distribution of y can be affected by the value of x.
 
 Depending on the nature of y supervised learning problems can be further categorized into regression and classification. Regression when y is continuous and classification when it's discrete. We can talk about regression and classification all day long: they are the backbone of many statistical models used in many natural science and social science fields. But here we are only using them as components of deep neural networks, which we plan to build in later chapters.
 
@@ -40,7 +40,7 @@ $$
 
 ### Geometry of least squares
 
-Geometrically, the least squares solution is the orthogonal projection of the target onto the subspace spanned by the basis functions.
+Geometrically, we can think of the basis functions as a set of coordinate axes spanning a feature space, and $\mathbf{w}^\top \mathbf{\phi}(\mathbf{x}_n)$ as a linear combination of these axes that lies in the feature space. The target is a vector outside this subspace, and the least squares solution is the orthogonal projection of the target onto the subspace spanned by the basis functions.
 
 ![](./img/DLFC/Chapter-4/Figure_3.png)
 
@@ -55,3 +55,5 @@ Geometrically, the least squares solution is the orthogonal projection of the ta
 ## Decision theory
 
 ## The bias-variance trade-off
+
+...And regularisation as a middle ground.
