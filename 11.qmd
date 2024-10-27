@@ -8,37 +8,42 @@ no algorithms, 32 plots
 
 "Graphical models" is a misleading term.  The full name should be "Graphical representations of statistical models", or "independence diagrams of joint probability distributions".  Anyway, just like in life, we take shortcuts here and there to make things easier, while actually make them much harder in the end.
 
+This section is an essential discussion of graphical models, we'll cover directed graphs and their factorizations; binary and Gaussian variables, their model parameters, and how graph structure affects model complexity; using binary classification as example, we also introduce the different components of the complete graph representations; finally we introduce Bayesian inference as inverse graphical models.
+
+### Directed graphs
+
 ![](./img/DLFC/Chapter-11/Figure_1.png)
 ![](./img/DLFC/Chapter-11/Figure_2.png)
+### Factorization
+
 ![](./img/DLFC/Chapter-11/Figure_3_a.png)
 ![](./img/DLFC/Chapter-11/Figure_3_b.png)
 ![](./img/DLFC/Chapter-11/Figure_4.png)
 ![](./img/DLFC/Chapter-11/Figure_5.png)
+### Discrete variables
+
 ![](./img/DLFC/Chapter-11/Figure_6.png)
+### Gaussian variables
+
 ![](./img/DLFC/Chapter-11/Figure_7.png)
+### Binary classifier
+
 ![](./img/DLFC/Chapter-11/Figure_8.png)
 ![](./img/DLFC/Chapter-11/Figure_9.png)
+### Parameters and observations
+
+observed variables, latent variables, deterministic parameters
+
+There are also two types of latent variables. The first is latent "variables", which are the latent variables in the traditional sense of machine learning. There are also model parameters, which are paremeters used to parameterize the observed and latent variables. However, in probabilistic modeling, and in their graphical representation, and in their Bayesian inference, the two kinds of latent variables are essentially treated the same.
+
 ![](./img/DLFC/Chapter-11/Figure_10.png)
 ![](./img/DLFC/Chapter-11/Figure_11.png)
 ![](./img/DLFC/Chapter-11/Figure_12.png)
+### Bayes' theorem
+
 ![](./img/DLFC/Chapter-11/Figure_13_a.png)
 ![](./img/DLFC/Chapter-11/Figure_13_b.png)
 ![](./img/DLFC/Chapter-11/Figure_13_c.png)
-
-### Directed graphs
-
-### Factorization
-
-### Discrete variables
-
-### Gaussian variables
-
-### Binary classifier
-
-### Parameters and observations
-
-### Bayes' theorem
-
 ## Conditional independence
 
 To say a is conditionally (on c) independent of b is to say $p(a|b,c) = p(a|c)$. 

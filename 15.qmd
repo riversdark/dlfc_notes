@@ -2,9 +2,10 @@
 title: "Discrete latent variables"
 ---
 
+3 algorithms, 16 plots.
 
 This chapter deals with mixture models and their solutions. 
-Because all deep generative models use variational inference, we also gradually build to it.
+Because all deep generative models use variational inference, we also gradually build up to it.
 
 EM is used to train models with local hidden variables.
 

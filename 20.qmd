@@ -335,8 +335,8 @@ The denoising diffusion models discussed so far in this chapter are closely rela
 
 Here it is important to emphasize that the gradient is with respect to the data vector, not with respect to any parameter vector. Since the score function is the gradient wrt the input data
 
-1.  it is vector-valued, and has the same dimensionality as the input.
-2.  integrating the score function over the data space gives the log data likelihood, up to a constant.
+1. it is vector-valued, and has the same dimensionality as the input.
+2. integrating the score function over the data space gives the log data likelihood, up to a constant.
 
 So if we parameterize the score function as s(x, w), optimize the parameters w so that the parameterized score matches the empirical data score, we have effectively modeled the data distribution. And if we can further generate samples using the parameterized score function, we have built a generative model of the data that we can sample from.
 
@@ -353,32 +353,43 @@ To use score matching, we need to define two models
 
 ### score loss function
 
-the training match the model score to the data distribution score.
+The training matches the model score to the data distribution score.
 
 $$
 J(\mathbf{w}) = \frac{1}{2} \int \left\| \mathbf{s}(\mathbf{x}, \mathbf{w}) - \nabla_{\mathbf{x}} \ln p(\mathbf{x}) \right\|^2 p(\mathbf{x}) \, d\mathbf{x}
 $$
 
-of course this is only theoretically; we don't actually know the data distribution. we now move on to workarounds.
+Of course this is only theoretical: we don't actually know the data distribution. Next we move on to workarounds.
 
 ### modified score loss
 
-we first approximate the data distribution with the empirical one 
+We first work on approximating the data distribution. We approximate it with the empirical one
 $$
-p_{\mathcal{D}}(\mathbf{x}) = \frac{1}{N} \sum_{n=1}^{N} \delta(\mathbf{x} - \mathbf{x}_n)
+p_{\mathcal{D}}(\mathbf{x}) = \frac{1}{N} \sum_{n=1}^{N} \delta(\mathbf{x} - \mathbf{x}_n).
 $$
 
-since the empirical distribution is not differentiable, we then smooth it with the Parzen estimator 
+This essentially is a uniform distribution over the data points. Since it is not differentiable, we then smooth it with the kernel density estimator 
 $$
 q_{\sigma}(\mathbf{z}) = \int q(\mathbf{z} | \mathbf{x}, \sigma)p(\mathbf{x}) \, d\mathbf{x}
 $$
 
-this results in the loss function 
+where $q(\mathbf{z} | \mathbf{x}, \sigma)$ is a Gaussian distribution centered at $\mathbf{x}$ with standard deviation $\sigma$.
+
+Now we have a known, differentiable distribution of the newly introduced variable $\mathbf{z}$. We can then proceed to define the score matching loss function
+
 $$
-J(\mathbf{w}) = \frac{1}{2N} \sum_{n=1}^{N} \int \left\| \mathbf{s}(\mathbf{z}, \mathbf{w}) - \nabla_{\mathbf{z}} \ln q(\mathbf{z}|\mathbf{x}_n, \sigma) \right\|^2 q(\mathbf{z}|\mathbf{x}_n, \sigma) \, d\mathbf{z} + \text{const.}
+\begin{align}
+J(\mathbf{w}) &= \frac{1}{2} \int \left\| s(\mathbf{z}, \mathbf{w}) - \nabla_{\mathbf{z}} \ln q_\sigma(\mathbf{z}) \right\|^2 q_\sigma(\mathbf{z}) \mathrm{d}\mathbf{z}, \\
+&= \frac{1}{2} \int \int \left\| s(\mathbf{z}, \mathbf{w}) - \nabla_{\mathbf{z}} \ln q(\mathbf{z} | \mathbf{x}, \sigma) \right\|^2 q(\mathbf{z} | \mathbf{x}, \sigma) p(\mathbf{x}) \mathrm{d}\mathbf{z} \mathrm{d}\mathbf{x} + \text{const.}, \\
+&= \frac{1}{2N} \sum_{n=1}^{N} \int \left\| s(\mathbf{z}, \mathbf{w}) - \nabla_{\mathbf{z}} \ln q(\mathbf{z} | \mathbf{x}_n, \sigma) \right\|^2 q(\mathbf{z} | \mathbf{x}_n, \sigma) \mathrm{d}\mathbf{z} + \text{const.}
+\end{align}
 $$
 
-in the end, note we are matching scores of the latents, not the data.
+1. we are matching scores of the latents, not the data.
+2. By using the approximate data distribution, which integrates out the data, we are working with a double integral.
+3. Since the data distribution is essentially uniform on point sets, we can simply sum over the data points.
+
+In the end, note we are matching scores of the latents, not the data. We have arrived, at this point, to how to choose the noise level $\sigma$ for the kernel density estimator. This problem is comparable to choosing the forward diffusion process in the previous section.
 
 ### noise variance
 

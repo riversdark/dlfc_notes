@@ -4,6 +4,12 @@ title: "Graph neural networks"
 
 ![](./img/DLFC/Chapter-13/Figure_1.png)
 
+some examples of graphs:
+- molecules with atoms as nodes and chemical bonds as edges
+- road networks with cities as nodes and roads as edges
+- documents with single documents as nodes and cross-links as edges
+- social networks with people as nodes and friendships as edges
+
 ## Machine learning on graphs
 
 ### Graph properties
@@ -13,6 +19,10 @@ title: "Graph neural networks"
 ![](./img/DLFC/Chapter-13/Figure_2_a.png)
 ![](./img/DLFC/Chapter-13/Figure_2_b.png)
 ![](./img/DLFC/Chapter-13/Figure_2_c.png)
+
+dense vs sparse adjacency matrix.
+
+COO (coordinate list) format is a sparse matrix format that stores the non-zero elements of a matrix along with their corresponding row and column indices.
 
 ### Permutation equivariance
 
@@ -27,6 +37,8 @@ Like in vision CNN models, the receptive field is quite small and fixed. Vision 
 ![](./img/DLFC/Chapter-13/Figure_3_a.png)
 ![](./img/DLFC/Chapter-13/Figure_3_b.png)
 
+A conv followed by pooling can be understand as aggregating info to the central node.
+
 ### Graph convolution networks (GCN)
 
 Each node has an associated hidden variable that stores the aggragated info from all its neighbours.
@@ -36,7 +48,13 @@ algo13.1 simple message passing neural network. Aggregate then update.
 
 ### Aggregation operators
 
+aggregate z, update h. /no edge and graph embedding./
+
+![](./img/DLFC/Chapter-13/algo13.1.png)
+
 ![](./img/DLFC/Chapter-13/Figure_4.png)
+
+GNN grows its receptive field by having more layers of message passing.
 
 ### Update operators
 
@@ -61,11 +79,15 @@ Algo13.2: general graph network training scheme.
 3. update node embeddings
 4. update graph embedding.
 
+![](./img/DLFC/Chapter-13/algo13.2.png)
+
 ![](./img/DLFC/Chapter-13/Figure_5_a.png)
 ![](./img/DLFC/Chapter-13/Figure_5_b.png)
 ![](./img/DLFC/Chapter-13/Figure_5_c.png)
 
 ### Over-smoothing
+
+Correct for over-smoothing by adding residual connections.
 
 ### Regularisation
 

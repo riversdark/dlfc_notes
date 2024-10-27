@@ -26,6 +26,13 @@ Deep neural nets offer the best of both worlds.
 
 ### Geometry of the Gaussian
 
+the Mahalanobis distance is the square root of quadratic distance, wrt some matrix M
+
+$$
+d_M(\mathbf{x}, \mathbf{x}') = \sqrt{(\mathbf{x} - \mathbf{x}')^\top \mathbf{M} (\mathbf{x} - \mathbf{x}')}
+$$
+
+
 ### Moments
 
 ### Limitations

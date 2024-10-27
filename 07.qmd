@@ -49,7 +49,18 @@ $$
 
 ### Stochastic gradient descent
 
+eta: learning rate
+
+online learning, update w for each point
+
+![](./img/DLFC/Chapter-7/algo7.1.png)
+
 ### Mini-batches
+
+update w, compute g with mini-batch data
+hyperparams: eta, B
+
+![](./img/DLFC/Chapter-7/algo7.2.png)
 
 ### Parameter initialisation
 
