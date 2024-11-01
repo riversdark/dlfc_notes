@@ -11,8 +11,6 @@ EM is used to train models with local hidden variables.
 
 the Gaussian mixture DATA log likelihood is the sum of individual LLs, each being a weighted sum of the components
 
-to train K-means (algo 15.1): iteratively update assignments(E) and centers(M)
-
 to train Gaussian mixture with EM (algo 15.2)
 - E step: given K centers, update NK responsibilities
 - M step: reverse update
@@ -27,7 +25,13 @@ to train with general EM (algo 15.3)
 
 ## K-means clustering
 
-update assignments (E) and centers (M) till convergence
+loss function:
+
+$$
+J = \sum_{n=1}^N \sum_{k=1}^K r_{nk} \| \mathbf{x}_n - \mathbf{\mu}_k \|^2 \tag{15.1}
+$$
+
+to train K-means (algo 15.1): iteratively update assignments(E) and centers(M) till convergence
 
 ![](./img/DLFC/Chapter-15/Figure_1_a.png)
 ![](./img/DLFC/Chapter-15/Figure_1_b.png)
